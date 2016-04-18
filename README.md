@@ -4,7 +4,7 @@ A micro Scala utility library. Made for functional programming begginers :)
 
 ![hamster picture](http://loicdescotte.github.io/images/hamster.jpg)
 
-## Basic validation
+## Simple validation
 
 Validation is right biased, i.e. Right is used for the "success side" and left for the "failure" side.
 
@@ -18,7 +18,7 @@ Validation is right biased, i.e. Right is used for the "success side" and left f
  val successes = validation.successes //List[Int] : List(1)
 ```
  
-##  Basic monad transformers
+##  Simple monad transformers
 
 Example : combine Future and Option types then make it work in a for comprehension.
 
