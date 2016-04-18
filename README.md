@@ -6,14 +6,14 @@ A micro Scala utility library. Made for functional programming begginers :)
 
 ```scala
  val e1: Either[String, Int] = Right(1)
- val e2: Either[String, Int] = Left("nan")
- val e3: Either[String, Int] = Left("nan2")
+ val e2: Either[String, Int] = Left("error 1")
+ val e3: Either[String, Int] = Left("error 2")
  
  val validation = Validation(e1,e2, e3)
- val failures = validation.failures //List[String] : List("nan", "nan2")
+ val failures = validation.failures //List[String] : List("error 1", "error 2")
  val successes = validation.successes //List[Int] : List(1)
 ```
-Note : validation is right biased. 
+Note : validation is right biased, i.e. Right is used for the "success side" and left for the "failure" side.
  
 ##  Basic monad transformers
 
