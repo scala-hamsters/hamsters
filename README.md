@@ -4,6 +4,8 @@ A micro Scala utility library. Made for functional programming begginers :)
 
 ## Basic validation
 
+Validation is right biased, i.e. Right is used for the "success side" and left for the "failure" side.
+
 ```scala
  val e1: Either[String, Int] = Right(1)
  val e2: Either[String, Int] = Left("error 1")
@@ -13,9 +15,10 @@ A micro Scala utility library. Made for functional programming begginers :)
  val failures = validation.failures //List[String] : List("error 1", "error 2")
  val successes = validation.successes //List[Int] : List(1)
 ```
-Note : validation is right biased, i.e. Right is used for the "success side" and left for the "failure" side.
  
 ##  Basic monad transformers
+
+Example : combine Future and Option types then make it work in a for comprehension.
 
 ```scala
 def foa: Future[Option[String]] = Future(Some("a"))
@@ -31,7 +34,7 @@ Currently hamsters only supports FutureEither and FutureOption monad transformer
 
 ## Right biased Either
 
-`map` and `flatMap` can be used by default as on the right side of Either, for example in for comprehension. 
+Either is not biased is standard Scala library. With this helper, `map` and `flatMap` can be used by default as on the right side of Either, for example in for comprehension. 
 
 ```scala
 import io.github.hamsters.Implicits._
