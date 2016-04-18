@@ -1,6 +1,6 @@
 # Hamsters
 
-A micro Scala utility library. Made for begginers :)
+A micro Scala utility library. Made for functional programming begginers :)
 
 ## Basic validation
 
