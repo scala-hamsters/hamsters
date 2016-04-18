@@ -26,7 +26,7 @@ val composedAB: Future[Option[String]] = (for {
 } yield ab).future
 
 ```
-Currently hamsters only supports FutureEither and FutureOption monad transformers but more will come :)
+Currently hamsters only supports FutureEither and FutureOption monad transformers but more will come!
 
 ## Right biased Either
 
