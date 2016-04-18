@@ -21,6 +21,7 @@ Validation is right biased, i.e. Right is used for the "success side" and left f
 ##  Simple monad transformers
 
 Example : combine Future and Option types then make it work in a for comprehension.
+More information on why it's useful [here](http://loicdescotte.github.io/posts/scala-compose-option-future/).
 
 ```scala
 def foa: Future[Option[String]] = Future(Some("a"))
