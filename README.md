@@ -16,10 +16,6 @@ A micro Scala utility library.
  
 ##  Basic monad transformers
 
-   * FutureOption
-   * FutureEither 
- 
-
 ```scala
 def foa: Future[Option[String]] = Future(Some("a"))
 def fob(a: String): Future[Option[String]] = Future(Some(a+"b"))
@@ -30,6 +26,7 @@ val composedAB: Future[Option[String]] = (for {
 } yield ab).future
 
 ```
+Currently hamsters only supports FutureEither and FutureOption monad transformers but more will come :)
 
 ## Right biased Either
 
@@ -50,6 +47,6 @@ for {
 } yield(s"$v1-$v2-$v3")  //Left("nan")
 ```
  
-## TODO 
+## Coming soon 
  * basic HList with conversions from/to tuples
  * basic type Union
