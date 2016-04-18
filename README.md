@@ -54,5 +54,5 @@ for {
 ```
  
 ## Coming soon 
- * basic HList with conversions from/to tuples
- * basic type Union
+ * Simple HList with conversions from/to tuples
+ * Simple type Union
