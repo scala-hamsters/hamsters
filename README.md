@@ -2,7 +2,7 @@
 
 A micro Scala utility library. Made for functional programming begginers :)
 
-[hamster picture](http://loicdescotte.github.io/images/hamster.jpg)
+![hamster picture](http://loicdescotte.github.io/images/hamster.jpg)
 
 ## Basic validation
 
