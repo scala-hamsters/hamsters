@@ -13,6 +13,7 @@ A micro Scala utility library. Made for functional programming begginers :)
  val failures = validation.failures //List[String] : List("nan", "nan2")
  val successes = validation.successes //List[Int] : List(1)
 ```
+Note : validation is right biased. 
  
 ##  Basic monad transformers
 
