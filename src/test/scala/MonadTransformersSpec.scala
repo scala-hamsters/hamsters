@@ -32,6 +32,23 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
     an [Exception] should be thrownBy Await.result(composedABWithFailure, 1 second)
   }
 
+
+  "FutureOption" should "be filtered with pattern matching in for comprehension" in {
+    def fo: Future[Option[(String, Int)]] = Future(Some(("a", 42)))
+
+    val filtered = (for {
+      (a, i) <- FutureOption(fo) if i > 5
+    } yield a).future
+
+    Await.result(filtered, 1 second) shouldBe Some(("a"))
+
+    val filtered2 = (for {
+      (a, i) <- FutureOption(fo) if i > 50
+    } yield a).future
+
+    Await.result(filtered2, 1 second) shouldBe None
+  }
+
   "FutureEither" should "handle Future[Either[_,_]] type" in {
     def fea: Future[Either[String, Int]] = Future(Right(1))
     def feb(a: Int): Future[Either[String, Int]] = Future(Right(a+2))
@@ -58,4 +75,19 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
     an [Exception] should be thrownBy Await.result(composedABWithFailure, 1 second)
   }
 
+  "FutureEither" should "be filtered with pattern matching in for comprehension" in {
+    def fe: Future[Either[String, (String, Int)]] = Future(Right(("a", 42)))
+
+    val filtered = (for {
+      (a, i) <- FutureEither(fe) if i > 5
+    } yield a).future
+
+    Await.result(filtered, 1 second) shouldBe Right("a")
+
+    val filtered2 = (for {
+      (a, i) <- FutureEither(fe) if i > 50
+    } yield a).future
+
+    Await.result(filtered2, 1 second) shouldBe Left("No value matching predicate")
+  }
 }
