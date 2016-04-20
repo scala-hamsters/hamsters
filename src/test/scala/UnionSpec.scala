@@ -1,7 +1,6 @@
 import io.github.hamsters.{Union3Type, Union3}
 import org.scalatest.{FlatSpec, Matchers}
 
-
 class UnionSpec extends FlatSpec with Matchers{
 
   val jsonUnion = new Union3Type[String, Int, Double]
@@ -19,9 +18,6 @@ class UnionSpec extends FlatSpec with Matchers{
       case Union3(Some(v: String), None, None) =>
       case _ => fail("wrong union type")
     }
-
   }
-
-
 
 }
