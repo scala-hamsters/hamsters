@@ -32,7 +32,6 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
     an [Exception] should be thrownBy Await.result(composedABWithFailure, 1 second)
   }
 
-
   "FutureEither" should "handle Future[Either[_,_]] type" in {
     def fea: Future[Either[String, Int]] = Future(Right(1))
     def feb(a: Int): Future[Either[String, Int]] = Future(Right(a+2))

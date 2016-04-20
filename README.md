@@ -2,7 +2,9 @@
 
 A micro Scala utility library. Made for functional programming begginers :)
 
-## Basic validation
+![hamster picture](http://loicdescotte.github.io/images/hamster.jpg)
+
+## Simple validation
 
 Validation is right biased, i.e. Right is used for the "success side" and left for the "failure" side.
 
@@ -16,9 +18,10 @@ Validation is right biased, i.e. Right is used for the "success side" and left f
  val successes = validation.successes //List[Int] : List(1)
 ```
  
-##  Basic monad transformers
+##  Simple monad transformers
 
-Example : combine Future and Option types then make it work in a for comprehension.
+Example : combine Future and Option types then make it work in a for comprehension.  
+More information on why it's useful [here](http://loicdescotte.github.io/posts/scala-compose-option-future/).
 
 ```scala
 def foa: Future[Option[String]] = Future(Some("a"))
@@ -64,4 +67,6 @@ for {
 ```
  
 ## Coming soon 
- * basic HList with conversions from/to tuples
+
+ * Simple HList with conversions from/to tuples
+ * More cool stuffs!
