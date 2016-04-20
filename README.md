@@ -41,7 +41,7 @@ You can define functions or methods that are able to return several types, depen
 ```scala
 //json element can contain a String, a Int or a Double
 def jsonElement(x: Int): Union3[String, Int, Double] = {
-  if(x >0) "0"
+  if(x == 0) "0"
   else if (x % 2 == 0) 1
   else 2.0
 }
