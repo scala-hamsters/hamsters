@@ -32,27 +32,28 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
     an [Exception] should be thrownBy Await.result(composedABWithFailure, 1 second)
   }
 
+
   "FutureEither" should "handle Future[Either[_,_]] type" in {
-    def foa: Future[Either[String, Int]] = Future(Right(1))
-    def fob(a: Int): Future[Either[String, Int]] = Future(Right(a+2))
+    def fea: Future[Either[String, Int]] = Future(Right(1))
+    def feb(a: Int): Future[Either[String, Int]] = Future(Right(a+2))
 
     val composedAB: Future[Either[String, Int]] = (for {
-      a <- FutureEither(foa)
-      ab <- FutureEither(fob(a))
+      a <- FutureEither(fea)
+      ab <- FutureEither(feb(a))
     } yield ab).future
 
     Await.result(composedAB, 1 second) shouldBe Right(3)
 
     val composedABWithNone: Future[Either[String, Int]] = (for {
       a <- FutureEither(Future.successful(Left("d'oh!")))
-      ab <- FutureEither(fob(a))
+      ab <- FutureEither(feb(a))
     } yield ab).future
 
     Await.result(composedABWithNone, 1 second) shouldBe Left("d'oh!")
 
     val composedABWithFailure: Future[Either[String, Int]] = (for {
       a <- FutureEither(Future.failed(new Exception("d'oh!")))
-      ab <- FutureEither(fob(a))
+      ab <- FutureEither(feb(a))
     } yield ab).future
 
     an [Exception] should be thrownBy Await.result(composedABWithFailure, 1 second)
