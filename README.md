@@ -28,9 +28,21 @@ val composedAB: Future[Option[String]] = (for {
   a <- FutureOption(foa)
   ab <- FutureOption(fob(a))
 } yield ab).future
-
 ```
 Currently hamsters only supports FutureEither and FutureOption monad transformers but more will come!
+
+## Union types
+
+You can define functions or methods that are able to return several types, depending on the context.
+
+```scala
+//json element can contain a String, a Int or a Double
+def jsonElement(x: Int): Union3[String, Int, Double] = {
+  if(x >0) "0"
+  else if (x % 2 == 0) 1
+  else 2.0
+}
+```
 
 ## Right biased Either
 
@@ -53,4 +65,3 @@ for {
  
 ## Coming soon 
  * basic HList with conversions from/to tuples
- * basic type Union
