@@ -2,6 +2,12 @@ package io.github.hamsters
 
 trait HList {
   def ::[T](v: T): HList
+  //TODO def map
+  //TODO def flatMap
+  //TODO def filter
+  //TODO def fold*
+  //TODO def reduce*
+  //TODO def tupled
 }
 
 case class HCons[T](head: T, tail: HList) extends HList {
