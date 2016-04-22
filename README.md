@@ -1,6 +1,6 @@
 # Hamsters
 
-A micro Scala utility library. Made for functional programming begginers :)
+A micro Scala utility library. Made for functional programming beginners :)
 
 ![hamster picture](http://loicdescotte.github.io/images/hamster.jpg)
 
