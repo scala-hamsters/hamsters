@@ -34,6 +34,16 @@ val composedAB: Future[Option[String]] = (for {
 ```
 Currently hamsters only supports FutureEither and FutureOption monad transformers but more will come!
 
+## HList
+
+HLists can contain heterogeneous data types. It's like tuples on steroids!
+ 
+```scala
+val hlist = 2.0 :: "hi" :: HNil
+hlist.head // 2.0
+hlist.tail // "hi" :: HNil
+```
+
 ## Union types
 
 You can define functions or methods that are able to return several types, depending on the context.
@@ -66,7 +76,7 @@ for {
 } yield(s"$v1-$v2-$v3")  //Left("nan")
 ```
  
-## Coming soon 
+## TODO
 
- * Simple HList with conversions from/to tuples
- * More cool stuffs!
+ * HList operations (map, filter...)
+ * HList conversions from/to tuples
