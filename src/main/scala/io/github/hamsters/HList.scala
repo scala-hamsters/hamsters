@@ -27,12 +27,27 @@ case class HCons[T](head: T, tail: HList) extends HList {
     foldLeft0(zero, head, tail)
   }
 
-/*
-  def map[U](f: (Any) => Any): HCons[U] = {
-    //TODO
 
+  def map[U](f: (Any) => Any): HCons[Any] = {
+
+    def map0(accu: HList, rest: HList): HCons[Any] = {
+      accu match {
+        case a: HNil => map0(f(head) :: HNil, tail)
+        case a: HCons[Any] => rest match {
+          case t: HNil => a
+          case t: HCons[Any] => map0(a ++ (f(t.head) :: HNil), t.tail)
+        }
+      }
+
+
+    }
+    map0(HNil, this)
   }
-  */
+
+  def filter(p: (Any) => Boolean): HCons[Any] = {
+    //TODO
+    0 :: HNil
+  }
 
   def ++(l2: HList): HCons[T] = {
     //TODO @tailrec ?

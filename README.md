@@ -76,8 +76,3 @@ for {
   v3 <- e3
 } yield(s"$v1-$v2-$v3")  //Left("nan")
 ```
- 
-## TODO
-
- * HList operations (map, filter...)
- * HList conversions from/to tuples

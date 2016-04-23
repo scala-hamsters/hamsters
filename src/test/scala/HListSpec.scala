@@ -27,4 +27,10 @@ class HListSpec extends FlatSpec with Matchers{
   }
 
 
+  "HList" should "be mappable" in {
+
+    (2.0 :: "hi" :: HNil).map(_.toString) shouldBe ("2.0" :: "hi" :: HNil)
+
+  }
+
 }
