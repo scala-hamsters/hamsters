@@ -40,10 +40,19 @@ HLists can contain heterogeneous data types. It's like tuples on steroids!
  
 ```scala
 val hlist = 2.0 :: "hi" :: HNil
+
 hlist.head // 2.0
+
 hlist.tail // "hi" :: HNil
+
 (2.0 :: "hi" :: HNil).foldLeft("")(_+_) // "2.0hi"
+
 (2.0 :: "hi" :: HNil).map(_.toString) // "2.0" :: "hi" :: HNil
+
+(2.0 :: "hi" :: HNil).filter{
+      case s: String if s.startsWith("h") => true
+      case _ => false
+    } //"hi" :: HNil
 ```
 
 ## Union types
