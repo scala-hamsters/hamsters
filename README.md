@@ -37,7 +37,7 @@ Currently hamsters only supports FutureEither and FutureOption monad transformer
 ## HList
 
 HLists can contain heterogeneous data types. It's like tuples on steroids!
-`::` is used to append elements at the beggining of an HList. `++`is used to concatenate 2 Hlists.
+`::` is used to append elements at the beggining of an HList. `++` is used to concatenate 2 Hlists.
  
 ```scala
 val hlist = 2.0 :: "hi" :: HNil
