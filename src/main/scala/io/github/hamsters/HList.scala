@@ -11,7 +11,7 @@ trait HList {
   //TODO def tupled
 }
 
-case class HCons[T](head: T, tail: HList) extends HList {
+case class HCons[+T](head: T, tail: HList) extends HList {
 
   override def ::[U](v: U) = HCons(v, this)
 
@@ -33,9 +33,9 @@ case class HCons[T](head: T, tail: HList) extends HList {
     def map0(accu: HList, rest: HList): HCons[Any] = {
       accu match {
         case a: HNil => map0(f(head) :: HNil, tail)
-        case a: HCons[Any] => rest match {
-          case t: HNil => a
-          case t: HCons[Any] => map0(a ++ (f(t.head) :: HNil), t.tail)
+        case a: HCons[_] => rest match {
+          case r: HNil => a
+          case r: HCons[_] => map0(a ++ (f(r.head) :: HNil), r.tail)
         }
       }
 

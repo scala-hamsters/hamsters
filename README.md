@@ -43,6 +43,7 @@ val hlist = 2.0 :: "hi" :: HNil
 hlist.head // 2.0
 hlist.tail // "hi" :: HNil
 (2.0 :: "hi" :: HNil).foldLeft("")(_+_) // "2.0hi"
+(2.0 :: "hi" :: HNil).map(_.toString) // "2.0" :: "hi" :: HNil
 ```
 
 ## Union types
