@@ -4,15 +4,9 @@ import scala.annotation.tailrec
 
 trait HList {
   def ::[U](v: U): HList
-
-  def tail: HList
-
-  def head: Any
-
-  def ++(l2: HList): HList
 }
 
-case class HCons[+T](override val head: T, override val tail: HList) extends HList {
+case class HCons[+T](val head: T,  val tail: HList) extends HList {
 
   override def ::[U](v: U) = HCons(v, this)
 
@@ -35,7 +29,11 @@ case class HCons[+T](override val head: T, override val tail: HList) extends HLi
 
       rest match {
         case r: HNil => accu
-        case r: HCons[_] => map0(accu ++ (f(r.head) :: HNil), r.tail)
+        case r: HCons[_] => accu match {
+          case HNil => map0(f(r.head) :: HNil, r.tail)
+          case a: HCons[_] => map0(a ++ (f(r.head) :: HNil), r.tail)
+        }
+
       }
     }
 
@@ -47,7 +45,10 @@ case class HCons[+T](override val head: T, override val tail: HList) extends HLi
     def filter0(accu: HList, rest: HList): HList = {
       rest match {
         case HNil => accu
-        case r: HCons[_] => if (p(r.head)) filter0(accu ++ (r.head :: HNil), r.tail) else filter0(accu, r.tail)}
+        case r: HCons[_] => accu match {
+          case HNil => if (p(r.head)) filter0(r.head :: HNil, r.tail) else filter0(accu, r.tail)
+          case a: HCons[_] => if (p(r.head)) filter0(a ++ (r.head :: HNil), r.tail) else filter0(accu, r.tail)}
+        }
     }
     filter0(HNil, this)
   }
@@ -71,12 +72,6 @@ class HNil extends HList {
   override def ::[T](v: T) = HCons(v, this)
 
   override def toString = "HNil"
-
-  override def tail = HNil
-
-  override def head = throw new Exception("head of HNil")
-
-  override def ++(l2: HList) = l2
 }
 
 object HNil extends HNil
