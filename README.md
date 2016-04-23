@@ -52,8 +52,6 @@ hlist ++ ("hello" :: true :: HNil) //(2.0 :: (hi :: (hello :: (true :: HNil))))
       case _ => false
     } //"hi" :: HNil
 
-hlist.head // 2.0
-hlist.tail // "hi" :: HNil
 ```
 
 ## Union types
