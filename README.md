@@ -4,7 +4,7 @@ A micro Scala utility library. Compatible with functional programming beginners 
 
 ![hamster picture](http://loicdescotte.github.io/images/hamster.jpg)
 
-[![Travis](https://travis-ci.org/scala-hamsters/hamsters.svg)](https://travis-ci.org/scala-hamsters/hamsters)
+[![Travis](https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master)](https://travis-ci.org/scala-hamsters/hamsters)
 
 ## Install as dependency
 
