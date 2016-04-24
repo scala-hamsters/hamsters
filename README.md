@@ -72,7 +72,7 @@ def jsonElement(x: Int): Union3[String, Int, Double] = {
 
 ## OK biased Either
 
-Either is not biased is standard Scala library. With this helper, `map` and `flatMap` can be used by default as on the right side of Either (i.e `OK`or `Right in the standard lib) for example in for comprehension. 
+Either has no prefered side (`Left` or `Right`) in the standard Scala library. With this helper, `map` and `flatMap` can be used by default as on the right side of Either (i.e `OK`, or `Right` in the standard lib) for example in for comprehension. 
 
 
 ```scala
