@@ -1,5 +1,6 @@
 import org.scalatest.{Matchers, FlatSpec}
 import io.github.hamsters.Implicits
+import io.github.hamsters.Validation._
 
 class ImplicitsSpec extends FlatSpec with Matchers{
 
@@ -7,9 +8,9 @@ class ImplicitsSpec extends FlatSpec with Matchers{
 
     import Implicits._
 
-    val e1: Either[String, Int] = Right(1)
-    val e2: Either[String, Int] = Right(2)
-    val e3: Either[String, Int] = Right(3)
+    val e1 = OK(1)
+    val e2 = OK(2)
+    val e3 = OK(3)
 
     val combine = for {
       v1 <- e1
@@ -17,7 +18,7 @@ class ImplicitsSpec extends FlatSpec with Matchers{
       v3 <- e3
     } yield(s"$v1-$v2-$v3")
 
-    combine should be(Right("1-2-3"))
+    combine should be(OK("1-2-3"))
 
   }
 
@@ -25,9 +26,9 @@ class ImplicitsSpec extends FlatSpec with Matchers{
 
     import Implicits._
 
-    val e1: Either[String, Int] = Right(1)
-    val e2: Either[String, Int] = Left("nan")
-    val e3: Either[String, Int] = Left("nan2")
+    val e1: Either[String, Int] = OK(1)
+    val e2: Either[String, Int] = KO("nan")
+    val e3: Either[String, Int] = KO("nan2")
 
     val combine = for {
       v1 <- e1
@@ -35,7 +36,7 @@ class ImplicitsSpec extends FlatSpec with Matchers{
       v3 <- e3
     } yield(s"$v1-$v2-$v3")
 
-    combine should be(Left("nan"))
+    combine should be(KO("nan"))
 
   }
 
