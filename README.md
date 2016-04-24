@@ -18,7 +18,7 @@ Statements can be `OK` or `KO`. Then you can get all successes and failures.
  val successes = validation.successes //List[Int] : List(1)
 ```
 
-Note : Validation works with standard Scala Either types.
+Note : Validation works with standard Left and Right types.
  
 ##  Simple monad transformers
 
