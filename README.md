@@ -79,7 +79,7 @@ Either has no prefered side (`Left` or `Right`) in the standard Scala library. W
 import io.github.hamsters.Implicits._
 
 val e1: Either[String, Int] = OK(1)
-val e2: Either[String, Int]= KO("nan")
+val e2: Either[String, Int] = KO("nan")
 val e3: Either[String, Int] = KO("nan2")
 
 // Stop at first error
