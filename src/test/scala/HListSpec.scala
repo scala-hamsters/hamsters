@@ -15,7 +15,7 @@ class HListSpec extends FlatSpec with Matchers {
 
   }
 
-  /*
+
   "HList ++ " should "append hlist to another one" in {
 
     ((2.0 :: "hi" :: HNil) ++ (1 :: HNil)) shouldBe 2.0 :: "hi" :: 1 :: HNil
@@ -23,7 +23,7 @@ class HListSpec extends FlatSpec with Matchers {
     //FIXME val two: Double = ((2.0 :: "hi" :: HNil) ++ (1 :: HNil)).head
     ((2.0 :: "hi" :: HNil) ++ (1 :: HNil)).head shouldBe 2.0
 
-  }*/
+  }
 
   "HList fold" should "old over elements and produce a result" in {
 
