@@ -36,7 +36,7 @@ Currently hamsters only supports FutureEither and FutureOption monad transformer
 
 ## HList
 
-HLists can contain heterogeneous data types. It's like tuples on steroids!
+HLists can contain heterogeneous data types but are strongly typed. It's like tuples on steroids!
 `::` is used to append elements at the beggining of an HList. `++` is used to concatenate 2 Hlists.
  
 ```scala

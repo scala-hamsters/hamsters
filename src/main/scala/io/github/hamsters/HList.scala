@@ -6,17 +6,17 @@ trait HList {
   def ::[U](v: U): HList
 }
 
-case class HCons[+T](val head: T,  val tail: HList) extends HList {
+case class HCons[T, U <: HList](head : T, tail : U) extends HList {
 
-  override def ::[U](v: U) = HCons(v, this)
+  override def ::[V](v: V) = HCons(v, this)
 
-  def foldLeft[U](zero: U)(f: (U, Any) => U): U = {
+  def foldLeft[V](zero: V)(f: (V, Any) => V): V = {
     @tailrec
-    def foldLeft0(accu: U, head: Any, tail: HList): U = {
+    def foldLeft0(accu: V, head: Any, tail: HList): V = {
       val newAccu = f(accu, head)
       tail match {
         case HNil => newAccu
-        case t: HCons[T] => foldLeft0(newAccu, t.head, t.tail)
+        case t: HCons[_,_] => foldLeft0(newAccu, t.head, t.tail)
       }
     }
     foldLeft0(zero, head, tail)
@@ -29,9 +29,9 @@ case class HCons[+T](val head: T,  val tail: HList) extends HList {
 
       rest match {
         case r: HNil => accu
-        case r: HCons[_] => accu match {
+        case r: HCons[_,_] => accu match {
           case HNil => map0(f(r.head) :: HNil, r.tail)
-          case a: HCons[_] => map0(a ++ (f(r.head) :: HNil), r.tail)
+          case a: HCons[_,_] => map0(a ++ (f(r.head) :: HNil), r.tail)
         }
 
       }
@@ -45,19 +45,19 @@ case class HCons[+T](val head: T,  val tail: HList) extends HList {
     def filter0(accu: HList, rest: HList): HList = {
       rest match {
         case HNil => accu
-        case r: HCons[_] => accu match {
+        case r: HCons[_,_] => accu match {
           case HNil => if (p(r.head)) filter0(r.head :: HNil, r.tail) else filter0(accu, r.tail)
-          case a: HCons[_] => if (p(r.head)) filter0(a ++ (r.head :: HNil), r.tail) else filter0(accu, r.tail)}
+          case a: HCons[_,_] => if (p(r.head)) filter0(a ++ (r.head :: HNil), r.tail) else filter0(accu, r.tail)}
         }
     }
     filter0(HNil, this)
   }
 
-  def ++(l2: HList): HCons[T] = {
-    def append(l1: HCons[T], l2: HList): HCons[T] = {
+  def ++[V <: HList](l2: HList) = {
+    def append[W <: HList, X <: HList](l1: HCons[T,W], l2: X): HCons[_,_] = {
       l1.tail match {
         case HNil => HCons(l1.head, l2)
-        case t: HCons[T] => l1.head :: append(t, l2)
+        case t: HCons[T,U] => l1.head :: append(t, l2)
       }
     }
     append(this, l2)
