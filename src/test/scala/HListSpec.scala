@@ -20,8 +20,8 @@ class HListSpec extends FlatSpec with Matchers {
 
     ((2.0 :: "hi" :: HNil) ++ (1 :: HNil)) shouldBe 2.0 :: "hi" :: 1 :: HNil
     //type check
-    //FIXME val two: Double = ((2.0 :: "hi" :: HNil) ++ (1 :: HNil)).head
-    ((2.0 :: "hi" :: HNil) ++ (1 :: HNil)).head shouldBe 2.0
+    val two: Double = ((2.0 :: "hi" :: HNil) ++ (1 :: HNil)).head
+    two shouldBe 2.0
 
   }
 
