@@ -63,6 +63,9 @@ case class HCons[+T](val head: T,  val tail: HList) extends HList {
     append(this, l2)
   }
 
+
+  def foreach(f: (Any) => Unit): Unit = map(f)
+
   override def toString = s"($head :: $tail)"
 
 }
