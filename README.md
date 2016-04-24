@@ -13,7 +13,7 @@ libraryDependencies ++= Seq(
   "io.github.scala-hamsters" %% "hamsters" % "1.0-BETA1"
 )
 
-resolvers += Resolver.url("github repo for html5tags", url("http://scala-hamsters.github.io/hamsters/releases/"))(Resolver.ivyStylePatterns)
+resolvers += Resolver.url("github repo for hamsters", url("http://scala-hamsters.github.io/hamsters/releases/"))(Resolver.ivyStylePatterns)
 ```
 
 ## Simple validation
