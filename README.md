@@ -4,6 +4,7 @@ A micro Scala utility library. Compatible with functional programming beginners 
 
 ![hamster picture](http://loicdescotte.github.io/images/hamster.jpg)
 
+[![Travis](https://travis-ci.org/scala-hasmters/hamsters.svg)](https://travis-ci.org/scala-hasmters/hamsters)
 ## Simple validation
 
 Statements can be `OK` or `KO`. Then you can get all successes and failures.
