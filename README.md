@@ -18,7 +18,7 @@ Statements can be `OK` or `KO`. Then you can get all successes and failures.
  val successes = validation.successes //List[Int] : List(1)
 ```
 
-Note : Validation works with standard Scala Either types.
+Note : Validation works with standard Left and Right types.
  
 ##  Simple monad transformers
 
@@ -72,14 +72,14 @@ def jsonElement(x: Int): Union3[String, Int, Double] = {
 
 ## OK biased Either
 
-Either is not biased is standard Scala library. With this helper, `map` and `flatMap` can be used by default as on the right side of Either (i.e `OK`or `Right in the standard lib) for example in for comprehension. 
+Either has no prefered side (`Left` or `Right`) in the standard Scala library. With this helper, `map` and `flatMap` can be used by default as on the right side of Either (i.e `OK`, or `Right` in the standard lib) for example in for comprehension. 
 
 
 ```scala
 import io.github.hamsters.Implicits._
 
 val e1: Either[String, Int] = OK(1)
-val e2: Either[String, Int]= KO("nan")
+val e2: Either[String, Int] = KO("nan")
 val e3: Either[String, Int] = KO("nan2")
 
 // Stop at first error
