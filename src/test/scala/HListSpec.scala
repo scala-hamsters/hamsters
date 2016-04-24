@@ -1,5 +1,5 @@
 import org.scalatest.{FlatSpec, Matchers}
-import io.github.hamsters.HNil
+import io.github.hamsters.{HCons, HNil}
 
 import scala.collection.mutable.ListBuffer
 
@@ -10,18 +10,24 @@ class HListSpec extends FlatSpec with Matchers {
     ("hi" :: HNil).tail shouldBe HNil
     ("hi" :: HNil).head shouldBe "hi"
 
-    (1 :: "hi" :: HNil).tail shouldBe "hi" :: HNil
-    (1 :: "hi" :: HNil).head shouldBe 1
+    //type erasure, but compiler give all the good types
+    (true :: 2.0 :: "hi" :: HNil) shouldBe a [HCons[_,HCons[_,HNil]]]
+    (true :: 2.0 :: "hi" :: HNil).tail shouldBe a [HCons[_,HNil]]
+
+    (true :: 2.0 :: "hi" :: HNil).head shouldBe a [java.lang.Boolean]
+    (true :: 2.0 :: "hi" :: HNil).tail.head shouldBe a [java.lang.Double]
 
   }
 
 
   "HList ++ " should "append hlist to another one" in {
 
-    ((2.0 :: "hi" :: HNil) ++ (1 :: HNil)) shouldBe 2.0 :: "hi" :: 1 :: HNil
-    //type check
-    val two: Double = ((2.0 :: "hi" :: HNil) ++ (1 :: HNil)).head
-    two shouldBe 2.0
+    val sum = (2.0 :: "hi" :: HNil) ++ (1 :: HNil)
+    sum shouldBe 2.0 :: "hi" :: 1 :: HNil
+    sum shouldBe a [HCons[_,HCons[_,HCons[_,HNil]]]]
+    sum.head shouldBe a [java.lang.Double]
+    sum.head shouldBe 2.0
+    sum.tail.head shouldBe "hi"
 
   }
 
