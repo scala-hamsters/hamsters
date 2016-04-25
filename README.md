@@ -2,6 +2,14 @@
 
 A micro Scala utility library. Compatible with functional programming beginners :)
 
+Currently, Hamsters supports :
+
+ * Validation
+ * OK/KO Monads
+ * Monad transformers
+ * HLists
+ * Union types
+
 ![hamster picture](http://loicdescotte.github.io/images/hamster.jpg)
 
 [![Travis](https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master)](https://travis-ci.org/scala-hamsters/hamsters)
@@ -16,7 +24,7 @@ libraryDependencies ++= Seq(
 resolvers += Resolver.url("github repo for hamsters", url("http://scala-hamsters.github.io/hamsters/releases/"))(Resolver.ivyStylePatterns)
 ```
 
-## Simple validation
+## Validation and monadic OK/KO
 
 Statements can be `OK` or `KO`. Then you can get all successes and failures.
 
@@ -30,12 +38,42 @@ Statements can be `OK` or `KO`. Then you can get all successes and failures.
  val successes = validation.successes //List[Int] : List(1)
 ```
 
-Note : Validation works with standard Left and Right types.
+You can also use OK/KO in a monadic way if you want to stop processing at the first encountered error.
+
+```scala
+import io.github.hamsters.Implicits._
+
+val e1: Either[String, Int] = OK(1)
+val e2: Either[String, Int] = KO("nan")
+val e3: Either[String, Int] = KO("nan2")
+
+// Stop at first error
+for {
+  v1 <- e1
+  v2 <- e2
+  v3 <- e3
+} yield(s"$v1-$v2-$v3")  //KO("nan")
+```
+
+Note : Validation relies on standard Either, Left and Right types.
  
-##  Simple monad transformers
+##  Monad transformers
 
 Example : combine Future and Option types then make it work in a for comprehension.  
 More information on why it's useful [here](http://loicdescotte.github.io/posts/scala-compose-option-future/).
+
+### FutureEither
+
+```scala
+def fea: Future[Either[String, Int]] = Future(OK(1))
+def feb(a: Int): Future[Either[String, Int]] = Future(OK(a+2))
+
+val composedAB: Future[Either[String, Int]] = (for {
+  a <- FutureEither(fea)
+  ab <- FutureEither(feb(a))
+} yield ab).future
+```
+### FutureOption
 
 ```scala
 def foa: Future[Option[String]] = Future(Some("a"))
@@ -46,7 +84,6 @@ val composedAB: Future[Option[String]] = (for {
   ab <- FutureOption(fob(a))
 } yield ab).future
 ```
-Currently hamsters only supports FutureEither and FutureOption monad transformers but more will come!
 
 ## HList
 
@@ -80,24 +117,4 @@ def jsonElement(x: Int): Union3[String, Int, Double] = {
   else if (x % 2 == 0) 1
   else 2.0
 }
-```
-
-## OK biased Either
-
-Either has no prefered side (`Left` or `Right`) in the standard Scala library. With this helper, `map` and `flatMap` can be used by default as on the right side of Either (i.e `OK`, or `Right` in the standard lib) for example in for comprehension. 
-
-
-```scala
-import io.github.hamsters.Implicits._
-
-val e1: Either[String, Int] = OK(1)
-val e2: Either[String, Int] = KO("nan")
-val e3: Either[String, Int] = KO("nan2")
-
-// Stop at first error
-for {
-  v1 <- e1
-  v2 <- e2
-  v3 <- e3
-} yield(s"$v1-$v2-$v3")  //KO("nan")
 ```
