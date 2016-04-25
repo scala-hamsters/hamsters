@@ -1,6 +1,8 @@
 # Hamsters
 
-A micro Scala utility library. Compatible with functional programming beginners :)
+A micro Scala utility library. Compatible with functional programming beginners.
+
+![hamster picture](https://avatars2.githubusercontent.com/u/18599689?v=3&s=200)
 
 Currently, Hamsters supports :
 
@@ -9,8 +11,6 @@ Currently, Hamsters supports :
  * Monad transformers
  * HLists
  * Union types
-
-![hamster picture](http://loicdescotte.github.io/images/hamster.jpg)
 
 [![Travis](https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master)](https://travis-ci.org/scala-hamsters/hamsters)
 
