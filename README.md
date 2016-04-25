@@ -41,8 +41,6 @@ Statements can be `OK` or `KO`. Then you can get all successes and failures.
 You can also use OK/KO in a monadic way if you want to stop processing at the first encountered error.
 
 ```scala
-import io.github.hamsters.Implicits._
-
 val e1: Either[String, Int] = OK(1)
 val e2: Either[String, Int] = KO("nan")
 val e3: Either[String, Int] = KO("nan2")
