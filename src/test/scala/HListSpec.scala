@@ -1,5 +1,5 @@
-import org.scalatest.{FlatSpec, Matchers}
 import io.github.hamsters.{HCons, HNil}
+import org.scalatest.{FlatSpec, Matchers}
 
 import scala.collection.mutable.ListBuffer
 
@@ -11,11 +11,11 @@ class HListSpec extends FlatSpec with Matchers {
     ("hi" :: HNil).head shouldBe "hi"
 
     //type erasure, but compiler give all the good types
-    (true :: 2.0 :: "hi" :: HNil) shouldBe a [HCons[_,HCons[_,HNil]]]
-    (true :: 2.0 :: "hi" :: HNil).tail shouldBe a [HCons[_,HNil]]
+    (true :: 2.0 :: "hi" :: HNil) shouldBe a[HCons[_, HCons[_, HNil]]]
+    (true :: 2.0 :: "hi" :: HNil).tail shouldBe a[HCons[_, HNil]]
 
-    (true :: 2.0 :: "hi" :: HNil).head shouldBe a [java.lang.Boolean]
-    (true :: 2.0 :: "hi" :: HNil).tail.head shouldBe a [java.lang.Double]
+    (true :: 2.0 :: "hi" :: HNil).head shouldBe a[java.lang.Boolean]
+    (true :: 2.0 :: "hi" :: HNil).tail.head shouldBe a[java.lang.Double]
 
   }
 
@@ -24,8 +24,8 @@ class HListSpec extends FlatSpec with Matchers {
 
     val sum = (2.0 :: "hi" :: HNil) ++ (1 :: HNil)
     sum shouldBe 2.0 :: "hi" :: 1 :: HNil
-    sum shouldBe a [HCons[_,HCons[_,HCons[_,HNil]]]]
-    sum.head shouldBe a [java.lang.Double]
+    sum shouldBe a[HCons[_, HCons[_, HCons[_, HNil]]]]
+    sum.head shouldBe a[java.lang.Double]
     sum.head shouldBe 2.0
     sum.tail.head shouldBe "hi"
 

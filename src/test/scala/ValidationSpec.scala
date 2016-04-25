@@ -9,7 +9,7 @@ class ValidationSpec extends FlatSpec with Matchers {
     val e2 = KO("nan")
     val e3 = KO("nan2")
 
-    val validation = Validation(e1,e2, e3)
+    val validation = Validation(e1, e2, e3)
     validation.failures should be(List("nan", "nan2"))
     validation.successes should be(List(1))
   }
@@ -24,7 +24,7 @@ class ValidationSpec extends FlatSpec with Matchers {
       v1 <- e1
       v2 <- e2
       v3 <- e3
-    } yield(s"$v1-$v2-$v3")
+    } yield (s"$v1-$v2-$v3")
 
     combine should be(OK("1-2-3"))
 
@@ -40,7 +40,7 @@ class ValidationSpec extends FlatSpec with Matchers {
       v1 <- e1
       v2 <- e2
       v3 <- e3
-    } yield(s"$v1-$v2-$v3")
+    } yield (s"$v1-$v2-$v3")
 
     combine should be(KO("nan"))
 

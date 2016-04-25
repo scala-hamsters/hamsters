@@ -1,15 +1,16 @@
-import io.github.hamsters.{FutureEither, FutureOption}
 import io.github.hamsters.Validation._
+import io.github.hamsters.{FutureEither, FutureOption}
 import org.scalatest._
+
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent._
 import scala.concurrent.duration._
-import scala.concurrent.ExecutionContext.Implicits.global
 
 class MonadTransformersSpec extends FlatSpec with Matchers {
 
   "FutureOption" should "handle Future[Option[_]] type" in {
     def foa: Future[Option[String]] = Future(Some("a"))
-    def fob(a: String): Future[Option[String]] = Future(Some(a+"b"))
+    def fob(a: String): Future[Option[String]] = Future(Some(a + "b"))
 
     val composedAB: Future[Option[String]] = (for {
       a <- FutureOption(foa)
@@ -30,7 +31,7 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
       ab <- FutureOption(fob(a))
     } yield ab).future
 
-    an [Exception] should be thrownBy Await.result(composedABWithFailure, 1 second)
+    an[Exception] should be thrownBy Await.result(composedABWithFailure, 1 second)
   }
 
 
@@ -52,7 +53,7 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
 
   "FutureEither" should "handle Future[Either[_,_]] type" in {
     def fea: Future[Either[String, Int]] = Future(OK(1))
-    def feb(a: Int): Future[Either[String, Int]] = Future(OK(a+2))
+    def feb(a: Int): Future[Either[String, Int]] = Future(OK(a + 2))
 
     val composedAB: Future[Either[String, Int]] = (for {
       a <- FutureEither(fea)
@@ -73,7 +74,7 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
       ab <- FutureEither(feb(a))
     } yield ab).future
 
-    an [Exception] should be thrownBy Await.result(composedABWithFailure, 1 second)
+    an[Exception] should be thrownBy Await.result(composedABWithFailure, 1 second)
   }
 
   "FutureEither" should "be filtered with pattern matching in for comprehension" in {

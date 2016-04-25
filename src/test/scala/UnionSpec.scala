@@ -1,7 +1,7 @@
-import io.github.hamsters.{Union2, Union2Type, Union3Type, Union3}
+import io.github.hamsters.{Union2, Union2Type, Union3, Union3Type}
 import org.scalatest.{FlatSpec, Matchers}
 
-class UnionSpec extends FlatSpec with Matchers{
+class UnionSpec extends FlatSpec with Matchers {
 
 
   "Union2" should "work with different types" in {
@@ -9,7 +9,7 @@ class UnionSpec extends FlatSpec with Matchers{
     import stringOrInt._
 
     def computeValue(x: Int): Union2[String, Int] = {
-      if(x >0) "0"
+      if (x > 0) "0"
       else 1
     }
 
@@ -30,7 +30,7 @@ class UnionSpec extends FlatSpec with Matchers{
 
     //json element can contain a String, a Int or a Double
     def jsonElement(x: Int): Union3[String, Int, Double] = {
-      if(x == 0) "0"
+      if (x == 0) "0"
       else if (x % 2 == 0) 1
       else 2.0
     }
