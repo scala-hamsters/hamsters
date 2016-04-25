@@ -42,7 +42,7 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
       (a, i) <- FutureOption(fo) if i > 5
     } yield a).future
 
-    Await.result(filtered, 1 second) shouldBe Some(("a"))
+    Await.result(filtered, 1 second) shouldBe Some("a")
 
     val filtered2 = (for {
       (a, i) <- FutureOption(fo) if i > 50
