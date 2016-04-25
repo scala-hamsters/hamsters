@@ -55,7 +55,7 @@ for {
 } yield(s"$v1-$v2-$v3")  //KO("nan")
 ```
 
-Note : Validation relies on standard Either, Left and Right types.
+Note : Validation relies on standard Either, Left and Right types. KO is used on the left side, OK on the right side.
  
 ##  Monad transformers
 
