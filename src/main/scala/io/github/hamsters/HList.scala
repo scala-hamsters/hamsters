@@ -52,14 +52,13 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
   }
 
   def ++[V <: HList](l2: V): HCons[T, U] = {
-    def append[X <: HList, Y <: HList](l1: HCons[T, X], l2: Y): HCons[T, _] = {
+    def append[X <: HList](l1: HCons[T, X], l2: V): HCons[T, _] = {
       l1.tail match {
         case HNil => HCons(l1.head, l2)
         case h: HCons[T, U] => l1.head :: append(h, l2)
       }
     }
-    val total = append(this, l2)
-    total match {
+    append(this, l2) match {
       case h: HCons[T, U] => h
     }
   }
