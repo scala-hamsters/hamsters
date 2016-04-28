@@ -10,7 +10,7 @@ class HListSpec extends FlatSpec with Matchers {
     ("hi" :: HNil).tail shouldBe HNil
     ("hi" :: HNil).head shouldBe "hi"
 
-    //type erasure, but compiler give all the good types
+    //type erasure
     (true :: 2.0 :: "hi" :: HNil) shouldBe a[HCons[_, HCons[_, HNil]]]
     (true :: 2.0 :: "hi" :: HNil).tail shouldBe a[HCons[_, HNil]]
 

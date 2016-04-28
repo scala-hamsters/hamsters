@@ -78,4 +78,4 @@ class HNil extends HList {
   override def toString = "HNil"
 }
 
-object HNil extends HNil
+case object HNil extends HNil
