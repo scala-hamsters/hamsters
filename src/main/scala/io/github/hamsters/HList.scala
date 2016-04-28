@@ -36,7 +36,7 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
 
   def foreach(f: (Any) => Unit): Unit = map(f)
 
-  def map[U](f: (Any) => Any): HList = {
+  def map[V <: HList](f: (Any) => Any): HList = {
 
     @tailrec
     def map0(accu: HList, rest: HList): HList = {
@@ -62,6 +62,8 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
       case h: HCons[T, U] => h
     }
   }
+
+  def +[V](v: V) = ++ (v:: HNil)
 
   override def ::[V](v: V) = HCons(v, this)
 
