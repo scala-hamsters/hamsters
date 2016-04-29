@@ -10,12 +10,13 @@ class HListSpec extends FlatSpec with Matchers {
     ("hi" :: HNil).tail shouldBe HNil
     ("hi" :: HNil).head shouldBe "hi"
 
+    val hlist = true :: 2.0 :: "hi" :: HNil
     //type erasure
-    (true :: 2.0 :: "hi" :: HNil) shouldBe a[HCons[_, HCons[_, HNil]]]
-    (true :: 2.0 :: "hi" :: HNil).tail shouldBe a[HCons[_, HNil]]
+    hlist shouldBe a[HCons[_, HCons[_, HNil]]]
+    hlist.tail shouldBe a[HCons[_, HNil]]
 
-    (true :: 2.0 :: "hi" :: HNil).head shouldBe a[java.lang.Boolean]
-    (true :: 2.0 :: "hi" :: HNil).tail.head shouldBe a[java.lang.Double]
+    hlist.head shouldBe a[java.lang.Boolean]
+    hlist.tail.head shouldBe a[java.lang.Double]
 
   }
 
@@ -24,7 +25,11 @@ class HListSpec extends FlatSpec with Matchers {
 
     import HList._
 
-    val sum = ++ (2.0 :: "hi" :: HNil, 1 :: HNil)
+    val hlist1 = 2.0 :: "hi" :: HNil
+    val hlist2 = 1 :: HNil
+
+    val sum = ++(hlist1, hlist2)
+
     sum shouldBe 2.0 :: "hi" :: 1 :: HNil
     sum shouldBe a[HCons[_, HCons[_, HCons[_, HNil]]]]
     sum.head shouldBe a[java.lang.Double]
@@ -33,6 +38,20 @@ class HListSpec extends FlatSpec with Matchers {
     sum.tail.tail.head shouldBe 1
 
   }
+
+  /* FIXME
+  "HList + " should "append element to a hlist " in {
+
+    val hlist = 2.0 :: "hi" :: HNil
+    val sum = hlist + 1
+    sum shouldBe 2.0 :: "hi" :: 1 :: HNil
+    sum shouldBe a[HCons[_, HCons[_, HCons[_, HNil]]]]
+    sum.head shouldBe a[java.lang.Double]
+    sum.head shouldBe 2.0
+    sum.tail.head shouldBe "hi"
+    sum.tail.tail.head shouldBe 1
+
+  }*/
 
   "HList fold" should "old over elements and produce a result" in {
 

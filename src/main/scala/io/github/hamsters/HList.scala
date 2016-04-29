@@ -84,7 +84,8 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
     }
   }
 
-  def +[V](v: V) = +++(v :: HNil)
+  //FIXME
+  //def +[V](v: V) = HList.++(this, v :: HNil)
 }
 
 object HList {

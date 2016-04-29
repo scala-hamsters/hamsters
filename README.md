@@ -85,22 +85,26 @@ val composedAB: Future[Option[String]] = (for {
 
 ## HList
 
-HLists can contain heterogeneous data types but are strongly typed. It's like tuples on steroids!
-`::` is used to append elements at the beggining of an HList. `++` is used to concatenate 2 Hlists.
+HLists can contain heterogeneous data types but are strongly typed. It's like tuples on steroids!  
+`::` is used to append elements at the beggining of an HList.  
+`++` is used to concatenate 2 Hlists.
  
 ```scala
 val hlist = 2.0 :: "hi" :: HNil
 
-hlist ++ ("hello" :: true :: HNil) //(2.0 :: (hi :: (hello :: (true :: HNil))))
+val hlist1 = 2.0 :: "hi" :: HNil
+val hlist2 = 1 :: HNil
+
+val sum = ++(hlist1, hlist2) //(2.0 :: (hi :: (1 : HNil)))
 
 (2.0 :: "hi" :: HNil).foldLeft("")(_+_) // "2.0hi"
 
 (2.0 :: "hi" :: HNil).map(_.toString) // "2.0" :: "hi" :: HNil
 
 (2.0 :: "hi" :: HNil).filter{
-      case s: String if s.startsWith("h") => true
-      case _ => false
-    } //"hi" :: HNil
+  case s: String if s.startsWith("h") => true
+  case _ => false
+} //"hi" :: HNil
 
 ```
 
