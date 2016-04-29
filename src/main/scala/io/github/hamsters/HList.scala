@@ -40,6 +40,7 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
     foldLeft0(zero, head, tail)
   }
 
+  //TODO HList return type is too generic
   def filter(p: (Any) => Boolean): HList = {
     @tailrec
     def filter0(accu: HList, rest: HList): HList = {
@@ -56,6 +57,7 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
 
   def foreach(f: (Any) => Unit): Unit = map(f)
 
+  //TODO HList return type is too generic
   def map[V <: HList](f: (Any) => Any): HList = {
 
     @tailrec
