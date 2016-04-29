@@ -30,7 +30,7 @@ class HListSpec extends FlatSpec with Matchers {
     sum.head shouldBe a[java.lang.Double]
     sum.head shouldBe 2.0
     sum.tail.head shouldBe "hi"
-    //sum.tail.tail.head shouldBe 1
+    sum.tail.tail.head shouldBe 1
 
   }
 

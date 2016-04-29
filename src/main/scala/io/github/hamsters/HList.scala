@@ -8,36 +8,32 @@ sealed trait HList {
   def ::[U](v: U): HList
 }
 
+class HNil extends HList {
+  type Plus[L <: HList] = L
+
+  def ::[T](v: T) = HCons(v, this)
+}
+
+object HNil extends HNil
+
 case class Appender[L1 <: HList, L2 <: HList, R <: HList](fn: (L1, L2) => R) {
   def apply(l1: L1, l2: L2) = fn(l1, l2)
 }
 
-object HList{
-  def ++[L1 <: HList, L2 <: HList](l1: L1, l2 : L2)
-    (implicit f : Appender[L1 , L2, L1#Plus[L2]]) = f(l1, l2)
-
-  type Plus[V <: HList] = HCons[T, U#Plus[V]]
-
-  def append[L1 <: HList, L2 <: HList](l1 : L1, l2 : L2)
-    (implicit fn : Appender[L1, L2, L1#Plus[L2]]) : L1#Plus[L2] = fn(l1, l2)
-  implicit def nilAppender[L <: HList] : Appender[HNil, L, L] =
-    Appender((v : HNil, l : L) => l)
-  implicit def consAppender[T, L1 <: HList, L2 <: HList, R <: HList]
-  (implicit fn : Appender[L1, L2, R]) : Appender[HCons[T, L1], L2, HCons[T, R]] =
-    Appender[HCons[T, L1], L2, HCons[T, R]]((l1 : HCons[T, L1], l2 : L2) => HCons(l1.head, fn(l1.tail, l2)))
-
-}
-
 case class HCons[T, U <: HList](head: T, tail: U) extends HList {
+  type Plus[L <: HList] = HCons[T, U#Plus[L]]
 
-  def ++[L2 <: HList](l2 : L2) = HList ++ (this,l2)
+  def ::[V](v: V) = HCons(v, this)
+
+  //FIXME
+  //def ++[L2 <: HList](l2: L2) = HList.++(this,l2)
 
   def foldLeft[V](zero: V)(f: (V, Any) => V): V = {
     @tailrec
     def foldLeft0(accu: V, head: Any, tail: HList): V = {
       val newAccu = f(accu, head)
       tail match {
-        case HNil => newAccu
+        case _: HNil => newAccu
         case h: HCons[_, _] => foldLeft0(newAccu, h.head, h.tail)
       }
     }
@@ -48,9 +44,9 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
     @tailrec
     def filter0(accu: HList, rest: HList): HList = {
       rest match {
-        case HNil => accu
+        case _: HNil => accu
         case r: HCons[_, _] => accu match {
-          case HNil => if (p(r.head)) filter0(r.head :: HNil, r.tail) else filter0(accu, r.tail)
+          case _: HNil => if (p(r.head)) filter0(r.head :: HNil, r.tail) else filter0(accu, r.tail)
           case a: HCons[_, _] => if (p(r.head)) filter0(a +++ (r.head :: HNil), r.tail) else filter0(accu, r.tail)
         }
       }
@@ -65,17 +61,15 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
     @tailrec
     def map0(accu: HList, rest: HList): HList = {
       rest match {
-        case r: HNil => accu
+        case _: HNil => accu
         case r: HCons[_, _] => accu match {
-          case HNil => map0(f(r.head) :: HNil, r.tail)
+          case _: HNil => map0(f(r.head) :: HNil, r.tail)
           case a: HCons[_, _] => map0(a +++ (f(r.head) :: HNil), r.tail)
         }
       }
     }
     map0(HNil, this)
   }
-
-
 
   //FIXME use ++ instead
   private def +++[V <: HList](l2: V): HCons[T, U] = {
@@ -90,19 +84,15 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
     }
   }
 
-  def +[V](v: V) = +++ (v:: HNil)
-
-  override def ::[V](v: V) = HCons(v, this)
-
-  override def toString = s"($head :: $tail)"
-
+  def +[V](v: V) = +++(v :: HNil)
 }
 
+object HList {
+  def ++[L1 <: HList, L2 <: HList](l1: L1, l2: L2)(implicit f: Appender[L1, L2, L1#Plus[L2]]): L1#Plus[L2] = f(l1, l2)
 
-class HNil extends HList {
-  override def ::[T](v: T) = HCons(v, this)
+  implicit def nilAppender[L <: HList]: Appender[HNil, L, L] = Appender((v: HNil, l: L) => l)
 
-  override def toString = "HNil"
+  implicit def consAppender[T, L1 <: HList, L2 <: HList, R <: HList](implicit f: Appender[L1, L2, R]): Appender[HCons[T, L1], L2, HCons[T, R]] = {
+    Appender[HCons[T, L1], L2, HCons[T, R]]((l1: HCons[T, L1], l2: L2) => HCons(l1.head, f(l1.tail, l2)))
+  }
 }
-
-case object HNil extends HNil
