@@ -1,4 +1,4 @@
-import io.github.hamsters.{HCons, HNil}
+import io.github.hamsters.{HList, HCons, HNil}
 import org.scalatest.{FlatSpec, Matchers}
 
 import scala.collection.mutable.ListBuffer
@@ -22,12 +22,15 @@ class HListSpec extends FlatSpec with Matchers {
 
   "HList ++ " should "append hlist to another one" in {
 
-    val sum = (2.0 :: "hi" :: HNil) ++ (1 :: HNil)
+    import HList._
+
+    val sum = ++ (2.0 :: "hi" :: HNil, 1 :: HNil)
     sum shouldBe 2.0 :: "hi" :: 1 :: HNil
     sum shouldBe a[HCons[_, HCons[_, HCons[_, HNil]]]]
     sum.head shouldBe a[java.lang.Double]
     sum.head shouldBe 2.0
     sum.tail.head shouldBe "hi"
+    //sum.tail.tail.head shouldBe 1
 
   }
 
