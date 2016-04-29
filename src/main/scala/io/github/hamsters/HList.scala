@@ -6,12 +6,16 @@ sealed trait HList {
   type Plus[L <: HList] <: HList
 
   def ::[U](v: U): HList
+
+  override def toString: String
 }
 
 class HNil extends HList {
   type Plus[L <: HList] = L
 
   def ::[T](v: T) = HCons(v, this)
+
+  override def toString = "HNIL"
 }
 
 object HNil extends HNil
@@ -85,6 +89,8 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
       case h: HCons[T, U] => h
     }
   }
+
+  override def toString = s"($head : $tail)"
 
   //FIXME
   //def +[V](v: V) = HList.++(this, v :: HNil)
