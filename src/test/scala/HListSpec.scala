@@ -69,14 +69,14 @@ class HListSpec extends FlatSpec with Matchers {
   "HList filter" should "keep only elements satisfying predicate" in {
 
     //first element : false
-    (2.0 :: "hi" :: HNil).filter {
+    (2.0 :: "hi" :: "bye" :: HNil).filter {
       case s: String if s.startsWith("h") => true
       case _ => false
     } shouldBe ("hi" :: HNil)
 
 
     //first element : true
-    ("hi" :: 2.0 :: HNil).filter {
+    ("hi" :: 2.0 :: "bye" :: HNil).filter {
       case s: String if s.startsWith("h") => true
       case _ => false
     } shouldBe ("hi" :: HNil)
@@ -96,11 +96,27 @@ class HListSpec extends FlatSpec with Matchers {
 
   }
 
-
   "HList foreach" should "iterate over elements" in {
 
     val list = ListBuffer[String]()
     (2.0 :: "hi" :: "hello" :: HNil).foreach {
+      case s: String => list += s
+      case _ =>
+    }
+
+    list shouldBe List("hi", "hello")
+
+  }
+
+  "HList" should "chain map filter and foreach" in {
+
+    val list = ListBuffer[String]()
+    val hlist = 2.0 :: "bye" :: "hi" :: "hello" :: HNil
+
+    hlist.map(_.toString).filter {
+      case s: String if s.startsWith("h") => true
+      case _ => false
+    }.foreach {
       case s: String => list += s
       case _ =>
     }

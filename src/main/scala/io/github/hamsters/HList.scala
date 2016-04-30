@@ -7,13 +7,23 @@ sealed trait HList {
 
   def ::[U](v: U): HList
 
+  def filter(p: (Any) => Boolean): HList
+
+  def map[V <: HList](f: (Any) => Any): HList
+
+  def foreach(f: (Any) => Unit): Unit = map(f)
+
   override def toString: String
 }
 
 class HNil extends HList {
   type Plus[L <: HList] = L
 
-  def ::[T](v: T) = HCons(v, this)
+  override def ::[T](v: T) = HCons(v, this)
+
+  override def filter(p: (Any) => Boolean) = HNil
+
+  override def map[V <: HList](f: (Any) => Any) = HNil
 
   override def toString = "HNIL"
 }
@@ -27,7 +37,7 @@ case class Appender[L1 <: HList, L2 <: HList, R <: HList](fn: (L1, L2) => R) {
 case class HCons[T, U <: HList](head: T, tail: U) extends HList {
   type Plus[L <: HList] = HCons[T, U#Plus[L]]
 
-  def ::[V](v: V) = HCons(v, this)
+  override def ::[V](v: V) = HCons(v, this)
 
   //FIXME
   //def ++[L2 <: HList](l2: L2) = HList.++(this,l2)
@@ -45,7 +55,7 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
   }
 
   //TODO HList return type is too generic
-  def filter(p: (Any) => Boolean): HList = {
+  override def filter(p: (Any) => Boolean): HList = {
     @tailrec
     def filter0(accu: HList, rest: HList): HList = {
       rest match {
@@ -58,8 +68,6 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
     }
     filter0(HNil, this)
   }
-
-  def foreach(f: (Any) => Unit): Unit = map(f)
 
   //TODO HList return type is too generic
   def map[V <: HList](f: (Any) => Any): HList = {
