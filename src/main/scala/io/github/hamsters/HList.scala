@@ -9,7 +9,7 @@ sealed trait HList {
 
   def filter(p: (Any) => Boolean): HList
 
-  def map[V <: HList](f: (Any) => Any): HList
+  def map(f: (Any) => Any): HList
 
   def foreach(f: (Any) => Unit): Unit = map(f)
 
@@ -23,7 +23,7 @@ class HNil extends HList {
 
   override def filter(p: (Any) => Boolean) = HNil
 
-  override def map[V <: HList](f: (Any) => Any) = HNil
+  override def map(f: (Any) => Any) = HNil
 
   override def toString = "HNIL"
 }
@@ -70,7 +70,7 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
   }
 
   //TODO HList return type is too generic
-  def map[V <: HList](f: (Any) => Any): HList = {
+  def map(f: (Any) => Any): HList = {
 
     @tailrec
     def map0(accu: HList, rest: HList): HList = {
@@ -86,11 +86,11 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
   }
 
   //FIXME use ++ instead
-  private def +++[L2 <: HList](l2: L2) = {
-    def append[V <: HList](l1: HCons[T, V], l2: L2): HCons[T, _] = {
+  private def +++(l2: HList) = {
+    def append(l1: HCons[T, _], l2: HList): HCons[T, _] = {
       l1.tail match {
         case HNil => HCons(l1.head, l2)
-        case h: HCons[T, U] => l1.head :: append(h, l2)
+        case h: HCons[T, _] => l1.head :: append(h, l2)
       }
     }
     append(this, l2)
