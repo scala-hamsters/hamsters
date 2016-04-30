@@ -86,16 +86,14 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
   }
 
   //FIXME use ++ instead
-  private def +++[L2 <: HList](l2: L2): HCons[T, U] = {
+  private def +++[L2 <: HList](l2: L2) = {
     def append[V <: HList](l1: HCons[T, V], l2: L2): HCons[T, _] = {
       l1.tail match {
         case HNil => HCons(l1.head, l2)
         case h: HCons[T, U] => l1.head :: append(h, l2)
       }
     }
-    append(this, l2) match {
-      case h: HCons[T, U] => h
-    }
+    append(this, l2)
   }
 
   override def toString = s"($head : $tail)"
