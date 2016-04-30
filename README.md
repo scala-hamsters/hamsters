@@ -18,7 +18,7 @@ Currently, Hamsters supports :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %% "hamsters" % "1.0.0-BETA1"
+  "io.github.scala-hamsters" %% "hamsters" % "1.0.0-BETA2"
 )
 
 resolvers += Resolver.url("github repo for hamsters", url("http://scala-hamsters.github.io/hamsters/releases/"))(Resolver.ivyStylePatterns)
@@ -29,13 +29,16 @@ resolvers += Resolver.url("github repo for hamsters", url("http://scala-hamsters
 Statements can be `OK` or `KO`. Then you can get all successes and failures.
 
 ```scala
- val e1 = OK(1)
- val e2 = KO("error 1")
- val e3 = KO("error 2")
+import io.github.hamsters.Validation
+import Validation._
+
+val e1 = OK(1)
+val e2 = KO("error 1")
+val e3 = KO("error 2")
  
- val validation = Validation(e1,e2, e3)
- val failures = validation.failures //List[String] : List("error 1", "error 2")
- val successes = validation.successes //List[Int] : List(1)
+val validation = Validation(e1,e2, e3)
+val failures = validation.failures //List[String] : List("error 1", "error 2")
+val successes = validation.successes //List[Int] : List(1)
 ```
 
 You can also use OK/KO in a monadic way if you want to stop processing at the first encountered error.
@@ -50,7 +53,7 @@ for {
   v1 <- e1
   v2 <- e2
   v3 <- e3
-} yield(s"$v1-$v2-$v3")  //KO("nan")
+} yield(s"$v1-$v2-$v3") //KO("nan")
 ```
 
 Note : Validation relies on standard Either, Left and Right types. KO is used on the left side, OK on the right side.
@@ -63,6 +66,9 @@ More information on why it's useful [here](http://loicdescotte.github.io/posts/s
 ### FutureEither
 
 ```scala
+import io.github.hamsters.Validation._
+import io.github.hamsters.{FutureEither, FutureOption}
+
 def fea: Future[Either[String, Int]] = Future(OK(1))
 def feb(a: Int): Future[Either[String, Int]] = Future(OK(a+2))
 
@@ -90,6 +96,9 @@ HLists can contain heterogeneous data types but are strongly typed. It's like tu
 `++` is used to concatenate 2 Hlists.
  
 ```scala
+import io.github.hamsters.{HList, HCons, HNil}
+import HList._
+
 val hlist = 2.0 :: "hi" :: HNil
 
 val hlist1 = 2.0 :: "hi" :: HNil
@@ -113,7 +122,12 @@ val sum = ++(hlist1, hlist2) //(2.0 :: (hi :: (1 : HNil)))
 You can define functions or methods that are able to return several types, depending on the context.
 
 ```scala
+import io.github.hamsters.{Union3, Union3Type}
+
 //json element can contain a String, a Int or a Double
+val jsonUnion = new Union3Type[String, Int, Double]
+import jsonUnion._
+    
 def jsonElement(x: Int): Union3[String, Int, Double] = {
   if(x == 0) "0"
   else if (x % 2 == 0) 1

@@ -1,5 +1,5 @@
 import io.github.hamsters.Validation
-import io.github.hamsters.Validation._
+import Validation._
 import org.scalatest._
 
 class ValidationSpec extends FlatSpec with Matchers {
