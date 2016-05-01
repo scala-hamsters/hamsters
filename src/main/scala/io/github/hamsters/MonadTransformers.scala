@@ -9,6 +9,8 @@ case class FutureOption[+A](future: Future[Option[A]]) extends AnyVal {
       case None => Future.successful(None)
     }
     FutureOption(newFuture)
+
+    def run = future
   }
 
   def map[B](f: A => B)(implicit ec: ExecutionContext): FutureOption[B] = {
@@ -54,4 +56,11 @@ case class FutureEither[L, +R](future: Future[Either[L, R]]) extends AnyVal {
     })
   }
 
+}
+
+object MonadTransformers {
+  implicit def futureOptionToFuture[A](fo : FutureOption[A]) : Future[Option[A]] = fo.future
+  implicit def futureEitherToFuture[L,R](fe : FutureEither[L,R]) : Future[Either[L,R]] = fe.future
+  //implicit def futureToFutureOption[A](f: Future[Option[A]]): FutureOption[A] = FutureOption(f)
+  //implicit def futureToFutureEither[L,R](f: Future[Either[L,R]]): FutureEither[L,R] = FutureEither(f)
 }

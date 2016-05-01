@@ -68,14 +68,15 @@ More information on why it's useful [here](http://loicdescotte.github.io/posts/s
 ```scala
 import io.github.hamsters.Validation._
 import io.github.hamsters.{FutureEither, FutureOption}
+import io.github.hamsters.MonadTransformers._
 
 def fea: Future[Either[String, Int]] = Future(OK(1))
 def feb(a: Int): Future[Either[String, Int]] = Future(OK(a+2))
 
-val composedAB: Future[Either[String, Int]] = (for {
+val composedAB: Future[Either[String, Int]] = for {
   a <- FutureEither(fea)
   ab <- FutureEither(feb(a))
-} yield ab).future
+} yield ab
 ```
 ### FutureOption
 
@@ -83,10 +84,10 @@ val composedAB: Future[Either[String, Int]] = (for {
 def foa: Future[Option[String]] = Future(Some("a"))
 def fob(a: String): Future[Option[String]] = Future(Some(a+"b"))
 
-val composedAB: Future[Option[String]] = (for {
+val composedAB: Future[Option[String]] = for {
   a <- FutureOption(foa)
   ab <- FutureOption(fob(a))
-} yield ab).future
+} yield ab
 ```
 
 ## HList
