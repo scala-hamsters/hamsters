@@ -30,8 +30,8 @@ class HNil extends HList {
 
 object HNil extends HNil
 
-case class Appender[L1 <: HList, L2 <: HList, R <: HList](fn: (L1, L2) => R) {
-  def apply(l1: L1, l2: L2) = fn(l1, l2)
+case class Appender[L1 <: HList, L2 <: HList, R <: HList](f: (L1, L2) => R) {
+  def apply(l1: L1, l2: L2) = f(l1, l2)
 }
 
 case class HCons[T, U <: HList](head: T, tail: U) extends HList {
@@ -105,9 +105,9 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
 object HList {
   def ++[L1 <: HList, L2 <: HList](l1: L1, l2: L2)(implicit f: Appender[L1, L2, L1#Plus[L2]]): L1#Plus[L2] = f(l1, l2)
 
-  implicit def nilAppender[L <: HList]: Appender[HNil, L, L] = Appender((v: HNil, l: L) => l)
+  implicit def nilAppender[L <: HList] = Appender((v: HNil, l: L) => l)
 
-  implicit def consAppender[T, L1 <: HList, L2 <: HList, R <: HList](implicit f: Appender[L1, L2, R]): Appender[HCons[T, L1], L2, HCons[T, R]] = {
+  implicit def consAppender[T, L1 <: HList, L2 <: HList, R <: HList](implicit f: Appender[L1, L2, R]) = {
     Appender[HCons[T, L1], L2, HCons[T, R]]((l1: HCons[T, L1], l2: L2) => HCons(l1.head, f(l1.tail, l2)))
   }
 }
