@@ -39,8 +39,9 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
 
   override def ::[V](v: V) = HCons(v, this)
 
-  //FIXME
-  //def ++[L2 <: HList](l2: L2) = HList.++(this,l2)
+  def ++[L2 <: HList](l2: L2)(implicit f: Appender[HCons[T,U], L2, Plus[L2]]): HCons[T, U#Plus[L2]] = HList.++(this,l2)
+
+  def +[V](v: V)(implicit f: Appender[HCons[T,U], HCons[V, HNil], Plus[HCons[V, HNil]]]): HCons[T, U#Plus[HCons[V, HNil]]]  = HList.++(this, v :: HNil)
 
   def foldLeft[V](zero: V)(f: (V, Any) => V): V = {
     @tailrec
@@ -97,9 +98,6 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
   }
 
   override def toString = s"($head : $tail)"
-
-  //FIXME
-  //def +[V](v: V) = HList.++(this, v :: HNil)
 }
 
 object HList {

@@ -28,7 +28,7 @@ class HListSpec extends FlatSpec with Matchers {
     val hlist1 = 2.0 :: "hi" :: HNil
     val hlist2 = 1 :: HNil
 
-    val sum = ++(hlist1, hlist2)
+    val sum = hlist1 ++ hlist2
 
     sum shouldBe 2.0 :: "hi" :: 1 :: HNil
     sum shouldBe a[HCons[_, HCons[_, HCons[_, HNil]]]]
@@ -39,7 +39,7 @@ class HListSpec extends FlatSpec with Matchers {
 
   }
 
-  /* FIXME
+
   "HList + " should "append element to a hlist " in {
 
     val hlist = 2.0 :: "hi" :: HNil
@@ -51,7 +51,7 @@ class HListSpec extends FlatSpec with Matchers {
     sum.tail.head shouldBe "hi"
     sum.tail.tail.head shouldBe 1
 
-  }*/
+  }
 
   "HList fold" should "old over elements and produce a result" in {
 
