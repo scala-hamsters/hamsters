@@ -9,8 +9,6 @@ case class FutureOption[+A](future: Future[Option[A]]) extends AnyVal {
       case None => Future.successful(None)
     }
     FutureOption(newFuture)
-
-   // def run = future
   }
 
   def map[B](f: A => B)(implicit ec: ExecutionContext): FutureOption[B] = {
