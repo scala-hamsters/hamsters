@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0" xmlns:e="http://ant.apache.org/ivy/extra">
-	<info organisation="io.github.scala-hamsters" module="hamsters_2.11" revision="1.0.0-SNAPSHOT" status="integration" publication="20160424145818">
+	<info organisation="io.github.scala-hamsters" module="hamsters_2.11" revision="1.0.0-BETA3" status="release" publication="20160502120957">
 		<description>
 		hamsters
 		</description>
