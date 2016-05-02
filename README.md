@@ -18,7 +18,7 @@ Currently, Hamsters supports :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %% "hamsters" % "1.0.0-BETA3"
+  "io.github.scala-hamsters" %% "hamsters" % "1.0.0-BETA4"
 )
 
 resolvers += Resolver.url("github repo for hamsters", url("http://scala-hamsters.github.io/hamsters/releases/"))(Resolver.ivyStylePatterns)
@@ -96,6 +96,7 @@ HLists can contain heterogeneous data types but are strongly typed. It's like tu
 When you're manipulating data using tuples, it's common to add or subtrack some elements, but you have to make each element explicit to build a new tuple. HList simplifies this kind of task.  
 
  * `::` is used to append elements at the beggining of an HList
+ * `+` is used add element at the end of a HList
  * `++` is used to concatenate 2 Hlists
  * other operations : filter, map, foldLeft, foreach 
  
@@ -108,7 +109,8 @@ val hlist = 2.0 :: "hi" :: HNil
 val hlist1 = 2.0 :: "hi" :: HNil
 val hlist2 = 1 :: HNil
 
-val sum = ++(hlist1, hlist2) //(2.0 :: (hi :: (1 : HNil)))
+val sum = hlist1 + 1
+val sum2 = hlist1 ++ hlist2 //(2.0 :: (hi :: (1 : HNil)))
 
 (2.0 :: "hi" :: HNil).foldLeft("")(_+_) // "2.0hi"
 
