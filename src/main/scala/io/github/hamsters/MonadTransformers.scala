@@ -19,12 +19,7 @@ case class FutureOption[+A](future: Future[Option[A]]) extends AnyVal {
 
   def filter(p: (A) ⇒ Boolean)(implicit ec: ExecutionContext): FutureOption[A] = withFilter(p)
 
-  def withFilter(p: (A) ⇒ Boolean)(implicit ec: ExecutionContext): FutureOption[A] = {
-    FutureOption(future.map {
-      case Some(a) => if (p(a)) Some(a) else None
-      case _ => None
-    })
-  }
+  def withFilter(p: (A) ⇒ Boolean)(implicit ec: ExecutionContext): FutureOption[A] = FutureOption(future.map(_.filter(p)))
 }
 
 case class FutureEither[L, +R](future: Future[Either[L, R]]) extends AnyVal {
