@@ -43,7 +43,6 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
 
   def +[V](v: V)(implicit f: Appender[HCons[T,U], HCons[V, HNil], Plus[HCons[V, HNil]]]): HCons[T, U#Plus[HCons[V, HNil]]]  = HList.++(this, v :: HNil)
 
-  //FIXME to remove
   private def +++(l2: HList) = {
     def append(l1: HCons[T, _], l2: HList): HCons[T, _] = {
       l1.tail match {
@@ -66,7 +65,6 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
     foldLeft0(zero, head, tail)
   }
 
-  //TODO HList return type is too generic
   override def filter(p: (Any) => Boolean): HList = {
     @tailrec
     def filter0(accu: HList, rest: HList): HList = {
@@ -81,7 +79,6 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
     filter0(HNil, this)
   }
 
-  //TODO HList return type is too generic
   def map(f: (Any) => Any): HList = {
 
     @tailrec
@@ -101,7 +98,6 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
 }
 
 object HList {
-  //TODO possible to remove?
   def ++[L1 <: HList, L2 <: HList](l1: L1, l2: L2)(implicit f: Appender[L1, L2, L1#Plus[L2]]): L1#Plus[L2] = f(l1, l2)
 
   implicit def nilAppender[L <: HList] = Appender((v: HNil, l: L) => l)
