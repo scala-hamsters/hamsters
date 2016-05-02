@@ -43,6 +43,17 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
 
   def +[V](v: V)(implicit f: Appender[HCons[T,U], HCons[V, HNil], Plus[HCons[V, HNil]]]): HCons[T, U#Plus[HCons[V, HNil]]]  = HList.++(this, v :: HNil)
 
+  //FIXME to remove
+  private def +++(l2: HList) = {
+    def append(l1: HCons[T, _], l2: HList): HCons[T, _] = {
+      l1.tail match {
+        case HNil => HCons(l1.head, l2)
+        case h: HCons[T, _] => l1.head :: append(h, l2)
+      }
+    }
+    append(this, l2)
+  }
+
   def foldLeft[V](zero: V)(f: (V, Any) => V): V = {
     @tailrec
     def foldLeft0(accu: V, head: Any, tail: HList): V = {
@@ -86,21 +97,11 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
     map0(HNil, this)
   }
 
-  //FIXME use ++ instead
-  private def +++(l2: HList) = {
-    def append(l1: HCons[T, _], l2: HList): HCons[T, _] = {
-      l1.tail match {
-        case HNil => HCons(l1.head, l2)
-        case h: HCons[T, _] => l1.head :: append(h, l2)
-      }
-    }
-    append(this, l2)
-  }
-
   override def toString = s"($head : $tail)"
 }
 
 object HList {
+  //TODO possible to remove?
   def ++[L1 <: HList, L2 <: HList](l1: L1, l2: L2)(implicit f: Appender[L1, L2, L1#Plus[L2]]): L1#Plus[L2] = f(l1, l2)
 
   implicit def nilAppender[L <: HList] = Appender((v: HNil, l: L) => l)
