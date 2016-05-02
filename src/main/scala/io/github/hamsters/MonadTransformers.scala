@@ -10,21 +10,16 @@ case class FutureOption[+A](future: Future[Option[A]]) extends AnyVal {
     }
     FutureOption(newFuture)
 
-    def run = future
+   // def run = future
   }
 
   def map[B](f: A => B)(implicit ec: ExecutionContext): FutureOption[B] = {
     FutureOption(future.map(option => option map f))
   }
 
-  def filter(p: (A) ⇒ Boolean)(implicit ec: ExecutionContext): FutureOption[A] = filterWith(p)
+  def filter(p: (A) ⇒ Boolean)(implicit ec: ExecutionContext): FutureOption[A] = withFilter(p)
 
-  def filterWith(p: (A) ⇒ Boolean)(implicit ec: ExecutionContext): FutureOption[A] = {
-    FutureOption(future.map {
-      case Some(a) => if (p(a)) Some(a) else None
-      case _ => None
-    })
-  }
+  def withFilter(p: (A) ⇒ Boolean)(implicit ec: ExecutionContext): FutureOption[A] = FutureOption(future.map(_.filter(p)))
 }
 
 case class FutureEither[L, +R](future: Future[Either[L, R]]) extends AnyVal {
@@ -40,9 +35,9 @@ case class FutureEither[L, +R](future: Future[Either[L, R]]) extends AnyVal {
     FutureEither(future.map(either => either.right map f))
   }
 
-  def filter(p: (R) ⇒ Boolean)(implicit ec: ExecutionContext): FutureEither[String, R] = filterWith(p)
+  def filter(p: (R) ⇒ Boolean)(implicit ec: ExecutionContext): FutureEither[String, R] = withFilter(p)
 
-  def filterWith(p: (R) ⇒ Boolean)(implicit ec: ExecutionContext): FutureEither[String, R] = {
+  def withFilter(p: (R) ⇒ Boolean)(implicit ec: ExecutionContext): FutureEither[String, R] = {
     FutureEither(future.map {
       case Right(r) => if (p(r)) Right(r) else Left("No value matching predicate")
       case _ => Left("No value matching predicate")
