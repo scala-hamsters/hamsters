@@ -63,6 +63,18 @@ Note : Validation relies on standard Either, Left and Right types. KO is used on
 Example : combine Future and Option types then make it work in a for comprehension.  
 More information on why it's useful [here](http://loicdescotte.github.io/posts/scala-compose-option-future/).
 
+### FutureOption
+
+```scala
+def foa: Future[Option[String]] = Future(Some("a"))
+def fob(a: String): Future[Option[String]] = Future(Some(a+"b"))
+
+val composedAB: Future[Option[String]] = for {
+  a <- FutureOption(foa)
+  ab <- FutureOption(fob(a))
+} yield ab
+```
+
 ### FutureEither
 
 ```scala
@@ -76,17 +88,6 @@ def feb(a: Int): Future[Either[String, Int]] = Future(OK(a+2))
 val composedAB: Future[Either[String, Int]] = for {
   a <- FutureEither(fea)
   ab <- FutureEither(feb(a))
-} yield ab
-```
-### FutureOption
-
-```scala
-def foa: Future[Option[String]] = Future(Some("a"))
-def fob(a: String): Future[Option[String]] = Future(Some(a+"b"))
-
-val composedAB: Future[Option[String]] = for {
-  a <- FutureOption(foa)
-  ab <- FutureOption(fob(a))
 } yield ab
 ```
 
