@@ -96,8 +96,6 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
 
   override def toString = s"($head : $tail)"
 
-  def select[O](implicit selector: Selector[HCons[T, U], O]): O = selector(this)
-
 }
 
 object HList {
@@ -109,23 +107,5 @@ object HList {
     Appender[HCons[T, L1], L2, HCons[T, R]]((l1: HCons[T, L1], l2: L2) => HCons(l1.head, f(l1.tail, l2)))
   }
 }
-@implicitNotFound("Implicit not found: io.github.hamsters[${L}, ${O}]. You requested an element of type ${O}, but there is none in the HList ${L}.")
-trait Selector[L <: HList, O] {
-  def apply(l: L): O
-}
 
-object Selector {
-
-  def apply[L <: HList, O](implicit selector: Selector[L, O]) = selector
-
-  implicit def select[H, T <: HList] = new Selector[HCons[H, T], H] {
-    override def apply(l: HCons[H, T]): H = l.head
-  }
-
-  implicit def recurse[H, T <: HList, O](implicit st : Selector[T, O]) = new Selector[HCons[H, T], O] {
-    override def apply(l: HCons[H, T]): O = st.apply(l.tail)
-  }
-
-
-}
 
