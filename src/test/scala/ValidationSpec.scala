@@ -14,6 +14,16 @@ class ValidationSpec extends FlatSpec with Matchers {
     validation.successes should be(List(1))
   }
 
+  "Validation" should "give failures and successes with mixed types" in {
+    val e1 = OK(1)
+    val e2 = OK("2")
+    val e3 = KO("nan")
+
+    val validation = Validation(e1, e2, e3)
+    validation.failures should be(List("nan"))
+    validation.successes should be(List(1,"2"))
+  }
+
   "Either" should "compose using flatMap and map" in {
 
     val e1 = OK(1)

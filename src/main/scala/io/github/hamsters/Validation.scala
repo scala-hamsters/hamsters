@@ -2,10 +2,10 @@ package io.github.hamsters
 
 import scala.util.{Left, Right}
 
-class Validation[L, R](eithers: List[Either[L, R]]) {
-  def failures: List[L] = eithers.collect { case l: Left[L, _] => l.left.get }
+class Validation(eithers: List[Either[_,_]]) {
+  def failures = eithers.collect { case l: Left[_, _] => l.left.get }
 
-  def successes: List[R] = eithers.collect { case r: Right[_, R] => r.right.get }
+  def successes = eithers.collect { case r: Right[_, _] => r.right.get }
 }
 
 object Validation {
