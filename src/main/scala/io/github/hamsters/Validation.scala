@@ -13,7 +13,7 @@ object Validation {
   val OK = Right
   val KO = Left
 
-  def apply[L, R](eithers: Either[L, R]*) = new Validation(eithers.toList)
+  def apply(eithers: Either[_, _]*) = new Validation(eithers.toList)
 
   implicit class OKBiasedEither[L, R](e: Either[L, R]) {
     def map[R2](f: R => R2) = e.right.map(f)
