@@ -1,7 +1,7 @@
 package io.github.hamsters
 
 
-//TODO 6 to n arity (n to be defined). Generate via macros?
+// Should we generate (via macros) 6 to n arity ?
 
 case class Union2[T1, T2](v1: Option[T1], v2: Option[T2])
 
