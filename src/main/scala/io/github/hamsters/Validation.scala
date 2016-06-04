@@ -22,6 +22,10 @@ object Validation {
     def filter(p: (R) => Boolean) = filterWith(p)
 
     def filterWith(p: (R) => Boolean) = e.right.filter(p)
+
+    def get = e.right.get
+
+    def getOrElse[R2 >: R](or: => R2) = e.right.getOrElse(or)
   }
 }
 
