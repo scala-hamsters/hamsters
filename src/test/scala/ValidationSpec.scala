@@ -36,8 +36,18 @@ class ValidationSpec extends FlatSpec with Matchers {
     validation.failures should be(List("nan"))
   }
 
-  "Either" should "compose using flatMap and map" in {
+  "OK" should "give a value using get and getOrElse" in {
+    val e = OK(1)
+    e.get should be(1)
+    e.getOrElse(2) should be(1)
+  }
 
+  "KO" should "give a value using getOrElse" in {
+    val e = KO("d'oh!")
+    e.getOrElse(2) should be(2)
+  }
+
+  "Either" should "compose using flatMap and map" in {
     val e1 = OK(1)
     val e2 = OK(2)
     val e3 = OK(3)
