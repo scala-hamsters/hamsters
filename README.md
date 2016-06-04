@@ -37,8 +37,8 @@ val e2 = KO("error 1")
 val e3 = KO("error 2")
  
 val validation = Validation(e1,e2, e3)
+validation.hasFailures //true
 val failures = validation.failures //List[String] : List("error 1", "error 2")
-val successes = validation.successes //List[Int] : List(1)
 ```
 
 You can also use OK/KO in a monadic way if you want to stop processing at the first encountered error.

@@ -3,9 +3,8 @@ package io.github.hamsters
 import scala.util.{Left, Right}
 
 class Validation[L](eithers: List[Either[L,_]]) {
-  def failures = eithers.collect { case l: Left[L, _] => l.left.get }
-
-  def successes = eithers.collect { case r: Right[_, _] => r.right.get }
+  val failures: List[L] = eithers.collect { case l: Left[L, _] => l.left.get }
+  val hasFailures: Boolean = failures.nonEmpty
 }
 
 object Validation {
