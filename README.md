@@ -26,7 +26,7 @@ resolvers += Resolver.url("github repo for hamsters", url("http://scala-hamsters
 
 ## Scaladoc
 
-You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/api)
+You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/api).
 
 ## Usage
 
