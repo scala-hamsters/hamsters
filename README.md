@@ -24,7 +24,13 @@ libraryDependencies ++= Seq(
 resolvers += Resolver.url("github repo for hamsters", url("http://scala-hamsters.github.io/hamsters/releases/"))(Resolver.ivyStylePatterns)
 ```
 
-## Validation and monadic OK/KO
+## Scaladoc
+
+You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/api)
+
+## Usage
+
+### Validation and monadic OK/KO
 
 Statements can be `OK` or `KO`. Then you can get all successes and failures.
 
@@ -58,12 +64,12 @@ for {
 
 Note : Validation relies on standard Either, Left and Right types. KO is used on the left side, OK on the right side.
  
-##  Monad transformers
+###  Monad transformers
 
 Example : combine Future and Option types then make it work in a for comprehension.  
 More information on why it's useful [here](http://loicdescotte.github.io/posts/scala-compose-option-future/).
 
-### FutureOption
+#### FutureOption
 
 ```scala
 def foa: Future[Option[String]] = Future(Some("a"))
@@ -75,7 +81,7 @@ val composedAB: Future[Option[String]] = for {
 } yield ab
 ```
 
-### FutureEither
+#### FutureEither
 
 ```scala
 import io.github.hamsters.Validation._
@@ -91,7 +97,7 @@ val composedAB: Future[Either[String, Int]] = for {
 } yield ab
 ```
 
-## HList
+### HList
 
 HLists can contain heterogeneous data types but are strongly typed. It's like tuples on steroids!  
 When you're manipulating data using tuples, it's common to add or subtrack some elements, but you have to make each element explicit to build a new tuple. HList simplifies this kind of task.  
@@ -124,7 +130,7 @@ val sum2 = hlist1 ++ hlist2 //(2.0 :: (hi :: (1 : HNil)))
 
 ```
 
-## Union types
+### Union types
 
 You can define functions or methods that are able to return several types, depending on the context.
 
