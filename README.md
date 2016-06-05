@@ -24,10 +24,6 @@ libraryDependencies ++= Seq(
 resolvers += Resolver.url("github repo for hamsters", url("http://scala-hamsters.github.io/hamsters/releases/"))(Resolver.ivyStylePatterns)
 ```
 
-## Scaladoc
-
-You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/api).
-
 ## Usage
 
 ### Validation and monadic OK/KO
@@ -147,3 +143,7 @@ def jsonElement(x: Int): Union3[String, Int, Double] = {
   else 2.0
 }
 ```
+
+## Scaladoc
+
+You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/api).
