@@ -20,8 +20,6 @@ Currently, Hamsters supports :
 libraryDependencies ++= Seq(
   "io.github.scala-hamsters" %% "hamsters" % "1.0.4"
 )
-
-resolvers += Resolver.url("github repo for hamsters", url("http://scala-hamsters.github.io/hamsters/releases/"))(Resolver.ivyStylePatterns)
 ```
 
 ## Usage
