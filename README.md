@@ -14,12 +14,24 @@ Currently, Hamsters supports :
 
 [![Travis](https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master)](https://travis-ci.org/scala-hamsters/hamsters)
 
-## Install as dependency
+## Install as dependencyy (for Scala 2.11)
+
+With SBT : 
 
 ```scala
 libraryDependencies ++= Seq(
   "io.github.scala-hamsters" %% "hamsters" % "1.0.4"
 )
+```
+
+With Maven : 
+
+```xml
+<dependency>
+  <groupId>io.github.scala-hamsters</groupId>
+  <artifactId>hamsters_2.11</artifactId>
+  <version>1.0.4</version>
+</dependency>
 ```
 
 ## Usage
