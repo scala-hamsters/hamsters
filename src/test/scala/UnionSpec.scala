@@ -53,14 +53,12 @@ class UnionSpec extends FlatSpec with Matchers {
 
   "Union2" should "find a type" in {
 
-    //TODO should work with scala Int
-
-    val stringOrInt = new Union2Type[String, Integer]
+    val stringOrInt = new Union2Type[String, Int]
     import stringOrInt._
 
-    def computeValue(x: Int): Union2[String, Integer] = {
+    def computeValue(x: Int): Union2[String, Int] = {
       if (x > 0) "0"
-      else Integer.valueOf(1)
+      else 1
     }
 
     computeValue(1).find[String] should be(Some("0"))
@@ -75,28 +73,5 @@ class UnionSpec extends FlatSpec with Matchers {
     computeValue(0).find[Boolean] should be(None)
 
   }
-
-/*
-  "Union3" should "find a type" in {
-    val jsonUnion = new Union3Type[String, Int, Double]
-    import jsonUnion._
-
-    //json element can contain a String, a Int or a Double
-    def jsonElement(x: Int): Union3[String, Int, Double] = {
-      if (x == 0) "0"
-      else if (x % 2 == 0) 1
-      else 2.0
-    }
-
-    jsonElement(0).find[String] should be(Some("0"))
-
-    computeValue(0).find[Int] should be(None)
-
-    computeValue(0).find[Double] should be(None)
-
-    computeValue(0).find[Boollean] should be(None)
-
-  }
-*/
 
 }
