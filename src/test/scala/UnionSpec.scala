@@ -52,19 +52,22 @@ class UnionSpec extends FlatSpec with Matchers {
   }
 
   "Union2" should "find a type" in {
-    val stringOrInt = new Union2Type[String, Int]
+
+    //TODO should work with scala Int
+
+    val stringOrInt = new Union2Type[String, Integer]
     import stringOrInt._
 
-    def computeValue(x: Int): Union2[String, Int] = {
+    def computeValue(x: Int): Union2[String, Integer] = {
       if (x > 0) "0"
-      else 1
+      else Integer.valueOf(1)
     }
 
     computeValue(1).find[String] should be(Some("0"))
 
     computeValue(1).find[Int] should be(None)
 
-    computeValue(0).find[Int] should be(Some(1))
+    computeValue(0).find[Integer] should be(Some(1))
 
     computeValue(0).find[String] should be(None)
 

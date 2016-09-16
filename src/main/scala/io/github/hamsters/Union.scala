@@ -1,36 +1,37 @@
 package io.github.hamsters
 
 import scala.annotation.tailrec
-import scala.reflect.runtime.universe._
 import scala.reflect._
 // Should we generate (via macros) 6 to n arity ?
 
 private object Union {
-  implicit class MyInstanceOf[U: TypeTag](that: U) {
-    def myIsInstanceOf[T: TypeTag] =
-      typeOf[U] <:< typeOf[T]
+  implicit class NoEraseInstanceOf(that: Any) {
+    def noEraseInstanceOf[T: ClassTag]= {
+      val targetClass = classTag[T]
+      targetClass.runtimeClass.isInstance(that)
+    }
   }
 }
 
 trait Union { this: Product =>
-  import Union._
 
   @tailrec
   private def findTypeOnProductIterator[T](it: Iterator[Any])(implicit m: Manifest[T]): Option[T] = {
+    import Union._
     if(!it.hasNext) None
     else {
       val current = it.next()
       current match {
-        case Some(u) if u.myIsInstanceOf[T] => Some(u).asInstanceOf[Some[T]]
+        case Some(u) if u.noEraseInstanceOf[T] => Some(u).asInstanceOf[Some[T]]
         case _ => findTypeOnProductIterator(it)
       }
     }
   }
 
-  def find[T]: Option[T] = findTypeOnProductIterator(this.productIterator)
+  def find[T](implicit m: Manifest[T]): Option[T] = findTypeOnProductIterator(this.productIterator)
 }
 
-case class Union2[T1, T2](v1: Option[T1], v2: Option[T2])(implicit m1: Manifest[T1], m2: Manifest[T2]) extends Union
+case class Union2[T1, T2](v1: Option[T1], v2: Option[T2]) extends Union
 
 case class Union3[T1, T2, T3](v1: Option[T1], v2: Option[T2], v3: Option[T3])
 
