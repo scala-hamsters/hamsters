@@ -6,7 +6,10 @@ import scala.reflect._
 
 private object Union {
   implicit class NoEraseInstanceOf(that: Any) {
-    def noEraseInstanceOf[T: ClassTag]= that match { case _: T => true case _ => false }
+    def noEraseInstanceOf[T: ClassTag]= that match {
+      case _: T => true
+      case _ => false
+    }
   }
 }
 
