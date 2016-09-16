@@ -154,6 +154,12 @@ def jsonElement(x: Int): Union3[String, Int, Double] = {
 }
 ```
 
+Then you can ask for a specifc type and retreive an option (on Snapshot version only right now) : 
+
+```scala
+jsonElement(0).find[String] // Some("0")
+```
+
 ## Scaladoc
 
 You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/api).
