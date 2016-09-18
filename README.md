@@ -158,6 +158,7 @@ Then you can use pattern matching, or ask for a specifc type and retrieve an opt
 
 ```scala
 jsonElement(0).get[String] // Some("0")
+jsonElement(1).getOrElse("not found") // get String value or "not found" if get[String] is undefined
 ```
 
 ## Scaladoc
