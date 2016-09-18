@@ -16,7 +16,7 @@ Currently, Hamsters supports :
 
 ## Install as dependencyy (for Scala 2.11)
 
-With SBT : 
+With SBT :
 
 ```scala
 libraryDependencies ++= Seq(
@@ -24,7 +24,7 @@ libraryDependencies ++= Seq(
 )
 ```
 
-With Maven : 
+With Maven :
 
 ```xml
 <dependency>
@@ -47,7 +47,7 @@ import Validation._
 val e1 = OK(1)
 val e2 = KO("error 1")
 val e3 = KO("error 2")
- 
+
 val validation = Validation(e1,e2, e3)
 validation.hasFailures //true
 val failures = validation.failures //List[String] : List("error 1", "error 2")
@@ -69,10 +69,10 @@ for {
 ```
 
 Note : Validation relies on standard Either, Left and Right types. KO is used on the left side, OK on the right side.
- 
+
 ###  Monad transformers
 
-Example : combine Future and Option types then make it work in a for comprehension.  
+Example : combine Future and Option types then make it work in a for comprehension.
 More information on why it's useful [here](http://loicdescotte.github.io/posts/scala-compose-option-future/).
 
 #### FutureOption
@@ -105,14 +105,14 @@ val composedAB: Future[Either[String, Int]] = for {
 
 ### HList
 
-HLists can contain heterogeneous data types but are strongly typed. It's like tuples on steroids!  
-When you're manipulating data using tuples, it's common to add or subtrack some elements, but you have to make each element explicit to build a new tuple. HList simplifies this kind of task.  
+HLists can contain heterogeneous data types but are strongly typed. It's like tuples on steroids!
+When you're manipulating data using tuples, it's common to add or subtrack some elements, but you have to make each element explicit to build a new tuple. HList simplifies this kind of task.
 
  * `::` is used to append elements at the beggining of an HList
  * `+` is used add element at the end of a HList
  * `++` is used to concatenate 2 Hlists
- * other operations : filter, map, foldLeft, foreach 
- 
+ * other operations : filter, map, foldLeft, foreach
+
 ```scala
 import io.github.hamsters.{HList, HCons, HNil}
 import HList._
@@ -146,7 +146,7 @@ import io.github.hamsters.{Union3, Union3Type}
 //json element can contain a String, a Int or a Double
 val jsonUnion = new Union3Type[String, Int, Double]
 import jsonUnion._
-    
+
 def jsonElement(x: Int): Union3[String, Int, Double] = {
   if(x == 0) "0"
   else if (x % 2 == 0) 1
@@ -154,10 +154,10 @@ def jsonElement(x: Int): Union3[String, Int, Double] = {
 }
 ```
 
-Then you can use pattern matching, or ask for a specifc type and retrieve an option (on Snapshot version only right now) : 
+Then you can use pattern matching, or ask for a specifc type and retrieve an option (on Snapshot version only right now) :
 
 ```scala
-jsonElement(0).find[String] // Some("0")
+jsonElement(0).get[String] // Some("0")
 ```
 
 ## Scaladoc

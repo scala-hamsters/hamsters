@@ -28,16 +28,19 @@ trait Union { this: Product =>
     }
   }
 
-  def find[T](implicit m: Manifest[T]): Option[T] = findTypeOnProductIterator(this.productIterator)
+  def get[T](implicit m: Manifest[T]): Option[T] = findTypeOnProductIterator(this.productIterator)
+
+  def getOrElse[T](default: T)(implicit m: Manifest[T]): T = get[T].getOrElse(default)
+
 }
 
 case class Union2[T1, T2](v1: Option[T1], v2: Option[T2]) extends Union
 
-case class Union3[T1, T2, T3](v1: Option[T1], v2: Option[T2], v3: Option[T3])
+case class Union3[T1, T2, T3](v1: Option[T1], v2: Option[T2], v3: Option[T3]) extends Union
 
-case class Union4[T1, T2, T3, T4](v1: Option[T1], v2: Option[T2], v3: Option[T3], v4: Option[T4])
+case class Union4[T1, T2, T3, T4](v1: Option[T1], v2: Option[T2], v3: Option[T3], v4: Option[T4]) extends Union
 
-case class Union5[T1, T2, T3, T4, T5](v1: Option[T1], v2: Option[T2], v3: Option[T3], v4: Option[T4], v5: Option[T5])
+case class Union5[T1, T2, T3, T4, T5](v1: Option[T1], v2: Option[T2], v3: Option[T3], v4: Option[T4], v5: Option[T5]) extends Union
 
 class Union2Type[T1, T2] {
   implicit def toUnion21(t: T1) = new Union2[T1, T2](Some(t), None)
