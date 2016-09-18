@@ -20,7 +20,7 @@ With SBT :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %% "hamsters" % "1.0.4"
+  "io.github.scala-hamsters" %% "hamsters" % "1.0.5"
 )
 ```
 
@@ -30,7 +30,7 @@ With Maven :
 <dependency>
   <groupId>io.github.scala-hamsters</groupId>
   <artifactId>hamsters_2.11</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
 </dependency>
 ```
 
@@ -154,7 +154,7 @@ def jsonElement(x: Int): Union3[String, Int, Double] = {
 }
 ```
 
-Then you can use pattern matching, or ask for a specifc type and retrieve an option (on Snapshot version only right now) :
+Then you can use pattern matching, or ask for a specifc type and retrieve an option :
 
 ```scala
 jsonElement(0).get[String] // Some("0")
