@@ -133,7 +133,7 @@ sum2.tail.head // hi (String)
 
 (2.0 :: "hi" :: HNil).map(_.toString) // "2.0" :: "hi" :: HNil
 
-(2.0 :: "hi" :: HNil).filter{
+(2.0 :: "hi" :: HNil).filter {
   case s: String if s.startsWith("h") => true
   case _ => false
 } //"hi" :: HNil
