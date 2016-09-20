@@ -78,4 +78,15 @@ class ValidationSpec extends FlatSpec with Matchers {
 
   }
 
+  "from catchable" should "convert to etiher" in {
+
+      def compute(x: Int):Int = 2/x
+
+      fromCatchable(compute(1)) should be(OK(2))
+      fromCatchable(compute(0)) should be(KO("/ by zero"))
+
+      fromCatchable(compute(0), (t: Throwable) => t.getClass.getSimpleName) should be(KO("ArithmeticException"))
+
+  }
+
 }
