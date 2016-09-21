@@ -2,7 +2,7 @@ name := "hamsters"
 
 organization := "io.github.scala-hamsters"
 
-version := "1.0.6-SNAPSHOT"
+version := "1.0.7-SNAPSHOT"
 
 scalaVersion := "2.11.8"
 
