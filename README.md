@@ -68,6 +68,18 @@ for {
 } yield(s"$v1-$v2-$v3") //KO("nan")
 ```
 
+To automatically catch exceptions into a KO object, you can use `fromCatchable` (SNAPSHOT version only right now).
+By default it will give you an error message, but you can specify what to do in error cases :
+
+```scala
+def compute(x: Int):Int = 2/x
+
+fromCatchable(compute(1)) //OK(2)
+fromCatchable(compute(0)) //KO("/ by zero")
+
+fromCatchable(compute(0), (t: Throwable) => t.getClass.getSimpleName) //KO("ArithmeticException")
+```
+
 Note : Validation relies on standard Either, Left and Right types. KO is used on the left side, OK on the right side.
 
 ###  Monad transformers
