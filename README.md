@@ -20,7 +20,7 @@ With SBT :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %% "hamsters" % "1.0.5"
+  "io.github.scala-hamsters" %% "hamsters" % "1.0.7"
 )
 ```
 
@@ -30,7 +30,7 @@ With Maven :
 <dependency>
   <groupId>io.github.scala-hamsters</groupId>
   <artifactId>hamsters_2.11</artifactId>
-  <version>1.0.5</version>
+  <version>1.0.7</version>
 </dependency>
 ```
 
@@ -68,7 +68,7 @@ for {
 } yield(s"$v1-$v2-$v3") //KO("nan")
 ```
 
-To automatically catch exceptions into a KO object, you can use `fromCatchable` (SNAPSHOT version only right now).
+To automatically catch exceptions into a KO object, you can use `fromCatchable`.
 By default it will give you an error message, but you can specify what to do in error cases :
 
 ```scala
