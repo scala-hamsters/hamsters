@@ -2,7 +2,6 @@ package io.github.hamsters
 
 import scala.annotation.tailrec
 import scala.reflect._
-// Should we generate (via macros) 6 to n arity ?
 
 private object Union {
   implicit class NoEraseInstanceOf(that: Any) {
