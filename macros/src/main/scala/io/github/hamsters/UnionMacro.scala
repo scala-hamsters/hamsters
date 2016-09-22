@@ -27,27 +27,25 @@ object UnionMacro {
              ..${
             typesName.zipWithIndex.map { case (currentTypeName, y) =>
 
-              val conversionMethodName = TermName("toUnion" + y)
+              val unionXType2UnionXMethodName = TermName("toUnion" + y)
 
-              val unionTermName =q"""${TermName("Union" + tpes.size)}"""
+              val unionXType =q"""${TermName("Union" + tpes.size)}"""
               val constructorArgs = for (x <- typesName.indices) yield q"""${argByXY(x, y)}"""
 
               val manifests: Seq[c.universe.Tree] = tpes.zipWithIndex.map { case (TypeDef(_, typeName, _, _), indice) =>
-
                 val manifestTypeName = AppliedTypeTree(Ident(TypeName("Manifest")), List(Ident(TypeName("T1"))))
                 val manifestVariableName = TermName(s"m$indice")
                 q"""$manifestVariableName :  $manifestTypeName"""
               }
 
               q"""
-               implicit def $conversionMethodName(t: $currentTypeName)(implicit ..$manifests) = $unionTermName[..$typesName](..$constructorArgs);
+               implicit def $unionXType2UnionXMethodName(t: $currentTypeName)(implicit ..$manifests) = $unionXType[..$typesName](..$constructorArgs);
                """
             }
           }
             }
           """
-
-        case _ => c.abort(c.enclosingPosition, "union annotation only works on class")
+        case _ => c.abort(c.enclosingPosition, "UnionMacro annotation only works on class")
       }
     }
     c.Expr[Any](result)
