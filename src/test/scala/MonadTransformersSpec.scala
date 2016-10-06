@@ -52,6 +52,44 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
     Await.result(filtered2, 1 second) shouldBe None
   }
 
+  "FutureOption" should "handle future and option map/flatMap sequences" in {
+
+    import scala.concurrent.Future
+    import scala.concurrent.ExecutionContext.Implicits.global
+    import io.github.hamsters.FutureOption
+    import io.github.hamsters.MonadTransformers._
+
+    implicit def OptiontoFutureOption[T](o: Option[T]): Future[Option[T]] = Future.successful(o)
+    implicit def FuturetoFutureOption[T](f: Future[T]): Future[Some[T]] = f.map(Some(_))
+
+    case class User(id: Int)
+    case class Data(id: Int)
+
+    object Repo {
+      def update(id: Int) = Future(1)
+      def save(id: Int) = Future(Data(2))
+      def user(userId:Int) = Future(Some(User(userId)))
+    }
+
+    type Result = String
+    val userIdOption = Some(0)
+
+    val operationSequenceOpt : Future[Option[Result]] =
+      for {
+        userId <- FutureOption(userIdOption)
+        user <- FutureOption(Repo.user(userId))
+        data <- FutureOption(Repo.save(user.id))
+        _ <- FutureOption(Repo.update(data.id))
+      } yield {
+        "redirect"
+      }
+
+     val operationSequence = operationSequenceOpt.map(_.getOrElse("error"))
+
+     Await.result(operationSequence, 1 second) shouldBe "redirect"
+
+  }
+
   "FutureEither" should "handle Future[Either[_,_]] type" in {
     def fea: Future[Either[String, Int]] = Future(OK(1))
     def feb(a: Int): Future[Either[String, Int]] = Future(OK(a + 2))
