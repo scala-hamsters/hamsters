@@ -59,27 +59,27 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
     import io.github.hamsters.FutureOption
     import io.github.hamsters.MonadTransformers._
 
-    implicit def OptiontoFutureOption[T](o: Option[T]): Future[Option[T]] = Future.successful(o)
-    implicit def FuturetoFutureOption[T](f: Future[T]): Future[Some[T]] = f.map(Some(_))
+    implicit def optiontoFutureOption[T](o: Option[T]): Future[Option[T]] = Future.successful(o)
+    implicit def futuretoFutureOption[T](f: Future[T]): Future[Some[T]] = f.map(Some(_))
 
     case class User(id: Int)
     case class Data(id: Int)
 
     object Repo {
-      def update(id: Int) = Future(1)
-      def save(id: Int) = Future(Data(2))
       def user(userId:Int) = Future(Some(User(userId)))
+      def getData(id: Int) = Future(Data(1))
+      def updateData(id: Int) = Future(2)
     }
 
     type Result = String
-    val userIdOption = Some(0)
+    val userIdOption = Some(1)
 
     val operationSequenceOpt : Future[Option[Result]] =
       for {
         userId <- FutureOption(userIdOption)
         user <- FutureOption(Repo.user(userId))
-        data <- FutureOption(Repo.save(user.id))
-        _ <- FutureOption(Repo.update(data.id))
+        data <- FutureOption(Repo.getData(user.id))
+        _ <- FutureOption(Repo.updateData(data.id))
       } yield {
         "redirect"
       }
