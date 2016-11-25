@@ -177,6 +177,45 @@ jsonElement(0).get[String] // Some("0")
 jsonElement(1).getOrElse("not found") // get String value or "not found" if get[String] is undefined
 ```
 
+
+### Enums (master branch only right now)
+
+This typeclass allows to use parse and name methods on enumerable types. It can be very useful if you need to serialize and deserialize your types (in Json, in a database...)
+
+```scala
+sealed trait Season
+case object Winter extends Season
+case object Spring extends Season
+case object Summer extends Season
+case object Fall extends Season
+
+implicit val seasonEnumerable = new Enumerable[Season] {
+  override def list: List[Season] = List(Winter, Spring, Summer, Fall)
+}
+
+Enumeration.name(Winter) // "winter"
+Enumeration.parse("winter") // Some(Winter)
+```
+
+It is also possible to use custom namings :
+
+```scala
+
+implicit val seasonEnumerable = new Enumerable[Season] {
+  override def list = List(Winter, Spring, Summer, Fall)
+
+  override def name(s: Season) = {
+    s match {
+      case Winter => "WINTER_SEASON"
+      case other => super.name(other)
+    }
+  }
+}
+
+Enumeration.name(Winter) // "WINTER_SEASON"
+Enumeration.parse("WINTER_SEASON") // Some(Winter)
+```
+
 ## Scaladoc
 
 You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/api).

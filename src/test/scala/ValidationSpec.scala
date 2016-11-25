@@ -78,7 +78,7 @@ class ValidationSpec extends FlatSpec with Matchers {
 
   }
 
-  "from catchable" should "convert to etiher" in {
+  "from catchable" should "convert to either" in {
 
       def compute(x: Int):Int = 2/x
 
