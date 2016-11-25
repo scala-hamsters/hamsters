@@ -1,58 +1,47 @@
 package io.github.hamsters
 
-import scala.annotation.StaticAnnotation
-import scala.language.experimental.macros
-import scala.reflect.macros.blackbox
+import scala.collection.immutable.Seq
+import scala.meta.Term.Name
+import scala.meta.{Term, _}
 
-object UnionMacro {
+class UnionMacro extends scala.annotation.StaticAnnotation {
 
 
-  def impl(c: blackbox.Context)(annottees: c.Expr[Any]*): c.Expr[Any] = {
-    import c.universe._
 
-    def argByXY(idx: Int, i: Int): c.universe.Tree = if (idx == i) {
+  inline def apply(defn: Any): Any = meta {
+
+    def argByXY(idx: Int, i: Int): Term = if (idx == i) {
       q"""Some(t)"""
     }
     else {
       q"""None"""
     }
 
-    val result = {
-      annottees.map(_.tree).toList match {
-        case q"class $name[..$tpes](..$lFields) extends ..$parents  { ..$body }" :: Nil =>
-          val typesName: Seq[c.universe.TypeName] = tpes.map { case TypeDef(_, typeName, _, _) => typeName }
+    defn match {
+      case q"class $className[..$classTypes] { ..$body }" =>
+        val types = classTypes.map(t => Type.Name(t.name.value))
+        val typesName: Seq[Name] = classTypes.map(t => Term.Name(t.name.value))
+        val result =
           q"""
-            class $name[..$tpes](..$lFields) extends ..$parents   {
-              ..$body
-             ..${
+        class $className[..$classTypes] {
+        ..$body
+         ..${
+
             typesName.zipWithIndex.map { case (currentTypeName, y) =>
-
-              val unionXType2UnionXMethodName = TermName("toUnion" + y)
-
-              val unionXType =q"""${TermName("Union" + tpes.size)}"""
-              val constructorArgs = for (x <- typesName.indices) yield q"""${argByXY(x, y)}"""
-
-              val manifests: Seq[c.universe.Tree] = tpes.zipWithIndex.map { case (TypeDef(_, typeName, _, _), indice) =>
-                val manifestTypeName = AppliedTypeTree(Ident(TypeName("Manifest")), List(Ident(TypeName("T1"))))
-                val manifestVariableName = TermName(s"m$indice")
-                q"""$manifestVariableName :  $manifestTypeName"""
-              }
-
-              q"""
-               implicit def $unionXType2UnionXMethodName(t: $currentTypeName)(implicit ..$manifests) = $unionXType[..$typesName](..$constructorArgs);
-               """
+              val unionXType2UnionXMethodName = Term.Name("toUnion" + y)
+              val currentType = Type.Name(currentTypeName.value)
+              val unionXType = Term.Name("Union" + classTypes.size)
+              val constructorArgs : Seq[Term.Arg] = for (x <- typesName.indices) yield q"""${argByXY(x, y)}"""
+              q"implicit def $unionXType2UnionXMethodName(t : $currentType) = $unionXType[..$types](..$constructorArgs)"
             }
           }
-            }
+        }
           """
-        case _ => c.abort(c.enclosingPosition, "UnionMacro annotation only works on class")
-      }
+        //println(result.syntax) display code result
+        result
+      case _ =>
+        println(defn.structure)
+        abort("@UnionMacroMeta must annotate a class")
     }
-    c.Expr[Any](result)
-
   }
-}
-
-class UnionMacro extends StaticAnnotation {
-  def macroTransform(annottees: Any*) = macro UnionMacro.impl
 }

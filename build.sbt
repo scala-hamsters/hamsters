@@ -7,8 +7,12 @@ val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   scalaVersion := "2.11.8",
   scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
   publishMavenStyle := true,
-  libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value,
-  addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
+  libraryDependencies += "org.scalameta" %% "scalameta" % "1.3.0",
+  resolvers += Resolver.url(
+    "scalameta",
+    url("http://dl.bintray.com/scalameta/maven"))(Resolver.ivyStylePatterns),
+    addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0.132" cross CrossVersion.full),
+    scalacOptions += "-Xplugin-require:macroparadise"
 )
 
 lazy val publishSettings = Seq(
