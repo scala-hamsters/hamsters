@@ -17,6 +17,9 @@ class EnumSpec extends FlatSpec with Matchers {
 
     Enumeration.name(Winter) shouldBe "winter"
     Enumeration.parse("winter") shouldBe Some(Winter)
+    Enumeration.parse[Season]("winter") shouldBe Some(Winter)
+
+    Enumeration.list shouldBe List(Winter, Spring, Summer, Fall)
 
   }
 
@@ -42,5 +45,35 @@ class EnumSpec extends FlatSpec with Matchers {
     Enumeration.name(Winter) shouldBe "WINTER_SEASON"
     Enumeration.parse("WINTER_SEASON") shouldBe Some(Winter)
 
+    Enumeration.list shouldBe List(Winter, Spring, Summer, Fall)
   }
+
+  "Enum" should "enumerate and parse with several types" in {
+
+    sealed trait Season
+    case object Winter extends Season
+    case object Spring extends Season
+    case object Summer extends Season
+    case object Fall extends Season
+
+    sealed trait Color
+    case object Red extends Color
+    case object Green extends Color
+    case object Blue extends Color
+
+    implicit val seasonEnumerable = new Enumerable[Season] {
+      override def list: List[Season] = List(Winter, Spring, Summer, Fall)
+    }
+
+    implicit val colorEnumerable = new Enumerable[Color] {
+      override def list: List[Color] = List(Red, Green, Blue)
+    }
+
+    Enumeration.name(Winter) shouldBe "winter"
+    Enumeration.parse[Season]("winter") shouldBe Some(Winter)
+
+    Enumeration.list[Season] shouldBe List(Winter, Spring, Summer, Fall)
+  }
+
+
 }

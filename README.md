@@ -21,7 +21,7 @@ With SBT :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %% "hamsters" % "1.1.0"
+  "io.github.scala-hamsters" %% "hamsters" % "1.1.1"
 )
 ```
 
@@ -131,7 +131,7 @@ implicit val seasonEnumerable = new Enumerable[Season] {
 }
 
 Enumeration.name(Winter) // "winter"
-Enumeration.parse("winter") // Some(Winter)
+Enumeration.parse[Season]("winter") // Some(Winter)
 ```
 
 It is also possible to use custom namings :
@@ -150,7 +150,7 @@ implicit val seasonEnumerable = new Enumerable[Season] {
 }
 
 Enumeration.name(Winter) // "WINTER_SEASON"
-Enumeration.parse("WINTER_SEASON") // Some(Winter)
+Enumeration.parse[Season]("WINTER_SEASON") // Some(Winter)
 ```
 
 ### HList
