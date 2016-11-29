@@ -8,19 +8,20 @@ Currently, Hamsters supports :
 
  * Validation
  * OK/KO Monads
+ * Enum typeclass
  * Monad transformers
  * HLists
  * Union types
 
 [![Travis](https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master)](https://travis-ci.org/scala-hamsters/hamsters)
 
-## Install as dependencyy (for Scala 2.11)
+## Install as dependency (for Scala 2.11)
 
 With SBT :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %% "hamsters" % "1.0.7"
+  "io.github.scala-hamsters" %% "hamsters" % "1.1.0"
 )
 ```
 
@@ -114,6 +115,43 @@ val composedAB: Future[Either[String, Int]] = for {
   ab <- FutureEither(feb(a))
 } yield ab
 ```
+### Enums
+
+This typeclass allows to use parse and name methods on enumerable types. It can be very useful if you need to serialize and deserialize your types (in Json, in a database...)
+
+```scala
+sealed trait Season
+case object Winter extends Season
+case object Spring extends Season
+case object Summer extends Season
+case object Fall extends Season
+
+implicit val seasonEnumerable = new Enumerable[Season] {
+  override def list: List[Season] = List(Winter, Spring, Summer, Fall)
+}
+
+Enumeration.name(Winter) // "winter"
+Enumeration.parse("winter") // Some(Winter)
+```
+
+It is also possible to use custom namings :
+
+```scala
+
+implicit val seasonEnumerable = new Enumerable[Season] {
+  override def list = List(Winter, Spring, Summer, Fall)
+
+  override def name(s: Season) = {
+    s match {
+      case Winter => "WINTER_SEASON"
+      case other => super.name(other)
+    }
+  }
+}
+
+Enumeration.name(Winter) // "WINTER_SEASON"
+Enumeration.parse("WINTER_SEASON") // Some(Winter)
+```
 
 ### HList
 
@@ -177,44 +215,9 @@ jsonElement(0).get[String] // Some("0")
 jsonElement(1).getOrElse("not found") // get String value or "not found" if get[String] is undefined
 ```
 
+### Extensions
 
-### Enums (master branch only right now)
-
-This typeclass allows to use parse and name methods on enumerable types. It can be very useful if you need to serialize and deserialize your types (in Json, in a database...)
-
-```scala
-sealed trait Season
-case object Winter extends Season
-case object Spring extends Season
-case object Summer extends Season
-case object Fall extends Season
-
-implicit val seasonEnumerable = new Enumerable[Season] {
-  override def list: List[Season] = List(Winter, Spring, Summer, Fall)
-}
-
-Enumeration.name(Winter) // "winter"
-Enumeration.parse("winter") // Some(Winter)
-```
-
-It is also possible to use custom namings :
-
-```scala
-
-implicit val seasonEnumerable = new Enumerable[Season] {
-  override def list = List(Winter, Spring, Summer, Fall)
-
-  override def name(s: Season) = {
-    s match {
-      case Winter => "WINTER_SEASON"
-      case other => super.name(other)
-    }
-  }
-}
-
-Enumeration.name(Winter) // "WINTER_SEASON"
-Enumeration.parse("WINTER_SEASON") // Some(Winter)
-```
+See [hamsters-extensions](https://github.com/scala-hamsters/hamsters-extensions) for more information.
 
 ## Scaladoc
 
