@@ -216,6 +216,10 @@ jsonElement(1).getOrElse("not found") // get String value or "not found" if get[
 ```
 
 ### Extensions
+ 
+ * [Hlist extensions](https://github.com/scala-hamsters/hamsters-extensions/blob/master/hamsters-hlists-extensions/README.md)
+ * [Twitter Utils extensions](https://github.com/scala-hamsters/hamsters-extensions/blob/master/hamsters-twitter-util/README.md)
+
 
 See [hamsters-extensions](https://github.com/scala-hamsters/hamsters-extensions) for more information.
 
