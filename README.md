@@ -31,7 +31,7 @@ With Maven :
 <dependency>
   <groupId>io.github.scala-hamsters</groupId>
   <artifactId>hamsters_2.11</artifactId>
-  <version>1.0.7</version>
+  <version>1.1.1</version>
 </dependency>
 ```
 
