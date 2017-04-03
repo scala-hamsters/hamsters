@@ -5,13 +5,14 @@ val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   version := "1.1.3-SNAPSHOT",
   scalacOptions ++= Seq(),
   scalaVersion := "2.11.8",
+  crossScalaVersions := Seq("2.11.8", "2.12.1"),
   scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
   publishMavenStyle := true,
-  libraryDependencies += "org.scalameta" %% "scalameta" % "1.3.0",
+  libraryDependencies += "org.scalameta" %% "scalameta" % "1.6.0",
   resolvers += Resolver.url(
     "scalameta",
     url("http://dl.bintray.com/scalameta/maven"))(Resolver.ivyStylePatterns),
-    addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0.132" cross CrossVersion.full),
+    addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M7" cross CrossVersion.full),
     scalacOptions += "-Xplugin-require:macroparadise"
 )
 
@@ -62,6 +63,6 @@ lazy val root = Project(
   file("."),
   settings = buildSettings ++ publishSettings ++ Seq(
     name := "hamsters",
-    libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.6" % "test"
+    libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.1" % "test"
   )
 ).dependsOn(macros % "compile-internal")
