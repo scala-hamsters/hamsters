@@ -21,7 +21,7 @@ With SBT :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %% "hamsters" % "1.1.1"
+  "io.github.scala-hamsters" %% "hamsters" % "1.1.2"
 )
 ```
 
@@ -31,7 +31,7 @@ With Maven :
 <dependency>
   <groupId>io.github.scala-hamsters</groupId>
   <artifactId>hamsters_2.11</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.2</version>
 </dependency>
 ```
 
@@ -216,7 +216,7 @@ jsonElement(1).getOrElse("not found") // get String value or "not found" if get[
 ```
 
 ### Extensions
- 
+
  * [Hlist extensions](https://github.com/scala-hamsters/hamsters-extensions/blob/master/hamsters-hlists-extensions/README.md)
  * [Twitter Utils extensions](https://github.com/scala-hamsters/hamsters-extensions/blob/master/hamsters-twitter-util/README.md)
 
