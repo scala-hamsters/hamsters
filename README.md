@@ -15,7 +15,7 @@ Currently, Hamsters supports :
 
 [![Travis](https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master)](https://travis-ci.org/scala-hamsters/hamsters)
 
-## Install as dependency (for Scala 2.11)
+## Install as dependency
 
 With SBT :
 
@@ -82,6 +82,7 @@ fromCatchable(compute(0), (t: Throwable) => t.getClass.getSimpleName) //KO("Arit
 ```
 
 Note : Validation relies on standard Either, Left and Right types. KO is used on the left side, OK on the right side.
+With Hamsters, you can use Either in for comprehension from Scala 2.11.
 
 ###  Monad transformers
 
