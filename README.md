@@ -82,7 +82,7 @@ fromCatchable(compute(0), (t: Throwable) => t.getClass.getSimpleName) //KO("Arit
 ```
 
 Note : Validation relies on standard Either, Left and Right types. KO is used on the left side, OK on the right side.
-With Hamsters, you can use Either in for comprehension from Scala 2.11.
+With Hamsters, you can use Either in for comprehension even from Scala 2.11.
 
 ###  Monad transformers
 
