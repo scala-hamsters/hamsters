@@ -21,6 +21,7 @@ object Validation {
     }
   }
 
+
   def failures[L](eithers: Either[L, _]*): List[L] = eithers.toList.collect { case l: Left[L, _] => l.left.get }
 
   def hasFailures[L](eithers: Either[L, _]*): Boolean = failures(eithers: _*).nonEmpty
@@ -38,4 +39,21 @@ object Validation {
 
     def getOrElse[R2 >: R](or: => R2) = e.right.getOrElse(or)
   }
+
+  def result[L,R1,R2](e1: Either[L,R1], e2: Either[L,R2]): Either[List[L], (R1,R2)] = {
+    failures(e1, e2) match {
+      case Nil => Right(e1.get, e2.get)
+      case f : List[L] =>  Left(f)
+    }
+  }
+
+  def result[L,R1,R2,R3](e1: Either[L,R1], e2: Either[L,R2], e3: Either[L,R3]): Either[List[L], (R1,R2,R3)] = {
+    failures(e1, e2, e3) match {
+      case Nil => Right(e1.get, e2.get, e3.get)
+      case f : List[L] =>  Left(f)
+    }
+  }
+
+  //TODO more parameters for results
+
 }

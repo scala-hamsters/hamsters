@@ -28,12 +28,11 @@ class ValidationSpec extends FlatSpec with Matchers {
     Validation.failures(e1, e2, e3) should be(List("nan"))
   }
 
-  /* TODO
   "Validation" should "give values if all OK" in {
     val e1 = OK(1)
     val e2 = OK("2")
 
-    Validation.result(e1,e2) should be OK()
+    Validation.result(e1, e2) should be(OK((1,"2")))
   }
 
   "Validation" should "not give values if all are not OK" in {
@@ -41,9 +40,9 @@ class ValidationSpec extends FlatSpec with Matchers {
     val e2 = OK("2")
     val e3 = KO("nan")
 
-    Validation.result(e1,e2) should be KO(List("nan"))
+    Validation.result(e1, e2, e3) should be(KO(List("nan")))
   }
- */
+
 
   "OK" should "give a value using get and getOrElse" in {
     val e = OK(1)

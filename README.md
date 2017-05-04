@@ -48,8 +48,13 @@ import Validation._
 val e1 = OK(1)
 val e2 = KO("error 1")
 val e3 = KO("error 2")
+val e4 = OK("4")
 
-Validation.failures(e1,e2, e3) //List[String] : List("error 1", "error 2")
+Validation.result(e1,e2, e3) // List[String] : List("error 1", "error 2")
+Validation.result(e1, e4) // (OK(("1", 4)))
+
+Validation.failures(e1,e2, e3) // List[String] : List("error 1", "error 2")
+Validation.failures(e1, e4) // Nil
 ```
 
 You can also use OK/KO in a monadic way if you want to stop processing at the first encountered error.
