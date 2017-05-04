@@ -54,6 +54,40 @@ object Validation {
     }
   }
 
-  //TODO more parameters for results
+  def result[L,R1,R2,R3,R4](e1: Either[L,R1], e2: Either[L,R2], e3: Either[L,R3], e4: Either[L, R4]): Either[List[L], (R1,R2,R3,R4)] = {
+    failures(e1, e2, e3, e4) match {
+      case Nil => Right(e1.get, e2.get, e3.get, e4.get)
+      case f : List[L] =>  Left(f)
+    }
+  }
+
+  def result[L,R1,R2,R3,R4,R5](e1: Either[L,R1], e2: Either[L,R2], e3: Either[L,R3], e4: Either[L, R4], e5: Either[L, R5]): Either[List[L], (R1,R2,R3,R4,R5)] = {
+    failures(e1, e2, e3, e4, e5) match {
+      case Nil => Right(e1.get, e2.get, e3.get, e4.get, e5.get)
+      case f : List[L] =>  Left(f)
+    }
+  }
+
+  def result[L,R1,R2,R3,R4,R5,R6](e1: Either[L,R1], e2: Either[L,R2], e3: Either[L,R3], e4: Either[L, R4], e5: Either[L, R5], e6: Either[L, R6]): Either[List[L], (R1,R2,R3,R4,R5,R6)] = {
+    failures(e1, e2, e3, e4, e5, e6) match {
+      case Nil => Right(e1.get, e2.get, e3.get, e4.get, e5.get, e6.get)
+      case f : List[L] =>  Left(f)
+    }
+  }
+
+  def result[L,R1,R2,R3,R4,R5,R6,R7](e1: Either[L,R1], e2: Either[L,R2], e3: Either[L,R3], e4: Either[L, R4], e5: Either[L, R5], e6: Either[L, R6], e7: Either[L, R7]): Either[List[L], (R1,R2,R3,R4,R5,R6,R7)] = {
+    failures(e1, e2, e3, e4, e5, e6, e7) match {
+      case Nil => Right(e1.get, e2.get, e3.get, e4.get, e5.get, e6.get, e7.get)
+      case f : List[L] =>  Left(f)
+    }
+  }
+
+  def result[L,R1,R2,R3,R4,R5,R6,R7,R8](e1: Either[L,R1], e2: Either[L,R2], e3: Either[L,R3], e4: Either[L, R4], e5: Either[L, R5], e6: Either[L, R6], e7: Either[L, R7], e8: Either[L, R8]): Either[List[L], (R1,R2,R3,R4,R5,R6,R7,R8)] = {
+    failures(e1, e2, e3, e4, e5, e6, e7, e8) match {
+      case Nil => Right(e1.get, e2.get, e3.get, e4.get, e5.get, e6.get, e7.get, e8.get)
+      case f : List[L] =>  Left(f)
+    }
+  }
+  //TODO more parameters for results. use macro?
 
 }
