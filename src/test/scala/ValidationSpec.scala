@@ -9,10 +9,7 @@ class ValidationSpec extends FlatSpec with Matchers {
     val e2 = OK(2)
     val e3 = OK(3)
 
-    val validation = Validation(e1, e2, e3)
-    val failures: List[String] = validation.failures
-    validation.hasFailures should be(false)
-    failures should be(Nil)
+    Validation.failures(e1,e2,e3) should be(Nil)
   }
 
   "Validation" should "give failures" in {
@@ -20,10 +17,7 @@ class ValidationSpec extends FlatSpec with Matchers {
     val e2 = KO("nan")
     val e3 = KO("nan2")
 
-    val validation = Validation(e1, e2, e3)
-    val failures: List[String] = validation.failures
-    validation.hasFailures should be(true)
-    failures should be(List("nan", "nan2"))
+    Validation.failures(e1,e2,e3) should be(List("nan", "nan2"))
   }
 
   "Validation" should "give failures with mixed types" in {
@@ -31,10 +25,25 @@ class ValidationSpec extends FlatSpec with Matchers {
     val e2 = OK("2")
     val e3 = KO("nan")
 
-    val validation = Validation(e1, e2, e3)
-    validation.hasFailures should be(true)
-    validation.failures should be(List("nan"))
+    Validation.failures(e1, e2, e3) should be(List("nan"))
   }
+
+  /* TODO
+  "Validation" should "give values if all OK" in {
+    val e1 = OK(1)
+    val e2 = OK("2")
+
+    Validation.result(e1,e2) should be OK()
+  }
+
+  "Validation" should "not give values if all are not OK" in {
+    val e1 = OK(1)
+    val e2 = OK("2")
+    val e3 = KO("nan")
+
+    Validation.result(e1,e2) should be KO(List("nan"))
+  }
+ */
 
   "OK" should "give a value using get and getOrElse" in {
     val e = OK(1)

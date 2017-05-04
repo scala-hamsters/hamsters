@@ -2,17 +2,10 @@ package io.github.hamsters
 
 import scala.util.{Left, Right}
 
-class Validation[L](eithers: List[Either[L,_]]) {
-  val failures: List[L] = eithers.collect { case l: Left[L, _] => l.left.get }
-  val hasFailures: Boolean = failures.nonEmpty
-}
-
 object Validation {
 
   val OK = Right
   val KO = Left
-
-  def apply[L, R](eithers: Either[L, _]*) = new Validation(eithers.toList)
 
   def fromCatchable[R](body: => R): Either[String,R] = {
      val throwableToErrorMessage = (t: Throwable) => Option(t.getMessage).getOrElse("Error: an exception has been thrown")
@@ -27,6 +20,10 @@ object Validation {
       case t: Throwable => Left(errorMgt(t))
     }
   }
+
+  def failures[L](eithers: Either[L, _]*): List[L] = eithers.toList.collect { case l: Left[L, _] => l.left.get }
+
+  def hasFailures[L](eithers: Either[L, _]*): Boolean = failures(eithers: _*).nonEmpty
 
   implicit class OKBiasedEither[L, R](e: Either[L, R]) {
     def map[R2](f: R => R2) = e.right.map(f)
