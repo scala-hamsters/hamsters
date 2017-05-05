@@ -55,8 +55,8 @@ val e2 = Left("error 1")
 val e3 = Left("error 2")
 val e4 = Right("4")
 
-Validation.result(e1,e2, e3) // List[String] : List("error 1", "error 2")
-Validation.result(e1, e4) // (Right((1, "4")))
+Validation.result(e1,e2, e3) // List[String] : Left(List("error 1", "error 2"))
+Validation.result(e1, e4) // Right((1, "4"))
 
 Validation.failures(e1,e2, e3) // List[String] : List("error 1", "error 2")
 Validation.failures(e1, e4) // Nil
@@ -168,8 +168,8 @@ val hlist = 2.0 :: "hi" :: HNil
 val hlist1 = 2.0 :: "hi" :: HNil
 val hlist2 = 1 :: HNil
 
-val sum = hlist1 + 1
-val sum2 = hlist1 ++ hlist2 // 2.0 :: (hi :: (1 : HNil))
+val sum = hlist1 + 1 // 2.0 :: "hi" :: 1 :: HNil
+val sum2 = hlist1 ++ hlist2 // 2.0 :: "hi" :: 1 : HNil
 
 sum2.tail // hi :: (1 : HNil)
 sum2.head // 2.0 (Double)
