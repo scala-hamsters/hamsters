@@ -6,9 +6,9 @@ sealed trait HList {
 
   type Plus[L <: HList] <: HList
 
-  def apply[A](index: Int): A
+  def apply[A: Manifest](index: Int): A
 
-  def get[A](index: Int): Option[A]
+  def get[A: Manifest](index: Int): Option[A]
 
   def ::[U](v: U): HList
 
@@ -26,9 +26,9 @@ class HNil extends HList {
 
   type Plus[L <: HList] = L
 
-  def apply[A](index: Int) = throw new Exception("empty Hlist")
+  override def apply[A: Manifest](index: Int) = throw new Exception("empty Hlist")
 
-  def get[A](index: Int): Option[A] = None
+  override def get[A: Manifest](index: Int) = None
 
   override def ::[T](v: T) = HCons(v, this)
 
@@ -50,9 +50,25 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
 
   type Plus[L <: HList] = HCons[T, U#Plus[L]]
 
-  def apply[A](index: Int) = ???
+  override def apply[A: Manifest](index: Int) = get[A](index).getOrElse(throw new Exception("Index not found for this type"))
 
-  def get[A](index: Int): Option[A] = ???
+  override def get[A: Manifest](index: Int) = {
+     def get(head: Any, tail: HList, index: Int): Option[A] = {
+       if(index >0) {
+         tail match {
+           case _: HNil => None
+           case h: HCons[_, _] => get(h.head, h.tail, index-1)
+         }
+       }
+       else {
+         head match {
+           case value: A => Some(value)
+           case _ => None
+         }
+       }
+     }
+     get(head, tail, index)
+  }
 
   override def ::[V](v: V) = HCons(v, this)
 
