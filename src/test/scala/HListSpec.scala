@@ -57,7 +57,7 @@ class HListSpec extends FlatSpec with Matchers {
 
     val hlist = 2.0 :: "hi" :: HNil
     hlist.get[String](1) should be(Some("hi"))
-    hlist.apply[String](1) should be("hi")
+    hlist[String](1) should be("hi")
 
   }
 

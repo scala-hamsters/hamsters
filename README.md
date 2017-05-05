@@ -15,7 +15,7 @@ Currently, Hamsters supports :
 
 [![Travis](https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master)](https://travis-ci.org/scala-hamsters/hamsters)
 
-## Install as dependency
+## Install as dependency (for Scala 2.11)
 
 With SBT :
 
@@ -181,6 +181,11 @@ val sum2 = hlist1 ++ hlist2 // 2.0 :: (hi :: (1 : HNil))
 sum2.tail // hi :: (1 : HNil)
 sum2.head // 2.0 (Double)
 sum2.tail.head // hi (String)
+
+// Retrieve element by index and type
+hlist.get[String](1) // Some("hi")
+// Or use apply to avoid Option
+hlist[String](1) // "hi"
 
 (2.0 :: "hi" :: HNil).foldLeft("")(_+_) // "2.0hi"
 
