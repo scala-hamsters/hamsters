@@ -15,7 +15,7 @@ Currently, Hamsters supports :
 
 [![Travis](https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master)](https://travis-ci.org/scala-hamsters/hamsters)
 
-## Install as dependency (for Scala 2.11)
+## Install as dependency
 
 With SBT :
 
