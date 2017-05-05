@@ -38,7 +38,7 @@ With Maven :
 
 ### Validation
 
-Statements can be succesful or fail. Validaition helps you to retrieve values or failures for a sequence of statements.
+Statements can be succesful or fail. Validation helps you to retrieve values or failures for a sequence of statements.
 
 ```
   Note : Validation relies on standard Either types.
