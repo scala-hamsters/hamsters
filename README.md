@@ -38,11 +38,11 @@ With Maven :
 
 ### Validation
 
-Statements can be succesful or fail. Validaition helps you to retrieve values or failures for a sequence of statements.
+Statements can be successful or fail. Validaition helps you to retrieve values or failures for a sequence of statements.
 
 ```
   Note : Validation relies on standard Either types.
-  Left is used for errors, Right for correct results.
+  Left is used for failures, Right for correct results.
   You can also use KO as an alias for Left and OK as an alias for Right.
 ```
 
