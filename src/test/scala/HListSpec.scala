@@ -53,6 +53,30 @@ class HListSpec extends FlatSpec with Matchers {
 
   }
 
+  "HList get" should "retrieve element with type and index" in {
+
+    val hlist = 2.0 :: "hi" :: HNil
+    hlist.get[String](1) should be(Some("hi"))
+    hlist.apply[String](1) should be("hi")
+
+  }
+
+
+  "HList get" should "give None at wrong index" in {
+
+    val hlist = 2.0 :: "hi" :: HNil
+    hlist.get[String](2) should be(None)
+
+  }
+
+  "HList get" should "give None at wrong type" in {
+
+    val hlist = 2.0 :: "hi" :: HNil
+    hlist.get[String](0) should be(None)
+
+  }
+
+
   "HList fold" should "old over elements and produce a result" in {
 
     (2.0 :: "hi" :: HNil).foldLeft("")(_ + _) shouldBe "2.0hi"
