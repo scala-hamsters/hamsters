@@ -42,7 +42,7 @@ Statements can be succesful or fail. Validation helps you to retrieve values or 
 
 ```
   Note : Validation relies on standard Either types.
-  Left is used for errors, Right for correct results.
+  Left is used for failures, Right for correct results.
   You can also use KO as an alias for Left and OK as an alias for Right.
 ```
 
@@ -56,7 +56,7 @@ val e3 = Left("error 2")
 val e4 = Right("4")
 
 Validation.result(e1,e2, e3) // List[String] : List("error 1", "error 2")
-Validation.result(e1, e4) // (Right(("1", 4)))
+Validation.result(e1, e4) // (Right((1, "4")))
 
 Validation.failures(e1,e2, e3) // List[String] : List("error 1", "error 2")
 Validation.failures(e1, e4) // Nil
