@@ -41,6 +41,11 @@ With Maven :
 
 Statements can be `OK` or `KO`. Then you can get all successes and failures.
 
+```
+  Note : Validation relies on standard Either types. KO is an alias for Left, OK is an alias for Right.
+  All examples in this README also work with Left/Right types.
+```
+
 ```scala
 import io.github.hamsters.Validation
 import Validation._
@@ -83,8 +88,6 @@ fromCatchable(compute(0)) //KO("/ by zero")
 
 fromCatchable(compute(0), (t: Throwable) => t.getClass.getSimpleName) //KO("ArithmeticException")
 ```
-
-Note : Validation relies on standard Either, Left and Right types. KO is used on the left side, OK on the right side.
 
 ###  Monad transformers
 
