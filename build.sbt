@@ -4,16 +4,15 @@ val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "io.github.scala-hamsters",
   version := "1.3.1-SNAPSHOT",
   scalacOptions ++= Seq(),
-  scalaVersion := "2.11.8",
+  scalaVersion := "2.11.11",
   crossScalaVersions := Seq("2.11.8", "2.12.1"),
   scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
   publishMavenStyle := true,
-  libraryDependencies += "org.scalameta" %% "scalameta" % "1.6.0",
-  resolvers += Resolver.url(
-    "scalameta",
-    url("http://dl.bintray.com/scalameta/maven"))(Resolver.ivyStylePatterns),
-    addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M7" cross CrossVersion.full),
-    scalacOptions += "-Xplugin-require:macroparadise"
+  libraryDependencies += "org.scalameta" %% "scalameta" % "1.7.0",
+  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M8" cross CrossVersion.full),
+  scalacOptions += "-Xplugin-require:macroparadise",
+  scalacOptions in(Compile, console) := Seq(), // macroparadise plugin doesn't work in repl yet.
+  sources in(Compile, doc) := Nil // macroparadise doesn't work with scaladoc yet.
 )
 
 lazy val publishSettings = Seq(
