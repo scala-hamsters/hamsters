@@ -13,7 +13,7 @@ val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   scalacOptions += "-Xplugin-require:macroparadise",
   scalacOptions in(Compile, console) := Seq(), // macroparadise plugin doesn't work in repl yet.
   sources in(Compile, doc) := Nil, // macroparadise doesn't work with scaladoc yet.
-  resolvers += Resolver.bintrayIvyRepo("scalameta", "maven"),
+  resolvers += Resolver.bintrayIvyRepo("scalameta", "maven")
 )
 
 lazy val publishSettings = Seq(
