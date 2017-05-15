@@ -2,7 +2,7 @@ import sbt.Keys._
 
 val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "io.github.scala-hamsters",
-  version := "1.3.1-SNAPSHOT",
+  version := "1.3.2-SNAPSHOT",
   scalacOptions ++= Seq(),
   scalaVersion := "2.11.11",
   crossScalaVersions := Seq("2.11.11", "2.12.1"),
