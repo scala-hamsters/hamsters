@@ -84,9 +84,9 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
         "redirect"
       }
 
-     val operationSequence = operationSequenceOpt.map(_.getOrElse("error"))
+    val operationSequence = operationSequenceOpt.map(_.getOrElse("error"))
 
-     Await.result(operationSequence, 1 second) shouldBe "redirect"
+    Await.result(operationSequence, 1 second) shouldBe "redirect"
 
   }
 
