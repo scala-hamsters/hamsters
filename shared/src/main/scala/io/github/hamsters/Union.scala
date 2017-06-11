@@ -15,7 +15,7 @@ private object Union {
 trait Union { this: Product =>
 
   @tailrec
-  private def findTypeOnProductIterator[T](it: Iterator[Any])(implicit m: Manifest[T]): Option[T] = {
+  private def findTypeOnProductIterator[T : ClassTag](it: Iterator[Any]): Option[T] = {
     import Union._
     if(!it.hasNext) None
     else {
@@ -27,9 +27,9 @@ trait Union { this: Product =>
     }
   }
 
-  def get[T](implicit m: Manifest[T]): Option[T] = findTypeOnProductIterator(this.productIterator)
+  def get[T : ClassTag] : Option[T] = findTypeOnProductIterator(this.productIterator)
 
-  def getOrElse[T](default: T)(implicit m: Manifest[T]): T = get[T].getOrElse(default)
+  def getOrElse[T : ClassTag](default: T): T = get[T].getOrElse(default)
 
 }
 

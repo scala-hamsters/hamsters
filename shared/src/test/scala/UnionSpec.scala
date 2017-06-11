@@ -116,7 +116,7 @@ class UnionSpec extends FlatSpec with Matchers {
 
     jsonElement(1).get[Double] should be(Some(2.0))
 
-    jsonElement(1).get[Int] should be(None)
+    jsonElement(1).get[String] should be(None)
 
     jsonElement(2).get[Int] should be(Some(1))
 

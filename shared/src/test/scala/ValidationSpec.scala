@@ -88,10 +88,10 @@ class ValidationSpec extends FlatSpec with Matchers {
 
   "from catchable" should "convert to either" in {
 
-    def compute(x: Int):Int = 2/x
+    def compute(x: BigInt) = BigInt(2)/x
 
-    fromCatchable(compute(1)) should be(Right(2))
-    fromCatchable(compute(0)) should be(Left("/ by zero"))
+    fromCatchable(compute(1)) should be(Right(BigInt(2)))
+    fromCatchable(compute(0)) should be(Left("BigInteger divide by zero"))
 
     fromCatchable(compute(0), (t: Throwable) => t.getClass.getSimpleName) should be(Left("ArithmeticException"))
 
