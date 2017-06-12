@@ -51,18 +51,28 @@ lazy val publishSettings = Seq(
       Some("staging" at nexus + "service/local/staging/deploy/maven2")
   }
 )
+scalaVersion in ThisBuild := "2.11.11"
 
-lazy val macros = Project(
-  "macros",
-  file("macros"),
-  settings = buildSettings
-)
 
-lazy val root = Project(
-  "root",
-  file("."),
-  settings = buildSettings ++ publishSettings ++ Seq(
-    name := "hamsters",
-    libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.1" % "test"
-  )
-).dependsOn(macros % "compile-internal")
+lazy val macros = crossProject.in(file("macros"))
+  .settings(name := "macros")
+  .settings(buildSettings)
+
+lazy val macrosJVM = macros.jvm
+lazy val macrosJS = macros.js
+
+
+lazy val hamsters = crossProject.in(file("."))
+  .settings(name := "hamsters")
+  .settings(buildSettings ++ publishSettings)
+  .settings(libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.1" % "test")
+
+lazy val hamstersJVM = hamsters.jvm.dependsOn(macrosJVM)
+lazy val hamstersJS = hamsters.js.dependsOn(macrosJS)
+
+
+
+lazy val root = project.in(file("."))
+  .aggregate(hamstersJVM, hamstersJS)
+  .dependsOn(hamstersJVM, hamstersJS)
+

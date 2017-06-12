@@ -1,13 +1,11 @@
+import io.github.hamsters.MonadTransformers._
 import io.github.hamsters.Validation._
 import io.github.hamsters.{FutureEither, FutureOption}
 import org.scalatest._
 
-import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent._
-import scala.concurrent.duration._
-import io.github.hamsters.MonadTransformers._
 
-class MonadTransformersSpec extends FlatSpec with Matchers {
+class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
 
   "FutureOption" should "handle Future[Option[_]] type" in {
     def foa: Future[Option[String]] = Future(Some("a"))
@@ -18,44 +16,48 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
       ab <- FutureOption(fob(a))
     } yield ab
 
-    Await.result(composedAB, 1 second) shouldBe Some("ab")
+    composedAB map { _ shouldBe Some("ab") }
+
 
     val composedABWithNone: Future[Option[String]] = for {
       a <- FutureOption(Future.successful(None))
       ab <- FutureOption(fob(a))
     } yield ab
 
-    Await.result(composedABWithNone, 1 second) shouldBe None
+    composedABWithNone map { _ shouldBe None }
 
     val composedABWithFailure: Future[Option[String]] = for {
       a <- FutureOption(Future.failed(new Exception("d'oh!")))
       ab <- FutureOption(fob(a))
     } yield ab
 
-    an[Exception] should be thrownBy Await.result(composedABWithFailure, 1 second)
+    composedABWithFailure.failed map { _ shouldBe a [Exception]}
+
   }
 
 
   "FutureOption" should "be filtered with pattern matching in for comprehension" in {
+
     def fo: Future[Option[(String, Int)]] = Future(Some(("a", 42)))
 
     val filtered = for {
       (a, i) <- FutureOption(fo) if i > 5
     } yield a
 
-    Await.result(filtered, 1 second) shouldBe Some("a")
+    filtered.future map { _ shouldBe Some("a") }
+
 
     val filtered2 = for {
       (a, i) <- FutureOption(fo) if i > 50
     } yield a
 
-    Await.result(filtered2, 1 second) shouldBe None
+    filtered2.future map { _ shouldBe None }
+
+
   }
 
   "FutureOption" should "handle future and option map/flatMap sequences" in {
 
-    import scala.concurrent.Future
-    import scala.concurrent.ExecutionContext.Implicits.global
     import io.github.hamsters.FutureOption
     import io.github.hamsters.MonadTransformers._
 
@@ -84,9 +86,8 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
         "redirect"
       }
 
-     val operationSequence = operationSequenceOpt.map(_.getOrElse("error"))
-
-     Await.result(operationSequence, 1 second) shouldBe "redirect"
+    val operationSequence = operationSequenceOpt.map(_.getOrElse("error"))
+    operationSequence. map { _ shouldBe  "redirect" }
 
   }
 
@@ -99,21 +100,22 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
       ab <- FutureEither(feb(a))
     } yield ab
 
-    Await.result(composedAB, 1 second) shouldBe OK(3)
+    composedAB map { _ shouldBe OK(3)}
 
     val composedABWithNone: Future[Either[String, Int]] = for {
       a <- FutureEither(Future.successful(KO("d'oh!")))
       ab <- FutureEither(feb(a))
     } yield ab
 
-    Await.result(composedABWithNone, 1 second) shouldBe KO("d'oh!")
+    composedABWithNone map { _ shouldBe  KO("d'oh!")}
 
     val composedABWithFailure: Future[Either[String, Int]] = for {
       a <- FutureEither(Future.failed(new Exception("d'oh!")))
       ab <- FutureEither(feb(a))
     } yield ab
 
-    an[Exception] should be thrownBy Await.result(composedABWithFailure, 1 second)
+    composedABWithFailure.failed map { _ shouldBe a [Exception]}
+
   }
 
   "FutureEither" should "be filtered with pattern matching in for comprehension" in {
@@ -123,12 +125,13 @@ class MonadTransformersSpec extends FlatSpec with Matchers {
       (a, i) <- FutureEither(fe) if i > 5
     } yield a
 
-    Await.result(filtered, 1 second) shouldBe OK("a")
+    filtered.future map { _ shouldBe OK("a") }
 
     val filtered2 = for {
       (a, i) <- FutureEither(fe) if i > 50
     } yield a
 
-    Await.result(filtered2, 1 second) shouldBe KO("No value matching predicate")
+    filtered2.future map { _ shouldBe KO("No value matching predicate") }
+
   }
 }
