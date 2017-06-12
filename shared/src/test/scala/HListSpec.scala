@@ -79,14 +79,14 @@ class HListSpec extends FlatSpec with Matchers {
 
   "HList fold" should "old over elements and produce a result" in {
 
-    (2.0 :: "hi" :: HNil).foldLeft("")(_ + _) shouldBe "2.0hi"
+    (2 :: "hi" :: HNil).foldLeft("")(_ + _) shouldBe "2hi"
 
   }
 
 
   "HList map" should "map elements" in {
 
-    (2.0 :: "hi" :: HNil).map(_.toString) shouldBe ("2.0" :: "hi" :: HNil)
+    (2 :: "hi" :: HNil).map(_.toString) shouldBe ("2" :: "hi" :: HNil)
 
   }
 

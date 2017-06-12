@@ -1,14 +1,15 @@
 package io.github.hamsters
 
 import scala.annotation.{implicitNotFound, tailrec}
+import scala.reflect.ClassTag
 
 sealed trait HList {
 
   type Plus[L <: HList] <: HList
 
-  def apply[A: Manifest](index: Int): A
+  def apply[A: ClassTag](index: Int): A
 
-  def get[A: Manifest](index: Int): Option[A]
+  def get[A: ClassTag](index: Int): Option[A]
 
   def ::[U](v: U): HList
 
@@ -26,9 +27,9 @@ class HNil extends HList {
 
   type Plus[L <: HList] = L
 
-  override def apply[A: Manifest](index: Int) = throw new Exception("empty Hlist")
+  override def apply[A: ClassTag](index: Int) = throw new Exception("empty Hlist")
 
-  override def get[A: Manifest](index: Int) = None
+  override def get[A: ClassTag](index: Int) = None
 
   override def ::[T](v: T) = HCons(v, this)
 
@@ -50,9 +51,9 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
 
   type Plus[L <: HList] = HCons[T, U#Plus[L]]
 
-  override def apply[A: Manifest](index: Int) = get[A](index).getOrElse(throw new Exception("Index not found for this type"))
+  override def apply[A: ClassTag](index: Int) = get[A](index).getOrElse(throw new Exception("Index not found for this type"))
 
-  override def get[A: Manifest](index: Int) = {
+  override def get[A: ClassTag](index: Int) = {
      def get(head: Any, tail: HList, index: Int): Option[A] = {
        if(index >0) {
          tail match {
