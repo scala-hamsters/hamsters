@@ -4,8 +4,6 @@ val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "io.github.scala-hamsters",
   version := "1.3.2-SNAPSHOT",
   scalacOptions ++= Seq(),
-  scalaVersion := "2.11.11",
-  crossScalaVersions := Seq("2.11.11", "2.12.1"),
   scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
   publishMavenStyle := true,
   libraryDependencies += "org.scalameta" %% "scalameta" % "1.7.0",
@@ -51,8 +49,9 @@ lazy val publishSettings = Seq(
       Some("staging" at nexus + "service/local/staging/deploy/maven2")
   }
 )
-scalaVersion in ThisBuild := "2.11.11"
 
+scalaVersion in ThisBuild := "2.11.11"
+crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.1")
 
 lazy val macros = crossProject.in(file("macros"))
   .settings(name := "macros")
@@ -75,4 +74,3 @@ lazy val hamstersJS = hamsters.js.dependsOn(macrosJS)
 lazy val root = project.in(file("."))
   .aggregate(hamstersJVM, hamstersJS)
   .dependsOn(hamstersJVM, hamstersJS)
-
