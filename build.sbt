@@ -60,14 +60,13 @@ lazy val macros = crossProject.in(file("macros"))
 lazy val macrosJVM = macros.jvm
 lazy val macrosJS = macros.js
 
-
 lazy val hamsters = crossProject.in(file("."))
   .settings(name := "hamsters")
   .settings(buildSettings ++ publishSettings)
   .settings(libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.1" % "test")
 
-lazy val hamstersJVM = hamsters.jvm.dependsOn(macrosJVM)
-lazy val hamstersJS = hamsters.js.dependsOn(macrosJS)
+lazy val hamstersJVM = hamsters.jvm.dependsOn(macrosJVM % "compile-internal")
+lazy val hamstersJS = hamsters.js.dependsOn(macrosJS % "compile-internal")
 
 
 
