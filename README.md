@@ -1,6 +1,6 @@
 # Hamsters
 
-A mini Scala utility library. Compatible with functional programming beginners.
+A mini Scala utility library. Compatible with functional programming beginners. For the JVM and Scala.JS.
 
 ![hamster picture](https://avatars2.githubusercontent.com/u/18599689?v=3&s=200)
 
@@ -20,7 +20,7 @@ With SBT :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %% "hamsters" % "1.3.1"
+  "io.github.scala-hamsters" %% "hamsters" % "1.4.0"
 )
 ```
 
@@ -30,8 +30,16 @@ With Maven :
 <dependency>
   <groupId>io.github.scala-hamsters</groupId>
   <artifactId>hamsters_${scala.version}</artifactId>
-  <version>1.3.1</version>
+  <version>1.4.0</version>
 </dependency>
+```
+
+For Scala.js :
+
+```scala
+libraryDependencies ++= Seq(
+  "io.github.scala-hamsters" %%% "hamstersjs" % "1.4.0"
+)
 ```
 
 ## Usage

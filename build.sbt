@@ -2,7 +2,7 @@ import sbt.Keys._
 
 val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "io.github.scala-hamsters",
-  version := "1.3.2-SNAPSHOT",
+  version := "1.4.1-SNAPSHOT",
   scalacOptions ++= Seq(),
   scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
   publishMavenStyle := true,
@@ -39,6 +39,11 @@ lazy val publishSettings = Seq(
         <name>Damien Gouyette</name>
         <url>http://www.Cestpasdur.com/</url>
       </developer>
+      <developer>
+        <id>oraclewalid</id>
+        <name>Walid Chergui</name>
+        <url>https://github.com/oraclewalid</url>
+      </developer>
     </developers>
   ),
   publishTo := {
@@ -50,26 +55,27 @@ lazy val publishSettings = Seq(
   }
 )
 
+val hamstersSettings = buildSettings ++ publishSettings
+
 scalaVersion in ThisBuild := "2.11.11"
 crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.1")
 
 lazy val macros = crossProject.in(file("macros"))
   .settings(name := "macros")
-  .settings(buildSettings)
+  .settings(hamstersSettings)
 
 lazy val macrosJVM = macros.jvm
 lazy val macrosJS = macros.js
 
 lazy val hamsters = crossProject.in(file("."))
   .settings(name := "hamsters")
-  .settings(buildSettings ++ publishSettings)
   .settings(libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.1" % "test")
+  .settings(hamstersSettings)
 
-lazy val hamstersJVM = hamsters.jvm.dependsOn(macrosJVM % "compile-internal")
+lazy val hamstersJVM = hamsters.jvm.dependsOn(macrosJVM % "compile-internal").settings(moduleName := "hamsters")
 lazy val hamstersJS = hamsters.js.dependsOn(macrosJS % "compile-internal")
-
-
 
 lazy val root = project.in(file("."))
   .aggregate(hamstersJVM, hamstersJS)
   .dependsOn(hamstersJVM, hamstersJS)
+  .settings(hamstersSettings)
