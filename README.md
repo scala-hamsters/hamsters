@@ -1,6 +1,6 @@
 # Hamsters
 
-A mini Scala utility library. Compatible with functional programming beginners. For the JVM and Scala.JS.
+A mini Scala utility library. Compatible with functional programming beginners. For the JVM and Scala.js.
 
 ![hamster picture](https://avatars2.githubusercontent.com/u/18599689?v=3&s=200)
 
