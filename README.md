@@ -162,7 +162,7 @@ Enumeration.parse[Season]("WINTER_SEASON") // Some(Winter)
 HLists can contain heterogeneous data types but are strongly typed. It's like tuples on steroids!
 When you're manipulating data using tuples, it's common to add or subtrack some elements, but you have to make each element explicit to build a new tuple. HList simplifies this kind of task.
 
- * `::` is used to append elements at the beggining of an HList, and to construct new HLists
+ * `::` is used to append elements at the beginning of an HList, and to construct new HLists
  * `+` is used add element at the end of a HList
  * `++` is used to concatenate 2 Hlists
  * HNil is the empty HList
