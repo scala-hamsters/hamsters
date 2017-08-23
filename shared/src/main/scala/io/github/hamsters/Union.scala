@@ -27,8 +27,19 @@ trait Union { this: Product =>
     }
   }
 
+  /**
+   * Get an Option of result for a given type
+   * @tparam T
+   * @return Option of result for T
+   */
   def get[T : ClassTag] : Option[T] = findTypeOnProductIterator(this.productIterator)
 
+  /**
+   * Get result for a given type, or a default value if type is not found
+   * @param default
+   * @tparam T
+   * @return result for T or default
+   */
   def getOrElse[T : ClassTag](default: T): T = get[T].getOrElse(default)
 
 }

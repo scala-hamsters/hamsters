@@ -1,22 +1,60 @@
 package io.github.hamsters
 
-import scala.annotation.{implicitNotFound, tailrec}
+import scala.annotation.tailrec
 import scala.reflect.ClassTag
 
 sealed trait HList {
 
   type Plus[L <: HList] <: HList
 
+  /**
+   * Retrieve element at index
+   *
+   * @param index
+   * @tparam A
+   * @return element at index
+   */
   def apply[A: ClassTag](index: Int): A
 
+  /**
+   * Retrieve element at index in an Option
+   *
+   * @param index
+   * @tparam A
+   * @return Option of element at index
+   */
   def get[A: ClassTag](index: Int): Option[A]
 
+  /**
+   * Append element at the beginning of this HList
+   *
+   * @param v
+   * @tparam U
+   * @return a new HList
+   */
   def ::[U](v: U): HList
 
+  /**
+   * Filter this HList with a predicate
+   *
+   * @param p
+   * @return a new filtered HList
+   */
   def filter(p: (Any) => Boolean): HList
 
+  /**
+   * Apply f to all elements of this HList
+   *
+   * @param f
+   * @return a new HList
+   */
   def map(f: (Any) => Any): HList
 
+  /**
+   * Executes f for each element of the HList
+   *
+   * @param f
+   */
   def foreach(f: (Any) => Unit): Unit = map(f)
 
   override def toString: String
@@ -29,12 +67,38 @@ class HNil extends HList {
 
   override def apply[A: ClassTag](index: Int) = throw new Exception("empty Hlist")
 
+  /**
+   * Retrieve element at index in an Option
+   *
+   * @param index
+   * @tparam A
+   * @return Option of element at index
+   */
   override def get[A: ClassTag](index: Int) = None
 
+  /**
+   * Append element at the beginning of this HList
+   *
+   * @param v
+   * @tparam T
+   * @return a new HList
+   */
   override def ::[T](v: T) = HCons(v, this)
 
+  /**
+   * Filter this HList with a predicate
+   *
+   * @param p
+   * @return HNil
+   */
   override def filter(p: (Any) => Boolean) = HNil
 
+  /**
+   * Apply f to all elements
+   *
+   * @param f
+   * @return HNil
+   */
   override def map(f: (Any) => Any) = HNil
 
   override def toString = "HNIL"
@@ -51,31 +115,67 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
 
   type Plus[L <: HList] = HCons[T, U#Plus[L]]
 
+  /**
+   * Retrieve element at index
+   *
+   * @param index
+   * @tparam A
+   * @return element at index
+   */
   override def apply[A: ClassTag](index: Int) = get[A](index).getOrElse(throw new Exception("Index not found for this type"))
 
+  /**
+   * Retrieve element at index in an Option
+   *
+   * @param index
+   * @tparam A
+   * @return Option of element at index
+   */
   override def get[A: ClassTag](index: Int) = {
-     def get(head: Any, tail: HList, index: Int): Option[A] = {
-       if(index >0) {
-         tail match {
-           case _: HNil => None
-           case h: HCons[_, _] => get(h.head, h.tail, index-1)
-         }
-       }
-       else {
-         head match {
-           case value: A => Some(value)
-           case _ => None
-         }
-       }
-     }
-     get(head, tail, index)
+    def get(head: Any, tail: HList, index: Int): Option[A] = {
+      if (index > 0) {
+        tail match {
+          case _: HNil => None
+          case h: HCons[_, _] => get(h.head, h.tail, index - 1)
+        }
+      }
+      else {
+        head match {
+          case value: A => Some(value)
+          case _ => None
+        }
+      }
+    }
+
+    get(head, tail, index)
   }
 
+  /**
+   * Append element at the beginning of this HList
+   *
+   * @param v
+   * @tparam V
+   * @return a new HList
+   */
   override def ::[V](v: V) = HCons(v, this)
 
-  def ++[L2 <: HList](l2: L2)(implicit f: Appender[HCons[T,U], L2, Plus[L2]]): HCons[T, U#Plus[L2]] = HList.++(this,l2)
+  /**
+   * Append another HList to this HList
+   * @param l2
+   * @param f
+   * @tparam L2
+   * @return a new HList
+   */
+  def ++[L2 <: HList](l2: L2)(implicit f: Appender[HCons[T, U], L2, Plus[L2]]): HCons[T, U#Plus[L2]] = HList.++(this, l2)
 
-  def +[V](v: V)(implicit f: Appender[HCons[T,U], HCons[V, HNil], Plus[HCons[V, HNil]]]): HCons[T, U#Plus[HCons[V, HNil]]]  = HList.++(this, v :: HNil)
+  /**
+   * Append an element to this HList
+   * @param v
+   * @param f
+   * @tparam V
+   * @return a new HList
+   */
+  def +[V](v: V)(implicit f: Appender[HCons[T, U], HCons[V, HNil], Plus[HCons[V, HNil]]]): HCons[T, U#Plus[HCons[V, HNil]]] = HList.++(this, v :: HNil)
 
   private def +++(l2: HList) = {
     def append(l1: HCons[T, _], l2: HList): HCons[T, _] = {
@@ -84,9 +184,17 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
         case h: HCons[T, _] => l1.head :: append(h, l2)
       }
     }
+
     append(this, l2)
   }
 
+  /**
+   * Applies a binary operator to a start value and all elements of this HList, going left to right.
+   * @param zero
+   * @param f
+   * @tparam V
+   * @return computed result
+   */
   def foldLeft[V](zero: V)(f: (V, Any) => V): V = {
     @tailrec
     def foldLeft0(accu: V, head: Any, tail: HList): V = {
@@ -96,9 +204,16 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
         case h: HCons[_, _] => foldLeft0(newAccu, h.head, h.tail)
       }
     }
+
     foldLeft0(zero, head, tail)
   }
 
+  /**
+   * Filter this HList with a predicate
+   *
+   * @param p
+   * @return HNil
+   */
   override def filter(p: (Any) => Boolean): HList = {
     @tailrec
     def filter0(accu: HList, rest: HList): HList = {
@@ -110,9 +225,16 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
         }
       }
     }
+
     filter0(HNil, this)
   }
 
+  /**
+   * Apply f to all elements of this HList
+   *
+   * @param f
+   * @return a new HList
+   */
   def map(f: (Any) => Any): HList = {
 
     @tailrec
@@ -125,6 +247,7 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
         }
       }
     }
+
     map0(HNil, this)
   }
 
