@@ -2,7 +2,7 @@ import sbt.Keys._
 
 val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "io.github.scala-hamsters",
-  version := "1.4.1-SNAPSHOT",
+  version := "1.4.2-SNAPSHOT",
   scalacOptions ++= Seq(),
   scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
   publishMavenStyle := true,
