@@ -119,6 +119,9 @@ val composedAB: Future[Either[String, Int]] = for {
   ab <- FutureEither(feb(a))
 } yield ab
 ```
+
+Note : For Future[Try] composition, see `Future.fromTry` to get a single future success of failure.
+
 ### Enums
 
 This typeclass allows to use parse and name methods on enumerable types. It can be very useful if you need to serialize and deserialize your types (in Json, in a database...)
