@@ -50,7 +50,7 @@ case class FutureOption[+A](future: Future[Option[A]]) extends AnyVal {
 case class FutureEither[L, +R](future: Future[Either[L, R]]) extends AnyVal {
 
   /**
-   * Returns the result of applying f to this FutureOption if this FutureEither is not empty
+   * Returns the result of applying f to this FutureEither if this FutureEither is not empty
    * @param f
    * @param ec
    * @tparam R2
@@ -65,7 +65,7 @@ case class FutureEither[L, +R](future: Future[Either[L, R]]) extends AnyVal {
   }
 
   /**
-   * Returns the result of applying f to this FutureOption if this FutureEither is not empty
+   * Returns the result of applying f to this FutureEither if this FutureEither is not empty
    * @param f
    * @param ec
    * @tparam R2
