@@ -259,6 +259,8 @@ object HList {
 
   def ++[L1 <: HList, L2 <: HList](l1: L1, l2: L2)(implicit f: Appender[L1, L2, L1#Plus[L2]]): L1#Plus[L2] = f(l1, l2)
 
+
+  // inspired by http://jnordenberg.blogspot.fr/2008/08/hlist-in-scala.html  
   implicit def nilAppender[L <: HList] = Appender((v: HNil, l: L) => l)
 
   implicit def consAppender[T, L1 <: HList, L2 <: HList, R <: HList](implicit f: Appender[L1, L2, R]) = {
