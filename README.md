@@ -237,7 +237,7 @@ Retry allows to run a code block several times if it fails, with a customizable 
 ```scala
 val logErrorsFunction = (errorMessage: String) => println(errorMessage)
 
-Retry.retry(3, logErrorsFunction) {
+Retry.retry(maxRetries = 3, logErrorsFunction) {
   1+1
 } // util.Success(2)
 ```
