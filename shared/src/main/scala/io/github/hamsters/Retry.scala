@@ -3,7 +3,15 @@ package io.github.hamsters
 import scala.util.{Try, Success, Failure}
 
 object Retry {
-  // Returning T, throwing the exception on failure
+ 
+  /**
+   * Retry a function several times
+   * @param maxRetries number of retries
+   * @param errorFn the function to run if it fails to handle the error message
+   * @param fn the function to run
+   * @tparam T
+   * @return Try of result
+   */
   final def retry[T](maxRetries: Int, errorFn: (String) => Unit = _=> Unit)(fn: => T): Try[T] = {
     @annotation.tailrec
     def retry(nbTries: Int, errorFn: (String) => Unit)(fn: => T): Try[T] = {
