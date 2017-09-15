@@ -2,12 +2,12 @@ import sbt.Keys._
 
 val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "io.github.scala-hamsters",
-  version := "1.5.1-SNAPSHOT",
+  version := "1.5.2-SNAPSHOT",
   scalacOptions ++= Seq(),
   scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
   publishMavenStyle := true,
   libraryDependencies += "org.scalameta" %% "scalameta" % "1.7.0",
-  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M9" cross CrossVersion.full),
+  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M8" cross CrossVersion.full),
   scalacOptions += "-Xplugin-require:macroparadise",
   scalacOptions in(Compile, console) := Seq(), // macroparadise plugin doesn't work in repl yet.
   resolvers += Resolver.bintrayIvyRepo("scalameta", "maven")
