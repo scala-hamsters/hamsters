@@ -120,7 +120,7 @@ val composedAB: Future[Either[String, Int]] = for {
 } yield ab
 ```
 
-Note : For Future[Try] composition, see `Future.fromTry` to get a single future success of failure.
+Note : For Future[Try] composition, see `Future.fromTry` to get a single future success or failure.
 
 ### Enums
 
