@@ -1,20 +1,20 @@
 package io.github.hamsters
 
-import scala.util.Try
+import scala.util.{Try, Success, Failure}
 
 object Retry {
   // Returning T, throwing the exception on failure
-  final def retry[T](maxRetries: Int, errorFn: (String) => Unit = _=> Unit)(fn: => T): T = {
+  final def retry[T](maxRetries: Int, errorFn: (String) => Unit = _=> Unit)(fn: => T): Try[T] = {
     @annotation.tailrec
-    def retry(maxRetries: Int,nbTries: Int, errorFn: (String) => Unit)(fn: => T): T = {
-      util.Try {fn} match {
-        case util.Success(x) => x
-        case _ if maxRetries > 1 => retry(maxRetries, maxRetries - 1,errorFn)(fn)
-        case util.Failure(e) =>
+    def retry(nbTries: Int, errorFn: (String) => Unit)(fn: => T): Try[T] = {
+      Try {fn} match {
+        case Success(x) => Success(x)
+        case _ if nbTries > 1 => retry(nbTries - 1, errorFn)(fn)
+        case Failure(e) =>
           errorFn(s"Tried $maxRetries times, still not enough : ${e.getMessage}")
-          throw e
+          Failure(e)
       }
     }
-    retry(maxRetries,maxRetries,errorFn)(fn)
+    retry(maxRetries,errorFn)(fn)
   }
 }
