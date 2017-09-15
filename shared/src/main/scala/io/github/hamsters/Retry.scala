@@ -3,24 +3,18 @@ package io.github.hamsters
 import scala.util.Try
 
 object Retry {
-
-
-  
-  /**
-   * Retry a function n times
-   * @param n number of retries
-   * @return Try of result
-   */
-  @annotation.tailrec
-  def retry[T](n: Int)(fn: => T): Try[T] = {
-    // Borrowed from https://stackoverflow.com/questions/7930814/whats-the-scala-way-to-implement-a-retry-able-call-like-this-one
-    Try { fn } match {
-      case x: util.Success[T] => x
-      case _ if n > 1 => retry(n - 1)(fn)
-      case fn => fn
+  // Returning T, throwing the exception on failure
+  final def retry[T](maxRetries: Int, errorFn: (String) => Unit = _=> Unit)(fn: => T): T = {
+    @annotation.tailrec
+    def retry(maxRetries: Int,nbTries: Int, errorFn: (String) => Unit)(fn: => T): T = {
+      util.Try {fn} match {
+        case util.Success(x) => x
+        case _ if maxRetries > 1 => retry(maxRetries, maxRetries - 1,errorFn)(fn)
+        case util.Failure(e) =>
+          errorFn(s"Tried $maxRetries times, still not enough : ${e.getMessage}")
+          throw e
+      }
     }
+    retry(maxRetries,maxRetries,errorFn)(fn)
   }
-
-  
-
 }
