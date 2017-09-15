@@ -11,6 +11,7 @@ Currently, Hamsters supports :
  * Monad transformers
  * HLists
  * Union types
+ * Retry util
 
 [![Travis](https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master)](https://travis-ci.org/scala-hamsters/hamsters)
 
@@ -227,6 +228,20 @@ Then you can use pattern matching, or ask for a specifc type and retrieve an opt
 jsonElement(0).get[String] // Some("0")
 jsonElement(1).getOrElse("not found") // get String value or "not found" if get[String] is undefined
 ```
+
+
+### Retry
+
+Retry allows to run a code block several times if it fails, with a customizable maximum number of retries. It accepts a function to log the error messages : 
+
+```scala
+val logErrorsFunction = (errorMessage: String) => println(errorMessage)
+
+Retry.retry(3, logErrorsFunction) {
+  1+1
+} // util.Success(2)
+```
+
 
 ### Extensions
 
