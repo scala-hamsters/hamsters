@@ -7,7 +7,7 @@ object Retry {
   /**
    * Retry a function several times
    * @param maxRetries number of retries
-   * @param errorFn the function to run if it fails to handle the error message
+   * @param errorFn the function to run if it fails, to handle the error message
    * @param fn the function to run
    * @tparam T
    * @return Try of result
