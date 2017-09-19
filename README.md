@@ -126,6 +126,7 @@ Note : For Future[Try] composition, see `Future.fromTry` to get a single future 
 ### Enums
 
 This typeclass allows to use `parse`, `name` and `list` methods on Algebraic Data Types. It can be very useful if you need to serialize and deserialize your types (in Json, in a database...).
+You can [read here](https://underscore.io/blog/posts/2014/09/03/enumerations.html) why it's better to use sealed case objects than Scala Enumerations.
 
 ```scala
 sealed trait Season
