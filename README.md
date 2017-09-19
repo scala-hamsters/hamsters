@@ -7,8 +7,8 @@ A mini Scala utility library. Compatible with functional programming beginners. 
 Currently, Hamsters supports :
 
  * Validation
+ * Monad transformers 
  * Enum typeclass
- * Monad transformers
  * HLists
  * Union types
  * Retry util
