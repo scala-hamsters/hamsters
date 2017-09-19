@@ -125,7 +125,7 @@ Note : For Future[Try] composition, see `Future.fromTry` to get a single future 
 
 ### Enums
 
-This typeclass allows to use parse and name methods on enumerable types. It can be very useful if you need to serialize and deserialize your types (in Json, in a database...)
+This typeclass allows to use `parse`, `name` and `list` methods on Algebraic Data Types. It can be very useful if you need to serialize and deserialize your types (in Json, in a database...).
 
 ```scala
 sealed trait Season
@@ -140,6 +140,7 @@ implicit val seasonEnumerable = new Enumerable[Season] {
 
 Enumeration.name(Winter) // "winter"
 Enumeration.parse[Season]("winter") // Some(Winter)
+Enumeration.list[Season] // List(Winter, Spring, Summer, Fall)
 ```
 
 It is also possible to use custom namings :
