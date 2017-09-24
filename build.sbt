@@ -57,7 +57,7 @@ lazy val publishSettings = Seq(
 val hamstersSettings = buildSettings ++ publishSettings
 
 scalaVersion in ThisBuild := "2.11.11"
-crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.1")
+crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.3")
 
 lazy val macros = crossProject.in(file("macros"))
   .settings(name := "macros")
