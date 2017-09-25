@@ -1,7 +1,8 @@
 package io.github.hamsters
 
-//TODO remove this case class, just here for the draft
-case class Person(name: String, age: Int)
+//TODO remove this case classes, just here for the draft
+case class Name(firstName: String, lastName: String)
+case class Person(name: Name, age: Int)
 
 trait Showable[A] {
   def format(value: A): String
@@ -17,7 +18,7 @@ object Show {
     //TODO replace this by a macro to find the fields names for any type A
     new Showable[A] { 
       override def format(a: A) = a match {
-        case Person(name, age) => s"Person(name = $name, age = $age)"   
+        case Person(name, age) => s"Person(name = Name(firstName=${name.firstName}, lastName=${name.lastName}), age = $age)"   
       }
     }
   }
