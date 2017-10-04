@@ -234,7 +234,7 @@ jsonElement(1).getOrElse("not found") // get String value or "not found" if get[
 
 ### Retry
 
-Retry allows to run a code block several times if it fails, with a customizable maximum number of retries. It accepts a function to log the error messages : 
+Retry allows to run a code block several times if it fails, with a customizable maximum number of tries. It accepts a function to log the error messages : 
 
 ```scala
 val logErrorsFunction = (errorMessage: String) => println(errorMessage)
