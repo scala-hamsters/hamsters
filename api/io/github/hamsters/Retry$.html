@@ -345,22 +345,22 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="io.github.hamsters.Retry#retry" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="retry[T](maxRetries:Int,errorFn:String=&gt;Unit)(fn:=&gt;T):scala.util.Try[T]"></a>
+      <a id="retry[T](maxTries:Int,errorFn:String=&gt;Unit)(fn:=&gt;T):scala.util.Try[T]"></a>
       <a id="retry[T](Int,(String)⇒Unit)(⇒T):Try[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">retry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="maxRetries">maxRetries: <span class="extype" name="scala.Int">Int</span></span>, <span name="errorFn">errorFn: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span> = <span class="symbol"><span class="name"><a href="../../../scala/package.html">_=&gt; Unit</a></span></span></span>)</span><span class="params">(<span name="fn">fn: ⇒ <span class="extype" name="io.github.hamsters.Retry.retry.T">T</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="io.github.hamsters.Retry.retry.T">T</span>]</span>
+        <span class="name">retry</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="maxTries">maxTries: <span class="extype" name="scala.Int">Int</span></span>, <span name="errorFn">errorFn: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span> = <span class="symbol"><span class="name"><a href="../../../scala/package.html">_=&gt; Unit</a></span></span></span>)</span><span class="params">(<span name="fn">fn: ⇒ <span class="extype" name="io.github.hamsters.Retry.retry.T">T</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="io.github.hamsters.Retry.retry.T">T</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.Retry$@retry[T](maxRetries:Int,errorFn:String=&gt;Unit)(fn:=&gt;T):scala.util.Try[T]" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.Retry$@retry[T](maxTries:Int,errorFn:String=&gt;Unit)(fn:=&gt;T):scala.util.Try[T]" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Retry a function several times</p><div class="fullcomment"><div class="comment cmt"><p>Retry a function several times</p></div><dl class="paramcmts block"><dt class="param">maxRetries</dt><dd class="cmt"><p>number of retries</p></dd><dt class="param">errorFn</dt><dd class="cmt"><p>the function to run if it fails, to handle the error message</p></dd><dt class="param">fn</dt><dd class="cmt"><p>the function to run</p></dd><dt>returns</dt><dd class="cmt"><p>Try of result</p></dd></dl></div>
+      <p class="shortcomment cmt">Retry a function several times</p><div class="fullcomment"><div class="comment cmt"><p>Retry a function several times</p></div><dl class="paramcmts block"><dt class="param">maxTries</dt><dd class="cmt"><p>number of retries</p></dd><dt class="param">errorFn</dt><dd class="cmt"><p>the function to run if it fails, to handle the error message</p></dd><dt class="param">fn</dt><dd class="cmt"><p>the function to run</p></dd><dt>returns</dt><dd class="cmt"><p>Try of result</p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
