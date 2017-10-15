@@ -178,8 +178,6 @@ When you're manipulating data using tuples, it's common to add or subtrack some 
 import io.github.hamsters.{HList, HCons, HNil}
 import HList._
 
-val hlist = 2.0 :: "hi" :: HNil
-
 val hlist1 = 2.0 :: "hi" :: HNil
 val hlist2 = 1 :: HNil
 
@@ -191,9 +189,9 @@ sum2.head // 2.0 (Double)
 sum2.tail.head // hi (String)
 
 // Retrieve element by index and type
-hlist.get[String](1) // Some("hi")
+hlist1.get[String](1) // Some("hi")
 // Or use apply to avoid Option
-hlist[String](1) // "hi"
+hlist1[String](1) // "hi"
 
 (2.0 :: "hi" :: HNil).foldLeft("")(_+_) // "2.0hi"
 
