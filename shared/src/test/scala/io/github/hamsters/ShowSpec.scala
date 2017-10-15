@@ -1,15 +1,7 @@
 package io.github.hamsters
 
 import org.scalatest.{FlatSpec, Matchers}
-import io.github.hamsters.ShowMacro
-
 class ShowSpec extends FlatSpec with Matchers {
-
-  @ShowMacro
-  case class Name(firstName: String, lastName: String)
-
-  @ShowMacro
-  case class Person(name : Name, age: Int)
 
   "Show on simple object" should "show field names and values of object" in {
     val n = Name("john", "doe")

@@ -23,3 +23,11 @@ object ShowableSyntax {
   }
 
 }
+
+
+
+@ShowMacro
+case class Name(firstName: String, lastName: String)
+
+@ShowMacro
+case class Person(name : Name, age: Int)
