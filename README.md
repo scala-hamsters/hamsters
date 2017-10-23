@@ -254,3 +254,7 @@ See [hamsters-extensions](https://github.com/scala-hamsters/hamsters-extensions)
 ## Scaladoc
 
 You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/api).
+
+## Special thanks
+
+To [Laurencebeillaux](https://github.com/laurencebeillaux) who created the Hamsters logo.
