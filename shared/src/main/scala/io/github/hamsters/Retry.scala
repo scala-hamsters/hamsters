@@ -12,7 +12,7 @@ object Retry {
    * @tparam T
    * @return Try of result
    */
-  def retry[T](maxTries: Int, errorFn: (String) => Unit = _=> Unit)(fn: => T): Try[T] = {
+  def apply[T](maxTries: Int, errorFn: (String) => Unit = _=> Unit)(fn: => T): Try[T] = {
     @annotation.tailrec
     def retry(nbTries: Int, errorFn: (String) => Unit)(fn: => T): Try[T] = {
       Try {fn} match {
