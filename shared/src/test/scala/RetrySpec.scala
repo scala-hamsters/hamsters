@@ -10,14 +10,14 @@ class RetrySpec extends FlatSpec with Matchers with MockFactory {
   "Retry" should "run function several times if failed" in {
     logErrorsFunctionMock expects ("Tried 3 times, still not enough : failed")
     
-    Retry.retry(3, logErrorsFunctionMock) {
+    Retry(3, logErrorsFunctionMock) {
       throw new Exception("failed")
     }
     
   }
 
   "Retry" should "return result if no error" in {
-    val result = Retry.retry(3, logErrorsFunctionMock) {
+    val result = Retry(3, logErrorsFunctionMock) {
       1+1
     }
 
