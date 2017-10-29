@@ -182,11 +182,11 @@ val hlist1 = 2.0 :: "hi" :: HNil
 val hlist2 = 1 :: HNil
 
 val sum = hlist1 + 1 // 2.0 :: "hi" :: 1 :: HNil
-val sum2 = hlist1 ++ hlist2 // 2.0 :: "hi" :: 1 : HNil
+val sum2 = hlist1 ++ hlist2 // 2.0 :: "hi" :: 1 :: HNil
 
-sum2.tail // hi :: (1 : HNil)
+sum2.tail // hi :: (1 :: HNil)
 sum2.head // 2.0 (Double)
-sum2.tail.head // hi (String)
+sum2.tail.head // "hi" (String)
 
 // Retrieve element by index and type
 hlist1.get[String](1) // Some("hi")
