@@ -6,8 +6,8 @@ val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   scalacOptions ++= Seq(),
   scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
   publishMavenStyle := true,
-  libraryDependencies += "org.scalameta" %% "scalameta" % "1.7.0",
-  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M8" cross CrossVersion.full),
+  libraryDependencies += "org.scalameta" %% "scalameta" % "1.8.0" % Provided,
+  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M10" cross CrossVersion.full),
   scalacOptions += "-Xplugin-require:macroparadise",
   scalacOptions in(Compile, console) := Seq(), // macroparadise plugin doesn't work in repl yet.
   resolvers += Resolver.bintrayIvyRepo("scalameta", "maven")
@@ -57,7 +57,7 @@ lazy val publishSettings = Seq(
 val hamstersSettings = buildSettings ++ publishSettings
 
 scalaVersion in ThisBuild := "2.11.11"
-crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.1")
+crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.3")
 
 lazy val macros = crossProject.in(file("macros"))
   .settings(name := "macros")
