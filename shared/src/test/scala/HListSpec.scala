@@ -1,4 +1,4 @@
-import io.github.hamsters.{HList, HCons, HNil}
+import io.github.hamsters.{HCons, HList, HNil}
 import org.scalatest.{FlatSpec, Matchers}
 
 import scala.collection.mutable.ListBuffer
@@ -146,6 +146,17 @@ class HListSpec extends FlatSpec with Matchers {
     }
 
     list shouldBe List("hi", "hello")
+
+  }
+
+  "HList ::" should "val hList : String :: Boolean :: HNil should compile" in {
+
+    import HList._
+
+    val hList : String :: Boolean :: HNil = "hello"::true::HNil
+
+    hList.head shouldBe a[java.lang.String]
+    hList.get[Boolean](1) shouldBe Some(true)
 
   }
 
