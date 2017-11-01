@@ -115,8 +115,6 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
 
   type Plus[L <: HList] = HCons[T, U#Plus[L]]
 
-
-
   /**
    * Retrieve element at index
    *
@@ -260,6 +258,7 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
 object HList {
 
   type ::[T,U <: HList] = HCons[T,U]
+
 
   def ++[L1 <: HList, L2 <: HList](l1: L1, l2: L2)(implicit f: Appender[L1, L2, L1#Plus[L2]]): L1#Plus[L2] = f(l1, l2)
 

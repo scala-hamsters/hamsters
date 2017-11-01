@@ -1,4 +1,3 @@
-import io.github.hamsters
 import io.github.hamsters.{HCons, HList, HNil}
 import org.scalatest.{FlatSpec, Matchers}
 
