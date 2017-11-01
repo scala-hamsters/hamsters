@@ -11,6 +11,7 @@ class EmptyOptionValuesSpec extends FlatSpec with Matchers {
     val optString: Option[String] = None
     optString.orEmpty shouldEqual ""
   }
+
   "An none element of Option[Iterable] of multiple data types" should "return empty iterable" in {
     val optListString: Option[List[String]] = None
     optListString.orEmpty shouldEqual Iterable[String]()
@@ -21,14 +22,17 @@ class EmptyOptionValuesSpec extends FlatSpec with Matchers {
     val optListMyCaseClass: Option[List[MyCaseClass]] = None
     optListMyCaseClass.orEmpty shouldEqual Iterable[MyCaseClass]()
   }
+
   "A none element of Option[Int]" should "return 0" in {
     val optInt: Option[Int] = None
     optInt.orEmpty shouldEqual 0
   }
+
   "A none element of Option[Float]" should "return 0f" in {
     val optFloat: Option[Float] = None
     optFloat.orEmpty shouldEqual 0f
   }
+  
   "A none element of Option[Double]" should "return 0d" in {
     val optDouble: Option[Double] = None
     optDouble.orEmpty shouldEqual 0d

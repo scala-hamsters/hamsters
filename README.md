@@ -9,6 +9,7 @@ Currently, Hamsters supports :
  * Validation
  * Monad transformers 
  * Enum typeclass
+ * Default values for options (orEmpty)
  * HLists
  * Union types
  * Retry util
@@ -161,6 +162,27 @@ implicit val seasonEnumerable = new Enumerable[Season] {
 
 Enumeration.name(Winter) // "WINTER_SEASON"
 Enumeration.parse[Season]("WINTER_SEASON") // Some(Winter)
+```
+
+## Default values for options (orEmpty)
+
+Default values for options avoid repeating the same `getOrElse` code again and again : 
+
+```scala
+val noneString: Option[String] = None
+noneString.orEmpty  // ""
+
+val noneInt: Option[Int] = None
+noneInt.orEmpty // 0 
+
+val noneList: Option[List[String]] = None
+noneList.orEmpty  // List[String]()
+``` 
+
+To support other types, you just have to declare a new implicit value : 
+ 
+ ```scala
+implicit def myCaseClassDefaultValue= new DefaultValue[MyCaseClass] { ... }
 ```
 
 ### HList
