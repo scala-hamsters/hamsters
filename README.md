@@ -178,7 +178,7 @@ When you're manipulating data using tuples, it's common to add or subtrack some 
 import io.github.hamsters.{HList, HCons, HNil}
 import HList._
 
-val hlist1 = 2.0 :: "hi" :: HNil
+val hlist1: Double :: String :: HNil = 2.0 :: "hi" :: HNil
 val hlist2 = 1 :: HNil
 
 val sum = hlist1 + 1 // 2.0 :: "hi" :: 1 :: HNil
