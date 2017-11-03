@@ -8,7 +8,7 @@ val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   publishMavenStyle := true,
   libraryDependencies += "org.scalameta" %% "scalameta" % "1.8.0" % Provided,
   addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M10" cross CrossVersion.full),
-  scalacOptions += "-Xplugin-require:macroparadise",
+  scalacOptions ++= List("-Xplugin-require:macroparadise", "-language:higherKinds", "-language:implicitConversions", "-feature"),
   scalacOptions in(Compile, console) := Seq(), // macroparadise plugin doesn't work in repl yet.
   resolvers += Resolver.bintrayIvyRepo("scalameta", "maven")
 )
