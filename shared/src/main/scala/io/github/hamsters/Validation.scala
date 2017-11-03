@@ -1,6 +1,6 @@
 package io.github.hamsters
 
-import scala.util.{Failure, Left, Right, Success, Try}
+import scala.util.{Left, Right}
 
 @ValidationMacro
 object Validation {
