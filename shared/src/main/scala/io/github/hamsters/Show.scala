@@ -13,55 +13,55 @@ object Show {
 
 object ShowableSyntax {
 
-  implicit val stringShowable = new Showable[String] {
+  implicit val stringShowable: Showable[String] = new Showable[String] {
     override def format(value: String) = value
   }
 
-  implicit val intShowable = new Showable[Int] {
+  implicit val intShowable: Showable[Int] = new Showable[Int] {
     override def format(value: Int) = value.toString
   }
 
-  implicit val doubleShowable = new Showable[Double] {
+  implicit val doubleShowable: Showable[Double] = new Showable[Double] {
     override def format(value: Double) = value.toString
   }
 
-  implicit val floatShowable = new Showable[Float] {
+  implicit val floatShowable: Showable[Float] = new Showable[Float] {
     override def format(value: Float) = value.toString
   }
 
-  implicit val longShowable = new Showable[Long] {
+  implicit val longShowable: Showable[Long] = new Showable[Long] {
     override def format(value: Long) = value.toString
   }
 
-  implicit val jdkDateShowable = new Showable[Date] {
+  implicit val jdkDateShowable: Showable[Date] = new Showable[Date] {
     override def format(value: Date) = value.toString
   }
 
-  implicit val jdkLocalDateShowable = new Showable[LocalDate] {
+  implicit val jdkLocalDateShowable: Showable[LocalDate] = new Showable[LocalDate] {
     override def format(value: LocalDate) = value.toString
   }
 
-  implicit val jdkLocalDateTimeShowable = new Showable[LocalDateTime] {
+  implicit val jdkLocalDateTimeShowable: Showable[LocalDateTime] = new Showable[LocalDateTime] {
     override def format(value: LocalDateTime) = value.toString
   }
 
-  implicit val booleanShowable = new Showable[Boolean] {
+  implicit val booleanShowable: Showable[Boolean]   = new Showable[Boolean] {
     override def format(value: Boolean) = value.toString
   }
 
-  implicit val byteShowable = new Showable[Byte] {
+  implicit val byteShowable: Showable[Byte] = new Showable[Byte] {
     override def format(value: Byte) = value.toString
   }
 
-  implicit val shortShowable = new Showable[Short] {
+  implicit val shortShowable: Showable[Short] = new Showable[Short] {
     override def format(value: Short) = value.toString
   }
 
-  implicit val unitShowable = new Showable[Unit] {
+  implicit val unitShowable: Showable[Unit] = new Showable[Unit] {
     override def format(value: Unit) = value.toString
   }
 
-  implicit class ShowtOps[A](value: A) {
+  implicit class ShowtOps[A](val value: A) extends AnyVal {
     def show(implicit s: Showable[A]): String = s.format(value)
   }
 
