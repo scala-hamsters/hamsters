@@ -61,7 +61,7 @@ object ShowableSyntax {
     override def format(value: Unit) = value.toString
   }
 
-  implicit class ShowtOps[A](val value: A) extends AnyVal {
+  implicit class ShowableOps[A](val value: A) extends AnyVal {
     def show(implicit s: Showable[A]): String = s.format(value)
   }
 
