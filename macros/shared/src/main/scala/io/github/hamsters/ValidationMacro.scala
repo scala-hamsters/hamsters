@@ -19,6 +19,15 @@ class ValidationMacro extends scala.annotation.StaticAnnotation {
           q"""
            object $t {
             ..$body
+             import scala.util.Try
+             import scala.util.Success
+             import scala.util.Failure
+             implicit def fromTry[T](t : Try[T]): Either[String,T] = {
+               t match {
+               case Success(res) => Right(res)
+               case Failure(e) => Left(e.getMessage)
+             }
+             }
             ..${
             Range(1, 22).map { index =>
               q"""def run[L,..${typeParams.take(index + 1)}](..${params.take(index + 1)}) : Either[List[L], (..${typeNames.take(index + 1)})] = {
@@ -37,4 +46,3 @@ class ValidationMacro extends scala.annotation.StaticAnnotation {
     }
   }
 }
-
