@@ -36,6 +36,17 @@ object Validation {
     }
   }
 
+  /** Return successes (right) for several Either values
+    *
+    * @param eithers
+    * @tparam L
+    * @return successes
+    */
+  def results[L](eithers : Either[L, _]*) : List[Right[L, _]]= {
+    eithers.toList.collect {
+      case r : Right[L, _] => r
+    }
+  }
 
   /**
    * Retrieve failures (left) for several Either values

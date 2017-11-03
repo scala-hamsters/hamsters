@@ -43,6 +43,17 @@ class ValidationSpec extends FlatSpec with Matchers {
     Validation.run(e1, e2, e3) should be(Left(List("nan")))
   }
 
+  "Validation results" should "return only the right values" in {
+    val e0 = Left("nan bis")
+    val e1 = Right(1)
+    val e2 = Right("2")
+    val e3 = Left("nan")
+    val e4 = Right("3")
+
+    Validation.results(e0, e1, e2, e3, e4) should have size 3
+    Validation.results(e0, e1, e2, e3, e4) should be(List(Right(1), Right("2"), Right("3")))
+  }
+
 
   "OK" should "give a value using get and getOrElse" in {
     val e = Right(1)
