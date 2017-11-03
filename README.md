@@ -13,6 +13,7 @@ Currently, Hamsters supports :
  * [HLists](docs/hlist.md)
  * [Union types](docs/union_types.md)
  * [Retry util](docs/retry.md)
+ * [NonEmptyList](docs/nonemptylist.md)
 
 [![Travis](https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master)](https://travis-ci.org/scala-hamsters/hamsters)
 
