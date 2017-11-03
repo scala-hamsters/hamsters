@@ -44,13 +44,7 @@ libraryDependencies ++= Seq(
 )
 ```
 
-## Usage
-
-### Extensions
-
- * [Hlist extensions](https://github.com/scala-hamsters/hamsters-extensions/blob/master/hamsters-hlists-extensions/README.md)
- * [Twitter Utils extensions](https://github.com/scala-hamsters/hamsters-extensions/blob/master/hamsters-twitter-util/README.md)
-
+## Extensions
 
 See [hamsters-extensions](https://github.com/scala-hamsters/hamsters-extensions) for more information.
 
