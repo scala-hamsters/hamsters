@@ -32,7 +32,7 @@ class ValidationSpec extends FlatSpec with Matchers {
     val e1 = Right(1)
     val e2 = Right("2")
 
-    Validation.result(e1, e2) should be(Right((1,"2")))
+    Validation.run(e1, e2) should be(Right((1,"2")))
   }
 
   "Validation" should "not give values if all are not OK" in {
@@ -40,7 +40,7 @@ class ValidationSpec extends FlatSpec with Matchers {
     val e2 = Right("2")
     val e3 = Left("nan")
 
-    Validation.result(e1, e2, e3) should be(Left(List("nan")))
+    Validation.run(e1, e2, e3) should be(Left(List("nan")))
   }
 
 

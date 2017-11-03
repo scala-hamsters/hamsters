@@ -21,7 +21,7 @@ class ValidationMacro extends scala.annotation.StaticAnnotation {
             ..$body
             ..${
             Range(1, 22).map { index =>
-              q"""def result[L,..${typeParams.take(index + 1)}](..${params.take(index + 1)}) : Either[List[L], (..${typeNames.take(index + 1)})] = {
+              q"""def run[L,..${typeParams.take(index + 1)}](..${params.take(index + 1)}) : Either[List[L], (..${typeNames.take(index + 1)})] = {
               failures(..${params.take(index + 1).map(p => Term.Name(p.name.value))}) match {
                  case Nil => Right(..${params.take(index + 1).map(p =>q"""${Term.Name(p.name.value)}.get""")})
                  case f : List[L] => Left(f)
@@ -31,7 +31,7 @@ class ValidationMacro extends scala.annotation.StaticAnnotation {
           }
            }
          """
-        //abort(resul.syntax)
+//        abort(resul.syntax)
         resul
 
     }
