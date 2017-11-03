@@ -13,9 +13,13 @@ object Retry {
    * @return Try of result
    */
   def apply[T](maxTries: Int, errorFn: (String) => Unit = _=> Unit)(fn: => T): Try[T] = {
+    fromTry(maxTries, errorFn)(Try(fn))
+  }
+
+  def fromTry[T](maxTries: Int, errorFn: (String) => Unit = _=> Unit)(fn: => Try[T]): Try[T] = {
     @annotation.tailrec
-    def retry(nbTries: Int, errorFn: (String) => Unit)(fn: => T): Try[T] = {
-      Try {fn} match {
+    def retry(nbTries: Int, errorFn: (String) => Unit)(fn: => Try[T]): Try[T] = {
+      fn match {
         case Success(x) => Success(x)
         case _ if nbTries > 1 => retry(nbTries - 1, errorFn)(fn)
         case Failure(e) =>
