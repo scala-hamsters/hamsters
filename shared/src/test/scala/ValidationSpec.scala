@@ -125,13 +125,7 @@ class ValidationSpec extends FlatSpec with Matchers {
 
   }
   "from try" should "convert to either" in {
-
-
     fromTry(Try(1)) should be(Right(1))
-//    fromCatchable(compute(0)) should be(Left("BigInteger divide by zero"))
-//
-//    fromCatchable(compute(0), (t: Throwable) => t.getClass.getSimpleName) should be(Left("ArithmeticException"))
-
+    fromTry(Failure(new IllegalArgumentException("BigInteger divide by zero"))) should be(Left("BigInteger divide by zero"))
   }
-
 }
