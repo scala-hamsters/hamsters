@@ -7,18 +7,17 @@ trait Showable[A] {
   def format(value: A): String
 }
 
-object Show {
-  def show[A](value: A)(implicit s: Showable[A]): String = s.format(value)
-}
-
-object ShowableSyntax {
-
+object Showable {
   implicit val stringShowable: Showable[String] = new Showable[String] {
     override def format(value: String) = value
   }
 
   implicit val intShowable: Showable[Int] = new Showable[Int] {
     override def format(value: Int) = value.toString
+  }
+
+  implicit val charShowable: Showable[Char] = new Showable[Char] {
+    override def format(value: Char) = value.toString
   }
 
   implicit val doubleShowable: Showable[Double] = new Showable[Double] {
@@ -37,14 +36,6 @@ object ShowableSyntax {
     override def format(value: Date) = value.toString
   }
 
-  implicit val jdkLocalDateShowable: Showable[LocalDate] = new Showable[LocalDate] {
-    override def format(value: LocalDate) = value.toString
-  }
-
-  implicit val jdkLocalDateTimeShowable: Showable[LocalDateTime] = new Showable[LocalDateTime] {
-    override def format(value: LocalDateTime) = value.toString
-  }
-
   implicit val booleanShowable: Showable[Boolean]   = new Showable[Boolean] {
     override def format(value: Boolean) = value.toString
   }
@@ -60,6 +51,13 @@ object ShowableSyntax {
   implicit val unitShowable: Showable[Unit] = new Showable[Unit] {
     override def format(value: Unit) = value.toString
   }
+}
+
+object Show {
+  def show[A](value: A)(implicit s: Showable[A]): String = s.format(value)
+}
+
+object ShowableSyntax {
 
   implicit class ShowableOps[A](val value: A) extends AnyVal {
     def show(implicit s: Showable[A]): String = s.format(value)
@@ -67,10 +65,19 @@ object ShowableSyntax {
 
 }
 
-
-
 @ShowMacro
 case class Name(firstName: String, lastName: String)
 
 @ShowMacro
 case class Person(name : Name, age: Int)
+
+@ShowMacro
+case class AdditionalShowInstances(
+                                    c: Char = '1',
+                                    b: Byte = 1.toByte,
+                                    boo: Boolean = true,
+                                    l: Long = 1L,
+                                    doub: Double = 1.0,
+                                    fl: Float = 1f,
+                                    date: Date = new Date(11111),
+                                    short: Short = 1.toShort)
