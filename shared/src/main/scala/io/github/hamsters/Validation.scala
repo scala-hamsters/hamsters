@@ -48,6 +48,14 @@ object Validation {
   }
 
   /**
+    * Tells if eithers contain successes (right)
+    * @param eithers
+    * @tparam R
+    * @return boolean
+    */
+  def hasSuccesses[R](eithers: Either[_, R]*): Boolean = results(eithers: _*).nonEmpty
+
+  /**
    * Retrieve failures (left) for several Either values
    * @param eithers
    * @tparam L
