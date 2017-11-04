@@ -37,13 +37,11 @@ class ValidationSpec extends FlatSpec with Matchers {
     Validation.run(e1, e2) should be(Right((1,"2")))
   }
 
-
   "Validation mixing Either and Try" should "give values if all OK" in {
     val e1 = Right(1)
     val e2 = Try("2")
     Validation.run(e1, e2) should be(Right((1,"2")))
   }
-
 
   "Validation" should "not give values if all are not OK" in {
     val e1 = Right(1)
@@ -68,7 +66,7 @@ class ValidationSpec extends FlatSpec with Matchers {
     val e4 = Right("3")
 
     Validation.results(e0, e1, e2, e3, e4) should have size 3
-    Validation.results(e0, e1, e2, e3, e4) should be(List(Right(1), Right("2"), Right("3")))
+    Validation.results(e0, e1, e2, e3, e4) should be(List(1, "2", "3"))
   }
 
 
