@@ -17,8 +17,8 @@ val e2 = Left("error 1")
 val e3 = Left("error 2")
 val e4 = Right("4")
 
-Validation.result(e1,e2, e3) // List[String] : Left(List("error 1", "error 2"))
-Validation.result(e1, e4) // Right((1, "4"))
+Validation.run(e1,e2, e3) // List[String] : Left(List("error 1", "error 2"))
+Validation.run(e1, e4) // Right((1, "4"))
 
 Validation.failures(e1,e2, e3) // List[String] : List("error 1", "error 2")
 Validation.failures(e1, e4) // Nil
