@@ -18,7 +18,6 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
 
     composedAB map { _ shouldBe Some("ab") }
 
-
     val composedABWithNone: Future[Option[String]] = for {
       a <- FutureOption(Future.successful(None))
       ab <- FutureOption(fob(a))
@@ -34,7 +33,6 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
     composedABWithFailure.failed map { _ shouldBe a [Exception]}
 
   }
-
 
   "FutureOption" should "be filtered with pattern matching in for comprehension" in {
 
