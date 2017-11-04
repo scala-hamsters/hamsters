@@ -37,7 +37,7 @@ object Validation {
   }
 
   /** Return successes (right) for several Either values
-    *
+    * Validation.run should be used instead in most cases as it is a type-safer method (it does not return a List[Any])
     * @param eithers
     * @return successes
     */
