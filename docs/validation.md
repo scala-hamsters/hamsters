@@ -22,8 +22,6 @@ Validation.run(e1, e4) // Right((1, "4"))
 
 Validation.failures(e1, e2, e3) // List[String] : List("error 1", "error 2")
 Validation.failures(e1, e4) // Nil
-
-Validation.results(e1, e2, e3, e4) // List[Any] : List(1, "4")
 ```
 
 To automatically catch exceptions into a Left or KO object, you can use `fromCatchable`.

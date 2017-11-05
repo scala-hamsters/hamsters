@@ -2,7 +2,7 @@ package jvm
 
 import io.github.hamsters.jvm.Retry
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.{AsyncFlatSpec, FlatSpec, Matchers}
+import org.scalatest.{FlatSpec, Matchers}
 
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
@@ -18,13 +18,13 @@ class RetrySpec extends FlatSpec with Matchers with MockFactory {
       throw new Exception("failed")
     }
 
-    Await.result(result.failed, Duration.Inf) shouldBe a [Exception]
+    Await.result(result.failed, Duration.Inf) shouldBe a[Exception]
   }
 
   "RetryJvm" should "return result if no error with wait" in {
-      val result = Retry.withWait(3, 3000, logErrorsFunctionMock) {
-        1+1
-      }
+    val result = Retry.withWait(3, 3000, logErrorsFunctionMock) {
+      1 + 1
+    }
 
     Await.result(result, Duration.Inf) should be(2)
   }
