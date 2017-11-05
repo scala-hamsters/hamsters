@@ -9,3 +9,4 @@ Documented feature of Hamsters :
  * [HLists](hlist.md)
  * [Union types](union_types.md)
  * [Retry util](retry.md)
+ * [NonEmptyList](nonemptylist.md)
