@@ -66,8 +66,8 @@ class ValidationSpec extends FlatSpec with Matchers {
     val e4 = Right("3")
 
     Validation.hasSuccesses(e0, e1, e2, e3, e4)  should be(true)
-    Validation.results(e0, e1, e2, e3, e4) should have size 3
-    Validation.results(e0, e1, e2, e3, e4) should be(List(1, "2", "3"))
+    Validation.successes(e0, e1, e2, e3, e4) should have size 3
+    Validation.successes(e0, e1, e2, e3, e4) should be(List(1, "2", "3"))
   }
 
 

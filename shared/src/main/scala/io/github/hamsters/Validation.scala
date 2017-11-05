@@ -41,7 +41,7 @@ object Validation {
     * @param eithers
     * @return successes
     */
-  def results(eithers : Either[_, _]*) : List[Any]= {
+  def successes(eithers : Either[_, _]*) : List[Any]= {
     eithers.toList.collect {
       case r : Right[_, _] => r.right.get
     }
@@ -53,7 +53,7 @@ object Validation {
     * @tparam R
     * @return boolean
     */
-  def hasSuccesses[R](eithers: Either[_, R]*): Boolean = results(eithers: _*).nonEmpty
+  def hasSuccesses[R](eithers: Either[_, R]*): Boolean = successes(eithers: _*).nonEmpty
 
   /**
     * Run the validation
