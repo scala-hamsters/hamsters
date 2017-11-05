@@ -29,7 +29,7 @@ class ValidationMacro extends scala.annotation.StaticAnnotation {
              }
              }
             ..${
-            Range(1, 22).map { index =>
+            Range(3, 22).map { index =>
               q"""def run[L,..${typeParams.take(index + 1)}](..${params.take(index + 1)}) : Either[List[L], (..${typeNames.take(index + 1)})] = {
               failures(..${params.take(index + 1).map(p => Term.Name(p.name.value))}) match {
                  case Nil => Right(..${params.take(index + 1).map(p =>q"""${Term.Name(p.name.value)}.get""")})
