@@ -2,7 +2,7 @@ import sbt.Keys._
 
 val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "io.github.scala-hamsters",
-  version := "1.5.3-SNAPSHOT",
+  version := "2.0.1-SNAPSHOT",
   scalacOptions ++= Seq(),
   scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
   publishMavenStyle := true,
@@ -14,8 +14,7 @@ val buildSettings = Defaults.coreDefaultSettings ++ Seq(
 )
 
 lazy val publishSettings = Seq(
-  pomExtra := (
-    <url>https://github.com/scala-hamsters/hamsters</url>
+  pomExtra := <url>https://github.com/scala-hamsters/hamsters</url>
     <licenses>
       <license>
         <name>Apache 2.0</name>
@@ -43,8 +42,7 @@ lazy val publishSettings = Seq(
         <name>Walid Chergui</name>
         <url>https://github.com/oraclewalid</url>
       </developer>
-    </developers>
-  ),
+    </developers>,
   publishTo := {
     val nexus = "https://oss.sonatype.org/"
     if (version.value.toLowerCase.endsWith("snapshot"))
