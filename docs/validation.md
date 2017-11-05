@@ -17,11 +17,13 @@ val e2 = Left("error 1")
 val e3 = Left("error 2")
 val e4 = Right("4")
 
-Validation.run(e1,e2, e3) // List[String] : Left(List("error 1", "error 2"))
+Validation.run(e1, e2, e3) // Left(List[String]) : Left(List("error 1", "error 2"))
 Validation.run(e1, e4) // Right((1, "4"))
 
-Validation.failures(e1,e2, e3) // List[String] : List("error 1", "error 2")
+Validation.failures(e1, e2, e3) // List[String] : List("error 1", "error 2")
 Validation.failures(e1, e4) // Nil
+
+Validation.results(e1, e2, e3, e4) // List[Any] : List(1, "4")
 ```
 
 To automatically catch exceptions into a Left or KO object, you can use `fromCatchable`.
@@ -39,4 +41,18 @@ fromCatchable(compute(0), (t: Throwable) => t.getClass.getSimpleName) //Left("Ar
 ```
 Note : You can also use Right/Left (or OK/KO) in a monadic way (for example in a for-comprehension) if you want to stop processing at the first encountered error, even with Scala 2.11.
 To make it work with Scala 2.11, just import Validation.OKBiasedEither.
+```
+
+## Remarks: Try
+
+You can use `Try` types with `Validation`:
+
+```scala
+Validation.results(
+  Failure(new Exception("nan")),
+  Success(1),
+  Success("2"),
+  Failure(new Exception("nan")),
+  Success("3")
+) // List[Any] : List(1, "2", "3")
 ```

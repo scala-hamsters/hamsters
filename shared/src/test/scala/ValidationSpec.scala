@@ -2,7 +2,7 @@ import io.github.hamsters.Validation
 import Validation._
 import org.scalatest._
 
-import scala.util.{Failure, Try}
+import scala.util.{Try, Failure, Success}
 
 class ValidationSpec extends FlatSpec with Matchers {
 
@@ -58,17 +58,48 @@ class ValidationSpec extends FlatSpec with Matchers {
 
     Validation.run(e1, e2, e3) should be(Left(List("nan")))
   }
-  "Validation results" should "return only the right values" in {
-    val e0 = Left("nan bis")
+
+  "Validation hasSuccesses of Eithers" should "return true" in {
+    val e0 = Left("nan")
     val e1 = Right(1)
     val e2 = Right("2")
-    val e3 = Left("nan")
+    val e3 = Left("nan bis")
     val e4 = Right("3")
 
     Validation.hasSuccesses(e0, e1, e2, e3, e4)  should be(true)
-    Validation.successes(e0, e1, e2, e3, e4) should have size 3
-    Validation.successes(e0, e1, e2, e3, e4) should be(List(1, "2", "3"))
   }
+
+  "Validation results" should "return only the right values" in {
+    val e0 = Left("nan")
+    val e1 = Right(1)
+    val e2 = Right("2")
+    val e3 = Left("nan bis")
+    val e4 = Right("3")
+
+    Validation.results(e0, e1, e2, e3, e4) should have size 3
+    Validation.results(e0, e1, e2, e3, e4) should be(List(1, "2", "3"))
+  }
+
+  "Validation hasSuccesses of Trys" should "return true" in {
+    Validation.hasSuccesses(
+      Failure(new Exception("nan")),
+      Success(1),
+      Success("2"),
+      Failure(new Exception("nan bis")),
+      Success("3")
+    )  should be(true)
+  }
+
+  "Validation results" should "return only the success values" in {
+    Validation.results(
+      Failure(new Exception("nan")),
+      Success(1),
+      Success("2"),
+      Failure(new Exception("nan bis")),
+      Success("3")
+    ) should be(List(1, "2", "3"))
+  }
+
 
 
   "OK" should "give a value using get and getOrElse" in {
