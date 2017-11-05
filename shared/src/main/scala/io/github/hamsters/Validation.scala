@@ -10,7 +10,6 @@ object Validation {
 
   /**
     * Return Either from code block
-    *
     * @param body
     * @tparam R
     * @return Either from code block
@@ -22,7 +21,6 @@ object Validation {
 
   /**
     * Return Either from code block with custom error management
-    *
     * @param body
     * @param errorMgt : error management function
     * @tparam L
@@ -40,21 +38,27 @@ object Validation {
 
   /** Return successes (right) for several Either values
     * Validation.run should be used instead in most cases as it is a type-safer method (it does not return a List[Any])
-    *
     * @param eithers
     * @return successes
     */
-  def results(eithers: Either[_, _]*): List[Any] = {
+  def results(eithers : Either[_, _]*) : List[Any]= {
     eithers.toList.collect {
-      case r: Right[_, _] => r.right.get
+      case r : Right[_, _] => r.right.get
     }
   }
+
+  /**
+    * Tells if eithers contain successes (right)
+    * @param eithers
+    * @tparam R
+    * @return boolean
+    */
+  def hasSuccesses[R](eithers: Either[_, R]*): Boolean = results(eithers: _*).nonEmpty
 
   /**
     * Run the validation
     * This validation accumulates all errors
     * Arity 2 to 22 methods are available and generated from macro
-    *
     * @param e1 : first either
     * @param e2 : second either
     * @tparam L
@@ -73,7 +77,6 @@ object Validation {
     * Run the validation
     * This validation accumulates all errors
     * Arity 2 to 22 methods are available and generated from macro
-    *
     * @param e1 : first either
     * @param e2 : second either
     * @param e3 : third either
@@ -92,7 +95,6 @@ object Validation {
 
   /**
     * Retrieve failures (left) for several Either values
-    *
     * @param eithers
     * @tparam L
     * @return failures
@@ -101,7 +103,6 @@ object Validation {
 
   /**
     * Tells if eithers contain failures (left)
-    *
     * @param eithers
     * @tparam L
     * @return boolean
