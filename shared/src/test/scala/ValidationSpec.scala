@@ -76,8 +76,8 @@ class ValidationSpec extends FlatSpec with Matchers {
     val e3 = Left("nan bis")
     val e4 = Right("3")
 
-    Validation.results(e0, e1, e2, e3, e4) should have size 3
-    Validation.results(e0, e1, e2, e3, e4) should be(List(1, "2", "3"))
+    Validation.successes(e0, e1, e2, e3, e4) should have size 3
+    Validation.successes(e0, e1, e2, e3, e4) should be(List(1, "2", "3"))
   }
 
   "Validation hasSuccesses of Trys" should "return true" in {
@@ -91,7 +91,7 @@ class ValidationSpec extends FlatSpec with Matchers {
   }
 
   "Validation results" should "return only the success values" in {
-    Validation.results(
+    Validation.successes(
       Failure(new Exception("nan")),
       Success(1),
       Success("2"),
