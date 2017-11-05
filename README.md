@@ -45,6 +45,10 @@ libraryDependencies ++= Seq(
 )
 ```
 
+## 1.x to 2.0 Migration
+
+`Validation.result` has been renamed to `Validation.run`.
+
 ## Extensions
 
 See [hamsters-extensions](https://github.com/scala-hamsters/hamsters-extensions) for more information.
