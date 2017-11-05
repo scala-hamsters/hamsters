@@ -384,6 +384,23 @@
       </a>
     </span>
       <p class="shortcomment cmt">Tells if eithers contain failures (left)</p><div class="fullcomment"><div class="comment cmt"><p>Tells if eithers contain failures (left)</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>boolean</p></dd></dl></div>
+    </li><li name="io.github.hamsters.Validation#hasSuccesses" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hasSuccesses[R](eithers:Either[_,R]*):Boolean"></a>
+      <a id="hasSuccesses[R](Either[_,R]*):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hasSuccesses</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="eithers">eithers: <a href="../../../scala/package.html#Either[+A,+B]=scala.util.Either[A,B]" class="extmbr" name="scala.Either">Either</a>[_, <span class="extype" name="io.github.hamsters.Validation.hasSuccesses.R">R</span>]*</span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#io.github.hamsters.Validation$@hasSuccesses[R](eithers:Either[_,R]*):Boolean" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Tells if eithers contain successes (right)</p><div class="fullcomment"><div class="comment cmt"><p>Tells if eithers contain successes (right)</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>boolean</p></dd></dl></div>
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
@@ -469,6 +486,67 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="io.github.hamsters.Validation#run" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="run[L,R1,R2,R3](e1:Either[L,R1],e2:Either[L,R2],e3:Either[L,R3]):Either[List[L],(R1,R2,R3)]"></a>
+      <a id="run[L,R1,R2,R3](Either[L,R1],Either[L,R2],Either[L,R3]):Either[List[L],(R1,R2,R3)]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">run</span><span class="tparams">[<span name="L">L</span>, <span name="R1">R1</span>, <span name="R2">R2</span>, <span name="R3">R3</span>]</span><span class="params">(<span name="e1">e1: <a href="../../../scala/package.html#Either[+A,+B]=scala.util.Either[A,B]" class="extmbr" name="scala.Either">Either</a>[<span class="extype" name="io.github.hamsters.Validation.run.L">L</span>, <span class="extype" name="io.github.hamsters.Validation.run.R1">R1</span>]</span>, <span name="e2">e2: <a href="../../../scala/package.html#Either[+A,+B]=scala.util.Either[A,B]" class="extmbr" name="scala.Either">Either</a>[<span class="extype" name="io.github.hamsters.Validation.run.L">L</span>, <span class="extype" name="io.github.hamsters.Validation.run.R2">R2</span>]</span>, <span name="e3">e3: <a href="../../../scala/package.html#Either[+A,+B]=scala.util.Either[A,B]" class="extmbr" name="scala.Either">Either</a>[<span class="extype" name="io.github.hamsters.Validation.run.L">L</span>, <span class="extype" name="io.github.hamsters.Validation.run.R3">R3</span>]</span>)</span><span class="result">: <a href="../../../scala/package.html#Either[+A,+B]=scala.util.Either[A,B]" class="extmbr" name="scala.Either">Either</a>[<a href="../../../scala/package.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="io.github.hamsters.Validation.run.L">L</span>], (<span class="extype" name="io.github.hamsters.Validation.run.R1">R1</span>, <span class="extype" name="io.github.hamsters.Validation.run.R2">R2</span>, <span class="extype" name="io.github.hamsters.Validation.run.R3">R3</span>)]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#io.github.hamsters.Validation$@run[L,R1,R2,R3](e1:Either[L,R1],e2:Either[L,R2],e3:Either[L,R3]):Either[List[L],(R1,R2,R3)]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Run the validation
+This validation accumulates all errors
+Arity 2 to 22 methods are available and generated from macro</p><div class="fullcomment"><div class="comment cmt"><p>Run the validation
+This validation accumulates all errors
+Arity 2 to 22 methods are available and generated from macro</p></div><dl class="paramcmts block"><dt class="param">e1</dt><dd class="cmt"><p>: first either</p></dd><dt class="param">e2</dt><dd class="cmt"><p>: second either</p></dd><dt class="param">e3</dt><dd class="cmt"><p>: third either</p></dd><dt>returns</dt><dd class="cmt"><p>a tuple (R1, R2, R3) of results in a Right if validation is successful or a list of errors L if it fails</p></dd></dl></div>
+    </li><li name="io.github.hamsters.Validation#run" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="run[L,R1,R2](e1:Either[L,R1],e2:Either[L,R2]):Either[List[L],(R1,R2)]"></a>
+      <a id="run[L,R1,R2](Either[L,R1],Either[L,R2]):Either[List[L],(R1,R2)]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">run</span><span class="tparams">[<span name="L">L</span>, <span name="R1">R1</span>, <span name="R2">R2</span>]</span><span class="params">(<span name="e1">e1: <a href="../../../scala/package.html#Either[+A,+B]=scala.util.Either[A,B]" class="extmbr" name="scala.Either">Either</a>[<span class="extype" name="io.github.hamsters.Validation.run.L">L</span>, <span class="extype" name="io.github.hamsters.Validation.run.R1">R1</span>]</span>, <span name="e2">e2: <a href="../../../scala/package.html#Either[+A,+B]=scala.util.Either[A,B]" class="extmbr" name="scala.Either">Either</a>[<span class="extype" name="io.github.hamsters.Validation.run.L">L</span>, <span class="extype" name="io.github.hamsters.Validation.run.R2">R2</span>]</span>)</span><span class="result">: <a href="../../../scala/package.html#Either[+A,+B]=scala.util.Either[A,B]" class="extmbr" name="scala.Either">Either</a>[<a href="../../../scala/package.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="io.github.hamsters.Validation.run.L">L</span>], (<span class="extype" name="io.github.hamsters.Validation.run.R1">R1</span>, <span class="extype" name="io.github.hamsters.Validation.run.R2">R2</span>)]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#io.github.hamsters.Validation$@run[L,R1,R2](e1:Either[L,R1],e2:Either[L,R2]):Either[List[L],(R1,R2)]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Run the validation
+This validation accumulates all errors
+Arity 2 to 22 methods are available and generated from macro</p><div class="fullcomment"><div class="comment cmt"><p>Run the validation
+This validation accumulates all errors
+Arity 2 to 22 methods are available and generated from macro</p></div><dl class="paramcmts block"><dt class="param">e1</dt><dd class="cmt"><p>: first either</p></dd><dt class="param">e2</dt><dd class="cmt"><p>: second either</p></dd><dt>returns</dt><dd class="cmt"><p>a tuple (R1, R2) of results in a Right if validation is successful or a list of errors L if it fails</p></dd></dl></div>
+    </li><li name="io.github.hamsters.Validation#successes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="successes(eithers:Either[_,_]*):List[Any]"></a>
+      <a id="successes(Either[_,_]*):List[Any]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">successes</span><span class="params">(<span name="eithers">eithers: <a href="../../../scala/package.html#Either[+A,+B]=scala.util.Either[A,B]" class="extmbr" name="scala.Either">Either</a>[_, _]*</span>)</span><span class="result">: <a href="../../../scala/package.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="scala.Any">Any</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#io.github.hamsters.Validation$@successes(eithers:Either[_,_]*):List[Any]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Return successes (right) for several Either values
+Validation.run should be used instead in most cases as it is a type-safer method (it does not return a List[Any])</p><div class="fullcomment"><div class="comment cmt"><p>Return successes (right) for several Either values
+Validation.run should be used instead in most cases as it is a type-safer method (it does not return a List[Any])</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>successes</p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

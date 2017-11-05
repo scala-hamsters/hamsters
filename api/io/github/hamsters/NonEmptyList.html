@@ -1,9 +1,9 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>HList - io.github.hamsters.HList</title>
-          <meta name="description" content="HList - io.github.hamsters.HList" />
-          <meta name="keywords" content="HList io.github.hamsters.HList" />
+          <title>NonEmptyList - io.github.hamsters.NonEmptyList</title>
+          <meta name="description" content="NonEmptyList - io.github.hamsters.NonEmptyList" />
+          <meta name="keywords" content="NonEmptyList io.github.hamsters.NonEmptyList" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -16,7 +16,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../index.html';
-            var hash = 'io.github.hamsters.HList';
+            var hash = 'io.github.hamsters.NonEmptyList';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -28,14 +28,14 @@
         </head>
         <body class="type">
       <div id="definition">
-        <a href="HList$.html" title="See companion object"><img alt="Trait/Object" src="../../../lib/trait_to_object_big.png" /></a>
+        <a href="NonEmptyList$.html" title="See companion object"><img alt="Class/Object" src="../../../lib/class_to_object_big.png" /></a>
         <p id="owner"><a href="../../package.html" class="extype" name="io">io</a>.<a href="../package.html" class="extype" name="io.github">github</a>.<a href="package.html" class="extype" name="io.github.hamsters">hamsters</a></p>
-        <h1><a href="HList$.html" title="See companion object">HList</a></h1><h3><span class="morelinks"><div>
+        <h1><a href="NonEmptyList$.html" title="See companion object">NonEmptyList</a></h1><h3><span class="morelinks"><div>
             Related Docs:
-            <a href="HList$.html" title="See companion object">object HList</a>
+            <a href="NonEmptyList$.html" title="See companion object">object NonEmptyList</a>
             | <a href="package.html" class="extype" name="io.github.hamsters">package hamsters</a>
           </div></span></h3><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -43,21 +43,18 @@
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier">sealed </span>
-        <span class="kind">trait</span>
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">HList</span><span class="result"> extends <a href="../../../scala/package.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></span>
+        <span class="name">NonEmptyList</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="head">head: <span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span></span>, <span name="tail">tail: <a href="../../../scala/package.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="../../../scala/package.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a>, <span class="extype" name="scala.Any">Any</span></div>
-        </div><div class="toggleContainer block">
-            <span class="toggle">Known Subclasses</span>
-            <div class="subClasses hiddenContent"><a href="HCons.html" class="extype" name="io.github.hamsters.HCons">HCons</a>, <a href="HNil.html" class="extype" name="io.github.hamsters.HNil">HNil</a>, <a href="HNil$.html" class="extype" name="io.github.hamsters.HNil">HNil</a></div>
-          </div></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="../../../scala/package.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
         
 
       <div id="mbrsel">
@@ -74,7 +71,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="io.github.hamsters.HList"><span>HList</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="io.github.hamsters.NonEmptyList"><span>NonEmptyList</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
                 <span class="filtertype">Implicitly<br />
@@ -96,23 +93,21 @@
 
       <div id="template">
         <div id="allMembers">
-        
-
-        <div id="types" class="types members">
-              <h3>Type Members</h3>
-              <ol><li name="io.github.hamsters.HList.Plus" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="Plus[L&lt;:io.github.hamsters.HList]&lt;:io.github.hamsters.HList"></a>
-      <a id="Plus[L&lt;:HList]:Plus[L]"></a>
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="io.github.hamsters.NonEmptyList#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(head:A,tail:List[A]):io.github.hamsters.NonEmptyList[A]"></a>
+      <a id="&lt;init&gt;:NonEmptyList[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">type</span>
+        <span class="modifier"></span>
+        <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">Plus</span><span class="tparams">[<span name="L">L &lt;: <a href="" class="extype" name="io.github.hamsters.HList">HList</a></span>]</span><span class="result"> &lt;: <a href="" class="extype" name="io.github.hamsters.HList">HList</a></span>
+        <span class="name">NonEmptyList</span><span class="params">(<span name="head">head: <span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span></span>, <span name="tail">tail: <a href="../../../scala/package.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]</span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@Plus[L&lt;:io.github.hamsters.HList]&lt;:io.github.hamsters.HList" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@&lt;init&gt;(head:A,tail:List[A]):io.github.hamsters.NonEmptyList[A]" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -120,108 +115,12 @@
     </li></ol>
             </div>
 
-        <div id="values" class="values members">
-              <h3>Abstract Value Members</h3>
-              <ol><li name="io.github.hamsters.HList#::" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="::[U](v:U):io.github.hamsters.HList"></a>
-      <a id="::[U](U):HList"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $colon$colon" class="name">::</span><span class="tparams">[<span name="U">U</span>]</span><span class="params">(<span name="v">v: <span class="extype" name="io.github.hamsters.HList.::.U">U</span></span>)</span><span class="result">: <a href="" class="extype" name="io.github.hamsters.HList">HList</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@::[U](v:U):io.github.hamsters.HList" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Append element at the beginning of this HList
-</p><div class="fullcomment"><div class="comment cmt"><p>Append element at the beginning of this HList
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a new HList</p></dd></dl></div>
-    </li><li name="io.github.hamsters.HList#apply" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="apply[A](index:Int)(implicitevidence$1:scala.reflect.ClassTag[A]):A"></a>
-      <a id="apply[A](Int)(ClassTag[A]):A"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">apply</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="index">index: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.ClassTag">ClassTag</span>[<span class="extype" name="io.github.hamsters.HList.apply.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="io.github.hamsters.HList.apply.A">A</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@apply[A](index:Int)(implicitevidence$1:scala.reflect.ClassTag[A]):A" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Retrieve element at index
-</p><div class="fullcomment"><div class="comment cmt"><p>Retrieve element at index
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>element at index</p></dd></dl></div>
-    </li><li name="io.github.hamsters.HList#filter" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="filter(p:Any=&gt;Boolean):io.github.hamsters.HList"></a>
-      <a id="filter((Any)⇒Boolean):HList"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">filter</span><span class="params">(<span name="p">p: (<span class="extype" name="scala.Any">Any</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="" class="extype" name="io.github.hamsters.HList">HList</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@filter(p:Any=&gt;Boolean):io.github.hamsters.HList" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Filter this HList with a predicate
-</p><div class="fullcomment"><div class="comment cmt"><p>Filter this HList with a predicate
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a new filtered HList</p></dd></dl></div>
-    </li><li name="io.github.hamsters.HList#get" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="get[A](index:Int)(implicitevidence$2:scala.reflect.ClassTag[A]):Option[A]"></a>
-      <a id="get[A](Int)(ClassTag[A]):Option[A]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">get</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="index">index: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.ClassTag">ClassTag</span>[<span class="extype" name="io.github.hamsters.HList.get.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="io.github.hamsters.HList.get.A">A</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@get[A](index:Int)(implicitevidence$2:scala.reflect.ClassTag[A]):Option[A]" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Retrieve element at index in an Option
-</p><div class="fullcomment"><div class="comment cmt"><p>Retrieve element at index in an Option
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Option of element at index</p></dd></dl></div>
-    </li><li name="io.github.hamsters.HList#map" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="map(f:Any=&gt;Any):io.github.hamsters.HList"></a>
-      <a id="map((Any)⇒Any):HList"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">map</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.Any">Any</span>) ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="" class="extype" name="io.github.hamsters.HList">HList</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@map(f:Any=&gt;Any):io.github.hamsters.HList" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Apply f to all elements of this HList
-</p><div class="fullcomment"><div class="comment cmt"><p>Apply f to all elements of this HList
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a new HList</p></dd></dl></div>
-    </li></ol>
-            </div>
+        
+
+        
 
         <div id="values" class="values members">
-              <h3>Concrete Value Members</h3>
+              <h3>Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
@@ -234,7 +133,7 @@
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@!=(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -251,7 +150,7 @@
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@##():Int" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@##():Int" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -268,34 +167,34 @@
         <span title="gt4s: $plus" class="implicit">+</span><span class="params">(<span name="other">other: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@+(other:String):String" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@+(other:String):String" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.HList">HList</a> to
-            <span class="extype" name="scala.Predef.any2stringadd">any2stringadd</span>[<a href="" class="extype" name="io.github.hamsters.HList">HList</a>] performed by method any2stringadd in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>] to
+            <span class="extype" name="scala.Predef.any2stringadd">any2stringadd</span>[<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]] performed by method any2stringadd in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>any2stringadd</dd></dl></div>
     </li><li name="scala.Predef.ArrowAssoc#-&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="-&gt;[B](y:B):(A,B)"></a>
-      <a id="-&gt;[B](B):(HList,B)"></a>
+      <a id="-&gt;[B](B):(NonEmptyList[A],B)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $minus$greater" class="implicit">-&gt;</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="y">y: <span class="extype" name="scala.Predef.ArrowAssoc.-&gt;.B">B</span></span>)</span><span class="result">: (<a href="" class="extype" name="io.github.hamsters.HList">HList</a>, <span class="extype" name="scala.Predef.ArrowAssoc.-&gt;.B">B</span>)</span>
+        <span title="gt4s: $minus$greater" class="implicit">-&gt;</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="y">y: <span class="extype" name="scala.Predef.ArrowAssoc.-&gt;.B">B</span></span>)</span><span class="result">: (<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>], <span class="extype" name="scala.Predef.ArrowAssoc.-&gt;.B">B</span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@-&gt;[B](y:B):(A,B)" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@-&gt;[B](y:B):(A,B)" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.HList">HList</a> to
-            <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="io.github.hamsters.HList">HList</a>] performed by method ArrowAssoc in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>] to
+            <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]] performed by method ArrowAssoc in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>ArrowAssoc</dd><dt>Annotations</dt><dd>
                 <span class="name">@inline</span><span class="args">()</span>
@@ -313,7 +212,7 @@
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@==(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@==(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -330,7 +229,7 @@
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@asInstanceOf[T0]:T0" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -347,7 +246,7 @@
         <span class="name">clone</span><span class="params">()</span><span class="result">: <a href="../../../scala/package.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@clone():Object" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@clone():Object" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -360,86 +259,86 @@
         </dd></dl></div>
     </li><li name="scala.Predef.Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ensuring(cond:A=&gt;Boolean,msg:=&gt;Any):A"></a>
-      <a id="ensuring((HList)⇒Boolean,⇒Any):HList"></a>
+      <a id="ensuring((NonEmptyList[A])⇒Boolean,⇒Any):NonEmptyList[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: (<a href="" class="extype" name="io.github.hamsters.HList">HList</a>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="msg">msg: ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="" class="extype" name="io.github.hamsters.HList">HList</a></span>
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: (<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="msg">msg: ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@ensuring(cond:A=&gt;Boolean,msg:=&gt;Any):A" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@ensuring(cond:A=&gt;Boolean,msg:=&gt;Any):A" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.HList">HList</a> to
-            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="io.github.hamsters.HList">HList</a>] performed by method Ensuring in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>] to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]] performed by method Ensuring in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
     </li><li name="scala.Predef.Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ensuring(cond:A=&gt;Boolean):A"></a>
-      <a id="ensuring((HList)⇒Boolean):HList"></a>
+      <a id="ensuring((NonEmptyList[A])⇒Boolean):NonEmptyList[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: (<a href="" class="extype" name="io.github.hamsters.HList">HList</a>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="" class="extype" name="io.github.hamsters.HList">HList</a></span>
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: (<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@ensuring(cond:A=&gt;Boolean):A" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@ensuring(cond:A=&gt;Boolean):A" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.HList">HList</a> to
-            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="io.github.hamsters.HList">HList</a>] performed by method Ensuring in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>] to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]] performed by method Ensuring in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
     </li><li name="scala.Predef.Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ensuring(cond:Boolean,msg:=&gt;Any):A"></a>
-      <a id="ensuring(Boolean,⇒Any):HList"></a>
+      <a id="ensuring(Boolean,⇒Any):NonEmptyList[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="msg">msg: ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="" class="extype" name="io.github.hamsters.HList">HList</a></span>
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="msg">msg: ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@ensuring(cond:Boolean,msg:=&gt;Any):A" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@ensuring(cond:Boolean,msg:=&gt;Any):A" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.HList">HList</a> to
-            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="io.github.hamsters.HList">HList</a>] performed by method Ensuring in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>] to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]] performed by method Ensuring in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
     </li><li name="scala.Predef.Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ensuring(cond:Boolean):A"></a>
-      <a id="ensuring(Boolean):HList"></a>
+      <a id="ensuring(Boolean):NonEmptyList[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="" class="extype" name="io.github.hamsters.HList">HList</a></span>
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@ensuring(cond:Boolean):A" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@ensuring(cond:Boolean):A" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.HList">HList</a> to
-            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="io.github.hamsters.HList">HList</a>] performed by method Ensuring in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>] to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]] performed by method Ensuring in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -454,28 +353,11 @@
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <a href="../../../scala/package.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="equals(x$1:Any):Boolean"></a>
-      <a id="equals(Any):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@equals(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -488,7 +370,7 @@
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@finalize():Unit" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@finalize():Unit" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -499,24 +381,6 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="io.github.hamsters.HList#foreach" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="foreach(f:Any=&gt;Unit):Unit"></a>
-      <a id="foreach((Any)⇒Unit):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">foreach</span><span class="params">(<span name="f">f: (<span class="extype" name="scala.Any">Any</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@foreach(f:Any=&gt;Unit):Unit" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Executes f for each element of the HList
-</p>
     </li><li name="scala.Predef.StringFormat#formatted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="formatted(fmtstr:String):String"></a>
       <a id="formatted(String):String"></a>
@@ -529,13 +393,13 @@
         <span class="implicit">formatted</span><span class="params">(<span name="fmtstr">fmtstr: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@formatted(fmtstr:String):String" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@formatted(fmtstr:String):String" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.HList">HList</a> to
-            <span class="extype" name="scala.Predef.StringFormat">StringFormat</span>[<a href="" class="extype" name="io.github.hamsters.HList">HList</a>] performed by method StringFormat in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>] to
+            <span class="extype" name="scala.Predef.StringFormat">StringFormat</span>[<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]] performed by method StringFormat in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>StringFormat</dd><dt>Annotations</dt><dd>
                 <span class="name">@inline</span><span class="args">()</span>
@@ -553,28 +417,28 @@
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@getClass():Class[_]" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@getClass():Class[_]" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hashCode():Int"></a>
-      <a id="hashCode():Int"></a>
+    </li><li name="io.github.hamsters.NonEmptyList#head" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="head:A"></a>
+      <a id="head:A"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">def</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">head</span><span class="result">: <span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@hashCode():Int" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@head:A" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+      
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -587,7 +451,7 @@
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -604,7 +468,7 @@
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <a href="../../../scala/package.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -621,7 +485,7 @@
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@notify():Unit" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@notify():Unit" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -638,7 +502,7 @@
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@notifyAll():Unit" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@notifyAll():Unit" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -655,28 +519,45 @@
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toString():String"></a>
-      <a id="toString():String"></a>
+    </li><li name="io.github.hamsters.NonEmptyList#tail" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="tail:List[A]"></a>
+      <a id="tail:List[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tail</span><span class="result">: <a href="../../../scala/package.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@tail:List[A]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="io.github.hamsters.NonEmptyList#toList" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toList:List[A]"></a>
+      <a id="toList:List[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">toList</span><span class="result">: <a href="../../../scala/package.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@toString():String" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@toList:List[A]" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+      <p class="shortcomment cmt">Convert a NonEmptyList to a List</p><div class="fullcomment"><div class="comment cmt"><p>Convert a NonEmptyList to a List</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a List</p></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -689,7 +570,7 @@
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@wait():Unit" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@wait():Unit" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -712,7 +593,7 @@
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -735,7 +616,7 @@
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@wait(x$1:Long):Unit" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@wait(x$1:Long):Unit" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -748,23 +629,23 @@
         </dd></dl></div>
     </li><li name="scala.Predef.ArrowAssoc#→" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="→[B](y:B):(A,B)"></a>
-      <a id="→[B](B):(HList,B)"></a>
+      <a id="→[B](B):(NonEmptyList[A],B)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $u2192" class="implicit">→</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="y">y: <span class="extype" name="scala.Predef.ArrowAssoc.→.B">B</span></span>)</span><span class="result">: (<a href="" class="extype" name="io.github.hamsters.HList">HList</a>, <span class="extype" name="scala.Predef.ArrowAssoc.→.B">B</span>)</span>
+        <span title="gt4s: $u2192" class="implicit">→</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="y">y: <span class="extype" name="scala.Predef.ArrowAssoc.→.B">B</span></span>)</span><span class="result">: (<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>], <span class="extype" name="scala.Predef.ArrowAssoc.→.B">B</span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#io.github.hamsters.HList@→[B](y:B):(A,B)" title="Permalink" target="_top">
+      <a href="../../../index.html#io.github.hamsters.NonEmptyList@→[B](y:B):(A,B)" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.HList">HList</a> to
-            <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="io.github.hamsters.HList">HList</a>] performed by method ArrowAssoc in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>] to
+            <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]] performed by method ArrowAssoc in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>ArrowAssoc</dd></dl></div>
     </li></ol>
@@ -776,26 +657,34 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scala.Serializable">
+              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="java.io.Serializable">
+              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="scala.Product">
+              <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
+            </div><div class="parent" name="scala.Equals">
+              <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <a href="../../../scala/package.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
             </div>
         <div class="conversion" name="scala.Predef.any2stringadd">
               <h3>Inherited by implicit conversion any2stringadd from
-                <a href="" class="extype" name="io.github.hamsters.HList">HList</a> to <span class="extype" name="scala.Predef.any2stringadd">any2stringadd</span>[<a href="" class="extype" name="io.github.hamsters.HList">HList</a>]
+                <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>] to <span class="extype" name="scala.Predef.any2stringadd">any2stringadd</span>[<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]]
               </h3>
             </div><div class="conversion" name="scala.Predef.StringFormat">
               <h3>Inherited by implicit conversion StringFormat from
-                <a href="" class="extype" name="io.github.hamsters.HList">HList</a> to <span class="extype" name="scala.Predef.StringFormat">StringFormat</span>[<a href="" class="extype" name="io.github.hamsters.HList">HList</a>]
+                <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>] to <span class="extype" name="scala.Predef.StringFormat">StringFormat</span>[<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]]
               </h3>
             </div><div class="conversion" name="scala.Predef.Ensuring">
               <h3>Inherited by implicit conversion Ensuring from
-                <a href="" class="extype" name="io.github.hamsters.HList">HList</a> to <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="io.github.hamsters.HList">HList</a>]
+                <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>] to <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]]
               </h3>
             </div><div class="conversion" name="scala.Predef.ArrowAssoc">
               <h3>Inherited by implicit conversion ArrowAssoc from
-                <a href="" class="extype" name="io.github.hamsters.HList">HList</a> to <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="io.github.hamsters.HList">HList</a>]
+                <a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>] to <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="io.github.hamsters.NonEmptyList">NonEmptyList</a>[<span class="extype" name="io.github.hamsters.NonEmptyList.A">A</span>]]
               </h3>
             </div>
         </div>
