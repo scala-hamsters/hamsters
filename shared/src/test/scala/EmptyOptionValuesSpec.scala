@@ -37,4 +37,9 @@ class EmptyOptionValuesSpec extends FlatSpec with Matchers {
     val optDouble: Option[Double] = None
     optDouble.orEmpty shouldEqual 0d
   }
+
+  "A none element of Option[BigDecimal]" should "return 0" in {
+    val optBigDecimal: Option[BigDecimal] = None
+    optBigDecimal.orEmpty shouldEqual 0
+  }
 }

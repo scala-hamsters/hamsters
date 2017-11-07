@@ -13,11 +13,11 @@ object DefaultValue{
     override def get = ""
   }
 
-  implicit def numericDefaultValue[T: Numeric] = new DefaultValue[T] {
+  implicit def numericDefaultValue[T: Numeric](implicit num: Numeric[T]) = new DefaultValue[T] {
     /**
       * @return zero an None of Option[Numeric] is provided
       */
-    override def get = 0.asInstanceOf[T]
+    override def get = num.zero
   }
 
   implicit def seqDefaultValue[T] = new DefaultValue[Seq[T]] {
