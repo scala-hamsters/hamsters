@@ -46,11 +46,11 @@ To make it work with Scala 2.11, just import Validation.OKBiasedEither.
 You can use `Try` types with `Validation`:
 
 ```scala
-Validation.results(
+Validation.run(
   Failure(new Exception("nan")),
   Success(1),
   Success("2"),
-  Failure(new Exception("nan")),
+  Failure(new Exception("error 2")),
   Success("3")
-) // List[Any] : List(1, "2", "3")
+) // Left[List[String]] : Left(List("nan", "error 2"))
 ```
