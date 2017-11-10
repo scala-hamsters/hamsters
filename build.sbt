@@ -77,3 +77,7 @@ lazy val root = project.in(file("."))
   .aggregate(hamstersJVM, hamstersJS)
   .dependsOn(hamstersJVM, hamstersJS)
   .settings(hamstersSettings)
+  .settings(
+    publish := {},
+    publishLocal := {}
+  )
