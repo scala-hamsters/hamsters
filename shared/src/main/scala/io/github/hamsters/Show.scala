@@ -1,6 +1,5 @@
 package io.github.hamsters
 
-import java.time.{LocalDate, LocalDateTime}
 import java.util.Date
 
 trait Showable[A] {
@@ -65,19 +64,4 @@ object ShowableSyntax {
 
 }
 
-@ShowMacro
-case class Name(firstName: String, lastName: String)
 
-@ShowMacro
-case class Person(name : Name, age: Int)
-
-@ShowMacro
-case class AdditionalShowInstances(
-                                    c: Char = '1',
-                                    b: Byte = 1.toByte,
-                                    boo: Boolean = true,
-                                    l: Long = 1L,
-                                    doub: Double = 1.0,
-                                    fl: Float = 1f,
-                                    date: Date = new Date(11111),
-                                    short: Short = 1.toShort)
