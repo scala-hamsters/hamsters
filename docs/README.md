@@ -10,3 +10,4 @@ Documented feature of Hamsters :
  * [Union types](union_types.md)
  * [Retry util](retry.md)
  * [NonEmptyList](nonemptylist.md)
+ * [Show](show.md)
