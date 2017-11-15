@@ -1,8 +1,10 @@
 package io.github.hamsters.jvm
 
 import scala.concurrent.Future
+import scala.concurrent.blocking
 
 object Retry {
+
 
   /**
     * Retry a function several times
@@ -17,7 +19,7 @@ object Retry {
     import scala.concurrent.ExecutionContext.Implicits.global
     def retry(remainingTries: Int, waitInMilliSeconds: Int, errorFn: (String) => Unit)(fn: => T): Future[T] = {
       Future{
-        if(remainingTries < maxTries) Thread.sleep(waitInMilliSeconds)
+        if(remainingTries < maxTries) blocking(Thread.sleep(waitInMilliSeconds))
         fn
       }.recoverWith{
         case _ if remainingTries > 1 =>

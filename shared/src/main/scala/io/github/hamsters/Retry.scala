@@ -1,6 +1,5 @@
 package io.github.hamsters
 
-import scala.concurrent.Future
 import scala.util.{Failure, Success, Try}
 
 object Retry {

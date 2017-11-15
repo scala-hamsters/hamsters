@@ -24,6 +24,6 @@ import io.github.hamsters.jvm.Retry
 } // Future(Success(2))
 ```
 
-To avoid blocking in the main Thread, this method returns a `Future[T]`.
+To avoid blocking in the main Thread, this method returns a `Future[T]` (it will block using another thread).
 
 Note : `withWait` is only available on the JVM as blocking is not compatible with ScalaJS.
