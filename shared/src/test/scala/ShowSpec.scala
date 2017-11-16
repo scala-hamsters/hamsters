@@ -33,7 +33,7 @@ class ShowSpec extends FlatSpec with Matchers {
     Show.show(p) should be("Person(name=Name(firstName=john,lastName=doe),age=35)")
   }
 
-  "Show works on new instances as of #41" should "show field names and values of object" in {
+  "Show on additional types" should "show field names and values of object" in {
     """
       |Show.show(AdditionalShowInstances(
       |    '1',
