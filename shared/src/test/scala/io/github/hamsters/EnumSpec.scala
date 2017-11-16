@@ -1,4 +1,5 @@
-import io.github.hamsters.{Enumerable, Enumeration}
+package io.github.hamsters
+
 import org.scalatest.{FlatSpec, Matchers}
 
 class EnumSpec extends FlatSpec with Matchers {

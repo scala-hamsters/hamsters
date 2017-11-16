@@ -1,8 +1,6 @@
+package io.github.hamsters
 
-import io.github.hamsters.Monoid
 import org.scalatest.{FlatSpec, Matchers}
-
-case class MyCaseClass(name: String, age: Int)
 
 class EmptyOptionValuesSpec extends FlatSpec with Matchers {
 

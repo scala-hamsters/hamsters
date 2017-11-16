@@ -1,16 +1,17 @@
+package io.github.hamsters
+
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Arbitrary, Properties}
 
 import scala.reflect._
-import _root_.io.github.hamsters.Monoid
 
 
 class BooleanMonoidSpec extends MonoidSpec[Boolean](Monoid.booleaMonoids)
 class IntMonoidSpec extends MonoidSpec[Int](Monoid.intMonoid)
 class BigDecimalMonoidSpec extends MonoidSpec[BigDecimal](Monoid.bigDecimalMonoid)
 //float and double monoid break the laws : https://github.com/scalaz/scalaz/issues/334
-//class FloatMonoidSpec extends MonoidSpec[Float](Monoid.floatMonoid)
-//class DoubleMonoidSpec extends MonoidSpec[Double](Monoid.doubleMonoid)
+//class FloatMonoidSpec extends io.github.hamsters.MonoidSpec[Float](Monoid.floatMonoid)
+//class DoubleMonoidSpec extends io.github.hamsters.MonoidSpec[Double](Monoid.doubleMonoid)
 class StringMonoidSpec extends MonoidSpec[String](Monoid.stringMonoid)
 class ListeMonoidSpec extends MonoidSpec[List[String]](Monoid.listMonoid)
 class SeqMonoidSpec extends MonoidSpec[Seq[String]](Monoid.seqMonoid)

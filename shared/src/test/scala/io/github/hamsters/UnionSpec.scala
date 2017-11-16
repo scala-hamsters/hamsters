@@ -1,4 +1,5 @@
-import io.github.hamsters.{Union2, Union2Type, Union3, Union3Type}
+package io.github.hamsters
+
 import org.scalatest.{FlatSpec, Matchers}
 
 class UnionSpec extends FlatSpec with Matchers {

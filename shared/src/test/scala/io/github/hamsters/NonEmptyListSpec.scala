@@ -1,4 +1,5 @@
-import io.github.hamsters.NonEmptyList
+package io.github.hamsters
+
 import org.scalatest.{FlatSpec, Matchers}
 
 class NonEmptyListSpec extends FlatSpec with Matchers {
