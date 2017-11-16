@@ -68,7 +68,7 @@ crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.3")
 lazy val macros = project.in(file("macros"))
   .settings(noDocFileSettings)
   .settings(name := "macros")
-  .settings(buildSettings ++ publishSettings)
+  .settings(buildSettings ++ noPublishSettings)
 
 lazy val hamsters = crossProject.in(file("."))
   .settings(name := "hamsters")
