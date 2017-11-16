@@ -2,15 +2,23 @@ import sbt.Keys._
 
 val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "io.github.scala-hamsters",
-  version := "2.0.2-SNAPSHOT",
+  version := "2.1.0",
   scalacOptions ++= Seq(),
-  scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
+  scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"), 
   publishMavenStyle := true,
   libraryDependencies += "org.scalameta" %% "scalameta" % "1.8.0" % Provided,
   addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M10" cross CrossVersion.full),
   scalacOptions ++= List("-Xplugin-require:macroparadise", "-language:higherKinds", "-language:implicitConversions", "-feature"),
   scalacOptions in(Compile, console) := Seq(), // macroparadise plugin doesn't work in repl yet.
   resolvers += Resolver.bintrayIvyRepo("scalameta", "maven")
+)
+
+lazy val noDocFileSettings = Seq (
+  sources in doc in Compile := List()
+)
+
+lazy val noPublishSettings = Seq (
+  publishTo := None
 )
 
 lazy val publishSettings = Seq(
@@ -54,30 +62,24 @@ lazy val publishSettings = Seq(
   }
 )
 
-val hamstersSettings = buildSettings ++ publishSettings
-
-scalaVersion in ThisBuild := "2.11.11"
+scalaVersion in ThisBuild := "2.12.3"
 crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.3")
 
 lazy val macros = project.in(file("macros"))
+  .settings(noDocFileSettings)
   .settings(name := "macros")
-  .settings(hamstersSettings)
-
+  .settings(buildSettings ++ publishSettings)
 
 lazy val hamsters = crossProject.in(file("."))
   .settings(name := "hamsters")
   .settings(libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.1" % "test")
   .settings(libraryDependencies += "org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test")
-  .settings(hamstersSettings)
+  .settings(buildSettings ++ publishSettings)
 
-lazy val hamstersJVM = hamsters.jvm.dependsOn(macros).settings(buildSettings)
-lazy val hamstersJS = hamsters.js.dependsOn(macros).settings(buildSettings)
+lazy val hamstersJVM = hamsters.jvm.dependsOn(macros).settings(buildSettings ++ publishSettings)
+lazy val hamstersJS = hamsters.js.dependsOn(macros).settings(buildSettings ++ publishSettings)
 
 lazy val root = project.in(file("."))
   .aggregate(hamstersJVM, hamstersJS, macros)
   .dependsOn(hamstersJVM, hamstersJS, macros)
-  .settings(hamstersSettings)
-  .settings(
-    publish := {},
-    publishLocal := {}
-  )
+  .settings(buildSettings ++ noPublishSettings)
