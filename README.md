@@ -25,7 +25,7 @@ With SBT :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %% "hamsters" % "2.1.0"
+  "io.github.scala-hamsters" %% "hamsters" % "2.1.1"
 )
 ```
 
@@ -35,7 +35,7 @@ With Maven :
 <dependency>
   <groupId>io.github.scala-hamsters</groupId>
   <artifactId>hamsters_${scala.version}</artifactId>
-  <version>2.1.0</version>
+  <version>2.1.1</version>
 </dependency>
 ```
 
@@ -43,7 +43,7 @@ For Scala.js :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %%% "hamstersjs" % "2.1.0"
+  "io.github.scala-hamsters" %%% "hamsters" % "2.1.1"
 )
 ```
 

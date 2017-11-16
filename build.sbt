@@ -2,7 +2,7 @@ import sbt.Keys._
 
 val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "io.github.scala-hamsters",
-  version := "2.1.0",
+  version := "2.1.1",
   scalacOptions ++= Seq(),
   scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
   publishMavenStyle := true,
@@ -70,19 +70,14 @@ lazy val macros = project.in(file("macros"))
   .settings(noDocFileSettings)
 
 lazy val hamsters = crossProject.in(file("."))
-  .settings(name := "hamsters")
   .settings(libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.1" % "test")
   .settings(libraryDependencies += "org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test")
   .settings(hamstersSettings)
 
-lazy val hamstersJVM = hamsters.jvm.dependsOn(macros).settings(buildSettings)
-lazy val hamstersJS = hamsters.js.dependsOn(macros).settings(buildSettings)
+lazy val hamstersJVM = hamsters.jvm.dependsOn(macros).settings(buildSettings).settings(name := "hamsters")
+lazy val hamstersJS = hamsters.js.dependsOn(macros).settings(buildSettings).settings(name := "hamsters")
 
 lazy val root = project.in(file("."))
   .aggregate(hamstersJVM, hamstersJS, macros)
   .dependsOn(hamstersJVM, hamstersJS, macros)
   .settings(hamstersSettings)
-  .settings(
-    publish := {},
-    publishLocal := {}
-  )
