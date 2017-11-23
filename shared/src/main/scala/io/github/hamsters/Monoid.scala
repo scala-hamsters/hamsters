@@ -25,11 +25,11 @@ object Monoid {
   }
 
   //float and double monoid break the laws : https://github.com/scalaz/scalaz/issues/334
-  val floatMonoid : Monoid[Float] = new Monoid[Float] {
+  implicit val floatMonoid : Monoid[Float] = new Monoid[Float] {
     override def empty = 0f
     override def compose(l: Float, r: Float) = l+ r
   }
-  val doubleMonoid : Monoid[Double] = new Monoid[Double] {
+  implicit val doubleMonoid : Monoid[Double] = new Monoid[Double] {
     override def empty = 0d
     override def compose(l: Double, r: Double) = l+r
   }
