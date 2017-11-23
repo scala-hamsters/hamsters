@@ -3,6 +3,8 @@
 Default values for options avoid repeating the same `getOrElse` code again and again : 
 
 ```scala
+import io.github.hamsters.EmptyOptionValues._
+
 val noneString: Option[String] = None
 noneString.orEmpty  // ""
 

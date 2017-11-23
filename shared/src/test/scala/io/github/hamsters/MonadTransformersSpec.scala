@@ -1,6 +1,7 @@
+package io.github.hamsters
+
 import io.github.hamsters.MonadTransformers._
 import io.github.hamsters.Validation._
-import io.github.hamsters.{FutureEither, FutureOption}
 import org.scalatest._
 
 import scala.concurrent._
@@ -56,7 +57,6 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
 
   "FutureOption" should "handle future and option map/flatMap sequences" in {
 
-    import io.github.hamsters.FutureOption
     import io.github.hamsters.MonadTransformers._
 
     implicit def optiontoFutureOption[T](o: Option[T]): Future[Option[T]] = Future.successful(o)
