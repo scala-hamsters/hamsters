@@ -4,7 +4,7 @@ trait Enumerable[A] {
 
   def name(a: A): String = a.toString.toLowerCase
 
-  def parse(s: String): Option[A] = list.find(a => name(a) == s)
+  def parse(s: String): Option[A] = list.find(a => name(a).equalsIgnoreCase(s))
 
   def list: List[A]
 }

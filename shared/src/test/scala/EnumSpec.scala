@@ -17,6 +17,8 @@ class EnumSpec extends FlatSpec with Matchers {
 
     Enumeration.name(Winter) shouldBe "winter"
     Enumeration.parse("winter") shouldBe Some(Winter)
+    //parse must be case-insensitive
+    Enumeration.parse("WiNteR") shouldBe Some(Winter)
     Enumeration.parse[Season]("winter") shouldBe Some(Winter)
 
     Enumeration.list shouldBe List(Winter, Spring, Summer, Fall)
