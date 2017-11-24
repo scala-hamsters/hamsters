@@ -29,13 +29,11 @@ class EmptyOptionValuesSpec extends FlatSpec with Matchers {
 
   "A none element of Option[Float]" should "return 0f" in {
     val optFloat: Option[Float] = None
-    implicit val monoidFloat: Monoid[Float] = Monoid.floatMonoid
     optFloat.orEmpty shouldEqual 0f
   }
 
   "A none element of Option[Double]" should "return 0d" in {
     val optDouble: Option[Double] = None
-    implicit val monoidDouble: Monoid[Double] = Monoid.doubleMonoid
     optDouble.orEmpty shouldEqual 0d
   }
 
