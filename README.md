@@ -25,7 +25,7 @@ With SBT :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %% "hamsters" % "2.1.0"
+  "io.github.scala-hamsters" %% "hamsters" % "2.1.2"
 )
 ```
 
@@ -35,7 +35,7 @@ With Maven :
 <dependency>
   <groupId>io.github.scala-hamsters</groupId>
   <artifactId>hamsters_${scala.version}</artifactId>
-  <version>2.1.0</version>
+  <version>2.1.2</version>
 </dependency>
 ```
 
@@ -43,7 +43,7 @@ For Scala.js :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %%% "hamstersjs" % "2.1.0"
+  "io.github.scala-hamsters" %%% "hamsters" % "2.1.2"
 )
 ```
 
@@ -57,7 +57,7 @@ See [hamsters-extensions](https://github.com/scala-hamsters/hamsters-extensions)
 
 ## Scaladoc
 
-You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/api).
+You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/doc/2.1/api).
 
 ## Special thanks
 

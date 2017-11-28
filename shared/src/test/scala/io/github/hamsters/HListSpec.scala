@@ -1,4 +1,5 @@
-import io.github.hamsters.{HCons, HList, HNil}
+package io.github.hamsters
+
 import org.scalatest.{FlatSpec, Matchers}
 
 import scala.collection.mutable.ListBuffer

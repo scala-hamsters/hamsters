@@ -1,4 +1,5 @@
-import io.github.hamsters.{Enumerable, Enumeration}
+package io.github.hamsters
+
 import org.scalatest.{FlatSpec, Matchers}
 
 class EnumSpec extends FlatSpec with Matchers {
@@ -17,6 +18,8 @@ class EnumSpec extends FlatSpec with Matchers {
 
     Enumeration.name(Winter) shouldBe "winter"
     Enumeration.parse("winter") shouldBe Some(Winter)
+    //parse must be case-insensitive
+    Enumeration.parse("WiNteR") shouldBe Some(Winter)
     Enumeration.parse[Season]("winter") shouldBe Some(Winter)
 
     Enumeration.list shouldBe List(Winter, Spring, Summer, Fall)

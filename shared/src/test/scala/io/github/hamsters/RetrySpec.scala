@@ -1,8 +1,9 @@
-import io.github.hamsters.Retry
+package io.github.hamsters
+
+import org.scalamock.scalatest.MockFactory
 import org.scalatest.{FlatSpec, Matchers}
 
 import scala.util.{Failure, Success, Try}
-import org.scalamock.scalatest.MockFactory
 
 class RetrySpec extends FlatSpec with Matchers with MockFactory {
 

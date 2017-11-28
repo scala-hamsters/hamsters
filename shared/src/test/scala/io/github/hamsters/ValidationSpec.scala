@@ -1,8 +1,9 @@
-import io.github.hamsters.Validation
-import Validation._
+package io.github.hamsters
+
+import io.github.hamsters.Validation._
 import org.scalatest._
 
-import scala.util.{Try, Failure, Success}
+import scala.util.{Failure, Success, Try}
 
 class ValidationSpec extends FlatSpec with Matchers {
 
