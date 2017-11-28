@@ -257,10 +257,14 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
 
 object HList {
 
-  type ::[T,U <: HList] = HCons[T,U]
+  type ::[H,T <: HList] = HCons[H,T]
 
 
   def ++[L1 <: HList, L2 <: HList](l1: L1, l2: L2)(implicit f: Appender[L1, L2, L1#Plus[L2]]): L1#Plus[L2] = f(l1, l2)
+
+  def toHList[T]( value : T)(implicit toHlist : T => HList) : HList = toHlist(value)
+
+  def toClass[T](value : HList)(implicit toClass : HList => T) : T = toClass(value)
 
 
   // inspired by http://jnordenberg.blogspot.fr/2008/08/hlist-in-scala.html  
