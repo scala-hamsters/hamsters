@@ -17,10 +17,6 @@ lazy val noDocFileSettings = Seq (
   sources in doc in Compile := List()
 )
 
-lazy val noPublishSettings = Seq (
-  publishTo := None
-)
-
 lazy val publishSettings = Seq(
   pomExtra := (
     <url>https://github.com/scala-hamsters/hamsters</url>
@@ -77,12 +73,10 @@ lazy val hamsters = crossProject.in(file("."))
     "org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test",
     "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
   ))
-  .settings(buildSettings ++ publishSettings)
 
-lazy val hamstersJVM = hamsters.jvm.dependsOn(macros).settings(buildSettings ++ publishSettings)
-lazy val hamstersJS = hamsters.js.dependsOn(macros).settings(buildSettings ++ publishSettings)
+lazy val hamstersJVM = hamsters.jvm.dependsOn(macros).settings(buildSettings ++ publishSettings).settings(name := "hamsters")
+lazy val hamstersJS = hamsters.js.dependsOn(macros).settings(buildSettings ++ publishSettings).settings(name := "hamsters")
 
 lazy val root = project.in(file("."))
   .aggregate(hamstersJVM, hamstersJS, macros)
-  .dependsOn(hamstersJVM, hamstersJS, macros)
-  .settings(buildSettings ++ publishSettings)
+  .settings(publishArtifact := false)
