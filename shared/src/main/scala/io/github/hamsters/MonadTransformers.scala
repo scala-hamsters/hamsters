@@ -2,11 +2,9 @@ package io.github.hamsters
 
 import scala.concurrent.{ExecutionContext, Future}
 
-object MonadTransformers {
-  type FutureOption[A] = OptionT[A, Future]
-}
+case class FutureOption[A](override val wrapped: Future[Option[A]]) extends OptionT[A, Future](wrapped)
 
-case class OptionT[A, Box[_]](wrapped: Box[Option[A]]) {
+class OptionT[A, Box[_]](val wrapped: Box[Option[A]]) {
 
   /**
     * Returns the result of applying f to this FutureOption if this FutureOption is not empty
@@ -20,7 +18,7 @@ case class OptionT[A, Box[_]](wrapped: Box[Option[A]]) {
       case Some(a) => f(a).wrapped
       case None => evidence.pure(None: Option[B])
     }
-    OptionT(newBox)
+    new OptionT(newBox)
   }
 
   /**
@@ -31,7 +29,7 @@ case class OptionT[A, Box[_]](wrapped: Box[Option[A]]) {
     * @return a new FutureOption
     */
   def map[B](f: A => B)(implicit ec: ExecutionContext, evidence: Monad[Box]): OptionT[B, Box] = {
-    OptionT(evidence.map(wrapped)((option: Option[A]) => option.map(f)))
+    new OptionT(evidence.map(wrapped)((option: Option[A]) => option.map(f)))
   }
 
   /**
@@ -49,7 +47,7 @@ case class OptionT[A, Box[_]](wrapped: Box[Option[A]]) {
     * @return a new FutureOption
     */
   def withFilter(p: (A) ⇒ Boolean)(implicit ec: ExecutionContext, evidence: Monad[Box]): OptionT[A, Box] = {
-    OptionT(evidence.map(wrapped)(_.filter(p)))
+    new OptionT(evidence.map(wrapped)(_.filter(p)))
   }
 }
 
@@ -119,6 +117,7 @@ case class FutureEither[L, +R](future: Future[Either[L, R]]) extends AnyVal {
 }
 
 object MonadTransformers {
+
   implicit def optionToT[A, Box[_]](optionT : OptionT[A, Box]): Box[Option[A]] = optionT.wrapped
   implicit def futureEitherToFuture[L,R](fe : FutureEither[L,R]): Future[Either[L,R]] = fe.future
 }
