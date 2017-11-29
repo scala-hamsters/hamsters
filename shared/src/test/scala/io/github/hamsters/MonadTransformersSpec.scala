@@ -5,6 +5,7 @@ import io.github.hamsters.Validation._
 import org.scalatest._
 
 import scala.concurrent._
+import MonadTransformers._
 
 class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
 
