@@ -1,8 +1,7 @@
+package io.github.hamsters
 
 
-import java.util.Date
 
-import io.github.hamsters._
 import org.scalatest.{FlatSpec, Matchers}
 
 class GenSpec extends FlatSpec with Matchers {
