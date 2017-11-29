@@ -44,14 +44,14 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
       (a, i) <- FutureOption(fo) if i > 5
     } yield a
 
-    filtered.future map { _ shouldBe Some("a") }
+    filtered.wrapped map { _ shouldBe Some("a") }
 
 
     val filtered2 = for {
       (a, i) <- FutureOption(fo) if i > 50
     } yield a
 
-    filtered2.future map { _ shouldBe None }
+    filtered2.wrapped  map { _ shouldBe None }
 
 
   }
