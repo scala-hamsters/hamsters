@@ -111,9 +111,9 @@ case class Appender[L1 <: HList, L2 <: HList, R <: HList](f: (L1, L2) => R) {
   def apply(l1: L1, l2: L2) = f(l1, l2)
 }
 
-case class HCons[T, U <: HList](head: T, tail: U) extends HList {
+case class HCons[H, T <: HList](head: H, tail: T) extends HList {
 
-  type Plus[L <: HList] = HCons[T, U#Plus[L]]
+  type Plus[L <: HList] = HCons[H, T#Plus[L]]
 
   /**
    * Retrieve element at index
@@ -166,7 +166,7 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
    * @tparam L2
    * @return a new HList
    */
-  def ++[L2 <: HList](l2: L2)(implicit f: Appender[HCons[T, U], L2, Plus[L2]]): HCons[T, U#Plus[L2]] = HList.++(this, l2)
+  def ++[L2 <: HList](l2: L2)(implicit f: Appender[HCons[H, T], L2, Plus[L2]]): HCons[H, T#Plus[L2]] = HList.++(this, l2)
 
   /**
    * Append an element to this HList
@@ -175,13 +175,13 @@ case class HCons[T, U <: HList](head: T, tail: U) extends HList {
    * @tparam V
    * @return a new HList
    */
-  def +[V](v: V)(implicit f: Appender[HCons[T, U], HCons[V, HNil], Plus[HCons[V, HNil]]]): HCons[T, U#Plus[HCons[V, HNil]]] = HList.++(this, v :: HNil)
+  def +[V](v: V)(implicit f: Appender[HCons[H, T], HCons[V, HNil], Plus[HCons[V, HNil]]]): HCons[H, T#Plus[HCons[V, HNil]]] = HList.++(this, v :: HNil)
 
   private def +++(l2: HList) = {
-    def append(l1: HCons[T, _], l2: HList): HCons[T, _] = {
+    def append(l1: HCons[H, _], l2: HList): HCons[H, _] = {
       l1.tail match {
         case HNil => HCons(l1.head, l2)
-        case h: HCons[T, _] => l1.head :: append(h, l2)
+        case h: HCons[H, _] => l1.head :: append(h, l2)
       }
     }
 
