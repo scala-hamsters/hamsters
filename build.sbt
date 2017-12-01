@@ -17,6 +17,12 @@ lazy val noDocFileSettings = Seq (
   sources in doc in Compile := List()
 )
 
+val noPublishSettings = Seq(
+  publishArtifact := false,
+  publish := {},
+  publishLocal := {}
+)
+
 lazy val publishSettings = Seq(
   pomExtra := (
     <url>https://github.com/scala-hamsters/hamsters</url>
@@ -79,4 +85,4 @@ lazy val hamstersJS = hamsters.js.dependsOn(macros).settings(buildSettings ++ pu
 
 lazy val root = project.in(file("."))
   .aggregate(hamstersJVM, hamstersJS, macros)
-  .settings(publishArtifact := false)
+  .settings(noPublishSettings)
