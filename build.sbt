@@ -75,7 +75,7 @@ lazy val macros = project.in(file("macros"))
 
 lazy val hamsters = crossProject.in(file("."))
   .settings(name := "hamsters")
-  .settings(buildSettings ++ noPublishSettings)
+  .settings(buildSettings ++ publishSettings)
   .settings(libraryDependencies ++= Seq(
     "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
     "org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test",
