@@ -60,12 +60,12 @@ lazy val publishSettings = Seq(
 scalaVersion in ThisBuild := "2.12.3"
 crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.3")
 publishTo in ThisBuild := {
-    val nexus = "https://oss.sonatype.org/"
-    if (version.value.toLowerCase.endsWith("snapshot"))
-      Some("snapshots" at nexus + "content/repositories/snapshots")
-    else
-      Some("staging" at nexus + "service/local/staging/deploy/maven2")
-  }
+  val nexus = "https://oss.sonatype.org/"
+  if (version.value.toLowerCase.endsWith("snapshot"))
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("staging" at nexus + "service/local/staging/deploy/maven2")
+}
 
 lazy val macros = project.in(file("macros"))
   .settings(noDocFileSettings)
