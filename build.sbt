@@ -21,7 +21,6 @@ val noPublishSettings = Seq(
   publishArtifact := false,
   publish := {},
   publishLocal := {},
-  publishTo := None
 )
 
 lazy val publishSettings = Seq(
@@ -55,18 +54,18 @@ lazy val publishSettings = Seq(
           <url>https://github.com/oraclewalid</url>
         </developer>
       </developers>
-    ),
-  publishTo := {
+    )
+)
+
+scalaVersion in ThisBuild := "2.12.3"
+crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.3")
+publishTo in ThisBuild := {
     val nexus = "https://oss.sonatype.org/"
     if (version.value.toLowerCase.endsWith("snapshot"))
       Some("snapshots" at nexus + "content/repositories/snapshots")
     else
       Some("staging" at nexus + "service/local/staging/deploy/maven2")
   }
-)
-
-scalaVersion in ThisBuild := "2.12.3"
-crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.3")
 
 lazy val macros = project.in(file("macros"))
   .settings(noDocFileSettings)
