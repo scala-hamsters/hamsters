@@ -57,6 +57,7 @@ lazy val publishSettings = Seq(
     )
 )
 
+
 scalaVersion in ThisBuild := "2.12.3"
 crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.3")
 publishTo in ThisBuild := {
@@ -74,7 +75,6 @@ lazy val macros = project.in(file("macros"))
 
 lazy val hamsters = crossProject.in(file("."))
   .settings(name := "hamsters")
-  .settings(buildSettings ++ publishSettings)
   .settings(libraryDependencies ++= Seq(
     "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
     "org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test",
