@@ -1,7 +1,4 @@
-package io.github.hamsters
-
-import scala.meta._
-
+package io.github.hamsters;
 
 object MetaHelper {
 
