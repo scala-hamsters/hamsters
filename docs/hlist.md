@@ -40,7 +40,7 @@ hlist1[String](1) // "hi"
 
 ```
 
-### HList <-> case class conversion macro
+### In next release (2.2) : HList <-> case class conversion macro
 
 You can use @HList macro to do HList to case class and case class to HList conversions :
 
