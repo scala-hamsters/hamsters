@@ -42,7 +42,7 @@ hlist1[String](1) // "hi"
 
 ### In next release (2.2) : HList <-> case class conversion macro
 
-You can do HList to case class and case class to HList conversions :
+You can use @HList macro to do HList to case class and case class to HList conversions :
 
 ```scala
 @HListMacro
