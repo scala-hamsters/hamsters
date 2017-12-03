@@ -3,8 +3,7 @@ package io.github.hamsters
 import scala.collection.immutable.Seq
 import scala.meta._
 
-class GenMacro extends scala.annotation.StaticAnnotation {
-
+class HListMacro extends scala.annotation.StaticAnnotation {
 
   inline def apply(defn: Any): Any = meta {
 
@@ -45,7 +44,7 @@ class GenMacro extends scala.annotation.StaticAnnotation {
          """
       case _ =>
         println(defn.structure)
-        abort("@GenMacro must annotate a class")
+        abort("@HListMacro must annotate a class")
     }
   }
 }

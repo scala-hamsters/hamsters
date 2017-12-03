@@ -5,8 +5,6 @@ import scala.meta._
 
 class ShowMacro extends scala.annotation.StaticAnnotation {
 
-
-
   inline def apply(defn: Any): Any = meta {
     defn match {
       //TODO handle object with existing companion

@@ -1,8 +1,6 @@
 package io.github.hamsters
 
-
 import java.util.Date
-
 import org.scalatest.{FlatSpec, Matchers}
 
 class ShowSpec extends FlatSpec with Matchers {

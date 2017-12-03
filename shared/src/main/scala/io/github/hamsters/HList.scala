@@ -28,11 +28,11 @@ sealed trait HList {
   /**
    * Append element at the beginning of this HList
    *
-   * @param v
-   * @tparam U
+   * @param t
+   * @tparam T
    * @return a new HList
    */
-  def ::[U](v: U): HList
+  def ::[T](t: T): HList
 
   /**
    * Filter this HList with a predicate
@@ -79,11 +79,11 @@ class HNil extends HList {
   /**
    * Append element at the beginning of this HList
    *
-   * @param v
-   * @tparam T
+   * @param h
+   * @tparam H
    * @return a new HList
    */
-  override def ::[T](v: T) = HCons(v, this)
+  override def ::[H](h: H) = HCons(h, this)
 
   /**
    * Filter this HList with a predicate
@@ -153,11 +153,11 @@ case class HCons[H, T <: HList](head: H, tail: T) extends HList {
   /**
    * Append element at the beginning of this HList
    *
-   * @param v
-   * @tparam V
+   * @param a
+   * @tparam A
    * @return a new HList
    */
-  override def ::[V](v: V) = HCons(v, this)
+  override def ::[A](a: A) = HCons(a, this)
 
   /**
    * Append another HList to this HList
@@ -170,12 +170,12 @@ case class HCons[H, T <: HList](head: H, tail: T) extends HList {
 
   /**
    * Append an element to this HList
-   * @param v
+   * @param a
    * @param f
-   * @tparam V
+   * @tparam A
    * @return a new HList
    */
-  def +[V](v: V)(implicit f: Appender[HCons[H, T], HCons[V, HNil], Plus[HCons[V, HNil]]]): HCons[H, T#Plus[HCons[V, HNil]]] = HList.++(this, v :: HNil)
+  def +[A](a: A)(implicit f: Appender[HCons[H, T], HCons[A, HNil], Plus[HCons[A, HNil]]]): HCons[H, T#Plus[HCons[A, HNil]]] = HList.++(this, a :: HNil)
 
   private def +++(l2: HList) = {
     def append(l1: HCons[H, _], l2: HList): HCons[H, _] = {
@@ -192,12 +192,12 @@ case class HCons[H, T <: HList](head: H, tail: T) extends HList {
    * Applies a binary operator to a start value and all elements of this HList, going left to right.
    * @param zero
    * @param f
-   * @tparam V
+   * @tparam A
    * @return computed result
    */
-  def foldLeft[V](zero: V)(f: (V, Any) => V): V = {
+  def foldLeft[A](zero: A)(f: (A, Any) => A): A = {
     @tailrec
-    def foldLeft0(accu: V, head: Any, tail: HList): V = {
+    def foldLeft0(accu: A, head: Any, tail: HList): A = {
       val newAccu = f(accu, head)
       tail match {
         case _: HNil => newAccu

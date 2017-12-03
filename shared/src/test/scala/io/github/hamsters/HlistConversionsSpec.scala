@@ -1,12 +1,10 @@
 package io.github.hamsters
 
-
-
 import org.scalatest.{FlatSpec, Matchers}
 
-class GenSpec extends FlatSpec with Matchers {
+class HlistConversionsSpec extends FlatSpec with Matchers {
 
-  @GenMacro
+  @HListMacro
   case class Person(name: String, age :Int, weight :Option[Int] = None)
 
   "Gen on case class" should "generate toClass and toHList" in {
