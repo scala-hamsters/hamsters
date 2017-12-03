@@ -1,5 +1,7 @@
 package io.github.hamsters;
 
+import scala.meta._
+
 object MetaHelper {
 
   def toType(arg: Type.Arg): Type = arg match {
