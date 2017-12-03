@@ -82,7 +82,9 @@ lazy val macrosJS = macros.js
 
 lazy val hamsters = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Full)
+  .in(file("."))
   .dependsOn(macros)
+  .settings(name := "hamsters")
   .settings(libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.1" % "test")
   .settings(libraryDependencies += "org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test")
   .settings(libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.13.4" % "test")
