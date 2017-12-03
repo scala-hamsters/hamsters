@@ -48,6 +48,6 @@ You can use @HList macro to do HList to case class and case class to HList conve
 @HListMacro
 case class Person(name: String, age :Int, weight :Option[Int] = None)
 
-Person(name = "Christophe Colomb", age = 42) //"Christophe Colomb"::42::None::HNil
+HList.toHList(Person(name = "Christophe Colomb", age = 42)) //"Christophe Colomb"::42::None::HNil
 HList.toClass[Person]("Christophe Colomb"::42::None::HNil) //Person(name = "Christophe Colomb", age = 42)
 ```
