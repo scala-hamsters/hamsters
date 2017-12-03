@@ -53,6 +53,7 @@ You can try quickly and easily Hamsters with script try-hamster.sh, this script 
 [Coursier](https://github.com/alexarchambault/coursier), [Ammonite] (https://github.com/lihaoyi/Ammonite) REPL and Hamsters dependency. .
 No dependencies needed other than a JDK.
 
+PS: The macros don't work with the REPL.g
 
 ```shell
 curl -s https://raw.githubusercontent.com/scala-hamsters/hamsters/repl/scripts/try-hamsters.sh | bash
