@@ -69,10 +69,13 @@ publishTo in ThisBuild := {
     Some("staging" at nexus + "service/local/staging/deploy/maven2")
 }
 
-lazy val macros = project.in(file("macros"))
+lazy val macros = crossProject.in(file("macros"))
   .settings(name := "macros")
   .settings(hamstersSettings)
   .settings(noDocFileSettings)
+
+lazy val macrosJVM = macros.jvm
+lazy val macrosJS = macros.js
 
 lazy val hamsters = crossProject.in(file("."))
   .settings(libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.1" % "test")
@@ -80,11 +83,11 @@ lazy val hamsters = crossProject.in(file("."))
   .settings(libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.13.4" % "test")
   .settings(hamstersSettings)
 
-lazy val hamstersJVM = hamsters.jvm.dependsOn(macros).settings(buildSettings).settings(name := "hamsters")
-lazy val hamstersJS = hamsters.js.dependsOn(macros).settings(buildSettings).settings(name := "hamsters")
+lazy val hamstersJVM = hamsters.jvm.dependsOn(macrosJVM % "compile-internal").settings(buildSettings).settings(name := "hamsters")
+lazy val hamstersJS = hamsters.js.dependsOn(macrosJS % "compile-internal").settings(buildSettings).settings(name := "hamsters")
 
 lazy val root = project.in(file("."))
-  .aggregate(hamstersJVM, hamstersJS, macros)
-  .dependsOn(hamstersJVM, hamstersJS, macros)
+  .aggregate(hamstersJVM, hamstersJS, macrosJVM, macrosJS)
+  .dependsOn(hamstersJVM, hamstersJS, macrosJVM, macrosJS)
   .settings(hamstersSettings)
   .settings(noPublishSettings)
