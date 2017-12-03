@@ -47,7 +47,7 @@ libraryDependencies ++= Seq(
 )
 ```
 
-## Try Hamster with an Ammonite instant REPL
+## Try Hamster with a REPL
 
 You can try quickly and easily Hamsters with script try-hamster.sh, this script downloads and installs 
 [Coursier](https://github.com/alexarchambault/coursier), [Ammonite](https://github.com/lihaoyi/Ammonite) REPL and Hamsters dependency. 
