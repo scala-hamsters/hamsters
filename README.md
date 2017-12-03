@@ -50,10 +50,10 @@ libraryDependencies ++= Seq(
 ## Try Hamster with an Ammonite instant REPL
 
 You can try quickly and easily Hamsters with script try-hamster.sh, this script downloads and installs 
-[Coursier](https://github.com/alexarchambault/coursier), [Ammonite] (https://github.com/lihaoyi/Ammonite) REPL and Hamsters dependency. .
+[Coursier](https://github.com/alexarchambault/coursier), [Ammonite](https://github.com/lihaoyi/Ammonite) REPL and Hamsters dependency. 
 No dependencies needed other than a JDK.
 
-PS: The macros don't work with the REPL.g
+PS: The macros don't work with the REPL
 
 ```shell
 curl -s https://raw.githubusercontent.com/scala-hamsters/hamsters/repl/scripts/try-hamsters.sh | bash
@@ -61,6 +61,8 @@ curl -s https://raw.githubusercontent.com/scala-hamsters/hamsters/repl/scripts/t
 Loading...
 Welcome to the Ammonite Repl 1.0.1
 (Scala 2.12.3 Java 1.8.0_151)
+
+
 @ val noneString: Option[String] = None 
 noneString: Option[String] = None
 
