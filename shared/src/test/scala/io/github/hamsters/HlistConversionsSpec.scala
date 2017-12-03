@@ -7,7 +7,7 @@ class HlistConversionsSpec extends FlatSpec with Matchers {
   @HListMacro
   case class Person(name: String, age :Int, weight :Option[Int] = None)
 
-  "Gen on case class" should "generate toClass and toHList" in {
+  "HListMacro on case class" should "generate toClass and toHList" in {
     val p = Person(name = "john", age = 42)
 
     """Person.toClass("Christophe Colomb"::42::None::HNil) """ should compile
