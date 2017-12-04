@@ -56,15 +56,17 @@ No dependencies needed other than a JDK.
 PS: The macros don't work with the REPL
 
 ```shell
-curl -s https://raw.githubusercontent.com/scala-hamsters/hamsters/repl/scripts/try-hamsters.sh | bash
+curl -s https://raw.githubusercontent.com/scala-hamsters/hamsters/master/scripts/try-hamsters.sh | bash
 
 Loading...
 Welcome to the Ammonite Repl 1.0.1
 (Scala 2.12.3 Java 1.8.0_151)
 
-
 @ val noneString: Option[String] = None 
 noneString: Option[String] = None
+
+@ noneString.orEmpty 
+res1: String = ""
 
 @ val hlist1: Double :: String :: HNil = 2.0 :: "hi" :: HNil 
 hlist1: Double :: String :: HNil = HCons(2.0, HCons("hi", HNIL))
