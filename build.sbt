@@ -1,5 +1,5 @@
 import sbt.Keys._
-
+import sbtcrossproject.{crossProject, CrossType}
 val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "io.github.scala-hamsters",
   version := "2.1.2",
@@ -69,22 +69,32 @@ publishTo in ThisBuild := {
     Some("staging" at nexus + "service/local/staging/deploy/maven2")
 }
 
-lazy val macros = project.in(file("macros"))
+lazy val macros = crossProject(JSPlatform, JVMPlatform)
+  .crossType(CrossType.Full)
+  .in(file("macros"))
   .settings(name := "macros")
   .settings(hamstersSettings)
   .settings(noDocFileSettings)
 
-lazy val hamsters = crossProject.in(file("."))
+lazy val macrosJVM = macros.jvm
+lazy val macrosJS = macros.js
+
+
+lazy val hamsters = crossProject(JSPlatform, JVMPlatform)
+  .crossType(CrossType.Full)
+  .in(file("."))
+  .dependsOn(macros)
+  .settings(name := "hamsters")
   .settings(libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.1" % "test")
   .settings(libraryDependencies += "org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test")
-  .settings(libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.13.4" % "test")
+  .settings(libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.13.4" % "test")
   .settings(hamstersSettings)
 
-lazy val hamstersJVM = hamsters.jvm.dependsOn(macros).settings(buildSettings).settings(name := "hamsters")
-lazy val hamstersJS = hamsters.js.dependsOn(macros).settings(buildSettings).settings(name := "hamsters")
+lazy val hamstersJVM = hamsters.jvm
+lazy val hamstersJS = hamsters.js
 
 lazy val root = project.in(file("."))
-  .aggregate(hamstersJVM, hamstersJS, macros)
-  .dependsOn(hamstersJVM, hamstersJS, macros)
+  .aggregate(hamstersJVM, hamstersJS, macrosJVM, macrosJS)
+  .dependsOn(hamstersJVM, hamstersJS, macrosJVM, macrosJS)
   .settings(hamstersSettings)
   .settings(noPublishSettings)
