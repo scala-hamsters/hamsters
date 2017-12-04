@@ -50,7 +50,7 @@ lazy val publishSettings = Seq(
           <url>https://github.com/oraclewalid</url>
         </developer>
       </developers>
-    ),
+    )
 )
 
 lazy val noDocFileSettings = Seq (
