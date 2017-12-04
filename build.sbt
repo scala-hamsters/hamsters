@@ -2,7 +2,7 @@ import sbt.Keys._
 import sbtcrossproject.{crossProject, CrossType}
 val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "io.github.scala-hamsters",
-  version := "2.1.2",
+  version := "2.2.0",
   scalacOptions ++= Seq(),
   scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
   publishMavenStyle := true,
@@ -59,7 +59,7 @@ lazy val noDocFileSettings = Seq (
 
 val hamstersSettings = buildSettings ++ publishSettings
 
-scalaVersion in ThisBuild := "2.11.11"
+scalaVersion in ThisBuild := "2.12.3"
 crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.3")
 publishTo in ThisBuild := {
   val nexus = "https://oss.sonatype.org/"
