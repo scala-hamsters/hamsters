@@ -86,7 +86,7 @@ See [hamsters-extensions](https://github.com/scala-hamsters/hamsters-extensions)
 
 ## Scaladoc
 
-You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/doc/2.1/api).
+You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/doc/2.2/api).
 
 ## Special thanks
 
