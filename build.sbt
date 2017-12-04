@@ -72,26 +72,25 @@ publishTo in ThisBuild := {
 lazy val macros = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Full)
   .in(file("macros"))
-  .settings(name := "macros")
   .settings(hamstersSettings)
   .settings(noDocFileSettings)
 
-lazy val macrosJVM = macros.jvm
-lazy val macrosJS = macros.js
-
+lazy val macrosJVM = macros.jvm.settings(name := "macros")
+lazy val macrosJS = macros.js.settings(name := "macros")
 
 lazy val hamsters = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Full)
   .in(file("."))
   .dependsOn(macros)
-  .settings(name := "hamsters")
-  .settings(libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.1" % "test")
-  .settings(libraryDependencies += "org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test")
-  .settings(libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.13.4" % "test")
+  .settings(libraryDependencies ++= Seq(
+    "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
+    "org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test",
+    "org.scalacheck" %%% "scalacheck" % "1.13.4" % "test"
+  ))
   .settings(hamstersSettings)
 
-lazy val hamstersJVM = hamsters.jvm
-lazy val hamstersJS = hamsters.js
+lazy val hamstersJVM = hamsters.jvm.settings(name := "hamsters")
+lazy val hamstersJS = hamsters.js.settings(name := "hamsters")
 
 lazy val root = project.in(file("."))
   .aggregate(hamstersJVM, hamstersJS, macrosJVM, macrosJS)
