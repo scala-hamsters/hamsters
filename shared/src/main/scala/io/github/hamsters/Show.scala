@@ -50,7 +50,10 @@ object Showable {
   implicit val unitShowable: Showable[Unit] = new Showable[Unit] {
     override def format(value: Unit) = value.toString
   }
-}
+
+  implicit def showClass[T] = new Showable[Class[T]] {
+    override def format(value: Class[T]) = value.getSimpleName.replace("$","")
+  }}
 
 object Show {
   def show[A](value: A)(implicit s: Showable[A]): String = s.format(value)
