@@ -46,4 +46,18 @@ class ShowSpec extends FlatSpec with Matchers {
     """.stripMargin should compile
   }
 
+  case object Foo
+  "Show on case object" should "show simple class name without $" in {
+    Show.show(Foo.getClass) should be("Foo")
+  }
+
+  "Show on case class" should "show simple class name without $" in {
+    Show.show(Name("hamster", "hidden").getClass) should be("Name")
+  }
+
+  "ShowableSyntax" should "add show method on supported types" in {
+    import ShowableSyntax.ShowableOps
+    Name("Hamster", "Hiden").getClass.show should be("Name")
+  }
+
 }

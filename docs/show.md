@@ -23,7 +23,22 @@ case class Person(name : Name, age: Int)
 val p = Person(Name("john", "doe"), 35)
 Show.show(p) // "Person(name=Name(firstName=john,lastName=doe),age=35)"
 
+//ShowableSyntax add show method
+import ShowableSyntax.ShowableOps
+Person(Name("john", "doe"), 35).show // "Person(name=Name(firstName=john,lastName=doe),age=35)"
 ```
+
+
+it's also works on case classes, case objects : 
+
+```
+Show.show(Name("hamster", "hiden").getClass) // "Name"
+
+case object Foo
+Show.show(Foo.getClass) // "Foo"
+```
+
+
 
 ## Depedencies 
 
