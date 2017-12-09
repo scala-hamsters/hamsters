@@ -4,7 +4,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 case class FutureOption[A](override val wrapped: Future[Option[A]]) extends OptionT[A, Future](wrapped)
 
-class OptionT[fA, Box[_]](val wrapped: Box[Option[A]]) {
+class OptionT[A, Box[_]](val wrapped: Box[Option[A]]) {
 
   /**
     * Returns the result of applying f to this FutureOption if this FutureOption is not empty
