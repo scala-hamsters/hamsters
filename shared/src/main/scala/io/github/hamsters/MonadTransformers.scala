@@ -13,7 +13,7 @@ class OptionT[A, Box[_]](val wrapped: Box[Option[A]]) {
     * @tparam B
     * @return a new FutureOption
     */
-  def flatMap[B](f: A => OptionT[B, Box])(implicit ec: ExecutionContext, evidence: Monad[Box]): OptionT[B, Box] = {
+  def flatMap[B](f: A => OptionT[B, Box])(implicit evidence: Monad[Box]): OptionT[B, Box] = {
     val newBox = evidence.flatMap(wrapped) {
       case Some(a) => f(a).wrapped
       case None => evidence.pure(None: Option[B])
@@ -28,7 +28,7 @@ class OptionT[A, Box[_]](val wrapped: Box[Option[A]]) {
     * @tparam B
     * @return a new FutureOption
     */
-  def map[B](f: A => B)(implicit ec: ExecutionContext, evidence: Monad[Box]): OptionT[B, Box] = {
+  def map[B](f: A => B)(implicit evidence: Monad[Box]): OptionT[B, Box] = {
     new OptionT(evidence.map(wrapped)((option: Option[A]) => option.map(f)))
   }
 
@@ -38,7 +38,7 @@ class OptionT[A, Box[_]](val wrapped: Box[Option[A]]) {
     * @param ec
     * @return a new FutureOption
     */
-  def filter(p: (A) ⇒ Boolean)(implicit ec: ExecutionContext, evidence: Monad[Box]  ): OptionT[A, Box] = withFilter(p)
+  def filter(p: (A) ⇒ Boolean)(implicit evidence: Monad[Box]): OptionT[A, Box] = withFilter(p)
 
   /**
     * Keep only values which satisfy a predicate
@@ -46,7 +46,7 @@ class OptionT[A, Box[_]](val wrapped: Box[Option[A]]) {
     * @param ec
     * @return a new FutureOption
     */
-  def withFilter(p: (A) ⇒ Boolean)(implicit ec: ExecutionContext, evidence: Monad[Box]): OptionT[A, Box] = {
+  def withFilter(p: (A) ⇒ Boolean)(implicit evidence: Monad[Box]): OptionT[A, Box] = {
     new OptionT(evidence.map(wrapped)(_.filter(p)))
   }
 }
