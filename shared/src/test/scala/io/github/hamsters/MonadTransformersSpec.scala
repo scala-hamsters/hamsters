@@ -12,18 +12,18 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
   def fob(a: String): Future[Option[String]] = Future(Some(a + "b"))
   // FIXME test fail with scala.js (execution context issue) 
   "OptionT" should "handle Future[Option[_]] type" in {
-   val composedAB= (for {
+   val composedAB: Future[Option[String]] = (for {
       a <- new OptionT(foa)
       ab <- new OptionT(fob(a))
-    } yield ab).wrapped //TODO try to avoid unwrapping
+    } yield ab) //TODO try to avoid unwrapping
 
     composedAB map { _ shouldBe Some("ab") }
 
     val noneString : Option[String] = None //TODO how to avoid type here?
-    val composedABWithNone = (for {
+    val composedABWithNone: Future[Option[String]] = (for {
       a <- new OptionT(Future.successful(noneString)) 
       ab <- new OptionT(fob(a))
-    } yield ab).wrapped 
+    } yield ab) 
 
     composedABWithNone map { _ shouldBe None }
 
