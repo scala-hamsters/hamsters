@@ -119,5 +119,6 @@ case class FutureEither[L, +R](future: Future[Either[L, R]]) extends AnyVal {
 object MonadTransformers {
 
   implicit def optionToT[A, Box[_]](optionT : OptionT[A, Box]): Box[Option[A]] = optionT.wrapped
+  implicit def futureOptionToFuture[A](fe : FutureOption[A]): Future[Option[A]] = fe.wrapped
   implicit def futureEitherToFuture[L,R](fe : FutureEither[L,R]): Future[Either[L,R]] = fe.future
 }

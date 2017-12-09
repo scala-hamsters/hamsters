@@ -15,7 +15,7 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
    val composedAB: Future[Option[String]] = (for {
       a <- new OptionT(foa)
       ab <- new OptionT(fob(a))
-    } yield ab) //TODO try to avoid unwrapping
+    } yield ab)
 
     composedAB map { _ shouldBe Some("ab") }
 
@@ -37,23 +37,23 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
     val composedAB= (for {
       a <- FutureOption(foa)
       ab <- FutureOption(fob(a))
-    } yield ab).wrapped //TODO try to avoid unwrapping
+    } yield ab)
 
     composedAB map { _ shouldBe Some("ab") }
 
     val noneString : Option[String] = None //TODO how to avoid type here?
-    val composedABWithNone = (for {
-      a: String <- FutureOption(Future.successful(noneString)) //TODO how to avoid type here?
+    val composedABWithNone: Future[Option[String]] = (for {
+      a <- FutureOption(Future.successful(noneString))
       ab <- FutureOption(fob(a))
-    } yield ab).wrapped
+    } yield ab)
 
     composedABWithNone map { _ shouldBe None }
 
     val failedFuture: Future[Option[String]] =  Future.failed(new Exception("d'oh!"))
-    val composedABWithFailure = (for {
+    val composedABWithFailure: Future[Option[String]] = (for {
       a <- FutureOption(failedFuture)
       ab <- FutureOption(fob(a))
-    } yield ab).wrapped
+    } yield ab)
 
     composedABWithFailure.failed map { _ shouldBe a [Exception]}
 
