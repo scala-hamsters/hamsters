@@ -9,28 +9,31 @@ import MonadTransformers._
 
 class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
 
+  // FIXME test fail with scala.js (execution context issue) 
   "FutureOption" should "handle Future[Option[_]] type" in {
     def foa: Future[Option[String]] = Future(Some("a"))
     def fob(a: String): Future[Option[String]] = Future(Some(a + "b"))
 
-    val composedAB: Future[Option[String]] = for {
+    val composedAB= (for {
       a <- FutureOption(foa)
       ab <- FutureOption(fob(a))
-    } yield ab
+    } yield ab).wrapped //TODO try to avoid unwrapping
 
     composedAB map { _ shouldBe Some("ab") }
 
-    val composedABWithNone: Future[Option[String]] = for {
-      a <- FutureOption(Future.successful(None))
+    val noneString : Option[String] = None //TODO how to avoid type here?
+    val composedABWithNone = (for {
+      a: String <- FutureOption(Future.successful(noneString)) //TODO how to avoid type here?
       ab <- FutureOption(fob(a))
-    } yield ab
+    } yield ab).wrapped
 
     composedABWithNone map { _ shouldBe None }
 
-    val composedABWithFailure: Future[Option[String]] = for {
-      a <- FutureOption(Future.failed(new Exception("d'oh!")))
+    val failedFuture: Future[Option[String]] =  Future.failed(new Exception("d'oh!"))
+    val composedABWithFailure = (for {
+      a <- FutureOption(failedFuture)
       ab <- FutureOption(fob(a))
-    } yield ab
+    } yield ab).wrapped
 
     composedABWithFailure.failed map { _ shouldBe a [Exception]}
 
@@ -75,15 +78,15 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
     type Result = String
     val userIdOption = Some(1)
 
-    val operationSequenceOpt : Future[Option[Result]] =
-      for {
+    val operationSequenceOpt =
+      (for {
         userId <- FutureOption(userIdOption)
         user <- FutureOption(Repo.user(userId))
         data <- FutureOption(Repo.getData(user.id))
         _ <- FutureOption(Repo.updateData(data.id))
       } yield {
         "redirect"
-      }
+      }).wrapped
 
     val operationSequence = operationSequenceOpt.map(_.getOrElse("error"))
     operationSequence. map { _ shouldBe  "redirect" }

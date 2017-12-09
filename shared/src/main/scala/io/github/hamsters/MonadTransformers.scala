@@ -4,7 +4,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 case class FutureOption[A](override val wrapped: Future[Option[A]]) extends OptionT[A, Future](wrapped)
 
-class OptionT[A, Box[_]](val wrapped: Box[Option[A]]) {
+class OptionT[fA, Box[_]](val wrapped: Box[Option[A]]) {
 
   /**
     * Returns the result of applying f to this FutureOption if this FutureOption is not empty
@@ -118,6 +118,6 @@ case class FutureEither[L, +R](future: Future[Either[L, R]]) extends AnyVal {
 
 object MonadTransformers {
 
-  implicit def optionToT[A, Box[_]](optionT : OptionT[A, Box]): Box[Option[A]] = optionT.wrapped
+  //implicit def optionToT[A, Box[_]](optionT : OptionT[A, Box]): Box[Option[A]] = optionT.wrapped
   implicit def futureEitherToFuture[L,R](fe : FutureEither[L,R]): Future[Either[L,R]] = fe.future
 }

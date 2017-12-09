@@ -1,7 +1,7 @@
 package io.github.hamsters
 
-import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 
 trait Monad[Box[_]] extends Functor[Box] {
 
