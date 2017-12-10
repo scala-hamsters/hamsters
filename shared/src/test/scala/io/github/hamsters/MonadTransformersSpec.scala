@@ -126,15 +126,18 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
 
     composedAB map { _ shouldBe OK(3)}
 
+    val koString: Left[String, Int] = KO("d'oh!")
+
     val composedABWithNone: Future[Either[String, Int]] = for {
-      a <- FutureEither(Future.successful(KO("d'oh!")))
+      a <- FutureEither(Future.successful(koString))
       ab <- FutureEither(feb(a))
     } yield ab
 
-    composedABWithNone map { _ shouldBe  KO("d'oh!")}
+    composedABWithNone map { _ shouldBe KO("d'oh!")}
 
+    val failedFuture: Future[Either[String, Int]] = Future.failed(new Exception("d'oh!"))
     val composedABWithFailure: Future[Either[String, Int]] = for {
-      a <- FutureEither(Future.failed(new Exception("d'oh!")))
+      a <- FutureEither(failedFuture)
       ab <- FutureEither(feb(a))
     } yield ab
 
@@ -149,13 +152,13 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
       (a, i) <- FutureEither(fe) if i > 5
     } yield a
 
-    filtered.future map { _ shouldBe OK("a") }
+    filtered.wrapped map { _ shouldBe OK("a") }
 
     val filtered2 = for {
       (a, i) <- FutureEither(fe) if i > 50
     } yield a
 
-    filtered2.future map { _ shouldBe KO("No value matching predicate") }
+    filtered2.wrapped map { _ shouldBe KO("No value matching predicate") }
 
   }
 }

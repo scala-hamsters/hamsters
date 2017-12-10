@@ -1,17 +1,19 @@
 package io.github.hamsters
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.Future
 
 case class FutureOption[A](override val wrapped: Future[Option[A]]) extends OptionT[A, Future](wrapped)
+
+case class FutureEither[L, R](override val wrapped: Future[Either[L, R]]) extends EitherT[L, R, Future](wrapped)
 
 class OptionT[A, Box[_]](val wrapped: Box[Option[A]]) {
 
   /**
-    * Returns the result of applying f to this FutureOption if this FutureOption is not empty
+    * Returns the result of applying f to this OptionT if this OptionT is not empty
+    *
     * @param f
-    * @param ec
     * @tparam B
-    * @return a new FutureOption
+    * @return a new OptionT
     */
   def flatMap[B](f: A => OptionT[B, Box])(implicit evidence: Monad[Box]): OptionT[B, Box] = {
     val newBox = evidence.flatMap(wrapped) {
@@ -22,11 +24,11 @@ class OptionT[A, Box[_]](val wrapped: Box[Option[A]]) {
   }
 
   /**
-    * Returns the result of applying f to this FutureOption if this FutureOption is not empty
+    * Returns the result of applying f to this OptionT if this OptionT is not empty
+    *
     * @param f
-    * @param ec
     * @tparam B
-    * @return a new FutureOption
+    * @return a new OptionT
     */
   def map[B](f: A => B)(implicit evidence: Monad[Box]): OptionT[B, Box] = {
     new OptionT(evidence.map(wrapped)((option: Option[A]) => option.map(f)))
@@ -34,91 +36,97 @@ class OptionT[A, Box[_]](val wrapped: Box[Option[A]]) {
 
   /**
     * Keep only values which satisfy a predicate
+    *
     * @param p
-    * @param ec
-    * @return a new FutureOption
+    * @return a new OptionT
     */
   def filter(p: (A) ⇒ Boolean)(implicit evidence: Monad[Box]): OptionT[A, Box] = withFilter(p)
 
   /**
     * Keep only values which satisfy a predicate
+    *
     * @param p
-    * @param ec
-    * @return a new FutureOption
+    * @return a new OptionT
     */
   def withFilter(p: (A) ⇒ Boolean)(implicit evidence: Monad[Box]): OptionT[A, Box] = {
     new OptionT(evidence.map(wrapped)(_.filter(p)))
   }
 }
 
-case class FutureEither[L, +R](future: Future[Either[L, R]]) extends AnyVal {
+class EitherT[L, R, Box[_]](val wrapped: Box[Either[L, R]]) {
 
   /**
-    * Returns the result of applying f to this FutureEither if this FutureEither is not empty
+    * Returns the result of applying f to this EitherT if this EitherT is not empty
+    *
     * @param f
-    * @param ec
     * @tparam R2
-    * @return a new FutureEither
+    * @return a new EitherT
     */
-  def flatMap[R2](f: R => FutureEither[L, R2])(implicit ec: ExecutionContext): FutureEither[L, R2] = {
-    val newFuture = future.flatMap {
-      case Right(r) => f(r).future
-      case Left(l) => Future.successful(Left(l))
+  def flatMap[R2](f: R => EitherT[L, R2, Box])(implicit evidence: Monad[Box]): EitherT[L, R2, Box] = {
+    val newBox: Box[Either[L, R2]] = evidence.flatMap(wrapped) {
+      case Right(r) => f(r).wrapped
+      case Left(l) => evidence.pure(Left(l))
     }
-    FutureEither(newFuture)
+    new EitherT(newBox)
   }
 
   /**
-    * Returns the result of applying f to this FutureEither if this FutureEither is not empty
+    * Returns the result of applying f to this EitherT if this EitherT is not empty
+    *
     * @param f
-    * @param ec
     * @tparam R2
-    * @return a new FutureEither
+    * @return a EitherT
     */
-  def map[R2](f: R => R2)(implicit ec: ExecutionContext): FutureEither[L, R2] = {
-    FutureEither(future.map(either => either.right map f))
+  def map[R2](f: R => R2)(implicit evidence: Monad[Box]): EitherT[L, R2, Box] = {
+    val newBox: Box[Either[L, R2]] = evidence.map(wrapped)((either: Either[L, R]) => either.right.map(f))
+    new EitherT(newBox)
   }
 
   /**
     * Keep only values which satisfy a predicate
+    *
     * @param p
-    * @param ec
-    * @return a new FutureEither
+    * @return a new EitherT
     */
-  def filter(p: (R) ⇒ Boolean)(implicit ec: ExecutionContext): FutureEither[String, R] = withFilter(p)
+  def filter(p: (R) ⇒ Boolean)(implicit evidence: Monad[Box]): EitherT[String, R, Box] = withFilter(p)
 
   /**
     * Keep only values which satisfy a predicate
+    *
     * @param p
-    * @param ec
-    * @return a new FutureEither
+    * @return a new EitherT
     */
-  def withFilter(p: (R) ⇒ Boolean)(implicit ec: ExecutionContext): FutureEither[String, R] = {
-    FutureEither(future.map {
+  def withFilter(p: (R) ⇒ Boolean)(implicit evidence: Monad[Box]): EitherT[String, R, Box] = {
+   val newBox: Box[Either[String, R]] = evidence.map(wrapped) {
       case Right(r) => if (p(r)) Right(r) else Left("No value matching predicate")
       case _ => Left("No value matching predicate")
-    })
+    }
+    new EitherT(newBox)
   }
 
   /**
     * Keep only values which satisfy a predicate, with a default value
+    *
     * @param p
     * @param default
-    * @param ec
-    * @return a new FutureEither
+    * @return a new EitherT
     */
-  def filterWithDefault(p: (R) ⇒ Boolean, default: L)(implicit ec: ExecutionContext): FutureEither[L, R] = {
-    FutureEither(future.map {
+  def filterWithDefault(p: (R) ⇒ Boolean, default: L)(implicit evidence: Monad[Box]): EitherT[L, R, Box] = {
+    val newBox: Box[Either[L, R]] =evidence.map(wrapped) {
       case Right(r) => if (p(r)) Right(r) else Left(default)
       case _ => Left(default)
-    })
+    }
+    new EitherT(newBox)
   }
-
 }
 
 object MonadTransformers {
 
-  implicit def optionToT[A, Box[_]](optionT : OptionT[A, Box]): Box[Option[A]] = optionT.wrapped
-  implicit def futureOptionToFuture[A](fe : FutureOption[A]): Future[Option[A]] = fe.wrapped
-  implicit def futureEitherToFuture[L,R](fe : FutureEither[L,R]): Future[Either[L,R]] = fe.future
+  implicit def optionTToT[A, Box[_]](optionT: OptionT[A, Box]): Box[Option[A]] = optionT.wrapped
+
+  implicit def eitherTToT[L, R, Box[_]](eitherT: EitherT[L, R, Box]): Box[Either[L, R]] = eitherT.wrapped
+
+  implicit def futureOptionToFuture[A](fo: FutureOption[A]): Future[Option[A]] = fo.wrapped
+
+  implicit def futureEitherToFuture[L, R](fe: FutureEither[L, R]): Future[Either[L, R]] = fe.wrapped
 }
