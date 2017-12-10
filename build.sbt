@@ -1,8 +1,8 @@
 import sbt.Keys._
-
+import sbtcrossproject.{crossProject, CrossType}
 val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "io.github.scala-hamsters",
-  version := "2.1.2",
+  version := "2.2.1",
   scalacOptions ++= Seq(),
   scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
   publishMavenStyle := true,
@@ -10,8 +10,13 @@ val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M10" cross CrossVersion.full),
   scalacOptions ++= List("-Xplugin-require:macroparadise", "-language:higherKinds", "-language:implicitConversions", "-feature"),
   scalacOptions in(Compile, console) := Seq(), // macroparadise plugin doesn't work in repl yet.
-  resolvers += Resolver.bintrayIvyRepo("scalameta", "maven"),
-  scalaCompilerBridgeSource := ("org.scala-sbt" % "compiler-interface" % "0.13.16" % "component").sources
+  resolvers += Resolver.bintrayIvyRepo("scalameta", "maven")
+)
+
+val noPublishSettings = Seq(
+  publishArtifact := false,
+  publish := {},
+  publishLocal := {},
 )
 
 lazy val publishSettings = Seq(
@@ -45,14 +50,7 @@ lazy val publishSettings = Seq(
           <url>https://github.com/oraclewalid</url>
         </developer>
       </developers>
-    ),
-  publishTo := {
-    val nexus = "https://oss.sonatype.org/"
-    if (version.value.toLowerCase.endsWith("snapshot"))
-      Some("snapshots" at nexus + "content/repositories/snapshots")
-    else
-      Some("staging" at nexus + "service/local/staging/deploy/maven2")
-  }
+    )
 )
 
 lazy val noDocFileSettings = Seq (
@@ -61,24 +59,41 @@ lazy val noDocFileSettings = Seq (
 
 val hamstersSettings = buildSettings ++ publishSettings
 
-scalaVersion in ThisBuild := "2.11.11"
+scalaVersion in ThisBuild := "2.12.3"
 crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.3")
+publishTo in ThisBuild := {
+  val nexus = "https://oss.sonatype.org/"
+  if (version.value.toLowerCase.endsWith("snapshot"))
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("staging" at nexus + "service/local/staging/deploy/maven2")
+}
 
-lazy val macros = project.in(file("macros"))
-  .settings(name := "macros")
+lazy val macros = crossProject(JSPlatform, JVMPlatform)
+  .crossType(CrossType.Full)
+  .in(file("macros"))
   .settings(hamstersSettings)
   .settings(noDocFileSettings)
 
-lazy val hamsters = crossProject.in(file("."))
-  .settings(libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.1" % "test")
-  .settings(libraryDependencies += "org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test")
-  .settings(libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.13.4" % "test")
+lazy val macrosJVM = macros.jvm.settings(name := "macros")
+lazy val macrosJS = macros.js.settings(name := "macros")
+
+lazy val hamsters = crossProject(JSPlatform, JVMPlatform)
+  .crossType(CrossType.Full)
+  .in(file("."))
+  .dependsOn(macros)
+  .settings(libraryDependencies ++= Seq(
+    "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
+    "org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test",
+    "org.scalacheck" %%% "scalacheck" % "1.13.4" % "test"
+  ))
   .settings(hamstersSettings)
 
-lazy val hamstersJVM = hamsters.jvm.dependsOn(macros).settings(buildSettings).settings(name := "hamsters")
-lazy val hamstersJS = hamsters.js.dependsOn(macros).settings(buildSettings).settings(name := "hamsters")
+lazy val hamstersJVM = hamsters.jvm.settings(name := "hamsters")
+lazy val hamstersJS = hamsters.js.settings(name := "hamsters")
 
 lazy val root = project.in(file("."))
-  .aggregate(hamstersJVM, hamstersJS, macros)
-  .dependsOn(hamstersJVM, hamstersJS, macros)
+  .aggregate(hamstersJVM, hamstersJS, macrosJVM, macrosJS)
+  .dependsOn(hamstersJVM, hamstersJS, macrosJVM, macrosJS)
   .settings(hamstersSettings)
+  .settings(noPublishSettings)

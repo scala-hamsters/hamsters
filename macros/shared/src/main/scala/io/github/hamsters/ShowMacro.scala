@@ -5,8 +5,6 @@ import scala.meta._
 
 class ShowMacro extends scala.annotation.StaticAnnotation {
 
-
-
   inline def apply(defn: Any): Any = meta {
     defn match {
       //TODO handle object with existing companion
@@ -24,7 +22,7 @@ class ShowMacro extends scala.annotation.StaticAnnotation {
         val res = Term.Block(Seq(cls, companion))
         //abort(res.syntax)
         res
-      case _ => abort(defn.pos, "Invalid annottee - you can only use @Show on case classes")
+      case _ => abort(defn.pos, "Invalid annottee - you can only use @ShowMacro on case classes")
     }
   }
 

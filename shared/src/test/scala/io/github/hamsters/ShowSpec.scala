@@ -1,8 +1,6 @@
 package io.github.hamsters
 
-
 import java.util.Date
-
 import org.scalatest.{FlatSpec, Matchers}
 
 class ShowSpec extends FlatSpec with Matchers {
@@ -46,6 +44,20 @@ class ShowSpec extends FlatSpec with Matchers {
       |      new Date(11111),
       |      1.toShort))
     """.stripMargin should compile
+  }
+
+  case object Foo
+  "Show on case object" should "show simple class name without $" in {
+    Show.show(Foo.getClass) should be("Foo")
+  }
+
+  "Show on case class" should "show simple class name without $" in {
+    Show.show(Name("hamster", "hidden").getClass) should be("Name")
+  }
+
+  "ShowableSyntax" should "add show method on supported types" in {
+    import ShowableSyntax.ShowableOps
+    Name("Hamster", "Hiden").getClass.show should be("Name")
   }
 
 }

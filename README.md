@@ -25,7 +25,7 @@ With SBT :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %% "hamsters" % "2.1.2"
+  "io.github.scala-hamsters" %% "hamsters" % "2.2.1"
 )
 ```
 
@@ -35,7 +35,7 @@ With Maven :
 <dependency>
   <groupId>io.github.scala-hamsters</groupId>
   <artifactId>hamsters_${scala.version}</artifactId>
-  <version>2.1.2</version>
+  <version>2.2.1</version>
 </dependency>
 ```
 
@@ -43,8 +43,37 @@ For Scala.js :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %%% "hamsters" % "2.1.2"
+  "io.github.scala-hamsters" %%% "hamsters" % "2.2.1"
 )
+```
+
+## Try Hamster with a REPL
+
+You can try quickly and easily Hamsters with script try-hamster.sh, this script downloads and installs 
+[Coursier](https://github.com/alexarchambault/coursier), [Ammonite](https://github.com/lihaoyi/Ammonite) REPL and Hamsters dependency. 
+No dependencies needed other than a JDK.
+
+PS: The macros don't work with the REPL
+
+```shell
+curl -s https://raw.githubusercontent.com/scala-hamsters/hamsters/master/scripts/try-hamsters.sh | bash
+
+Loading...
+Welcome to the Ammonite Repl 1.0.1
+(Scala 2.12.3 Java 1.8.0_151)
+
+@ val noneString: Option[String] = None 
+noneString: Option[String] = None
+
+@ noneString.orEmpty 
+res1: String = ""
+
+@ val hlist1: Double :: String :: HNil = 2.0 :: "hi" :: HNil 
+hlist1: Double :: String :: HNil = HCons(2.0, HCons("hi", HNIL))
+
+@ exit 
+Bye!
+
 ```
 
 ## 1.x to 2.0 Migration
@@ -57,7 +86,7 @@ See [hamsters-extensions](https://github.com/scala-hamsters/hamsters-extensions)
 
 ## Scaladoc
 
-You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/doc/2.1/api).
+You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/doc/2.2/api).
 
 ## Special thanks
 

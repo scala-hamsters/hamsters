@@ -1,5 +1,5 @@
 
-### HList
+# HList
 
 HLists can contain heterogeneous data types but are strongly typed. It's like tuples on steroids!
 When you're manipulating data using tuples, it's common to add or subtrack some elements, but you have to make each element explicit to build a new tuple. HList simplifies this kind of task.
@@ -38,4 +38,24 @@ hlist1[String](1) // "hi"
   case _ => false
 } //"hi" :: HNil
 
+```
+
+## HList <-> case class conversion macro
+
+You can use the HList macro to do HList to case class and case class to HList conversions :
+
+```scala
+@HListMacro
+case class Person(name: String, age :Int, weight :Option[Int] = None)
+
+HList.toHList(Person(name = "Christophe Colomb", age = 42)) //"Christophe Colomb"::42::None::HNil
+HList.toClass[Person]("Christophe Colomb"::42::None::HNil) //Person(name = "Christophe Colomb", age = 42)
+```
+### Depedencies 
+
+To use the HList macro, you need to add this dependencies to your build : 
+
+```scala
+libraryDependencies += "org.scalameta" %% "scalameta" % "1.8.0" % Provided
+addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M10" cross CrossVersion.full)
 ```
