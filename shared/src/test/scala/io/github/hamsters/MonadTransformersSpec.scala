@@ -3,14 +3,14 @@ package io.github.hamsters
 import io.github.hamsters.MonadTransformers._
 import io.github.hamsters.Validation._
 import org.scalatest._
-
 import scala.concurrent._
 import MonadTransformers._
+import scala.concurrent.ExecutionContext.Implicits.global
 
 class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
   def foa: Future[Option[String]] = Future(Some("a"))
   def fob(a: String): Future[Option[String]] = Future(Some(a + "b"))
-  // FIXME test fail with scala.js (execution context issue) 
+  
   "OptionT" should "handle Future[Option[_]] type" in {
    val composedAB: Future[Option[String]] = (for {
       a <- new OptionT(foa)
@@ -19,7 +19,7 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
 
     composedAB map { _ shouldBe Some("ab") }
 
-    val noneString : Option[String] = None //TODO how to avoid type here?
+    val noneString : Option[String] = None
     val composedABWithNone: Future[Option[String]] = (for {
       a <- new OptionT(Future.successful(noneString)) 
       ab <- new OptionT(fob(a))
@@ -29,7 +29,6 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
 
   }
 
-  // FIXME test fail with scala.js (execution context issue) 
   "FutureOption" should "handle Future[Option[_]] type" in {
     def foa: Future[Option[String]] = Future(Some("a"))
     def fob(a: String): Future[Option[String]] = Future(Some(a + "b"))
@@ -41,7 +40,7 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
 
     composedAB map { _ shouldBe Some("ab") }
 
-    val noneString : Option[String] = None //TODO how to avoid type here?
+    val noneString : Option[String] = None
     val composedABWithNone: Future[Option[String]] = (for {
       a <- FutureOption(Future.successful(noneString))
       ab <- FutureOption(fob(a))

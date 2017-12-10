@@ -1,7 +1,6 @@
 package io.github.hamsters
 
-import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.{ExecutionContext, Future}
 
 trait Monad[Box[_]] extends Functor[Box] {
 
@@ -22,7 +21,7 @@ object Monad {
     override def map[A, B](boxA: Option[A])(f: A => B) = boxA.map(f)
   }
 
-  implicit val futureMonad = new Monad[Future] {
+  implicit def futureMonad(implicit ec: ExecutionContext) = new Monad[Future] {
 
     override def pure[A](x: A): Future[A] = Future.successful(x)
 
