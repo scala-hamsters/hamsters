@@ -5,9 +5,12 @@ import io.github.hamsters.Validation._
 import org.scalatest._
 import scala.concurrent._
 import MonadTransformers._
-import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.ExecutionContext
 
 class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
+
+  override implicit val executionContext = ExecutionContext.global
+
   def foa: Future[Option[String]] = Future(Some("a"))
   def fob(a: String): Future[Option[String]] = Future(Some(a + "b"))
   
