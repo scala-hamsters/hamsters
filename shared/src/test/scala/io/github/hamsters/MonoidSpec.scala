@@ -6,7 +6,7 @@ import org.scalacheck.{Arbitrary, Properties}
 import scala.reflect._
 
 
-class BooleanMonoidSpec extends MonoidSpec[Boolean](Monoid.booleaMonoids)
+class BooleanMonoidSpec extends MonoidSpec[Boolean](Monoid.booleanMonoid)
 class IntMonoidSpec extends MonoidSpec[Int](Monoid.intMonoid)
 class BigDecimalMonoidSpec extends MonoidSpec[BigDecimal](Monoid.bigDecimalMonoid)
 //float and double monoid break the laws : https://github.com/scalaz/scalaz/issues/334
@@ -18,10 +18,9 @@ class SeqMonoidSpec extends MonoidSpec[Seq[String]](Monoid.seqMonoid)
 class OptionMonoidSpec extends MonoidSpec[Option[List[Int]]](Monoid.optionMonoid)
 
 
-abstract class MonoidSpec[T  : ClassTag](monoid: Monoid[T])(implicit arbitrary: Arbitrary[T]) extends Properties(s"Monoid for ${classTag[T]}") {
+abstract class MonoidSpec[T: ClassTag](monoid: Monoid[T])(implicit arbitrary: Arbitrary[T]) extends Properties(s"Monoid for ${classTag[T]}") {
 
   val id: T = monoid.empty
-
 
   // o mean compose
   // n o id == id o n == n
