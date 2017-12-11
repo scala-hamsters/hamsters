@@ -5,14 +5,15 @@ import org.scalacheck.{Arbitrary, Properties}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
+import scala.reflect.ClassTag
 
 class OptionMonadSpec extends MonadSpec[String, String, String, Option](Monad.optionMonad)
 class FutureMonadSpec extends MonadSpec[String, String, String, Future](Monad.futureMonad)
 
 abstract class MonadSpec[A: Arbitrary, B: Arbitrary, C: Arbitrary, Box[_]](monad: Monad[Box])
-(implicit boxArb: Arbitrary[Box[A]], aToBoxBArb: Arbitrary[A => Box[B]], bToBoxCArb: Arbitrary[B => Box[C]])
+(implicit boxArb: Arbitrary[Box[A]], aToBoxBArb: Arbitrary[A => Box[B]], bToBoxCArb: Arbitrary[B => Box[C]], tag: ClassTag[Box[_]])
 
-extends Properties(s"Monad for $monad") {
+extends Properties(s"Monad for $tag") {
 
   property("left identity") = forAll { (f: (A => Box[B]), a: A) =>
     val boxA: Box[A] = monad.pure(a)
