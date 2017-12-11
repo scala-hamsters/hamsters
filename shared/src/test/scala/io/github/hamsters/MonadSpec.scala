@@ -2,16 +2,17 @@ package io.github.hamsters
 
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Arbitrary, Properties}
+
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-import scala.reflect._
 
 class OptionMonadSpec extends MonadSpec[String, String, String, Option](Monad.optionMonad)
 class FutureMonadSpec extends MonadSpec[String, String, String, Future](Monad.futureMonad)
 
-abstract class MonadSpec[A: Arbitrary, B: Arbitrary, C: Arbitrary, Box[_]: ClassTag](monad: Monad[Box])
-  (implicit boxAArb: Arbitrary[Box[A]], aToBoxBArb: Arbitrary[A => Box[B]], bToBoxCArb: Arbitrary[B => Box[C]])
-  extends Properties(s"Monad for ${classTag[Box[_]]}") {
+abstract class MonadSpec[A: Arbitrary, B: Arbitrary, C: Arbitrary, Box[_]](monad: Monad[Box])
+(implicit boxArb: Arbitrary[Box[A]], aToBoxBArb: Arbitrary[A => Box[B]], bToBoxCArb: Arbitrary[B => Box[C]])
+
+extends Properties(s"Monad for $monad") {
 
   property("left identity") = forAll { (f: (A => Box[B]), a: A) =>
     val boxA: Box[A] = monad.pure(a)
