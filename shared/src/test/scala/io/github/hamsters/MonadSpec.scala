@@ -6,12 +6,11 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.reflect._
 
-/* FIXME : diverging implicit expansion for type org.scalacheck.Arbitrary[(A, Box[B])]
 class OptionMonadSpec extends MonadSpec[String, String, String, Option](Monad.optionMonad)
-
 class FutureMonadSpec extends MonadSpec[String, String, String, Future](Monad.futureMonad)
 
-abstract class MonadSpec[A, B, C, Box[_] : ClassTag](monad: Monad[Box])(implicit boxArb: Arbitrary[Box[A]], aArb: Arbitrary[A], bArb: Arbitrary[B], cArb: Arbitrary[C])
+abstract class MonadSpec[A: Arbitrary, B: Arbitrary, C: Arbitrary, Box[_]: ClassTag](monad: Monad[Box])
+  (implicit boxAArb: Arbitrary[Box[A]], aToBoxBArb: Arbitrary[A => Box[B]], bToBoxCArb: Arbitrary[B => Box[C]])
   extends Properties(s"Monad for ${classTag[Box[_]]}") {
 
   property("left identity") = forAll { (f: (A => Box[B]), a: A) =>
@@ -32,4 +31,3 @@ abstract class MonadSpec[A, B, C, Box[_] : ClassTag](monad: Monad[Box])(implicit
   }
 
 }
-*/
