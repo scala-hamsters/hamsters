@@ -14,7 +14,7 @@ object Monad {
 
   implicit val optionMonad = new Monad[Option] {
 
-    override def pure[A](x: A): Option[A] = Some(x)
+    override def pure[A](x: A): Option[A] = Option(x)
 
     override def flatMap[A, B](boxA: Option[A])(f: A => Option[B]) = boxA.flatMap(f)
 
