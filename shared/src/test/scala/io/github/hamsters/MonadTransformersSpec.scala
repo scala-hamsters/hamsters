@@ -15,18 +15,18 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
   def fob(a: String): Future[Option[String]] = Future(Some(a + "b"))
   
   "OptionT" should "handle Future[Option[_]] type" in {
-   val composedAB: Future[Option[String]] = (for {
-      a <- new OptionT(foa)
-      ab <- new OptionT(fob(a))
-    } yield ab)
+   val composedAB: Future[Option[String]] = for {
+     a <- new OptionT(foa)
+     ab <- new OptionT(fob(a))
+   } yield ab
 
     composedAB map { _ shouldBe Some("ab") }
 
     val noneString : Option[String] = None
-    val composedABWithNone: Future[Option[String]] = (for {
-      a <- new OptionT(Future.successful(noneString)) 
+    val composedABWithNone: Future[Option[String]] = for {
+      a <- new OptionT(Future.successful(noneString))
       ab <- new OptionT(fob(a))
-    } yield ab) 
+    } yield ab
 
     composedABWithNone map { _ shouldBe None }
 
@@ -36,26 +36,26 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
     def foa: Future[Option[String]] = Future(Some("a"))
     def fob(a: String): Future[Option[String]] = Future(Some(a + "b"))
 
-    val composedAB= (for {
+    val composedAB= for {
       a <- FutureOption(foa)
       ab <- FutureOption(fob(a))
-    } yield ab)
+    } yield ab
 
     composedAB map { _ shouldBe Some("ab") }
 
     val noneString : Option[String] = None
-    val composedABWithNone: Future[Option[String]] = (for {
+    val composedABWithNone: Future[Option[String]] = for {
       a <- FutureOption(Future.successful(noneString))
       ab <- FutureOption(fob(a))
-    } yield ab)
+    } yield ab
 
     composedABWithNone map { _ shouldBe None }
 
     val failedFuture: Future[Option[String]] =  Future.failed(new Exception("d'oh!"))
-    val composedABWithFailure: Future[Option[String]] = (for {
+    val composedABWithFailure: Future[Option[String]] = for {
       a <- FutureOption(failedFuture)
       ab <- FutureOption(fob(a))
-    } yield ab)
+    } yield ab
 
     composedABWithFailure.failed map { _ shouldBe a [Exception]}
 
@@ -82,8 +82,6 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
   }
 
   "FutureOption" should "handle future and option map/flatMap sequences" in {
-
-    import io.github.hamsters.MonadTransformers._
 
     implicit def optiontoFutureOption[T](o: Option[T]): Future[Option[T]] = Future.successful(o)
     implicit def futuretoFutureOption[T](f: Future[T]): Future[Some[T]] = f.map(Some(_))

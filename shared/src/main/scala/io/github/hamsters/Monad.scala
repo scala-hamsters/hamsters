@@ -16,12 +16,7 @@ object Monad {
 
     override def pure[A](x: A): Option[A] = Option(x)
 
-    override def flatMap[A, B](boxA: Option[A])(f: A => Option[B]) = {
-      boxA match {
-        case None => None: Option[B]
-        case Some(_) => boxA.flatMap(f)
-      }
-    }
+    override def flatMap[A, B](boxA: Option[A])(f: A => Option[B]) = boxA.flatMap(f)
 
     override def map[A, B](boxA: Option[A])(f: A => B) = boxA.map(f)
   }
