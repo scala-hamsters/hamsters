@@ -1,9 +1,9 @@
-###  Monad transformers
+#  Monad transformers
 
 Example : combine Future and Option types then make it work in a for comprehension.
 More information on why it's useful [here](http://loicdescotte.github.io/posts/scala-compose-option-future/).
 
-#### FutureOption
+## FutureOption
 
 ```scala
 def foa: Future[Option[String]] = Future(Some("a"))
@@ -15,7 +15,7 @@ val composedAB: Future[Option[String]] = for {
 } yield ab
 ```
 
-#### FutureEither
+## FutureEither
 
 ```scala
 import io.github.hamsters.Validation._

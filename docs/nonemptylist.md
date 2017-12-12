@@ -1,4 +1,4 @@
-### NonEmptyList
+# NonEmptyList
 
 A data type which represents a non-empty list with a single element (the head)
 and an optional tail.

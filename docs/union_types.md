@@ -1,4 +1,3 @@
-
 # Union types
 
 You can define functions or methods that are able to return several types, depending on the context.

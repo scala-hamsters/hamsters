@@ -5,7 +5,6 @@ trait Monoid[T]{
   def compose(l : T, r : T) : T
 }
 
-
 object Monoid {
 
   implicit val booleanMonoid : Monoid[Boolean] = new Monoid[Boolean] {
@@ -17,7 +16,6 @@ object Monoid {
     override def empty = 0
     override def compose(l: Int, r: Int) = l+r
   }
-
 
   implicit val bigDecimalMonoid : Monoid[BigDecimal] = new Monoid[BigDecimal] {
     override def empty = BigDecimal(0)
