@@ -35,7 +35,9 @@ val composedAB: Future[Either[String, Int]] = for {
 } yield ab
 ```
 
-Note 1 : You can also bring your own `Monad` implicit instance and work with `OptionT` or `EitherT`. 
-`Future` and `Option` instances are provided by default.
+## OptionT and EitherT
 
-Note 2 : For Future[Try] composition, see `Future.fromTry` to get a single future success or failure.
+If you use other combinations of F[Option[A]] or F[Either[L,R]], you can bring your own `Monad` implicit instance and work with `OptionT` or `EitherT`. `Future` and `Option` instances are provided by default.
+
+
+Note : For Future[Try] composition, see `Future.fromTry` to get a single future success or failure.
