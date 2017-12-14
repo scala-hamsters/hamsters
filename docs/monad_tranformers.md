@@ -6,6 +6,10 @@ More information on why it's useful [here](http://loicdescotte.github.io/posts/s
 ## FutureOption
 
 ```scala
+import io.github.hamsters.FutureOption
+import io.github.hamsters.MonadTransformers._
+//import your execution context here too
+
 def foa: Future[Option[String]] = Future(Some("a"))
 def fob(a: String): Future[Option[String]] = Future(Some(a+"b"))
 
@@ -18,9 +22,9 @@ val composedAB: Future[Option[String]] = for {
 ## FutureEither
 
 ```scala
-import io.github.hamsters.Validation._
-import io.github.hamsters.{FutureEither, FutureOption}
+import io.github.hamsters.FutureEither
 import io.github.hamsters.MonadTransformers._
+//import your execution context here too
 
 def fea: Future[Either[String, Int]] = Future(Right(1))
 def feb(a: Int): Future[Either[String, Int]] = Future(Right(a+2))
