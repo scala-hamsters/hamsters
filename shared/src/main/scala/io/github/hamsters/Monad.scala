@@ -3,7 +3,10 @@ package io.github.hamsters
 import scala.annotation.implicitNotFound
 import scala.concurrent.{ExecutionContext, Future}
 
-@implicitNotFound("Cannot create monad instance. If you are combining Future with another monad you might pass an (implicit ec: ExecutionContext) parameter to your method or import scala.concurrent.ExecutionContext.Implicits.global")
+@implicitNotFound("""Cannot create monad instance for type ${Box}.
+If you are combining Future with another monad you might pass
+an (implicit ec: ExecutionContext) parameter to your method
+or import scala.concurrent.ExecutionContext.Implicits.global""")
 trait Monad[Box[_]] extends Functor[Box] {
 
   def pure[A](a: A): Box[A]
