@@ -35,35 +35,18 @@ object Semigroup {
 
 }
 
-trait Semigroupal[Box[_]] {
-  def product[A, B](a: Box[A], b: Box[B]): Box[(A, B)]
-}
 
-object Semigroupal {
 
-  implicit def semigroupalOption = new Semigroupal[Option] {
-    override def product[A, B](maybeA: Option[A], maybeB: Option[B]): Option[(A, B)] = (maybeA, maybeB) match {
-      case (Some(a), Some(b)) => Some(a -> b)
-      case _ => None
-    }
-  }
 
-  implicit def semigroupalList = new Semigroupal[List] {
-    override def product[A, B](listA: List[A], listB: List[B]): List[(A, B)] = for {
-      a <- listA
-      b <- listB
-    } yield a -> b
-  }
-}
 
 case class Tuple2Box[Box[_], T](boxA: Box[T], boxB: Box[T]) {
-  def mapN(f: (T, T) => T)(implicit functor : Functor[Box], s : Semigroupal[Box]): Box[T] = {
+  def mapN(f: (T, T) => T)(implicit functor : Functor[Box], s : CartesianProduct[Box]): Box[T] = {
     functor.map(s.product(boxA,boxB)){case (a,b)=> f(a,b)}
   }
 }
 
 case class Tuple3Box[Box[_], T](boxA: Box[T], boxB: Box[T], boxC : Box[T]) {
-  def mapN(f: (T, T, T) => T)(implicit functor : Functor[Box], s : Semigroupal[Box]): Box[T] = {
+  def mapN(f: (T, T, T) => T)(implicit functor : Functor[Box], s : CartesianProduct[Box]): Box[T] = {
     functor.map(s.product(s.product(boxA,boxB), boxC)){case ((a, b), c) => f(a,b,c)}
   }
 }

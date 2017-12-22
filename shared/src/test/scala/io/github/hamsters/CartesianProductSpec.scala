@@ -1,9 +1,9 @@
 package io.github.hamsters
 
 import org.scalatest.{FlatSpec, Matchers}
-import io.github.hamsters.Semigroupal._
+import io.github.hamsters.CartesianProduct._
 import TupleBox._
-class SemigroupalSpec extends FlatSpec with Matchers  {
+class CartesianProductSpec extends FlatSpec with Matchers  {
 
 
   val t1Int: Option[Int] = Some(5)
