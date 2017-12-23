@@ -1,6 +1,6 @@
 package io.github.hamsters
 
-import scala.language.{higherKinds, implicitConversions}
+import scala.language.implicitConversions
 
 trait Semigroup[T] {
   def combine(a: T, b: T): T
@@ -39,19 +39,3 @@ object Semigroup {
 
 
 
-case class Tuple2Box[Box[_], T](boxA: Box[T], boxB: Box[T]) {
-  def mapN(f: (T, T) => T)(implicit functor : Functor[Box], s : CartesianProduct[Box]): Box[T] = {
-    functor.map(s.product(boxA,boxB)){case (a,b)=> f(a,b)}
-  }
-}
-
-case class Tuple3Box[Box[_], T](boxA: Box[T], boxB: Box[T], boxC : Box[T]) {
-  def mapN(f: (T, T, T) => T)(implicit functor : Functor[Box], s : CartesianProduct[Box]): Box[T] = {
-    functor.map(s.product(s.product(boxA,boxB), boxC)){case ((a, b), c) => f(a,b,c)}
-  }
-}
-
-object TupleBox {
-  implicit def t2x[Box[_],T](t: (Box[T], Box[T])) = Tuple2Box(t._1, t._2)
-  implicit def t3x[Box[_],T](t: (Box[T], Box[T], Box[T])) = Tuple3Box(t._1, t._2, t._3)
-}

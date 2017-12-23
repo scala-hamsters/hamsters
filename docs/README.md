@@ -11,3 +11,4 @@ Documented feature of Hamsters :
  * [Retry util](retry.md)
  * [NonEmptyList](nonemptylist.md)
  * [Show](show.md)
+ * [mapN](mapN.md)
