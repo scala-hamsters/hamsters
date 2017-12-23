@@ -18,27 +18,24 @@ val t3NoneInt: Option[Int] = None
 ```
 
  
- List :
+ Lists of  1 element :
  ```
-val t1List = List(6)
-val t2List = List(7)
-
-(t1List, t2List).mapN(_ * _)  // List(42)
+(List(6), List(7)).mapN(_ * _)  // List(42)
+ ```
+ 
+ List of several elements
+ 
+ ```
+ (List(1, 2), List(3, 4)).mapN(_ + _) // List(4, 5, 5, 6)
  ```
  
  Future : 
  ```
- val t1FutureInt: Future[Int] = Future.successful(66)
- val t2FutureInt: Future[Int] = Future.successful(77)
- 
- (t1FutureInt, t2FutureInt).mapN(_ + _) // Future(143)
+ (Future.successful(66), Future.successful(77)).mapN(_ + _) // Future(143)
  ```
  
  Triplet : 
  
  ```
-val t1List = List(6)
-val t2List = List(7)
-val t3List = List(8)
-(t1List, t2List, t3List).mapN( _ + _ + _ ) // List(21)
+(List(6), List(7), List(8)).mapN( _ + _ + _ ) // List(21)
  ```

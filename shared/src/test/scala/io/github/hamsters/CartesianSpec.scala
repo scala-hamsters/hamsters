@@ -18,19 +18,14 @@ class CartesianSpec extends AsyncFlatSpec with Matchers  {
   val t4NoneInt: Option[Int] = None
 
 
-  val t1List = List(6)
-  val t2List = List(7)
   val t3List = List(8)
-
-  val t1FutureInt: Future[Int] = Future.successful(66)
-  val t2FutureInt: Future[Int] = Future.successful(77)
 
   "addition on tuple of option" should "be apply when both presents" in {
     (t1OptionInt, t2SomeInt).mapN(_ + _) shouldBe Some(11)
   }
 
   "addition on tuple of Future Int" should "be apply when both presents" in {
-    (t1FutureInt, t2FutureInt).mapN(_ + _) map { _ shouldBe 143 }
+    (Future.successful(66), Future.successful(77)).mapN(_ + _) map { _ shouldBe 143 }
   }
 
   "multiplication on tuple of option" should "be apply when both presents" in {
@@ -42,10 +37,14 @@ class CartesianSpec extends AsyncFlatSpec with Matchers  {
   }
 
   "addition on tuple of list" should "be apply if box is List too " in {
-    (t1List, t2List).mapN(_ * _) shouldBe List(42)
+    (List(6), List(7)).mapN(_ * _) shouldBe List(42)
   }
 
   "addition on triple of list" should "be apply too" in {
-    (t1List, t2List, t3List).mapN( _ + _ + _ ) shouldBe List(21)
+    (List(6), List(7), t3List).mapN( _ + _ + _ ) shouldBe List(21)
+  }
+
+  "addition on tuple of list of several elements" should "be apply if box is List too " in {
+    (List(1, 2), List(3, 4)).mapN(_ + _) shouldBe List(4, 5, 5, 6)
   }
 }
