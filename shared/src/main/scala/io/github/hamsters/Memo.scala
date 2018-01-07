@@ -6,6 +6,7 @@ object Memo {
 
   /**
     * Memoize function result for idempotent functions
+    * For a thread safe implementation see Memo.threadSafeMemoize
     * @param f
     * @tparam A input type
     * @tparam B output type

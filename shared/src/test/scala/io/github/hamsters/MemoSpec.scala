@@ -11,7 +11,11 @@ class MemoSpec extends FlatSpec with Matchers {
     val calculatedValues = new ArrayBuffer[String]
     val plusOne = memoize{(x: Int) => {
       val result = (x +1).toString
+
+      //counting the number of calculated values
+      //not to be done in real use case, for for the unit test
       calculatedValues += result
+      //
       result
     }}
 
@@ -29,7 +33,11 @@ class MemoSpec extends FlatSpec with Matchers {
       val result1 = x +1
       val result2 = y +1
       val result = s"$result1,$result2"
+
+      //counting the number of calculated values
+      //not to be done in real use case, for for the unit test
       calculatedValues += result
+      //
       result
     }
 
