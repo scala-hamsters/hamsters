@@ -5,7 +5,7 @@ import scala.collection.mutable
 object Memo {
 
   /**
-    * Memoize function result for idempotent functions
+    * Memoize results for idempotent functions
     * For a thread safe implementation see Memo.threadSafeMemoize
     * @param f
     * @tparam A input type
@@ -17,7 +17,7 @@ object Memo {
   }
 
   /**
-    * Memoize function result for idempotent functions with a thread safe structure
+    * Memoize results for idempotent functions with a thread safe structure
     * @param f
     * @tparam A input type
     * @tparam B output type
