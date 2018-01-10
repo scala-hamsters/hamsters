@@ -38,4 +38,4 @@ plusOne(1,2) //"2,3" <-- the function is not really called this time as the resu
 
 ## Thread safety
 
-For a thread safe implementation, use Memo.threadSafeMemoize instead of Memo.memoize.
+For a thread safe implementation, use `Memo.threadSafeMemoize` instead of `Memo.memoize`.
