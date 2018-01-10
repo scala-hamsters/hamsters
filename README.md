@@ -12,10 +12,11 @@ Currently, Hamsters supports :
  * [Default values for options (orEmpty)](docs/default_values.md)
  * [HLists](docs/hlist.md)
  * [Union types](docs/union_types.md)
- * [Retry util](docs/retry.md)
  * [NonEmptyList](docs/nonemptylist.md)
  * [Show](docs/show.md)
  * [mapN](docs/mapN.md)
+ * [Memoization](docs/memo.md)
+ * [Retry](docs/retry.md)
 
 
 [![Travis](https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master)](https://travis-ci.org/scala-hamsters/hamsters)
@@ -26,7 +27,7 @@ With SBT :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %% "hamsters" % "2.4.0"
+  "io.github.scala-hamsters" %% "hamsters" % "2.5.0"
 )
 ```
 
@@ -36,7 +37,7 @@ With Maven :
 <dependency>
   <groupId>io.github.scala-hamsters</groupId>
   <artifactId>hamsters_${scala.version}</artifactId>
-  <version>2.4.0</version>
+  <version>2.5.0</version>
 </dependency>
 ```
 
@@ -44,7 +45,7 @@ For Scala.js :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %%% "hamsters" % "2.4.0"
+  "io.github.scala-hamsters" %%% "hamsters" % "2.5.0"
 )
 ```
 
