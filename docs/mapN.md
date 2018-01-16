@@ -8,6 +8,9 @@ The values can be encapsulated into List, Option, Future
 
 Option  : 
 ```
+import io.github.hamsters.Cartesian._
+import io.github.hamsters.Functor._
+
 val t1OptionInt: Option[Int] = Some(5)
 val t2SomeInt: Option[Int] = Some(6)
 val t3NoneInt: Option[Int] = None
