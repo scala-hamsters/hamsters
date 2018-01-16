@@ -49,9 +49,12 @@ libraryDependencies ++= Seq(
 )
 ```
 
-## Try Hamster with a REPL
+## Try Hamsters in ScalaFiddle or Ammonite
 
-You can try quickly and easily Hamsters with script try-hamster.sh, this script downloads and installs 
+You can try quickly and easily Hamsters with ScalaFiddle.  
+Example : [https://scalafiddle.io/sf/BDm8W4U/0](https://scalafiddle.io/sf/BDm8W4U/0)
+
+Alternatively, a REPL script is provided. `try-hamster.sh` script downloads and installs 
 [Coursier](https://github.com/alexarchambault/coursier), [Ammonite](https://github.com/lihaoyi/Ammonite) REPL and Hamsters dependency. 
 No dependencies needed other than a JDK.
 
