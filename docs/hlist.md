@@ -8,7 +8,7 @@ When you're manipulating data using tuples, it's common to add or subtrack some 
  * `+` is used add element at the end of a HList
  * `++` is used to concatenate 2 Hlists
  * HNil is the empty HList
- * other operations : filter, map, foldLeft, foreach
+ * other operations: filter, map, foldLeft, foreach
 
 ```scala
 import io.github.hamsters.{HList, HCons, HNil}
@@ -36,24 +36,24 @@ hlist1[String](1) // "hi"
 (2.0 :: "hi" :: HNil).filter {
   case s: String if s.startsWith("h") => true
   case _ => false
-} //"hi" :: HNil
+} // "hi" :: HNil
 
 ```
 
 ## HList <-> case class conversion macro
 
-You can use the HList macro to do HList to case class and case class to HList conversions :
+You can use the HList macro to do HList to case class and case class to HList conversions:
 
 ```scala
 @HListMacro
-case class Person(name: String, age :Int, weight :Option[Int] = None)
+case class Person(name: String, age: Int, weight: Option[Int] = None)
 
-HList.toHList(Person(name = "Christophe Colomb", age = 42)) //"Christophe Colomb"::42::None::HNil
-HList.toClass[Person]("Christophe Colomb"::42::None::HNil) //Person(name = "Christophe Colomb", age = 42)
+HList.toHList(Person(name = "Christophe Colomb", age = 42)) // "Christophe Colomb" :: 42 :: None :: HNil
+HList.toClass[Person]("Christophe Colomb" :: 42 :: None :: HNil) // Person(name = "Christophe Colomb", age = 42)
 ```
 ### Depedencies 
 
-To use the HList macro, you need to add this dependencies to your build : 
+To use the HList macro, you need to add this dependencies to your build: 
 
 ```scala
 libraryDependencies += "org.scalameta" %% "scalameta" % "1.8.0" % Provided
