@@ -18,5 +18,5 @@ noneList.orEmpty  // List[String]()
 To support other types, you just have to declare a new implicit value : 
  
  ```scala
-implicit def myCaseClassDefaultValue= new DefaultValue[MyCaseClass] { ... }
+implicit def myCaseClassDefaultValue = new DefaultValue[MyCaseClass] { ... }
 ```
