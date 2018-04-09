@@ -42,3 +42,5 @@ val t3NoneInt: Option[Int] = None
  ```
 (List(6), List(7), List(8)).mapN( _ + _ + _ ) // List(21)
  ```
+
+And so on until 22 parameters
