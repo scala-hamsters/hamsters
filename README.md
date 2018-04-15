@@ -13,10 +13,11 @@ Currently, Hamsters supports :
  * [Default values for options (orEmpty)](docs/default_values.md)
  * [HLists](docs/hlist.md)
  * [Union types](docs/union_types.md)
- * [Retry util](docs/retry.md)
  * [NonEmptyList](docs/nonemptylist.md)
  * [Show](docs/show.md)
  * [mapN](docs/mapN.md)
+ * [Memoization](docs/memo.md)
+ * [Retry](docs/retry.md)
 
 
 [![Travis](https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master)](https://travis-ci.org/scala-hamsters/hamsters)
@@ -27,7 +28,7 @@ With SBT :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %% "hamsters" % "2.4.0"
+  "io.github.scala-hamsters" %% "hamsters" % "2.5.0"
 )
 ```
 
@@ -37,7 +38,7 @@ With Maven :
 <dependency>
   <groupId>io.github.scala-hamsters</groupId>
   <artifactId>hamsters_${scala.version}</artifactId>
-  <version>2.4.0</version>
+  <version>2.5.0</version>
 </dependency>
 ```
 
@@ -45,13 +46,16 @@ For Scala.js :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %%% "hamsters" % "2.4.0"
+  "io.github.scala-hamsters" %%% "hamsters" % "2.5.0"
 )
 ```
 
-## Try Hamster with a REPL
+## Try Hamsters in ScalaFiddle or Ammonite
 
-You can try quickly and easily Hamsters with script try-hamster.sh, this script downloads and installs 
+You can try quickly and easily Hamsters with ScalaFiddle.  
+Example : [https://scalafiddle.io/sf/BDm8W4U/0](https://scalafiddle.io/sf/BDm8W4U/0)
+
+Alternatively, a REPL script is provided. `try-hamster.sh` script downloads and installs 
 [Coursier](https://github.com/alexarchambault/coursier), [Ammonite](https://github.com/lihaoyi/Ammonite) REPL and Hamsters dependency. 
 No dependencies needed other than a JDK.
 
@@ -88,7 +92,7 @@ See [hamsters-extensions](https://github.com/scala-hamsters/hamsters-extensions)
 
 ## Scaladoc
 
-You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/doc/2.4/api/io/github/hamsters/index.html).
+You can find the API documentation [here](http://scala-hamsters.github.io/hamsters/doc/2.5/api/io/github/hamsters/index.html).
 
 ## Special thanks
 

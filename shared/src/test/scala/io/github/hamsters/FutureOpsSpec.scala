@@ -4,7 +4,7 @@ import org.scalatest._
 import scala.concurrent.{ExecutionContext, _}
 import scala.util._
 
-class FutureOpsSpec extends AsyncFlatSpec with Matchers  {
+class FutureOpsSpec extends AsyncFlatSpec with Matchers {
 
   override implicit val executionContext = ExecutionContext.global
 
@@ -19,7 +19,10 @@ class FutureOpsSpec extends AsyncFlatSpec with Matchers  {
   case object BoomError extends Error("Boom")
 
   "FutureOps" should "convert Future[Either[Throwable, A]] to Future[A]" in {
-    FutureOps.fromEither(Right("a")) map (_ shouldBe "a")
+    FutureOps.fromEither(Right("a")) map {
+      _ shouldBe "a"
+    }
+
     FutureOps.fromEither(Left(BoomError)).failed map {
       _ shouldBe BoomError
     }

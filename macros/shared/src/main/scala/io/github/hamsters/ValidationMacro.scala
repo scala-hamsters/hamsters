@@ -1,5 +1,6 @@
 package io.github.hamsters
 
+import scala.collection.immutable
 import scala.meta._
 
 class ValidationMacro extends scala.annotation.StaticAnnotation {
@@ -9,7 +10,7 @@ class ValidationMacro extends scala.annotation.StaticAnnotation {
 
     val arityRange = Range(1, 23)
 
-    val typeParams = arityRange.map(i => Type.Name("R" + i)).map(n => tparam"..$Nil $n")
+    val typeParams: immutable.Seq[Type.Param] = arityRange.map(i => Type.Name("R" + i)).map(n => tparam"..$Nil $n")
     val typeNames = typeParams map (n => Type.Name(n.name.value))
 
     val params = arityRange map (i => param"""${Term.Name(s"e$i")} : ${t"""Either[L, ${Type.Name(s"R$i")}]"""} """)
