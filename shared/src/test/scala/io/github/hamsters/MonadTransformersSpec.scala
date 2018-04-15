@@ -113,10 +113,10 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
 
   }
 
-  "FutureEither" should "handle Future[Either[_,_]] type" in {
-    def fea: Future[Either[String, Int]] = Future(OK(1))
-    def feb(a: Int): Future[Either[String, Int]] = Future(OK(a + 2))
+  def fea: Future[Either[String, Int]] = Future(OK(1))
+  def feb(a: Int): Future[Either[String, Int]] = Future(OK(a + 2))
 
+  "FutureEither" should "handle Future[Either[_,_]] type" in {
     val composedAB: Future[Either[String, Int]] = for {
       a <- FutureEither(fea)
       ab <- FutureEither(feb(a))

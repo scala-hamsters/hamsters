@@ -8,6 +8,7 @@ Currently, Hamsters supports :
 
  * [Validation](docs/validation.md)
  * [Monad transformers](docs/monad_tranformers.md) 
+ * [Future squash operations](docs/future_squash.md) 
  * [Enum typeclass](docs/enums.md)
  * [Default values for options (orEmpty)](docs/default_values.md)
  * [HLists](docs/hlist.md)
