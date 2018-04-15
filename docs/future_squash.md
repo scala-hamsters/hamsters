@@ -13,6 +13,8 @@ FutureOps.fromEither(Left(BoomError)) //Future(BoomError)
 You can use `squash` on a Future[Either[Throwable, A]] to get a Future[A].
 
 ```scala
+import FutureOps._
+
 abstract class Error(message: String) extends Exception(message)
 case object BoomError extends Error("Boom")
 
@@ -26,11 +28,8 @@ feb.squash //Future(BoomError)
 It can also be useful to compose several Future[Either[Throwable, _]] without monad transformers :
 
 ```scala
-import FutureOps._
-
 def fea: Future[Either[Throwable, Int]] = Future(Right(1))
 def feb(a: Int): Future[Either[Throwable, Int]] = Future(Right(a + 2))
-
 
 val composedAB: Future[Int] = for {
   a <- fea.squash
