@@ -7,61 +7,88 @@ import scala.concurrent._
 import MonadTransformers._
 import scala.concurrent.ExecutionContext
 
-class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
+class MonadTransformersSpec extends AsyncFlatSpec with Matchers {
 
   override implicit val executionContext = ExecutionContext.global
 
   def foa: Future[Option[String]] = Future(Some("a"))
+
   def fob(a: String): Future[Option[String]] = Future(Some(a + "b"))
-  
-  "OptionT" should "handle Future[Option[_]] type" in {
-   val composedAB: Future[Option[String]] = for {
-     a <- new OptionT(foa)
-     ab <- new OptionT(fob(a))
-   } yield ab
 
-    composedAB map { _ shouldBe Some("ab") }
+  "OptionT" should "handle Future[Some[_]] type" in {
+    val composedAB: Future[Option[String]] = for {
+      a <- new OptionT(foa)
+      ab <- new OptionT(fob(a))
+    } yield ab
 
-    val noneString : Option[String] = None
+    composedAB map {
+      _ shouldBe Some("ab")
+    }
+  }
+
+
+  "OptionT" should "handle Future[None] type" in {
+    val noneString: Option[String] = None
     val composedABWithNone: Future[Option[String]] = for {
       a <- new OptionT(Future.successful(noneString))
       ab <- new OptionT(fob(a))
     } yield ab
 
-    composedABWithNone map { _ shouldBe None }
+    composedABWithNone map {
+      _ shouldBe None
+    }
 
   }
 
-  "FutureOption" should "handle Future[Option[_]] type" in {
+  "FutureOption" should "handle Future[Some[_]] type" in {
     def foa: Future[Option[String]] = Future(Some("a"))
+
     def fob(a: String): Future[Option[String]] = Future(Some(a + "b"))
 
-    val composedAB= for {
+    val composedAB: Future[Option[String]] = for {
       a <- FutureOption(foa)
       ab <- FutureOption(fob(a))
     } yield ab
 
-    composedAB map { _ shouldBe Some("ab") }
+    composedAB map {
+      _ shouldBe Some("ab")
+    }
+  }
 
-    val noneString : Option[String] = None
+  "FutureOption" should "handle Future[None] type" in {
+    def foa: Future[Option[String]] = Future(Some("a"))
+
+    def fob(a: String): Future[Option[String]] = Future(Some(a + "b"))
+
+    val noneString: Option[String] = None
     val composedABWithNone: Future[Option[String]] = for {
       a <- FutureOption(Future.successful(noneString))
       ab <- FutureOption(fob(a))
     } yield ab
 
-    composedABWithNone map { _ shouldBe None }
+    composedABWithNone map {
+      _ shouldBe None
+    }
+  }
 
-    val failedFuture: Future[Option[String]] =  Future.failed(new Exception("d'oh!"))
+  "FutureOption" should "handle failed Future" in {
+    def foa: Future[Option[String]] = Future(Some("a"))
+
+    def fob(a: String): Future[Option[String]] = Future(Some(a + "b"))
+
+    val failedFuture: Future[Option[String]] = Future.failed(new Exception("d'oh!"))
     val composedABWithFailure: Future[Option[String]] = for {
       a <- FutureOption(failedFuture)
       ab <- FutureOption(fob(a))
     } yield ab
 
-    composedABWithFailure.failed map { _ shouldBe a [Exception]}
+    composedABWithFailure.failed map {
+      _ shouldBe a[Exception]
+    }
 
   }
 
-  "FutureOption" should "be filtered with pattern matching in for comprehension" in {
+  "Future Some" should "be filtered with pattern matching in for comprehension" in {
 
     def fo: Future[Option[(String, Int)]] = Future(Some(("a", 42)))
 
@@ -69,14 +96,23 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
       (a, i) <- FutureOption(fo) if i > 5
     } yield a
 
-    filtered.wrapped map { _ shouldBe Some("a") }
+    filtered.wrapped map {
+      _ shouldBe Some("a")
+    }
 
+  }
+
+  "Future None" should "be filtered with pattern matching in for comprehension" in {
+
+    def fo: Future[Option[(String, Int)]] = Future(Some(("a", 42)))
 
     val filtered2 = for {
       (a, i) <- FutureOption(fo) if i > 50
     } yield a
 
-    filtered2.wrapped  map { _ shouldBe None }
+    filtered2.wrapped map {
+      _ shouldBe None
+    }
 
 
   }
@@ -84,14 +120,17 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
   "FutureOption" should "handle future and option map/flatMap sequences" in {
 
     implicit def optiontoFutureOption[T](o: Option[T]): Future[Option[T]] = Future.successful(o)
+
     implicit def futuretoFutureOption[T](f: Future[T]): Future[Some[T]] = f.map(Some(_))
 
     case class User(id: Int)
     case class Data(id: Int)
 
     object Repo {
-      def user(userId:Int) = Future(Some(User(userId)))
+      def user(userId: Int) = Future(Some(User(userId)))
+
       def getData(id: Int) = Future(Data(1))
+
       def updateData(id: Int) = Future(2)
     }
 
@@ -109,21 +148,28 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
       }).wrapped
 
     val operationSequence = operationSequenceOpt.map(_.getOrElse("error"))
-    operationSequence. map { _ shouldBe  "redirect" }
+    operationSequence.map {
+      _ shouldBe "redirect"
+    }
 
   }
 
   def fea: Future[Either[String, Int]] = Future(OK(1))
+
   def feb(a: Int): Future[Either[String, Int]] = Future(OK(a + 2))
 
-  "FutureEither" should "handle Future[Either[_,_]] type" in {
+  "FutureEither" should "handle Future[Right[_,_]] type" in {
     val composedAB: Future[Either[String, Int]] = for {
       a <- FutureEither(fea)
       ab <- FutureEither(feb(a))
     } yield ab
 
-    composedAB map { _ shouldBe OK(3)}
+    composedAB map {
+      _ shouldBe OK(3)
+    }
+  }
 
+  "FutureEither" should "handle Future[Left[_,_]] type" in {
     val koString: Left[String, Int] = KO("d'oh!")
 
     val composedABWithNone: Future[Either[String, Int]] = for {
@@ -131,32 +177,48 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers  {
       ab <- FutureEither(feb(a))
     } yield ab
 
-    composedABWithNone map { _ shouldBe KO("d'oh!")}
+    composedABWithNone map {
+      _ shouldBe KO("d'oh!")
+    }
 
+  }
+
+  "FutureEither" should "handle failed Future" in {
     val failedFuture: Future[Either[String, Int]] = Future.failed(new Exception("d'oh!"))
     val composedABWithFailure: Future[Either[String, Int]] = for {
       a <- FutureEither(failedFuture)
       ab <- FutureEither(feb(a))
     } yield ab
 
-    composedABWithFailure.failed map { _ shouldBe a [Exception]}
+    composedABWithFailure.failed map {
+      _ shouldBe a[Exception]
+    }
 
   }
 
-  "FutureEither" should "be filtered with pattern matching in for comprehension" in {
+  "Future Right" should "be filtered with pattern matching in for comprehension" in {
     def fe: Future[Either[String, (String, Int)]] = Future(OK(("a", 42)))
 
     val filtered = for {
       (a, i) <- FutureEither(fe) if i > 5
     } yield a
 
-    filtered.wrapped map { _ shouldBe OK("a") }
+    filtered.wrapped map {
+      _ shouldBe OK("a")
+    }
 
-    val filtered2 = for {
+  }
+
+  "Future Left" should "be filtered with pattern matching in for comprehension" in {
+    def fe: Future[Either[String, (String, Int)]] = Future(OK(("a", 42)))
+
+    val filtered = for {
       (a, i) <- FutureEither(fe) if i > 50
     } yield a
 
-    filtered2.wrapped map { _ shouldBe KO("No value matching predicate") }
+    filtered.wrapped map {
+      _ shouldBe KO("No value matching predicate")
+    }
 
   }
 }

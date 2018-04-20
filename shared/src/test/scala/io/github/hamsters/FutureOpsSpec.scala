@@ -18,17 +18,19 @@ class FutureOpsSpec extends AsyncFlatSpec with Matchers {
 
   case object BoomError extends Error("Boom")
 
-  "FutureOps" should "convert Future[Either[Throwable, A]] to Future[A]" in {
+  "FutureOps" should "convert Future[Right[Throwable, A]] to Future[A]" in {
     FutureOps.fromEither(Right("a")) map {
       _ shouldBe "a"
-    }
+    }   
+  }
 
+  "FutureOps" should "convert Future[Left[Throwable, A]] to Future[A]" in {   
     FutureOps.fromEither(Left(BoomError)).failed map {
       _ shouldBe BoomError
     }
   }
 
-  "FutureOps" should "squash Future[Either[Throwable, A]]" in {
+  "FutureOps" should "squash Future[Right[Throwable, A]]" in {
     val composedAB: Future[String] = for {
       a <- fea.squash
       ab <- feb(a).squash
@@ -38,6 +40,9 @@ class FutureOpsSpec extends AsyncFlatSpec with Matchers {
       _ shouldBe "1b"
     }
 
+  }
+
+   "FutureOps" should "squash Future[Left[Throwable, A]]" in {
     val error: Either[Throwable, Int] = Left(BoomError)
     val composedABWithError: Future[String] = for {
       a <- Future.successful(error).squash
@@ -54,14 +59,17 @@ class FutureOpsSpec extends AsyncFlatSpec with Matchers {
 
   def fob(a: String): Future[Option[String]] = Future(Some(a + "b"))
 
-  "FutureOps" should "convert Future[Option[A]] to Future[A]" in {
+  "FutureOps" should "convert Future[Nome[A]] to Future[A]" in {
     FutureOps.fromOption(Some("a")) map (_ shouldBe "a")
+  }
+
+  "FutureOps" should "convert Future[None] to Future[A]" in {
     FutureOps.fromOption(None).failed map {
       _ shouldBe a[EmptyValueError]
     }
   }
 
-  "FutureOps" should "squash Future[Option[A]]" in {
+  "FutureOps" should "squash Future[Some[A]]" in {
     val composedAB: Future[String] = for {
       a <- foa.squash
       ab <- fob(a).squash
@@ -71,6 +79,9 @@ class FutureOpsSpec extends AsyncFlatSpec with Matchers {
       _ shouldBe "ab"
     }
 
+  }
+
+  "FutureOps" should "squash Future[None]" in {   
     val noneString: Option[String] = None
     val composedABWithNone: Future[String] = for {
       a <- Future.successful(noneString).squash
