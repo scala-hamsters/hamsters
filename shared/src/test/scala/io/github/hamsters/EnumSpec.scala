@@ -62,7 +62,7 @@ class EnumSpec extends FlatSpec with Matchers {
     case object Fall extends Season
 
     implicit val seasonEnumerable = new Enumerable[Season] {
-      override def list = sealerate.values[Season]
+      override def list = sealerate.values[Season].toList
 
       override def name(s: Season): String  = {
         s match {
