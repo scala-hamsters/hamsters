@@ -39,3 +39,21 @@ implicit val seasonEnumerable = new Enumerable[Season] {
 Enumeration.name(Winter) // "WINTER_SEASON"
 Enumeration.parse[Season]("WINTER_SEASON") // Some(Winter)
 ```
+
+## Avoid listing trait instances with Sealerate
+
+You can also use [Sealerate](https://github.com/mrvisser/sealerate) to generate your enum's trait instance list : 
+
+```scala
+import ca.mrvisser.sealerate
+
+sealed trait Season
+case object Winter extends Season
+case object Spring extends Season
+case object Summer extends Season
+case object Fall extends Season
+
+implicit val seasonEnumerable = new Enumerable[Season] {
+  override def list = sealerate.values[Season].toList
+}
+```
