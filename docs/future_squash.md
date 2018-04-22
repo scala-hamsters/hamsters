@@ -10,7 +10,7 @@ FutureOps.fromEither(Left(BoomError)) //Future(BoomError)
 
 ## squash Future[Either[Throwable, A]]
 
-You can use `squash` on a Future[Either[Throwable, A]] to get a Future[A].
+You can use `squash` on a `Future[Either[Throwable, A]]` to get a `Future[A]`.
 
 ```scala
 import FutureOps._
@@ -25,7 +25,7 @@ fea.squash //Future("a")
 feb.squash //Future(BoomError)
 ```
 
-It can also be useful to compose several Future[Either[Throwable, _]] without monad transformers :
+It can also be useful to compose several `Future[Either[Throwable, _]]` without monad transformers :
 
 ```scala
 def fea: Future[Either[Throwable, Int]] = Future(Right(1))
