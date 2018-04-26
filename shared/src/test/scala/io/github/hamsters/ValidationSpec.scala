@@ -31,6 +31,20 @@ class ValidationSpec extends FlatSpec with Matchers {
     Validation.failures(e1, e2, e3) should be(List("nan"))
   }
 
+  "Validation" should "give failures with mixed error types" in {
+    
+    sealed trait ValidationError
+    case class NumericError(message: String) extends ValidationError
+    case class OtherError(message: String) extends ValidationError
+
+    val e1 = Right(1)
+    val e2 = Left(NumericError("nan"))
+    val e3 = Left(OtherError("foo"))
+
+    val failures: List[ValidationError] = Validation.failures(e1,e2,e3)
+    failures should be(List(NumericError("nan"), OtherError("foo")))
+  }
+
   "Validation" should "give values if all OK" in {
     val e1 = Right(1)
     val e2 = Right("2")

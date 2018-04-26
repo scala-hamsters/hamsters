@@ -8,10 +8,6 @@ import io.github.hamsters.Functor._
 import scala.concurrent.Future
 class CartesianSpec extends AsyncFlatSpec with Matchers  {
 
-
-
-
-
   val t1OptionInt: Option[Int] = Some(5)
   val t2SomeInt: Option[Int] = Some(6)
   val t3SomeInt: Option[Int] = Some(7)

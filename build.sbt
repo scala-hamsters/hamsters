@@ -2,7 +2,7 @@ import sbt.Keys._
 import sbtcrossproject.{crossProject, CrossType}
 val buildSettings = Defaults.coreDefaultSettings ++ Seq(
   organization := "io.github.scala-hamsters",
-  version := "2.4.0",
+  version := "2.6.0",
   scalacOptions ++= Seq(),
   scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
   publishMavenStyle := true,
@@ -85,7 +85,8 @@ lazy val hamsters = crossProject(JSPlatform, JVMPlatform)
   .settings(libraryDependencies ++= Seq(
     "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
     "org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test",
-    "org.scalacheck" %%% "scalacheck" % "1.13.4" % "test"
+    "org.scalacheck" %%% "scalacheck" % "1.13.4" % "test",
+    "ca.mrvisser" %% "sealerate" % "0.0.5" % "test"
   ))
   .settings(hamstersSettings)
 
