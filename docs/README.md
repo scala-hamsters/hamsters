@@ -12,3 +12,4 @@ Documented feature of Hamsters :
  * [NonEmptyList](nonemptylist.md)
  * [Show](show.md)
  * [mapN](mapN.md)
+ * [Lens](lens.md) 
