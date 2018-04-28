@@ -9,4 +9,7 @@ trait Lens[Source, Property] {self =>
     override def get: Source => NextProperty = source => next.get(self.get(source))
     override def set: Source => NextProperty => Source = source => target => self.set(source)(next.set(self.get(source))(target))
   }
+
+  def >>>[NextProperty](next: Lens[Property, NextProperty]): Lens[Source, NextProperty] = composeLens(next)
+
 }

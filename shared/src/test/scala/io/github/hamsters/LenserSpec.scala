@@ -1,36 +1,30 @@
 package io.github.hamsters
 
-import org.scalacheck.Prop.forAll
-import org.scalacheck.Properties
+import org.scalatest.{FlatSpec, Matchers}
 
-@GenLens
-case class Street(number: Int, name: String)
-@GenLens
-case class User(firstName: String, lastName: String, street: Street)
+class LenserSpec extends FlatSpec with Matchers {
 
-class LenserSpec extends Properties("Lens laws") {
+    @GenLens
+    case class ObjectLevel2(objectLevel3 : String)
+    @GenLens
+    case class ObjectLevel1(objectLevel2 : ObjectLevel2)
+    @GenLens
+    case class RootObject(objectLevel1 : ObjectLevel1)
 
-  import Generators._
-  import Street._
+    val instance = RootObject(ObjectLevel1(ObjectLevel2("initial value")))
+  
+    "set a value with composed lens"  should "set the value" in {
+      import RootObject._
+      import ObjectLevel1._
+      import ObjectLevel2._
+       (_objectLevel1 composeLens _objectLevel2 composeLens _objectLevel3).set(instance)("new value") == RootObject(ObjectLevel1(ObjectLevel2("new value")))
+    }
 
-  property("if I get twice, I get the same answer") = forAll { (user: User) =>
-    _number.get(user.street) == _number.get(user.street)
+  "set a value with composed (using symbol) lens"  should "set the value" in {
+    import RootObject._
+    import ObjectLevel1._
+    import ObjectLevel2._
+    (_objectLevel1 >>> _objectLevel2 >>> _objectLevel3).set(instance)("new value") == RootObject(ObjectLevel1(ObjectLevel2("new value")))
   }
-
-  property("if I get, then set it back, nothing changes") = forAll { (user: User) =>
-    _number.set(user.street)(_number.get(user.street)) == user.street
-  }
-
-  property("if I set, then get, I get what I set") = forAll { (user: User, streetNumber : Int) =>
-    _number.get(_number.set(user.street)(streetNumber)) == streetNumber
-  }
-
-  property("if I set twice then get, I get the second thing I set") = forAll { (user: User, streetNumber1 : Int, streetNumber2 : Int) =>
-    _number.get(_number.set(_number.set(user.street)(streetNumber1))(streetNumber2)) == streetNumber2
-  }
-
 
 }
-
-
-

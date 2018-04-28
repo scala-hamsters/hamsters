@@ -41,3 +41,16 @@ import Person._
 //res1: Person = Person(John,Doe,Address(Street(42,Rue de Picpus)))
 
 ```
+
+You can also use a more consise version
+
+
+```
+import Street._
+import Address._
+import Person._
+
+(_address >>>  _street >>> _number).set(instance)(42) 
+//res1: Person = Person(John,Doe,Address(Street(42,Rue de Picpus)))
+
+```
