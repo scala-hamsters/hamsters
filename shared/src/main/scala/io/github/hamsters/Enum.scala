@@ -4,9 +4,9 @@ trait Enumerable[A] {
 
   def name(a: A): String = a.toString.toLowerCase
 
-  def parse(s: String): Option[A] = list.find(a => name(a).equalsIgnoreCase(s))
+  def parse(s: String): Option[A] = set.find(a => name(a).equalsIgnoreCase(s))
 
-  def list: List[A]
+  def set: Set[A]
 }
 
 object Enumeration {
@@ -35,5 +35,5 @@ object Enumeration {
    * @tparam A
    * @return List of Enumerable objects
    */
-  def list[A](implicit ev: Enumerable[A]): List[A] = ev.list
+  def set[A](implicit ev: Enumerable[A]): Set[A] = ev.set
 }

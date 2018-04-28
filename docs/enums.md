@@ -11,7 +11,7 @@ case object Summer extends Season
 case object Fall extends Season
 
 implicit val seasonEnumerable = new Enumerable[Season] {
-  override def list: List[Season] = List(Winter, Spring, Summer, Fall)
+  override def set: Set[Season] = Set(Winter, Spring, Summer, Fall)
 }
 
 Enumeration.name(Winter) // "winter"
@@ -26,7 +26,7 @@ It is also possible to use custom namings :
 ```scala
 
 implicit val seasonEnumerable = new Enumerable[Season] {
-  override def list = List(Winter, Spring, Summer, Fall)
+  override def set = Set(Winter, Spring, Summer, Fall)
 
   override def name(s: Season) = {
     s match {
@@ -40,12 +40,11 @@ Enumeration.name(Winter) // "WINTER_SEASON"
 Enumeration.parse[Season]("WINTER_SEASON") // Some(Winter)
 ```
 
-## Avoid listing trait instances with Sealerate
+## Avoid listing trait instances
 
-You can also use [Sealerate](https://github.com/mrvisser/sealerate) to generate your enum's trait instance list : 
+You can also use Sealed.values[T] to generate your enum's trait instance set : 
 
 ```scala
-import ca.mrvisser.sealerate
 
 sealed trait Season
 case object Winter extends Season
@@ -54,6 +53,6 @@ case object Summer extends Season
 case object Fall extends Season
 
 implicit val seasonEnumerable = new Enumerable[Season] {
-  override def list = sealerate.values[Season].toList
+  override def set = Sealed.value[Season]
 }
 ```
