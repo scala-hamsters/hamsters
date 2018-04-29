@@ -10,6 +10,7 @@ Documented feature of Hamsters :
  * [Union types](union_types.md)
  * [NonEmptyList](nonemptylist.md)
  * [Show](show.md)
- * [mapN](mapN.md)
+ * [mapN](mapN.md) 
  * [Memoization](memo.md)
  * [Retry](retry.md)
+ * [Lens](lens.md)
