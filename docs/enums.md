@@ -53,6 +53,6 @@ case object Summer extends Season
 case object Fall extends Season
 
 implicit val seasonEnumerable = new Enumerable[Season] {
-  override def set = Sealed.value[Season]
+  override def set = Sealed.values[Season]
 }
 ```
