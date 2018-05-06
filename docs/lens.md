@@ -1,5 +1,5 @@
 
-# Lensers
+# Lenses
 
 
 A Lens helps to deal with a problem of updating complex immutable nested objects.
