@@ -4,6 +4,8 @@ Hamsters provides Monad transformers, but if you don't like to work with monad s
 ## FutureOps.fromEither
 
 ```scala
+import io.github.hamsters.FutureOps
+
 FutureOps.fromEither(Right("a")) //Future("a")
 FutureOps.fromEither(Left(BoomError)) //Future(BoomError)
 ```
