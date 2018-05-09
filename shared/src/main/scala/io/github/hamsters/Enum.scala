@@ -30,10 +30,10 @@ object Enumeration {
   def parse[A](s: String)(implicit ev: Enumerable[_ <: A]): Option[A] = ev.parse(s)
 
   /**
-   * List Enumerable objects for an Enumerable type
+   * Enumerate instances for an Enumerable type
    * @param ev
    * @tparam A
    * @return List of Enumerable objects
    */
-  def set[A](implicit ev: Enumerable[A]): Set[A] = ev.set
+  def enumerate[A](implicit ev: Enumerable[A]): Set[A] = ev.set
 }

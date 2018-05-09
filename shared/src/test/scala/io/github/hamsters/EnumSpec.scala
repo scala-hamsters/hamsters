@@ -13,7 +13,7 @@ class EnumSpec extends FlatSpec with Matchers {
     case object Fall extends Season
 
     implicit val seasonEnumerable = new Enumerable[Season] {
-      override def set: Set[Season] = Sealed.values[Season]
+      override def enumerate: Set[Season] = Sealed.values[Season]
     }
 
     Enumeration.name(Winter) shouldBe "winter"
@@ -22,7 +22,7 @@ class EnumSpec extends FlatSpec with Matchers {
     Enumeration.parse("WiNteR") shouldBe Some(Winter)
     Enumeration.parse[Season]("winter") shouldBe Some(Winter)
 
-    Enumeration.set shouldBe Set(Winter, Spring, Summer, Fall)
+    Enumeration.enumerate shouldBe Set(Winter, Spring, Summer, Fall)
 
   }
 
@@ -35,7 +35,7 @@ class EnumSpec extends FlatSpec with Matchers {
     case object Fall extends Season
 
     implicit val seasonEnumerable = new Enumerable[Season] {
-      override def set =Sealed.values[Season]
+      override def enumerate =Sealed.values[Season]
 
       override def name(s: Season): String  = {
         s match {
@@ -48,7 +48,7 @@ class EnumSpec extends FlatSpec with Matchers {
     Enumeration.name(Winter) shouldBe "WINTER_SEASON"
     Enumeration.parse("WINTER_SEASON") shouldBe Some(Winter)
 
-    Enumeration.set shouldBe Set(Winter, Spring, Summer, Fall)
+    Enumeration.enumerate shouldBe Set(Winter, Spring, Summer, Fall)
   }
 
   "Enum" should "enumerate and parse a custom enumerable type with sealerate" in {
@@ -62,7 +62,7 @@ class EnumSpec extends FlatSpec with Matchers {
     case object Fall extends Season
 
     implicit val seasonEnumerable = new Enumerable[Season] {
-      override def set = sealerate.values[Season]
+      override def enumerate = sealerate.values[Season]
 
       override def name(s: Season): String  = {
         s match {
@@ -75,7 +75,7 @@ class EnumSpec extends FlatSpec with Matchers {
     Enumeration.name(Winter) shouldBe "WINTER_SEASON"
     Enumeration.parse("WINTER_SEASON") shouldBe Some(Winter)
 
-    Enumeration.set shouldBe Set(Winter, Spring, Summer, Fall)
+    Enumeration.enumerate shouldBe Set(Winter, Spring, Summer, Fall)
   }
 
   "Enum" should "enumerate and parse with several types" in {
@@ -92,17 +92,17 @@ class EnumSpec extends FlatSpec with Matchers {
     case object Blue extends Color
 
     implicit val seasonEnumerable = new Enumerable[Season] {
-      override def set: Set[Season] = Set(Winter, Spring, Summer, Fall)
+      override def enumerate: Set[Season] = Set(Winter, Spring, Summer, Fall)
     }
 
     implicit val colorEnumerable = new Enumerable[Color] {
-      override def set: Set[Color] = Sealed.values[Color]
+      override def enumerate: Set[Color] = Sealed.values[Color]
     }
 
     Enumeration.name(Winter) shouldBe "winter"
     Enumeration.parse[Season]("winter") shouldBe Some(Winter)
 
-    Enumeration.set[Season] shouldBe Set(Winter, Spring, Summer, Fall)
+    Enumeration.enumerate[Season] shouldBe Set(Winter, Spring, Summer, Fall)
   }
 
 
