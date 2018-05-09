@@ -27,7 +27,7 @@ It is also possible to use custom namings :
 ```scala
 
 implicit val seasonEnumerable = new Enumerable[Season] {
-  override def enumerate = Set(Winter, Spring, Summer, Fall)
+  override def enumerate = Sealed.values[Season]
 
   override def name(s: Season) = {
     s match {
