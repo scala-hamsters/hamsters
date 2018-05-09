@@ -24,6 +24,10 @@ object Semigroup {
     override def combine(a: List[T], b: List[T]) = a ++ b
   }
 
+  implicit def semigroupalMap[K,V]: Semigroup[Map[K,V]] = new Semigroup[Map[K,V]] {
+    override def combine(a: Map[K,V], b: Map[K,V]) = a ++ b
+  }
+
   implicit def semigroupalOption[T](implicit semigroup: Semigroup[T]): Semigroup[Option[T]] = new Semigroup[Option[T]] {
     override def combine(maybeA: Option[T], maybeB: Option[T]) = {
       (maybeA, maybeB) match {
