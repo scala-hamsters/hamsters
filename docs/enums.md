@@ -40,20 +40,3 @@ implicit val seasonEnumerable = new Enumerable[Season] {
 Enumeration.name(Winter) // "WINTER_SEASON"
 Enumeration.parse[Season]("WINTER_SEASON") // Some(Winter)
 ```
-
-## Avoid listing trait instances
-
-You can also use Sealed.values[T] to generate your enum's trait instance set : 
-
-```scala
-
-sealed trait Season
-case object Winter extends Season
-case object Spring extends Season
-case object Summer extends Season
-case object Fall extends Season
-
-implicit val seasonEnumerable = new Enumerable[Season] {
-  override def enumerate = Sealed.values[Season]
-}
-```
