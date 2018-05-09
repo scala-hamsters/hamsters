@@ -13,4 +13,5 @@ Documented feature of Hamsters :
  * [mapN](mapN.md) 
  * [Memoization](memo.md)
  * [Retry](retry.md)
+ * [Sealed](sealed.md)
  * [Lens](lens.md)
