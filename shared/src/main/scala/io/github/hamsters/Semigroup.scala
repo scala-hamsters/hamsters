@@ -8,6 +8,8 @@ trait Semigroup[T] {
 
 object Semigroup {
 
+  def apply[T](implicit m : Semigroup[T]) = m
+
   implicit val semigroupalInt: Semigroup[Int] = new Semigroup[Int] {
     override def combine(a: Int, b: Int) = a + b
   }

@@ -7,6 +7,8 @@ trait Monoid[T]{
 
 object Monoid {
 
+  def apply[T](implicit m : Monoid[T]) = m
+
   implicit val booleanMonoid : Monoid[Boolean] = new Monoid[Boolean] {
     override def empty = false
     override def compose(l: Boolean, r: Boolean) = l || r

@@ -28,7 +28,7 @@ abstract class FunctorSpec[Box[_]](val functor: Functor[Box])(implicit val arbit
     map(boxA)(identity) == boxA
   }
 
-  property("composition") = forAll { (boxA: Box[Int]) =>
+  property("composition") = forAll { boxA: Box[Int] =>
     mapFG(boxA) == mapG(mapF(boxA))
   }
 
