@@ -6,7 +6,7 @@ trait Enumerable[A] {
 
   def parse(s: String): Option[A] = set.find(a => name(a).equalsIgnoreCase(s))
 
-  def set: Set[A]
+  def enumerate: Set[A]
 }
 
 object Enumeration {
