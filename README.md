@@ -6,19 +6,25 @@ A mini Scala utility library. Compatible with functional programming beginners. 
 
 Currently, Hamsters supports :
 
- * [Validation](docs/validation.md)
- * [Monad transformers](docs/monad_tranformers.md) 
- * [Future squash operations](docs/future_squash.md) 
- * [Enum typeclass](docs/enums.md)
- * [Default values for options (orEmpty)](docs/default_values.md)
- * [HLists](docs/hlist.md)
- * [Union types](docs/union_types.md)
- * [NonEmptyList](docs/nonemptylist.md)
- * [Show](docs/show.md)
- * [mapN](docs/mapN.md)
- * [Memoization](docs/memo.md)
- * [Retry](docs/retry.md)
+ * Validation
+ * Monad transformers
+ * Future squash operations
+ * Enum typeclass
+ * Default values for options (orEmpty)
+ * HLists
+ * Union types
+ * NonEmptyList
+ * Show
+ * mapN
+ * Memoization
+ * Retry
 
+
+## Documentation
+
+[2.6.0 documentation](https://github.com/scala-hamsters/hamsters/tree/2.6.0/docs)  
+
+[Master documentation](https://github.com/scala-hamsters/hamsters/tree/master/docs)
 
 [![Travis](https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master)](https://travis-ci.org/scala-hamsters/hamsters)
 
