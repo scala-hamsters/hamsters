@@ -12,4 +12,9 @@ class MonoidSpec extends FlatSpec with Matchers {
     Monoid[List[Int]].empty shouldBe List.empty[Int]
   }
 
+  "Monoid compose with |+|" should "also wors" in {
+    import Monoid._
+    List(1) |+| List(2) shouldBe List(1,2)
+  }
+
 }
