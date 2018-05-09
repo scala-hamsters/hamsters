@@ -16,6 +16,7 @@ Currently, Hamsters supports :
  * NonEmptyList
  * Show
  * mapN
+ * Lenses
  * Memoization
  * Retry
 
