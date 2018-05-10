@@ -1,11 +1,21 @@
 package io.github.hamsters
 
+import scala.language.implicitConversions
+
 trait Monoid[T]{
   def empty : T
   def compose(l : T, r : T) : T
 }
 
+class MonoidOps[T: Monoid](l: T) {
+  def |+|(r: T): T = Monoid[T].compose(l,r)
+}
+
 object Monoid {
+
+  implicit def type2Monoid[T: Monoid](t: T): MonoidOps[T] = new MonoidOps[T](t)
+
+  def apply[T](implicit m : Monoid[T]): Monoid[T] = m
 
   implicit val booleanMonoid : Monoid[Boolean] = new Monoid[Boolean] {
     override def empty = false
@@ -46,7 +56,6 @@ object Monoid {
     override def empty = Seq.empty[T]
     override def compose(l: Seq[T], r: Seq[T]) = l ++ r
   }
-
 
   implicit def optionMonoid[T] : Monoid[Option[T]] = new Monoid[Option[T]] {
     override def empty = None
