@@ -1,6 +1,6 @@
 # Hamsters Documentation
 
-Documented feature of Hamsters :
+Hamsters features :
 
  * [Validation](validation.md)
  * [Monad transformers](monad_tranformers.md) 
