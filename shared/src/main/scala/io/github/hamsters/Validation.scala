@@ -5,8 +5,8 @@ import scala.util.{Left, Right}
 @ValidationMacro
 object Validation {
 
-  val OK = Right
-  val KO = Left
+  val Valid = Right
+  val Invalid = Left
 
   /**
     * Return Either from code block
@@ -109,7 +109,7 @@ object Validation {
     */
   def hasFailures[L](eithers: Either[L, _]*): Boolean = failures(eithers: _*).nonEmpty
 
-  implicit class OKBiasedEither[L, R](e: Either[L, R]) {
+  implicit class RightBiasedEither[L, R](e: Either[L, R]) {
     def map[R2](f: R => R2) = e.right.map(f)
 
     def flatMap[R2](f: R => Either[L, R2]) = e.right.flatMap(f)
