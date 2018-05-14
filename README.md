@@ -59,7 +59,7 @@ libraryDependencies ++= Seq(
 
 ## Try Hamsters in ScalaFiddle or Ammonite
 
-You can try quickly and easily Hamsters with ScalaFiddle.  
+You can try Hamsters quickly and easily with ScalaFiddle.  
 Example : [https://scalafiddle.io/sf/BDm8W4U/0](https://scalafiddle.io/sf/BDm8W4U/0)
 
 Alternatively, a REPL script is provided. `try-hamster.sh` script downloads and installs 
