@@ -19,6 +19,7 @@ Currently, Hamsters supports :
  * Lenses
  * Memoization
  * Retry
+ * Clazz
 
 
 ## Documentation
