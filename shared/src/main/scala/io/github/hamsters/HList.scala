@@ -1,6 +1,5 @@
 package io.github.hamsters
 
-import scala.annotation.tailrec
 import scala.reflect.ClassTag
 
 sealed trait HList {
@@ -91,7 +90,7 @@ class HNil extends HList {
    * @param p
    * @return HNil
    */
-  override def filter(p: (Any) => Boolean) = HNil
+  override def filter(p: (Any) => Boolean): HNil.type = HNil
 
   /**
    * Apply f to all elements
@@ -99,7 +98,7 @@ class HNil extends HList {
    * @param f
    * @return HNil
    */
-  override def map(f: (Any) => Any) = HNil
+  override def map(f: (Any) => Any): HNil.type = HNil
 
   override def toString = "HNIL"
 
@@ -131,7 +130,7 @@ case class HCons[H, T <: HList](head: H, tail: T) extends HList {
    * @tparam A
    * @return Option of element at index
    */
-  override def get[A: ClassTag](index: Int) = {
+  override def get[A: ClassTag](index: Int): Option[A] = {
     def get(head: Any, tail: HList, index: Int): Option[A] = {
       if (index > 0) {
         tail match {
@@ -177,7 +176,7 @@ case class HCons[H, T <: HList](head: H, tail: T) extends HList {
    */
   def +[A](a: A)(implicit f: Appender[HCons[H, T], HCons[A, HNil], Plus[HCons[A, HNil]]]): HCons[H, T#Plus[HCons[A, HNil]]] = HList.++(this, a :: HNil)
 
-  private def +++(l2: HList) = {
+  private def +++(l2: HList): HCons[H, _] = {
     def append(l1: HCons[H, _], l2: HList): HCons[H, _] = {
       l1.tail match {
         case HNil => HCons(l1.head, l2)
@@ -196,7 +195,7 @@ case class HCons[H, T <: HList](head: H, tail: T) extends HList {
    * @return computed result
    */
   def foldLeft[A](zero: A)(f: (A, Any) => A): A = {
-    @tailrec
+    @scala.annotation.tailrec
     def foldLeft0(accu: A, head: Any, tail: HList): A = {
       val newAccu = f(accu, head)
       tail match {
@@ -215,7 +214,7 @@ case class HCons[H, T <: HList](head: H, tail: T) extends HList {
    * @return HNil
    */
   override def filter(p: (Any) => Boolean): HList = {
-    @tailrec
+    @scala.annotation.tailrec
     def filter0(accu: HList, rest: HList): HList = {
       rest match {
         case _: HNil => accu
@@ -237,7 +236,7 @@ case class HCons[H, T <: HList](head: H, tail: T) extends HList {
    */
   def map(f: (Any) => Any): HList = {
 
-    @tailrec
+    @scala.annotation.tailrec
     def map0(accu: HList, rest: HList): HList = {
       rest match {
         case _: HNil => accu
@@ -268,9 +267,9 @@ object HList {
 
 
   // inspired by http://jnordenberg.blogspot.fr/2008/08/hlist-in-scala.html  
-  implicit def nilAppender[L <: HList] = Appender((v: HNil, l: L) => l)
+  implicit def nilAppender[L <: HList]: Appender[HNil, L, L] = Appender((v: HNil, l: L) => l)
 
-  implicit def consAppender[T, L1 <: HList, L2 <: HList, R <: HList](implicit f: Appender[L1, L2, R]) = {
+  implicit def consAppender[T, L1 <: HList, L2 <: HList, R <: HList](implicit f: Appender[L1, L2, R]): Appender[::[T, L1], L2, ::[T, R]] = {
     Appender[HCons[T, L1], L2, HCons[T, R]]((l1: HCons[T, L1], l2: L2) => HCons(l1.head, f(l1.tail, l2)))
   }
 

@@ -1,6 +1,5 @@
 package io.github.hamsters
 
-import scala.annotation.tailrec
 import scala.reflect._
 
 private object Union {
@@ -14,7 +13,7 @@ private object Union {
 
 trait Union { this: Product =>
 
-  @tailrec
+  @scala.annotation.tailrec
   private def findTypeOnProductIterator[T : ClassTag](it: Iterator[Any]): Option[T] = {
     import Union._
     if(!it.hasNext) None

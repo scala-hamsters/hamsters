@@ -2,6 +2,9 @@ language: scala
 jdk:
   - oraclejdk8
 scala:
-   - 2.12.3
+  - 2.11.11
+  - 2.12.4
 script:
-   - sbt ++$TRAVIS_SCALA_VERSION clean +test
+- curl -L -o ~/bin/mill https://github.com/lihaoyi/mill/releases/download/0.3.4/0.3.4 && chmod +x ~/bin/mill
+- mill hamster[$TRAVIS_SCALA_VERSION].jvm.test
+- mill hamster[$TRAVIS_SCALA_VERSION].js.compile
