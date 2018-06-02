@@ -10,6 +10,8 @@ import scala.concurrent.duration.Duration
 class RetrySpec extends FlatSpec with Matchers with MockFactory {
 
   val logErrorsFunctionMock = mockFunction[String, Unit]
+  
+  import scala.concurrent.ExecutionContext.Implicits.global
 
   "RetryJvm" should "run function several times if failed with wait" in {
     logErrorsFunctionMock expects "Tried 3 times, still not enough : failed"
