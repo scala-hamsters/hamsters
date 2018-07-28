@@ -4,6 +4,7 @@ import io.github.hamsters.MonadTransformers._
 import io.github.hamsters.Validation._
 import org.scalatest._
 import scala.concurrent._
+import scala.util.{Try, Success, Failure}
 import MonadTransformers._
 import scala.concurrent.ExecutionContext
 
@@ -220,5 +221,58 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers {
       _ shouldBe Invalid("No value matching predicate")
     }
 
+  }
+
+  def fta: Future[Try[Int]] = Future(Try(1))
+
+  def ftb(a: Int): Future[Try[Int]] = Future(Try(a + 2))
+
+  "FutureTry" should "handle Future[Success[_]] type" in {
+    val composedAB: Future[Try[Int]] = for {
+      a <- FutureTry(fta)
+      ab <- FutureTry(ftb(a))
+    } yield ab
+
+    composedAB map {
+      _ shouldBe Success(3)
+    }
+  }
+
+  "FutureTry" should "handle Future[Failure[_]] type" in {
+    val exc = new Exception("d'oh!")
+    val koString: Try[Int] = Failure(exc)
+
+    val composedABWithFailure: Future[Try[Int]] = for {
+      a <- FutureTry(Future.successful(koString))
+      ab <- FutureTry(ftb(a))
+    } yield ab
+
+    composedABWithFailure map {
+      _ shouldBe Failure(exc)
+    }
+  }
+
+  "FutureTry" should "handle failed Future" in {
+    val failedFuture: Future[Try[Int]] = Future.failed(new Exception("d'oh!"))
+    val composedABWithFailure: Future[Try[Int]] = for {
+      a <- FutureTry(failedFuture)
+      ab <- FutureTry(ftb(a))
+    } yield ab
+
+    composedABWithFailure.failed map {
+      _ shouldBe a[Exception]
+    }
+  }
+
+  "Future Success" should "be filtered with pattern matching in for comprehension" in {
+    def ft: Future[Try[(String, Int)]] = Future(Try(("a", 42)))
+
+    val filtered = for {
+      (a, i) <- FutureTry(ft) if i > 5
+    } yield a
+
+    filtered.wrapped map {
+      _ shouldBe Success("a")
+    }
   }
 }

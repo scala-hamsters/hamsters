@@ -19,6 +19,22 @@ val composedAB: Future[Option[String]] = for {
 } yield ab
 ```
 
+## FutureTry
+
+```scala
+import io.github.hamsters.FutureTry
+import io.github.hamsters.MonadTransformers._
+//import your execution context here too, for example import scala.concurrent.ExecutionContext.Implicits.global
+
+def foa: Future[Try[String]] = Future(Try("a"))
+def fob(a: String): Future[Try[String]] = Future(Try(a+"b"))
+
+val composedAB: Future[Try[String]] = for {
+  a <- FutureTry(foa)
+  ab <- FutureTry(fob(a))
+} yield ab
+```
+
 ## FutureEither
 
 ```scala
