@@ -23,20 +23,8 @@ object FutureOps {
     def squash(implicit ec: ExecutionContext): Future[A] = futureEitherStack.flatMap(fromEither)
   }
 
-  /**
-    * Converts a Try[A] to a Future[A] that may raise a Throwable
-    *
-    * @param tr
-    * @tparam A
-    * @return a Future[A]
-    */
-  def fromTry[A](tr: Try[A]): Future[A] = tr match {
-    case Success(a) => Future.successful(a)
-    case Failure(th) => Future.failed(th)
-  }
-
   implicit class FutureTry[A](futureTryStack: Future[Try[A]]) {
-    def squash(implicit ec: ExecutionContext): Future[A] = futureTryStack.flatMap(fromTry)
+    def squash(implicit ec: ExecutionContext): Future[A] = futureTryStack.flatMap(Future.fromTry)
   }
 
   /**

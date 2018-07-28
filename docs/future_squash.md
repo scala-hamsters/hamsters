@@ -10,7 +10,7 @@ FutureOps.fromEither(Right("a")) //Future("a")
 FutureOps.fromEither(Left(BoomError)) //Future(BoomError)
 ```
 
-## squash Future[Either[Throwable, A]]
+## squash Future[Either[Throwable, A]] and Future[Try[A]]
 
 You can use `squash` on a `Future[Either[Throwable, A]]` to get a `Future[A]`.
 
@@ -25,6 +25,18 @@ val feb: Future[Either[Error, String]] = Future(Left(BoomError))
 
 fea.squash //Future("a")
 feb.squash //Future(BoomError)
+```
+
+You can also `squash` on a `Future[Try[A]]` to get a `Future[A]` in much the same way:
+
+```scala
+import FutureOps._
+
+val fta: Future[Try[String]] = Future(Success("a"))
+val ftb: Future[Try[String]] = Future(Failure(new Exception("Boom")))
+
+fta.squash //Future("a")
+ftb.squash //Future(Exception("Boom"))
 ```
 
 It can also be useful to compose several `Future[Either[Throwable, _]]` without monad transformers :
@@ -48,6 +60,20 @@ val composedABWithError: Future[Int] = for {
 
 composedABWithError //Future(Failure(BoomError))
 
+```
+
+Composing several `Future[Try[_]]`s without monad transformers is also possible:
+
+```scala
+def fta: Future[Try[Int]] = Future(Success(1))
+def ftb(a: Int): Future[Try[Int]] = Future(Success(a + 2))
+
+val composedAB: Future[Int] = for {
+  a <- fta.squash
+  ab <- ftb(a).squash
+} yield ab
+
+composedAB // Future("ab")
 ```
 
 ## Options
