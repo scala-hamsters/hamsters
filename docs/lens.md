@@ -5,7 +5,7 @@
 A Lens helps to deal with a problem of updating complex immutable nested objects.
 
 
-```
+```scala
 case class Street(number: Int, name: String)
 case class Address(street: Street)
 case class Person(firstName: String, lastName: String, address: Address)
@@ -13,7 +13,7 @@ case class Person(firstName: String, lastName: String, address: Address)
 
 With copy, we will have to write : 
 
-```
+```scala
 instance.copy(address = instance.address.copy(street = instance.address.street.copy(number = 42)))
 res1: Person = Person(John,Doe,Address(Street(42,Rue de Picpus)))
 ```
@@ -21,7 +21,7 @@ res1: Person = Person(John,Doe,Address(Street(42,Rue de Picpus)))
 With Lens, we  have to annotate the case class
 
 
-```
+```scala
 @GenLens
 case class Street(number: Int, name: String)
 @GenLens
@@ -32,7 +32,7 @@ case class Person(firstName: String, lastName: String, address: Address)
 
 And to use lenses  : 
 
-```
+```scala
 import Street._
 import Address._
 import Person._
@@ -45,7 +45,7 @@ import Person._
 You can also use a more consise version
 
 
-```
+```scala
 import Street._
 import Address._
 import Person._

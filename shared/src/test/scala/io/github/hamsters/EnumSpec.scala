@@ -51,33 +51,6 @@ class EnumSpec extends FlatSpec with Matchers {
     Enumeration.enumerate shouldBe Set(Winter, Spring, Summer, Fall)
   }
 
-  "Enum" should "enumerate and parse a custom enumerable type with sealerate" in {
-
-    import ca.mrvisser.sealerate
-
-    sealed trait Season
-    case object Winter extends Season
-    case object Spring extends Season
-    case object Summer extends Season
-    case object Fall extends Season
-
-    implicit val seasonEnumerable = new Enumerable[Season] {
-      override def enumerate = sealerate.values[Season]
-
-      override def name(s: Season): String  = {
-        s match {
-          case Winter => "WINTER_SEASON"
-          case other => super.name(other)
-        }
-      }
-    }
-
-    Enumeration.name(Winter) shouldBe "WINTER_SEASON"
-    Enumeration.parse("WINTER_SEASON") shouldBe Some(Winter)
-
-    Enumeration.enumerate shouldBe Set(Winter, Spring, Summer, Fall)
-  }
-
   "Enum" should "enumerate and parse with several types" in {
 
     sealed trait Season

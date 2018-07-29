@@ -24,7 +24,7 @@ Currently, Hamsters supports :
 
 ## Documentation
 
-[2.6.0 documentation](https://github.com/scala-hamsters/hamsters/tree/2.6.0/docs)  
+[3.0.0 documentation](https://github.com/scala-hamsters/hamsters/tree/3.0.0/docs)  
 
 [Master documentation](https://github.com/scala-hamsters/hamsters/tree/master/docs)
 
@@ -36,7 +36,7 @@ With SBT :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %% "hamsters" % "2.6.0"
+  "io.github.scala-hamsters" %% "hamsters" % "3.0.0"
 )
 ```
 
@@ -46,7 +46,7 @@ With Maven :
 <dependency>
   <groupId>io.github.scala-hamsters</groupId>
   <artifactId>hamsters_${scala.version}</artifactId>
-  <version>2.6.0</version>
+  <version>3.0.0</version>
 </dependency>
 ```
 
@@ -54,7 +54,7 @@ For Scala.js :
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.github.scala-hamsters" %%% "hamsters" % "2.6.0"
+  "io.github.scala-hamsters" %%% "hamsters" % "3.0.0"
 )
 ```
 

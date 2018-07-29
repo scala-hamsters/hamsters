@@ -2,7 +2,7 @@
 
 Sealed allows to list the child of a sealed trait
 
-```
+```scala
 sealed trait Colors
 case object Red extends Colors
 case object Orange extends Colors
