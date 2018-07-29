@@ -94,5 +94,32 @@ class FutureOpsSpec extends AsyncFlatSpec with Matchers {
 
   }
 
+  def fta: Future[Try[String]] = Future(Success("a"))
+
+  def ftb(a: String): Future[Try[String]] = Future(Success(a + "b"))
+
+  "FutureOps" should "squash Future[Success[A]]" in {
+    val composedAB: Future[String] = for {
+      a <- fta.squash
+      ab <- ftb(a).squash
+    } yield ab
+
+    composedAB map {
+      _ shouldBe "ab"
+    }
+  }
+
+  "FutureOps" should "squash Future[Failure[E]" in {
+    val exception = new Exception()
+    val failedString: Try[String] = Failure(exception)
+    val composedABWithFailure: Future[String] = for {
+      a <- Future.successful(failedString).squash
+      ab <- ftb(a).squash
+    } yield ab
+
+    composedABWithFailure.failed map {
+      _ shouldBe a[Exception]
+    }
+  }
 
 }

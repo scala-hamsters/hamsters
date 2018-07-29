@@ -23,6 +23,10 @@ object FutureOps {
     def squash(implicit ec: ExecutionContext): Future[A] = futureEitherStack.flatMap(fromEither)
   }
 
+  implicit class FutureTry[A](futureTryStack: Future[Try[A]]) {
+    def squash(implicit ec: ExecutionContext): Future[A] = futureTryStack.flatMap(Future.fromTry)
+  }
+
   /**
     * Converts an Option[A] to a Future[A] that may raise an empty value error
     *
