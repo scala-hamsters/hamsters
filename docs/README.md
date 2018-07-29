@@ -15,4 +15,3 @@ Hamsters features :
  * [Retry](retry.md)
  * [Sealed](sealed.md)
  * [Lens](lens.md)
- * [Clazz](clazz.md)
