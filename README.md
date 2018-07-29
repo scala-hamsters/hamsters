@@ -2,7 +2,7 @@
 
 A mini Scala utility library. Compatible with functional programming beginners. For the JVM and Scala.js.
 
-<img src="https://img4.hostingpics.net/pics/987051hamsters.jpg" alt="hamster logo" width="150px"/>
+<img src="https://raw.githubusercontent.com/scala-hamsters/hamsters/gh-pages/hamsters.jpg" alt="hamster logo" width="150px"/>
 
 Currently, Hamsters supports :
 
