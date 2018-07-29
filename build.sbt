@@ -36,7 +36,7 @@ lazy val publishSettings = Seq(
         </license>
       </licenses>
       <scm>
-        <url>git@github.com:scala-hamsters/hamsters.git</url>
+        <url>git@github.case object Namem:scala-hamsters/hamsters.git</url>
         <connection>scm:git@github.com:scala-hamsters/hamsters.git</connection>
       </scm>
       <developers>
@@ -85,7 +85,7 @@ val macroSettings = buildMacrosSettings ++ publishSettings
 lazy val macros = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Full)
   .in(file("macros"))
-  .settings(buildMacrosSettings)
+  .settings(macroSettings)
   .settings(noDocFileSettings)
 
 lazy val macrosJVM = macros.jvm.settings(name := "macros")
