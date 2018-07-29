@@ -39,7 +39,13 @@ lazy val publishSettings = Seq(
         <url>git@github.com:scala-hamsters/hamsters.git</url>
         <connection>scm:git@github.com:scala-hamsters/hamsters.git</connection>
       </scm>
-    )
+      <developers>
+        <developer>
+          <id>hamstersTeam</id>
+          <name>Hamsters Team</name>
+          <url>https://github.com/scala-hamsters/hamsters/graphs/contributors</url>
+        </developer>
+      </developers>    )
 )
 
 lazy val noDocFileSettings = Seq (
