@@ -1,6 +1,6 @@
 # Sealed
 
-Sealed allows to list the child of a sealed trait
+Sealed allows to list the children of a sealed trait
 
 ```scala
 sealed trait Colors
