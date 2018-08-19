@@ -19,7 +19,7 @@ Currently, Hamsters supports :
  * Lenses
  * Memoization
  * Retry
- * Sealed
+ * List the children of a sealed trait
 
 ## Documentation
 
