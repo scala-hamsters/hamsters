@@ -37,13 +37,12 @@ object Validation {
   }
 
   /** Return successes (right) for several Either values
-    * Validation.run should be used instead in most cases as it is a type-safer method (it does not return a List[Any])
     * @param eithers
     * @return successes
     */
-  def successes(eithers : Either[_, _]*) : List[Any]= {
+  def successes[R](eithers : Either[_, R]*) : List[R]= {
     eithers.toList.collect {
-      case r : Right[_, _] => r.right.get
+      case r : Right[_, R] => r.right.get
     }
   }
 
