@@ -1,0 +1,72 @@
+= Contributing
+
+== Prerequisites
+
+Install `mill` (if not already installed) using the https://www.lihaoyi.com/mill/#installation[installation instructions]. +
+If the installation was successful, `mill` should be available on your `PATH`.
+To confirm that `mill` is available, execute:
+
+ $ mill version
+
+You should see information about _mill_ version printed in the terminal.
+
+[source]
+[1/1] version
+0.3.4
+
+== Build
+
+Mill uses an hierarchical structure:
+
+* `hamster` (root module)
+** `2.11.11`
+**** `jvm`
+*** `js`
+*** `metas`
+*** `macros`
+** `2.12.4`
+*** `jvm`
+*** `js`
+*** `metas`
+*** `macros`
+
+So if you want to compile the `jvm` module for Scala 2.12.4, you need to type:
+
+[source]
+$ mill hamster[2.12.4].jvm.compile
+
+If you want to build all the modules for Scala 2.11.11 then you can replace the name of the module with `_`:
+
+ $ mill hamster[2.11.11]._.compile
+
+And if you want to build everything:
+
+ $ mill hamster.__.compile
+
+[NOTE]
+====
+The syntax is a shortcut for:
+
+
+ $ mill hamster._._.compile
+====
+
+To run all tests:
+
+ $ mill hamster.__.test
+
+== Release
+
+To prepare a release, open a terminal and type:
+
+[source]
+$ mill release.prepare --releaseVersion 1.2.3
+
+The above command will update the project, commit the changes and create a tag with the specified version.
+To perform the release, push the local changes:
+
+[source]
+$ git push origin master
+$ git push origin 1.2.3
+
+Travis will build project, run the tests and if all goes well, publish the release on Maven Central using the https://oss.sonatype.org/[oss.sonatype.org] repository.

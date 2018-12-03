@@ -3,4 +3,4 @@
 project/project
 project/target
 target/
-*.sc
+out/

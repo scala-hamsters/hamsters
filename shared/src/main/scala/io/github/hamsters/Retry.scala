@@ -25,7 +25,7 @@ object Retry {
     * @return Try of result
     */
   def fromTry[T](maxTries: Int, errorFn: (String) => Unit = _=> Unit)(fn: => Try[T]): Try[T] = {
-    @annotation.tailrec
+    @scala.annotation.tailrec
     def retry(remainingTries: Int, errorFn: (String) => Unit)(fn: => Try[T]): Try[T] = {
       fn match {
         case Success(x) => Success(x)
