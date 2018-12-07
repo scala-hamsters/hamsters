@@ -5,9 +5,6 @@ import scala.util.{Left, Right}
 @ValidationMacro
 object Validation {
 
-  val Valid = Right
-  val Invalid = Left
-
   /**
     * Return Either from code block
     * @param body
@@ -54,43 +51,6 @@ object Validation {
     */
   def hasSuccesses[R](eithers: Either[_, R]*): Boolean = successes(eithers: _*).nonEmpty
 
-  /**
-    * Run the validation
-    * This validation accumulates all errors
-    * Arity 2 to 22 methods are available and generated from macro
-    * @param e1 : first either
-    * @param e2 : second either
-    * @tparam L
-    * @tparam R1
-    * @tparam R2
-    * @return a tuple (R1, R2) of results in a Right if validation is successful or a list of errors L if it fails
-    */
-  def run[L, R1, R2](e1: Either[L, R1], e2: Either[L, R2]): Either[List[L], (R1, R2)] = {
-    failures(e1, e2) match {
-      case Nil => Right(e1.get, e2.get)
-      case f: List[L] => Left(f)
-    }
-  }
-
-  /**
-    * Run the validation
-    * This validation accumulates all errors
-    * Arity 2 to 22 methods are available and generated from macro
-    * @param e1 : first either
-    * @param e2 : second either
-    * @param e3 : third either
-    * @tparam L
-    * @tparam R1
-    * @tparam R2
-    * @tparam R3
-    * @return a tuple (R1, R2, R3) of results in a Right if validation is successful or a list of errors L if it fails
-    */
-  def run[L, R1, R2, R3](e1: Either[L, R1], e2: Either[L, R2], e3: Either[L, R3]): Either[List[L], (R1, R2, R3)] = {
-    failures(e1, e2, e3) match {
-      case Nil => Right(e1.get, e2.get, e3.get)
-      case f: List[L] => Left(f)
-    }
-  }
 
   /**
     * Retrieve failures (left) for several Either values
@@ -107,19 +67,5 @@ object Validation {
     * @return boolean
     */
   def hasFailures[L](eithers: Either[L, _]*): Boolean = failures(eithers: _*).nonEmpty
-
-  implicit class RightBiasedEither[L, R](e: Either[L, R]) {
-    def map[R2](f: R => R2) = e.right.map(f)
-
-    def flatMap[R2](f: R => Either[L, R2]) = e.right.flatMap(f)
-
-    def filter(p: (R) => Boolean) = filterWith(p)
-
-    def filterWith(p: (R) => Boolean) = e.right.filter(p)
-
-    def get = e.right.get
-
-    def getOrElse[R2 >: R](or: => R2) = e.right.getOrElse(or)
-  }
 
 }

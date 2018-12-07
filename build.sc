@@ -5,12 +5,12 @@ import mill.scalajslib._
 import mill.scalalib._
 import mill.scalalib.publish._
 
-object hamster extends Cross[HamsterModule]("2.11.11", "2.12.4")
+object hamsters extends Cross[HamstersModule]("2.11.11", "2.12.8", "2.13.0-M1")
 
-class HamsterModule(val scalaCrossVersion: String) extends Module {
+class HamstersModule(val scalaCrossVersion: String) extends Module {
   override def millSourcePath = super.millSourcePath / up / up
 
-  trait HamsterModule extends SbtModule with PublishModule {
+  trait HamstersModule extends SbtModule with PublishModule {
 
     def scalaVersion = scalaCrossVersion
 
@@ -46,19 +46,19 @@ class HamsterModule(val scalaCrossVersion: String) extends Module {
 
   }
 
-  object jvm extends HamsterMacroParadiseModule with TransitiveJar {
+  object jvm extends HamstersMacroParadiseModule with TransitiveJar {
     override def moduleDeps = Seq(shared)
 
     override def artifactName = "hamsters"
   }
 
-  object macros extends HamsterMacroParadiseModule {
+  object macros extends HamstersMacroParadiseModule {
     override def millSourcePath = super.millSourcePath / 'shared
 
     override def artifactName = "macros"
   }
 
-  object metas extends HamsterMetaParadiseModule {
+  object metas extends HamstersMetaParadiseModule {
     override def millSourcePath = super.millSourcePath
 
     override def sources = T.sources(
@@ -69,11 +69,11 @@ class HamsterModule(val scalaCrossVersion: String) extends Module {
     override def artifactName = "metas"
   }
 
-  object shared extends HamsterMetaParadiseModule {
+  object shared extends HamstersMetaParadiseModule {
     override def moduleDeps = Seq(macros, metas)
   }
 
-  object macrosJS extends HamsterMacroParadiseModule with HamsterScalaJSModule {
+  object macrosJS extends HamstersMacroParadiseModule with HamstersScalaJSModule {
     override def millSourcePath = super.millSourcePath / up
 
     override def sources = T.sources(
@@ -84,7 +84,7 @@ class HamsterModule(val scalaCrossVersion: String) extends Module {
     override def artifactName = "macros"
   }
 
-  object metasJS extends HamsterMetaParadiseModule with HamsterScalaJSModule {
+  object metasJS extends HamstersMetaParadiseModule with HamstersScalaJSModule {
     override def millSourcePath = super.millSourcePath / up
 
     override def sources = T.sources(
@@ -95,13 +95,13 @@ class HamsterModule(val scalaCrossVersion: String) extends Module {
     override def artifactName = "metas"
   }
 
-  object js extends HamsterModule with HamsterScalaJSModule with TransitiveJar {
+  object js extends HamstersModule with HamstersScalaJSModule with TransitiveJar {
     override def moduleDeps = Seq(macrosJS, metasJS)
 
     override def artifactName = "hamsters"
   }
 
-  trait HamsterMetaParadiseModule extends HamsterModule {
+  trait HamstersMetaParadiseModule extends HamstersModule {
     override def repositories() = super.repositories ++ Seq(
       coursier.ivy.IvyRepository.parse("https://dl.bintray.com/scalameta/maven/", dropInfoAttributes = true).toOption.get
     )
@@ -115,7 +115,7 @@ class HamsterModule(val scalaCrossVersion: String) extends Module {
     )
   }
 
-  trait HamsterMacroParadiseModule extends HamsterModule {
+  trait HamstersMacroParadiseModule extends HamstersModule {
     override def ivyDeps = Agg(
       ivy"org.scala-lang:scala-reflect:$scalaCrossVersion"
     )
@@ -125,7 +125,7 @@ class HamsterModule(val scalaCrossVersion: String) extends Module {
     )
   }
 
-  trait HamsterScalaJSModule extends ScalaJSModule {
+  trait HamstersScalaJSModule extends ScalaJSModule {
     def scalaJSVersion = "0.6.23"
   }
 

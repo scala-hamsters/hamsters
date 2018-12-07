@@ -45,35 +45,6 @@ class ValidationSpec extends FlatSpec with Matchers {
     failures should be(List(NumericError("nan"), OtherError("foo")))
   }
 
-  "Validation" should "give values if all OK" in {
-    val e1 = Right(1)
-    val e2 = Right("2")
-
-    Validation.run(e1, e2) should be(Right((1,"2")))
-  }
-
-  "Validation mixing Either and Try" should "give values if all OK" in {
-    val e1 = Right(1)
-    val e2 = Try("2")
-    Validation.run(e1, e2) should be(Right((1,"2")))
-  }
-
-  "Validation" should "not give values if all are not OK" in {
-    val e1 = Right(1)
-    val e2 = Right("2")
-    val e3 = Left("nan")
-
-    Validation.run(e1, e2, e3) should be(Left(List("nan")))
-  }
-
-  "Validation mixing Either and Try" should "not give values if all are not OK" in {
-    val e1 = Right(1)
-    val e2 = Right("2")
-    val e3 = Failure(new IllegalArgumentException("nan"))
-
-    Validation.run(e1, e2, e3) should be(Left(List("nan")))
-  }
-
   "Validation hasSuccesses of Eithers" should "return true" in {
     val e0 = Left("nan")
     val e1 = Right(1)

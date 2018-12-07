@@ -1,6 +1,5 @@
 = Hamsters
-:release-version: 3.0.0
-:documentation-version: 3.0.0
+:release-version: 4.0.0
 ifndef::env-github[:icons: font]
 ifdef::env-github[]
 :outfilesuffix: .adoc
@@ -18,8 +17,6 @@ Currently, Hamsters supports :
  * Future squash operations
  * Enum typeclass
  * Default values for options (orEmpty)
- * HLists
- * Union types
  * NonEmptyList
  * Show
  * mapN
@@ -38,24 +35,11 @@ image::https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master[Travis bu
 
 == Install as dependency
 
-With SBT :
-
 [source,scala,subs="verbatim,attributes"]
 ----
 libraryDependencies ++= Seq(
   "io.github.scala-hamsters" %% "hamsters" % "{release-version}"
 )
-----
-
-With Maven :
-
-[source,xml,subs="verbatim,attributes"]
-----
-<dependency>
-  <groupId>io.github.scala-hamsters</groupId>
-  <artifactId>hamsters_${scala.version}</artifactId>
-  <version>{release-version}</version>
-</dependency>
 ----
 
 For Scala.js :
@@ -105,7 +89,7 @@ See https://github.com/scala-hamsters/hamsters-extensions[hamsters-extensions] f
 
 == Scaladoc
 
-You can find the API documentation https://static.javadoc.io/io.github.scala-hamsters/hamsters_2.12/{documentation-version}/io/github/hamsters/index.html[here].
+You can find the API documentation https://static.javadoc.io/io.github.scala-hamsters/hamsters_2.12/{release-version}/io/github/hamsters/index.html[here].
 
 == Special thanks
 
