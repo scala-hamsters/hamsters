@@ -45,7 +45,7 @@ class ValidationSpec extends FlatSpec with Matchers {
     failures should be(List(NumericError("nan"), OtherError("foo")))
   }
 
-  "Validation hasSuccesses of Eithers" should "return true" in {
+  "hasSuccesses" should "return true" in {
     val e0 = Left("nan")
     val e1 = Right(1)
     val e2 = Right("2")
@@ -55,7 +55,7 @@ class ValidationSpec extends FlatSpec with Matchers {
     Validation.hasSuccesses(e0, e1, e2, e3, e4)  should be(true)
   }
 
-  "Validation results" should "return only the right values" in {
+  "successes" should "return only the right values" in {
     val e0 = Left("nan")
     val e1 = Right(1)
     val e2 = Right("2")
@@ -66,7 +66,7 @@ class ValidationSpec extends FlatSpec with Matchers {
     Validation.successes(e0, e1, e2, e3, e4) should be(List(1, "2", "3"))
   }
 
-  "Validation hasSuccesses of Trys" should "return true" in {
+  "hasSuccesses of Trys" should "return true" in {
     Validation.hasSuccesses(
       Failure(new Exception("nan")),
       Success(1),
@@ -76,7 +76,7 @@ class ValidationSpec extends FlatSpec with Matchers {
     )  should be(true)
   }
 
-  "Validation results" should "return only the success values" in {
+  "Validation successes" should "return only the success values" in {
     Validation.successes(
       Failure(new Exception("nan")),
       Success(1),
@@ -84,50 +84,6 @@ class ValidationSpec extends FlatSpec with Matchers {
       Failure(new Exception("nan bis")),
       Success("3")
     ) should be(List(1, "2", "3"))
-  }
-
-
-
-  "OK" should "give a value using get and getOrElse" in {
-    val e = Right(1)
-    e.get should be(1)
-    e.getOrElse(2) should be(1)
-  }
-
-  "KO" should "give a value using getOrElse" in {
-    val e = Left("d'oh!")
-    e.getOrElse(2) should be(2)
-  }
-
-  "Either" should "compose using flatMap and map" in {
-    val e1 = Right(1)
-    val e2 = Right(2)
-    val e3 = Right(3)
-
-    val combine = for {
-      v1 <- e1
-      v2 <- e2
-      v3 <- e3
-    } yield s"$v1-$v2-$v3"
-
-    combine should be(Right("1-2-3"))
-
-  }
-
-  "Either" should "stop at first error" in {
-
-    val e1: Either[String, Int] = Right(1)
-    val e2: Either[String, Int] = Left("nan")
-    val e3: Either[String, Int] = Left("nan2")
-
-    val combine = for {
-      v1 <- e1
-      v2 <- e2
-      v3 <- e3
-    } yield s"$v1-$v2-$v3"
-
-    combine should be(Left("nan"))
-
   }
 
   "from catchable" should "convert to either" in {
