@@ -4,7 +4,7 @@ jdk:
 
 scala:
 - 2.11.11
-- 2.12.4
+- 2.12.8
 
 script:
 - curl -L -o ~/bin/mill https://github.com/lihaoyi/mill/releases/download/0.3.4/0.3.4 && chmod +x ~/bin/mill

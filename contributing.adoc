@@ -18,42 +18,42 @@ You should see information about _mill_ version printed in the terminal.
 
 Mill uses an hierarchical structure:
 
-* `hamster` (root module)
+* `hamsters` (root module)
 ** `2.11.11`
 **** `jvm`
 *** `js`
 *** `metas`
 *** `macros`
-** `2.12.4`
+** `2.12.8`
 *** `jvm`
 *** `js`
 *** `metas`
 *** `macros`
 
-So if you want to compile the `jvm` module for Scala 2.12.4, you need to type:
+So if you want to compile the `jvm` module for Scala 2.12.8, you need to type:
 
 [source]
-$ mill hamster[2.12.4].jvm.compile
+$ mill hamsters[2.12.8].jvm.compile
 
 If you want to build all the modules for Scala 2.11.11 then you can replace the name of the module with `_`:
 
- $ mill hamster[2.11.11]._.compile
+ $ mill hamsters[2.11.11]._.compile
 
 And if you want to build everything:
 
- $ mill hamster.__.compile
+ $ mill hamsters.__.compile
 
 [NOTE]
 ====
 The syntax is a shortcut for:
 
 
- $ mill hamster._._.compile
+ $ mill hamsters._._.compile
 ====
 
 To run all tests:
 
- $ mill hamster.__.test
+ $ mill hamsters.__.test
 
 == Release
 

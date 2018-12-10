@@ -33,14 +33,11 @@ object Validation {
     }
   }
 
-  /** Return successes (right) for several Either values
-    * @param eithers
-    * @return successes
-    */
-  def successes[R](eithers : Either[_, R]*) : List[R]= {
-    eithers.toList.collect {
-      case r : Right[_, R] => r.right.get
-    }
+ 
+  /** Retrieves Right values for several Either values
+   */
+  def successes[B](eithers : Either[_, B]*) : Seq[B]=  eithers.toSeq.collect {
+    case Right(b) => b
   }
 
   /**
@@ -53,12 +50,11 @@ object Validation {
 
 
   /**
-    * Retrieve failures (left) for several Either values
-    * @param eithers
-    * @tparam L
-    * @return failures
-    */
-  def failures[L](eithers: Either[L, _]*): List[L] = eithers.toList.collect { case l: Left[L, _] => l.left.get }
+   * Retrieves Left values for several Either values
+   */
+  def failures[A](eithers: Either[A, _]*): Seq[A] = eithers.toSeq.collect { 
+    case Left(a) => a
+  }
 
   /**
     * Tells if eithers contain failures (left)

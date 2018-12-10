@@ -20,15 +20,15 @@ class ValidationSpec extends FlatSpec with Matchers {
     val e2 = Left("nan")
     val e3 = Failure(new IllegalArgumentException("nan2"))
 
-    Validation.failures(e1,e2,e3) should be(List("nan", "nan2"))
+    Validation.failures(e1,e2,e3) should be(Seq("nan", "nan2"))
   }
 
-  "Validation" should "give failures with mixed types" in {
+  "Validation" should "give failures with mixed right types" in {
     val e1 = Right(1)
     val e2 = Right("2")
     val e3 = Left("nan")
 
-    Validation.failures(e1, e2, e3) should be(List("nan"))
+    Validation.failures(e1, e2, e3) should be(Seq("nan"))
   }
 
   "Validation" should "give failures with mixed error types" in {
@@ -41,8 +41,8 @@ class ValidationSpec extends FlatSpec with Matchers {
     val e2 = Left(NumericError("nan"))
     val e3 = Left(OtherError("foo"))
 
-    val failures: List[ValidationError] = Validation.failures(e1,e2,e3)
-    failures should be(List(NumericError("nan"), OtherError("foo")))
+    val failures: Seq[ValidationError] = Validation.failures(e1,e2,e3)
+    failures should be(Seq(NumericError("nan"), OtherError("foo")))
   }
 
   "hasSuccesses" should "return true" in {
@@ -52,7 +52,7 @@ class ValidationSpec extends FlatSpec with Matchers {
     val e3 = Left("nan bis")
     val e4 = Right("3")
 
-    Validation.hasSuccesses(e0, e1, e2, e3, e4)  should be(true)
+    Validation.hasSuccesses(e0, e1, e2, e3, e4) should be(true)
   }
 
   "successes" should "return only the right values" in {
@@ -63,7 +63,7 @@ class ValidationSpec extends FlatSpec with Matchers {
     val e4 = Right("3")
 
     Validation.successes(e0, e1, e2, e3, e4) should have size 3
-    Validation.successes(e0, e1, e2, e3, e4) should be(List(1, "2", "3"))
+    Validation.successes(e0, e1, e2, e3, e4) should be(Seq(1, "2", "3"))
   }
 
   "hasSuccesses of Trys" should "return true" in {
@@ -76,14 +76,14 @@ class ValidationSpec extends FlatSpec with Matchers {
     )  should be(true)
   }
 
-  "Validation successes" should "return only the success values" in {
+  "successes of Trys" should "return only the success values" in {
     Validation.successes(
       Failure(new Exception("nan")),
       Success(1),
       Success("2"),
       Failure(new Exception("nan bis")),
       Success("3")
-    ) should be(List(1, "2", "3"))
+    ) should be(Seq(1, "2", "3"))
   }
 
   "from catchable" should "convert to either" in {
