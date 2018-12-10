@@ -36,7 +36,7 @@ object Validation {
  
   /** Retrieves Right values for several Either values
    */
-  def successes[B](eithers : Either[_, B]*) : Seq[B]=  eithers.toSeq.collect {
+  def successes[B](eithers : Either[_, B]*) : Seq[B]=  eithers.collect {
     case Right(b) => b
   }
 
@@ -52,7 +52,7 @@ object Validation {
   /**
    * Retrieves Left values for several Either values
    */
-  def failures[A](eithers: Either[A, _]*): Seq[A] = eithers.toSeq.collect { 
+  def failures[A](eithers: Either[A, _]*): Seq[A] = eithers.collect { 
     case Left(a) => a
   }
 
