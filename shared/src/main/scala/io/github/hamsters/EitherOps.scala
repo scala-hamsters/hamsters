@@ -2,8 +2,7 @@ package io.github.hamsters
 
 import scala.util.{Left, Right}
 
-@ValidationMacro
-object Validation {
+object EitherOps {
 
   /**
     * Return Either from code block
@@ -33,35 +32,24 @@ object Validation {
     }
   }
 
- 
-  /** Retrieves Right values for several Either values
-   */
-  def successes[B](eithers : Either[_, B]*) : Seq[B]=  eithers.collect {
-    case Right(b) => b
+  implicit class EitherLeftOps[L](eithers: Seq[Either[L,_]]){
+     
+    /**
+     * Retrieves Left values for several Either values
+     */
+    def collectLefts: Seq[L] = eithers.collect { 
+      case Left(l) => l
+    }
   }
 
-  /**
-    * Tells if eithers contain successes (right)
-    * @param eithers
-    * @tparam R
-    * @return boolean
-    */
-  def hasSuccesses[R](eithers: Either[_, R]*): Boolean = successes(eithers: _*).nonEmpty
-
-
-  /**
-   * Retrieves Left values for several Either values
-   */
-  def failures[A](eithers: Either[A, _]*): Seq[A] = eithers.collect { 
-    case Left(a) => a
+  implicit class EitherRightOps[R](eithers: Seq[Either[_,R]]){
+    
+    /**
+     * Retrieves Right values for several Either values
+     */
+    def collectRights: Seq[R] = eithers.collect { 
+      case Right(r) => r
+    }
   }
-
-  /**
-    * Tells if eithers contain failures (left)
-    * @param eithers
-    * @tparam L
-    * @return boolean
-    */
-  def hasFailures[L](eithers: Either[L, _]*): Boolean = failures(eithers: _*).nonEmpty
 
 }
