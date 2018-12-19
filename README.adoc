@@ -12,15 +12,15 @@ image::https://raw.githubusercontent.com/scala-hamsters/hamsters/gh-pages/hamste
 
 Currently, Hamsters supports :
 
- * Validation
- * Monad transformers
- * Future squash operations
+ * Monad transformers 
  * Enum typeclass
+ * Either additional operations (accumulate errors)
+ * mapN
+ * Lenses
+ * Future squash operations
  * Default values for options (orEmpty)
  * NonEmptyList
  * Show
- * mapN
- * Lenses
  * Memoization
  * Retry
  * List the children of a sealed trait
@@ -50,38 +50,6 @@ libraryDependencies ++= Seq(
   "io.github.scala-hamsters" %%% "hamsters" % "{release-version}"
 )
 ----
-
-== Try Hamsters in ScalaFiddle or Ammonite
-
-You can try Hamsters quickly and easily with ScalaFiddle.  
-Example : https://scalafiddle.io/sf/BDm8W4U/0
-
-Alternatively, a REPL script is provided. `try-hamster.sh` script downloads and installs 
-https://github.com/alexarchambault/coursier[Coursier], https://github.com/lihaoyi/Ammonite[Ammonite] REPL and Hamsters dependency.
-No dependencies needed other than a JDK.
-
-NOTE: The macros don't work with the REPL
-
-```shell
-curl -s https://raw.githubusercontent.com/scala-hamsters/hamsters/master/scripts/try-hamsters.sh | bash
-
-Loading...
-Welcome to the Ammonite Repl 1.0.1
-(Scala 2.12.3 Java 1.8.0_151)
-
-@ val noneString: Option[String] = None 
-noneString: Option[String] = None
-
-@ noneString.orEmpty 
-res1: String = ""
-
-@ val hlist1: Double :: String :: HNil = 2.0 :: "hi" :: HNil 
-hlist1: Double :: String :: HNil = HCons(2.0, HCons("hi", HNIL))
-
-@ exit 
-Bye!
-
-```
 
 == Extensions
 
