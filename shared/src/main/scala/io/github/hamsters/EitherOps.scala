@@ -32,24 +32,19 @@ object EitherOps {
     }
   }
 
-  implicit class EitherLeftOps[L](eithers: Seq[Either[L,_]]){
-     
-    /**
-     * Retrieves Left values for several Either values
-     */
-    def collectLefts: Seq[L] = eithers.collect { 
-      case Left(l) => l
-    }
+  /**
+   * Retrieves Left values for several Either values
+   */
+  def collectLefts[L](eithers: Either[L,_]*): Seq[L] = eithers.collect { 
+    case Left(l) => l
   }
 
-  implicit class EitherRightOps[R](eithers: Seq[Either[_,R]]){
-    
-    /**
-     * Retrieves Right values for several Either values
-     */
-    def collectRights: Seq[R] = eithers.collect { 
-      case Right(r) => r
-    }
+
+  /**
+   * Retrieves Right values for several Either values
+   */
+  def collectRights[R](eithers: Either[_,R]*): Seq[R] = eithers.collect { 
+    case Right(r) => r
   }
 
 }

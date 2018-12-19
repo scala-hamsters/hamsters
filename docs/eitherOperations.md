@@ -14,7 +14,7 @@ val e1 = Right(1)
 val e2 = Left(NumericError("nan"))
 val e3 = Left(OtherError("foo"))
 
-val errors: Seq[Error] Seq(e1,e2,e3).collectLefts
+val errors: Seq[Error] = collectLefts(e1,e2,e3)
 ```
 
 If there are no failures you can use a for comprehension to get all succesful values.

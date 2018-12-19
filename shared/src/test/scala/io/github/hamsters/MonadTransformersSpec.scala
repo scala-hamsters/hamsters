@@ -1,7 +1,7 @@
 package io.github.hamsters
 
 import io.github.hamsters.MonadTransformers._
-import io.github.hamsters.Validation._
+import io.github.hamsters.EitherOps._
 import org.scalatest._
 import scala.concurrent._
 import scala.util.{Try, Success, Failure}
@@ -155,9 +155,9 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers {
 
   }
 
-  def fea: Future[Either[String, Int]] = Future(Valid(1))
+  def fea: Future[Either[String, Int]] = Future(Right(1))
 
-  def feb(a: Int): Future[Either[String, Int]] = Future(Valid(a + 2))
+  def feb(a: Int): Future[Either[String, Int]] = Future(Right(a + 2))
 
   "FutureEither" should "handle Future[Right[_,_]] type" in {
     val composedAB: Future[Either[String, Int]] = for {
@@ -166,12 +166,12 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers {
     } yield ab
 
     composedAB map {
-      _ shouldBe Valid(3)
+      _ shouldBe Right(3)
     }
   }
 
   "FutureEither" should "handle Future[Left[_,_]] type" in {
-    val koString: Left[String, Int] = Invalid("d'oh!")
+    val koString: Left[String, Int] = Left("d'oh!")
 
     val composedABWithNone: Future[Either[String, Int]] = for {
       a <- FutureEither(Future.successful(koString))
@@ -179,7 +179,7 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers {
     } yield ab
 
     composedABWithNone map {
-      _ shouldBe Invalid("d'oh!")
+      _ shouldBe Left("d'oh!")
     }
 
   }
@@ -198,27 +198,27 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers {
   }
 
   "Future Right" should "be filtered with pattern matching in for comprehension" in {
-    def fe: Future[Either[String, (String, Int)]] = Future(Valid(("a", 42)))
+    def fe: Future[Either[String, (String, Int)]] = Future(Right(("a", 42)))
 
     val filtered = for {
       (a, i) <- FutureEither(fe) if i > 5
     } yield a
 
     filtered.wrapped map {
-      _ shouldBe Valid("a")
+      _ shouldBe Right("a")
     }
 
   }
 
   "Future Left" should "be filtered with pattern matching in for comprehension" in {
-    def fe: Future[Either[String, (String, Int)]] = Future(Valid(("a", 42)))
+    def fe: Future[Either[String, (String, Int)]] = Future(Right(("a", 42)))
 
     val filtered = for {
       (a, i) <- FutureEither(fe) if i > 50
     } yield a
 
     filtered.wrapped map {
-      _ shouldBe Invalid("No value matching predicate")
+      _ shouldBe Left("No value matching predicate")
     }
 
   }

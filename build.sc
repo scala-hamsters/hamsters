@@ -5,7 +5,7 @@ import mill.scalajslib._
 import mill.scalalib._
 import mill.scalalib.publish._
 
-object hamsters extends Cross[HamstersModule]("2.11.11", "2.12.8", "2.13.0-M1")
+object hamsters extends Cross[HamstersModule]("2.11.11", "2.12.4", "2.13.0-M1")
 
 class HamstersModule(val scalaCrossVersion: String) extends Module {
   override def millSourcePath = super.millSourcePath / up / up
