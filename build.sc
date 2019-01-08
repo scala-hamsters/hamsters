@@ -144,7 +144,6 @@ object release extends Module {
 
   def prepare(releaseVersion: String) = T.command {
     updateReadme(releaseVersion, releaseVersion) // release version and documentation version are the same
-    updateREPLscript(releaseVersion)
     tag(releaseVersion)
   }
 
@@ -155,14 +154,7 @@ object release extends Module {
       .replaceAll(":release-version: ([0-9\\.]+)", s":release-version: $releaseVersion")
       .replaceAll(":documentation-version: ([0-9\\.]+)", s":documentation-version: $documentationVersion"))
   }
-
-  private def updateREPLscript(releaseVersion: String): Unit = {
-    val script = pwd / 'scripts / "try-hamsters.sh"
-    val content = read ! script
-    write.over(script, content
-      .replaceAll("io\\.github\\.scala-hamsters:hamsters_2\\.12:([0-9\\.]+)", s"io.github.scala-hamsters:hamsters_2.12:$releaseVersion"))
-  }
-
+  
   private def tag(releaseVersion: String): Unit = {
     %%('git, 'commit, "-am", s"Release $releaseVersion")(pwd)
     %%('git, 'tag, releaseVersion)(pwd)
