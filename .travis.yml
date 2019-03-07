@@ -1,21 +1,7 @@
 language: scala
 jdk:
-- oraclejdk8
-
+  - oraclejdk8
 scala:
-- 2.12.4
-
+   - 2.12.3
 script:
-- curl -L -o ~/bin/mill https://github.com/lihaoyi/mill/releases/download/0.3.4/0.3.4 && chmod +x ~/bin/mill
-- mill hamsters[$TRAVIS_SCALA_VERSION].shared.test
-- mill hamsters[$TRAVIS_SCALA_VERSION].jvm.test
-- mill hamsters[$TRAVIS_SCALA_VERSION].js.compile
-
-jobs:
-  include:
-    - stage: release
-      if: |
-        repo = 'scala-hamsters/hamsters' AND \
-        tag IS present
-      script:
-      - mill hamsters.__.publish --gpgPassphrase "${GPG_PASSPHRASE}" --release true --sonatypeCreds "${SONATYPE_CREDENTIALS}"
+   - sbt ++$TRAVIS_SCALA_VERSION clean +test
