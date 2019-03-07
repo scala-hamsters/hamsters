@@ -27,7 +27,7 @@ Currently, Hamsters supports :
 
 == Documentation
 
-https://github.com/scala-hamsters/hamsters/tree/{release-version}/docs[{release-version} documentation]
+https://github.com/scala-hamsters/hamsters/tree/{release-version}/docs[Hamsters {release-version} documentation]
 
 image::https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master[Travis build status,link=https://travis-ci.org/scala-hamsters/hamsters]
 
