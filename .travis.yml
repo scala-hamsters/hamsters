@@ -19,4 +19,4 @@ jobs:
         repo = 'scala-hamsters/hamsters' AND \
         tag IS present
       script:
-      - mill hamster.__.publish --gpgPassphrase "${GPG_PASSPHRASE}" --release true --sonatypeCreds "${SONATYPE_CREDENTIALS}"
+      - mill hamsters.__.publish --gpgPassphrase "${GPG_PASSPHRASE}" --release true --sonatypeCreds "${SONATYPE_CREDENTIALS}"
