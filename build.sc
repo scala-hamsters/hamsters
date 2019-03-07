@@ -5,7 +5,7 @@ import mill.scalajslib._
 import mill.scalalib._
 import mill.scalalib.publish._
 
-object hamsters extends Cross[HamstersModule]("2.11.11", "2.12.4", "2.13.0-M1")
+object hamsters extends Cross[HamstersModule]("2.11.11", "2.12.4", "2.13.0-M5")
 
 class HamstersModule(val scalaCrossVersion: String) extends Module {
   override def millSourcePath = super.millSourcePath / up / up
@@ -16,7 +16,7 @@ class HamstersModule(val scalaCrossVersion: String) extends Module {
 
     override def scalacOptions = Seq("-Xplugin-require:macroparadise", "-language:higherKinds", "-language:implicitConversions", "-feature")
 
-    def publishVersion = "2.6.0"
+    def publishVersion = "4.0.0-Beta1"
 
     def pomSettings = PomSettings(
       description = "A mini Scala utility library",
