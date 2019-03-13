@@ -12,7 +12,7 @@ val globalSettings =Defaults.coreDefaultSettings ++ Seq(
 
 val buildSettings = globalSettings ++ Seq(
   libraryDependencies += "org.scalameta" %% "scalameta" % "1.8.0" % Provided,
-  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M10" cross CrossVersion.full),
+  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M11" cross CrossVersion.full),
   scalacOptions ++= List("-Xplugin-require:macroparadise", "-language:higherKinds", "-language:implicitConversions", "-feature"),
   scalacOptions in(Compile, console) := Seq(), // macroparadise plugin doesn't work in repl yet.
   resolvers += Resolver.bintrayIvyRepo("scalameta", "maven")
@@ -54,8 +54,8 @@ lazy val noDocFileSettings = Seq (
 
 val hamstersSettings = buildSettings ++ publishSettings
 
-scalaVersion in ThisBuild := "2.12.4"
-crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.4")
+scalaVersion in ThisBuild := "2.12.8"
+crossScalaVersions in ThisBuild := Seq("2.11.12", "2.12.8")
 publishTo in ThisBuild := {
   val nexus = "https://oss.sonatype.org/"
   if (version.value.toLowerCase.endsWith("snapshot"))
@@ -77,7 +77,7 @@ lazy val metasJS = metas.js.settings(name := "metas")
 val buildMacrosSettings = globalSettings ++ Seq(
     libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value,
     resolvers += Resolver.sonatypeRepo("releases"),
-    addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
+    addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.full)
 )
 
 val macroSettings = buildMacrosSettings ++ publishSettings
@@ -97,7 +97,7 @@ lazy val hamsters = crossProject(JSPlatform, JVMPlatform)
   .dependsOn(metas)
   .dependsOn(macros)  
   .settings(libraryDependencies ++= Seq(
-    "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
+    "org.scalatest" %%% "scalatest" % "3.0.5" % "test",
     "org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test",
     "org.scalacheck" %%% "scalacheck" % "1.13.4" % "test"
   ))
