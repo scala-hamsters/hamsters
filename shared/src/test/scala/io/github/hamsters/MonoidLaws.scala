@@ -7,12 +7,13 @@ import scala.reflect._
 
 class BooleanMonoidLaws extends MonoidLaws[Boolean](Monoid.booleanMonoid)
 class IntMonoidLaws extends MonoidLaws[Int](Monoid.intMonoid)
+class LongMonoidLaws extends MonoidLaws[Long](Monoid.longMonoid)
 class BigDecimalMonoidLaws extends MonoidLaws[BigDecimal](Monoid.bigDecimalMonoid)
 //float and double monoid break the laws : https://github.com/scalaz/scalaz/issues/334
 //class FloatMonoidLaws extends io.github.hamsters.MonoidLaws[Float](Monoid.floatMonoid)
 //class DoubleMonoidLaws extends io.github.hamsters.MonoidLaws[Double](Monoid.doubleMonoid)
 class StringMonoidLaws extends MonoidLaws[String](Monoid.stringMonoid)
-class ListeMonoidLaws extends MonoidLaws[List[String]](Monoid.listMonoid)
+class ListMonoidLaws extends MonoidLaws[List[String]](Monoid.listMonoid)
 class SeqMonoidLaws extends MonoidLaws[Seq[String]](Monoid.seqMonoid)
 class OptionMonoidLaws extends MonoidLaws[Option[List[Int]]](Monoid.optionMonoid)
 
