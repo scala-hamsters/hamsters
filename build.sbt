@@ -72,7 +72,7 @@ lazy val noDocFileSettings = Seq(
 
 val hamstersSettings = buildSettings ++ publishSettings
 
-scalaVersion in ThisBuild := "2.13.0-M5"
+scalaVersion in ThisBuild := "2.12.4"
 crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.4", "2.13.0-M5")
 publishTo in ThisBuild := {
   val nexus = "https://oss.sonatype.org/"
