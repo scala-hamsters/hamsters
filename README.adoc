@@ -29,8 +29,6 @@ Currently, Hamsters supports :
 
 https://github.com/scala-hamsters/hamsters/tree/{release-version}/docs[Hamsters {release-version} documentation]
 
-image::https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master[Travis build status,link=https://travis-ci.org/scala-hamsters/hamsters]
-
 == Install as dependency
 
 [source,scala,subs="verbatim,attributes"]
