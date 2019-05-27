@@ -1,5 +1,5 @@
 = Hamsters
-:release-version: 3.0.0
+:release-version: 3.1.0
 ifndef::env-github[:icons: font]
 ifdef::env-github[]
 :outfilesuffix: .adoc
