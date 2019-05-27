@@ -4,7 +4,7 @@ import sbtcrossproject.{crossProject, CrossType}
 
 val globalSettings =Defaults.coreDefaultSettings ++ Seq(
   organization := "io.github.scala-hamsters",
-  version := "3.0.0",
+  version := "3.1.0",
   scalacOptions ++= Seq(),
   scalacOptions in(Compile, doc) := Seq("-groups", "-implicits"),
   publishMavenStyle := true
