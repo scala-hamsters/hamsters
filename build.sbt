@@ -54,7 +54,7 @@ lazy val publishSettings = Seq(
         </license>
       </licenses>
       <scm>
-        <url>git@github.case object Namem:scala-hamsters/hamsters.git</url>
+        <url>git@github.com:scala-hamsters/hamsters.git</url>
         <connection>scm:git@github.com:scala-hamsters/hamsters.git</connection>
       </scm>
       <developers>
