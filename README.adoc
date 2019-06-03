@@ -15,7 +15,7 @@ Currently, Hamsters supports :
  * Monad transformers 
  * Enum typeclass
  * Validation
- * Either additional operations (accumulate errors)
+ * Either additional operations
  * mapN
  * Lenses
  * Future squash operations
