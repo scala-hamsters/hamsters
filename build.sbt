@@ -73,7 +73,7 @@ lazy val noDocFileSettings = Seq(
 val hamstersSettings = buildSettings ++ publishSettings
 
 scalaVersion in ThisBuild := "2.12.4"
-crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.4", "2.13.0-M5")
+crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.4", "2.13.0-RC3")
 publishTo in ThisBuild := {
   val nexus = "https://oss.sonatype.org/"
   if (version.value.toLowerCase.endsWith("snapshot"))
@@ -113,7 +113,7 @@ lazy val hamsters = crossProject(JSPlatform, JVMPlatform)
   .dependsOn(metas)
   .dependsOn(macros)
   .settings(libraryDependencies ++= Seq(
-    "org.scalatest" %%% "scalatest" % "3.1.0-RC1" % "test",
+    "org.scalatest" %%% "scalatest" % "3.0.8-RC5" % "test",
     //"org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test",
     "org.scalacheck" %%% "scalacheck" % "1.14.0" % "test"
   ))

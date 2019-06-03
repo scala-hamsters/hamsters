@@ -5,6 +5,7 @@ Hamsters features :
  * [Either operations](eitherOperations.md)
  * [Monad transformers](monad_tranformers.md) 
  * [Enum typeclass](enums.md)
+ * [Validation](validation.md)
  * [Default values for options (orEmpty)](default_values.md)
  * [NonEmptyList](nonemptylist.md)
  * [Show](show.md)

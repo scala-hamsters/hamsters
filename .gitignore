@@ -4,3 +4,6 @@ project/project
 project/target
 target/
 out/
+.bloop/
+.metals/
+project/.bloop
