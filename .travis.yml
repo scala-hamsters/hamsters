@@ -3,6 +3,7 @@ language: scala
 scala:
   - 2.11.11
   - 2.12.4
+  - 2.13.0-RC3
 
 jdk:
   - oraclejdk8
@@ -10,7 +11,7 @@ jdk:
 matrix:
   include:
     - jdk: openjdk11
-      scala: 2.12.8
+      scala: 2.12.4
 
 script:
-   - sbt ++$TRAVIS_SCALA_VERSION clean test
+   - sbt ++$TRAVIS_SCALA_VERSION clean +test
