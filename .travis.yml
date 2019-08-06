@@ -1,7 +1,7 @@
 language: scala
 jdk:
-  - oraclejdk8
+  - openjdk8
 scala:
-   - 2.12.3
+  - 2.12.3
 script:
-   - sbt ++$TRAVIS_SCALA_VERSION clean +test
+  - sbt ++$TRAVIS_SCALA_VERSION clean +test
