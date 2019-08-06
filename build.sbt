@@ -12,7 +12,7 @@ val globalSettings =Defaults.coreDefaultSettings ++ Seq(
 
 val buildSettings = globalSettings ++ Seq(
   libraryDependencies += "org.scalameta" %% "scalameta" % "1.8.0" % Provided,
-  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M10" cross CrossVersion.full),
+  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M11" cross CrossVersion.full),
   scalacOptions ++= List("-Xplugin-require:macroparadise", "-language:higherKinds", "-language:implicitConversions", "-feature"),
   scalacOptions in(Compile, console) := Seq(), // macroparadise plugin doesn't work in repl yet.
   resolvers += Resolver.bintrayIvyRepo("scalameta", "maven")
@@ -54,8 +54,8 @@ lazy val noDocFileSettings = Seq (
 
 val hamstersSettings = buildSettings ++ publishSettings
 
-scalaVersion in ThisBuild := "2.12.4"
-crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.4")
+scalaVersion in ThisBuild := "2.12.8"
+crossScalaVersions in ThisBuild := Seq("2.11.12", "2.12.8")
 publishTo in ThisBuild := {
   val nexus = "https://oss.sonatype.org/"
   if (version.value.toLowerCase.endsWith("snapshot"))
