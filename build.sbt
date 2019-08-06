@@ -1,5 +1,5 @@
 import sbt.Keys._
-import sbtcrossproject.{crossProject, CrossType}
+import sbtcrossproject.{CrossPlugin, CrossType}
 
 
 val globalSettings =Defaults.coreDefaultSettings ++ Seq(
@@ -26,7 +26,7 @@ val noPublishSettings = Seq(
 )
 
 lazy val publishSettings = Seq(
-  pomExtra := (
+  pomExtra :=
     <url>https://github.com/scala-hamsters/hamsters</url>
       <licenses>
         <license>
@@ -45,7 +45,7 @@ lazy val publishSettings = Seq(
           <name>Hamsters Team</name>
           <url>https://github.com/scala-hamsters/hamsters/graphs/contributors</url>
         </developer>
-      </developers>    )
+      </developers>
 )
 
 lazy val noDocFileSettings = Seq (
@@ -64,7 +64,7 @@ publishTo in ThisBuild := {
     Some("staging" at nexus + "service/local/staging/deploy/maven2")
 }
 
-lazy val metas = crossProject(JSPlatform, JVMPlatform)
+lazy val metas = CrossPlugin.autoImport.crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Full)
   .in(file("metas"))
   .settings(hamstersSettings)
@@ -82,7 +82,7 @@ val buildMacrosSettings = globalSettings ++ Seq(
 
 val macroSettings = buildMacrosSettings ++ publishSettings
 
-lazy val macros = crossProject(JSPlatform, JVMPlatform)
+lazy val macros = CrossPlugin.autoImport.crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Full)
   .in(file("macros"))
   .settings(macroSettings)
@@ -91,7 +91,7 @@ lazy val macros = crossProject(JSPlatform, JVMPlatform)
 lazy val macrosJVM = macros.jvm.settings(name := "macros")
 lazy val macrosJS = macros.js.settings(name := "macros")
 
-lazy val hamsters = crossProject(JSPlatform, JVMPlatform)
+lazy val hamsters = CrossPlugin.autoImport.crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Full)
   .in(file("."))
   .dependsOn(metas)
