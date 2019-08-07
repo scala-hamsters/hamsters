@@ -1,5 +1,5 @@
 import sbt.Keys._
-import sbtcrossproject.{crossProject, CrossType}
+import sbtcrossproject.{CrossPlugin, CrossType}
 
 
 val globalSettings =Defaults.coreDefaultSettings ++ Seq(
@@ -12,7 +12,7 @@ val globalSettings =Defaults.coreDefaultSettings ++ Seq(
 
 val buildSettings = globalSettings ++ Seq(
   libraryDependencies += "org.scalameta" %% "scalameta" % "1.8.0" % Provided,
-  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M10" cross CrossVersion.full),
+  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M11" cross CrossVersion.full),
   scalacOptions ++= List("-Xplugin-require:macroparadise", "-language:higherKinds", "-language:implicitConversions", "-feature"),
   scalacOptions in(Compile, console) := Seq(), // macroparadise plugin doesn't work in repl yet.
   resolvers += Resolver.bintrayIvyRepo("scalameta", "maven")
@@ -26,7 +26,7 @@ val noPublishSettings = Seq(
 )
 
 lazy val publishSettings = Seq(
-  pomExtra := (
+  pomExtra :=
     <url>https://github.com/scala-hamsters/hamsters</url>
       <licenses>
         <license>
@@ -45,7 +45,7 @@ lazy val publishSettings = Seq(
           <name>Hamsters Team</name>
           <url>https://github.com/scala-hamsters/hamsters/graphs/contributors</url>
         </developer>
-      </developers>    )
+      </developers>
 )
 
 lazy val noDocFileSettings = Seq (
@@ -54,8 +54,8 @@ lazy val noDocFileSettings = Seq (
 
 val hamstersSettings = buildSettings ++ publishSettings
 
-scalaVersion in ThisBuild := "2.12.4"
-crossScalaVersions in ThisBuild := Seq("2.11.11", "2.12.4")
+scalaVersion in ThisBuild := "2.12.8"
+crossScalaVersions in ThisBuild := Seq("2.11.12", "2.12.8")
 publishTo in ThisBuild := {
   val nexus = "https://oss.sonatype.org/"
   if (version.value.toLowerCase.endsWith("snapshot"))
@@ -64,7 +64,7 @@ publishTo in ThisBuild := {
     Some("staging" at nexus + "service/local/staging/deploy/maven2")
 }
 
-lazy val metas = crossProject(JSPlatform, JVMPlatform)
+lazy val metas = CrossPlugin.autoImport.crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Full)
   .in(file("metas"))
   .settings(hamstersSettings)
@@ -82,7 +82,7 @@ val buildMacrosSettings = globalSettings ++ Seq(
 
 val macroSettings = buildMacrosSettings ++ publishSettings
 
-lazy val macros = crossProject(JSPlatform, JVMPlatform)
+lazy val macros = CrossPlugin.autoImport.crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Full)
   .in(file("macros"))
   .settings(macroSettings)
@@ -91,15 +91,15 @@ lazy val macros = crossProject(JSPlatform, JVMPlatform)
 lazy val macrosJVM = macros.jvm.settings(name := "macros")
 lazy val macrosJS = macros.js.settings(name := "macros")
 
-lazy val hamsters = crossProject(JSPlatform, JVMPlatform)
+lazy val hamsters = CrossPlugin.autoImport.crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Full)
   .in(file("."))
   .dependsOn(metas)
-  .dependsOn(macros)  
+  .dependsOn(macros)
   .settings(libraryDependencies ++= Seq(
-    "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
+    "org.scalatest" %%% "scalatest" % "3.0.8" % "test",
     "org.scalamock" %%% "scalamock-scalatest-support" % "3.6.0" % "test",
-    "org.scalacheck" %%% "scalacheck" % "1.13.4" % "test"
+    "org.scalacheck" %%% "scalacheck" % "1.14.0" % "test"
   ))
   .settings(hamstersSettings)
 
