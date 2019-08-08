@@ -31,9 +31,5 @@ object Cartesian {
     } yield a -> b
   }
 
-
-
-
-
 }
 

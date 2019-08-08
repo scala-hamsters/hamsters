@@ -18,24 +18,24 @@ trait Monad[Box[_]] extends Functor[Box] {
 
 object Monad {
 
-  implicit val optionMonad = new Monad[Option] {
+  implicit val optionMonad: Monad[Option] = new Monad[Option] {
 
     override def pure[A](x: A): Option[A] = Option(x)
 
-    override def flatMap[A, B](boxA: Option[A])(f: A => Option[B]) = boxA.flatMap(f)
+    override def flatMap[A, B](boxA: Option[A])(f: A => Option[B]): Option[B] = boxA.flatMap(f)
 
-    override def map[A, B](boxA: Option[A])(f: A => B) = boxA.map(f)
+    override def map[A, B](boxA: Option[A])(f: A => B): Option[B] = boxA.map(f)
   }
 
-  implicit def futureMonad(implicit ec: ExecutionContext) = new Monad[Future] {
+  implicit def futureMonad(implicit ec: ExecutionContext): Monad[Future] = new Monad[Future] {
 
     override def pure[A](x: A): Future[A] = Future.successful(x)
 
-    override def flatMap[A, B](boxA: Future[A])(f: A => Future[B]) = {
+    override def flatMap[A, B](boxA: Future[A])(f: A => Future[B]): Future[B] = {
       boxA.flatMap(f)
     }
 
-    override def map[A, B](boxA: Future[A])(f: A => B) = {
+    override def map[A, B](boxA: Future[A])(f: A => B): Future[B] = {
       boxA.map(f)
     }
   }

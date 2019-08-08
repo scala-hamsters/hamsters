@@ -1,6 +1,6 @@
 package io.github.hamsters
 
-trait Lens[Source, Property] {self =>
+trait Lens[Source, Property] { self =>
 
   def get: Source => Property
   def set: Source => Property => Source
