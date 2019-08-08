@@ -13,7 +13,7 @@ object Memo {
     * @return calcluated, or memoized result if it has already been calculated
     */
   def memoize[A, B](f: A => B): A => B = new mutable.HashMap[A, B]() {
-    override def apply(key: A) = getOrElseUpdate(key, f(key))
+    override def apply(key: A): B = getOrElseUpdate(key, f(key))
   }
 
   /**
@@ -24,7 +24,7 @@ object Memo {
     * @return calcluated, or memoized result if it has already been calculated
     */
   def threadSafeMemoize[A, B](f: A => B): A => B = new mutable.HashMap[A, B]() { self =>
-    override def apply(key: A) = self.synchronized(getOrElseUpdate(key, f(key)))
+    override def apply(key: A): B = self.synchronized(getOrElseUpdate(key, f(key)))
   }
 
 }

@@ -27,7 +27,7 @@ object Validation {
     * @tparam R
     * @return Either from code block
     */
-  def fromCatchable[L, R](body: => R, errorMgt: (Throwable) => L): Either[L, R] = {
+  def fromCatchable[L, R](body: => R, errorMgt: Throwable => L): Either[L, R] = {
     try {
       Right(body)
     }
@@ -41,7 +41,7 @@ object Validation {
     * @param eithers
     * @return successes
     */
-  def successes(eithers : Either[_, _]*) : List[Any]= {
+  def successes(eithers : Either[_, _]*) : List[Any] = {
     eithers.toList.collect {
       case r : Right[_, _] => r.right.get
     }
@@ -110,17 +110,17 @@ object Validation {
   def hasFailures[L](eithers: Either[L, _]*): Boolean = failures(eithers: _*).nonEmpty
 
   implicit class RightBiasedEither[L, R](e: Either[L, R]) {
-    def map[R2](f: R => R2) = e.right.map(f)
+    def map[R2](f: R => R2): Either[L, R2] = e.right.map(f)
 
-    def flatMap[R2](f: R => Either[L, R2]) = e.right.flatMap(f)
+    def flatMap[R2](f: R => Either[L, R2]): Either[L, R2] = e.right.flatMap(f)
 
-    def filter(p: (R) => Boolean) = filterWith(p)
+    def filter(p: R => Boolean): Option[Either[Nothing, R]] = filterWith(p)
 
-    def filterWith(p: (R) => Boolean) = e.right.filter(p)
+    def filterWith(p: R => Boolean): Option[Either[Nothing, R]] = e.right.filter(p)
 
-    def get = e.right.get
+    def get: R = e.right.get
 
-    def getOrElse[R2 >: R](or: => R2) = e.right.getOrElse(or)
+    def getOrElse[R2 >: R](or: => R2): R2 = e.right.getOrElse(or)
   }
 
 }

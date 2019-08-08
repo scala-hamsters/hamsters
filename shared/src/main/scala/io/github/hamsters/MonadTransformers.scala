@@ -43,7 +43,7 @@ class OptionT[A, Box[_]](val wrapped: Box[Option[A]]) {
     * @param p
     * @return a new OptionT
     */
-  def filter(p: (A) ⇒ Boolean)(implicit evidence: Monad[Box]): OptionT[A, Box] = withFilter(p)
+  def filter(p: A ⇒ Boolean)(implicit evidence: Monad[Box]): OptionT[A, Box] = withFilter(p)
 
   /**
     * Keep only values which satisfy a predicate
@@ -51,7 +51,7 @@ class OptionT[A, Box[_]](val wrapped: Box[Option[A]]) {
     * @param p
     * @return a new OptionT
     */
-  def withFilter(p: (A) ⇒ Boolean)(implicit evidence: Monad[Box]): OptionT[A, Box] = {
+  def withFilter(p: A ⇒ Boolean)(implicit evidence: Monad[Box]): OptionT[A, Box] = {
     new OptionT(evidence.map(wrapped)(_.filter(p)))
   }
 }
@@ -90,7 +90,7 @@ class TryT[A, Box[_]](val wrapped: Box[Try[A]]) {
     * @param p
     * @return a new TryT
     */
-  def filter(p: (A) ⇒ Boolean)(implicit evidence: Monad[Box]): TryT[A, Box] = withFilter(p)
+  def filter(p: A ⇒ Boolean)(implicit evidence: Monad[Box]): TryT[A, Box] = withFilter(p)
 
   /**
     * Keep only values which satisfy a predicate
@@ -98,7 +98,7 @@ class TryT[A, Box[_]](val wrapped: Box[Try[A]]) {
     * @param p
     * @return a new TryT
     */
-  def withFilter(p: (A) ⇒ Boolean)(implicit evidence: Monad[Box]): TryT[A, Box] = {
+  def withFilter(p: A ⇒ Boolean)(implicit evidence: Monad[Box]): TryT[A, Box] = {
     new TryT(evidence.map(wrapped)(_.filter(p)))
   }
 }
@@ -138,7 +138,7 @@ class EitherT[L, R, Box[_]](val wrapped: Box[Either[L, R]]) {
     * @param p
     * @return a new EitherT
     */
-  def filter(p: (R) ⇒ Boolean)(implicit evidence: Monad[Box]): EitherT[String, R, Box] = withFilter(p)
+  def filter(p: R ⇒ Boolean)(implicit evidence: Monad[Box]): EitherT[String, R, Box] = withFilter(p)
 
   /**
     * Keep only values which satisfy a predicate
@@ -146,7 +146,7 @@ class EitherT[L, R, Box[_]](val wrapped: Box[Either[L, R]]) {
     * @param p
     * @return a new EitherT
     */
-  def withFilter(p: (R) ⇒ Boolean)(implicit evidence: Monad[Box]): EitherT[String, R, Box] = {
+  def withFilter(p: R ⇒ Boolean)(implicit evidence: Monad[Box]): EitherT[String, R, Box] = {
    val newBox: Box[Either[String, R]] = evidence.map(wrapped) {
       case Right(r) => if (p(r)) Right(r) else Left("No value matching predicate")
       case _ => Left("No value matching predicate")
@@ -161,7 +161,7 @@ class EitherT[L, R, Box[_]](val wrapped: Box[Either[L, R]]) {
     * @param default
     * @return a new EitherT
     */
-  def filterWithDefault(p: (R) ⇒ Boolean, default: L)(implicit evidence: Monad[Box]): EitherT[L, R, Box] = {
+  def filterWithDefault(p: R ⇒ Boolean, default: L)(implicit evidence: Monad[Box]): EitherT[L, R, Box] = {
     val newBox: Box[Either[L, R]] =evidence.map(wrapped) {
       case Right(r) => if (p(r)) Right(r) else Left(default)
       case _ => Left(default)
