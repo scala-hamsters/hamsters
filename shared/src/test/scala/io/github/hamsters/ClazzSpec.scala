@@ -25,5 +25,4 @@ class ClazzSpec extends FlatSpec with Matchers {
     Clazz.getSimpleName[Quix.type ] shouldBe "Quix"
   }
 
-
 }

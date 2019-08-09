@@ -15,7 +15,6 @@ trait Monad[Box[_]] extends Functor[Box] {
 
 }
 
-
 object Monad {
 
   implicit val optionMonad: Monad[Option] = new Monad[Option] {
@@ -31,13 +30,8 @@ object Monad {
 
     override def pure[A](x: A): Future[A] = Future.successful(x)
 
-    override def flatMap[A, B](boxA: Future[A])(f: A => Future[B]): Future[B] = {
-      boxA.flatMap(f)
-    }
+    override def flatMap[A, B](boxA: Future[A])(f: A => Future[B]): Future[B] = boxA.flatMap(f)
 
-    override def map[A, B](boxA: Future[A])(f: A => B): Future[B] = {
-      boxA.map(f)
-    }
+    override def map[A, B](boxA: Future[A])(f: A => B): Future[B] = boxA.map(f)
   }
 }
-

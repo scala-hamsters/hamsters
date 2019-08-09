@@ -1,6 +1,5 @@
 package io.github.hamsters
 
-
 import org.scalatest.{AsyncFlatSpec, Matchers}
 import io.github.hamsters.Cartesian._
 import io.github.hamsters.Functor._
@@ -12,7 +11,6 @@ class CartesianSpec extends AsyncFlatSpec with Matchers  {
   val t2SomeInt: Option[Int] = Some(6)
   val t3SomeInt: Option[Int] = Some(7)
   val t4NoneInt: Option[Int] = None
-
 
   val t3List = List(8)
 

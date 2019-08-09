@@ -15,17 +15,17 @@ abstract class MonadSpec[A: Arbitrary, B, C, Box[_]](monad: Monad[Box])
 
 extends Properties(s"Monad for $tag") {
 
-  property("left identity") = forAll { (a: A, f: (A => Box[B])) =>
+  property("left identity") = forAll { (a: A, f: A => Box[B]) =>
     val boxA: Box[A] = monad.pure(a)
     monad.flatMap(boxA)(f) == f(a)
   }
 
-  property("right identity") = forAll { (a: A, f: (A => Box[B])) =>
+  property("right identity") = forAll { (a: A, f: A => Box[B]) =>
     val boxFa: Box[Box[B]] =  monad.pure(f(a))
     monad.flatMap(boxFa)(monad.pure) == boxFa
   }
 
-  property("associativity") = forAll { (box: Box[A], f: (A => Box[B]), g: (B => Box[C])) =>
+  property("associativity") = forAll { (box: Box[A], f: A => Box[B], g: B => Box[C]) =>
     val boxB: Box[B] = monad.flatMap(box)(f)
     monad.flatMap(boxB)(g) == monad.flatMap(box) { a =>
       val boxB: Box[B] = f(a)

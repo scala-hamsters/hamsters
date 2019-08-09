@@ -27,25 +27,19 @@ object Validation {
     * @tparam R
     * @return Either from code block
     */
-  def fromCatchable[L, R](body: => R, errorMgt: Throwable => L): Either[L, R] = {
+  def fromCatchable[L, R](body: => R, errorMgt: Throwable => L): Either[L, R] =
     try {
       Right(body)
-    }
-    catch {
+    } catch {
       case t: Throwable => Left(errorMgt(t))
     }
-  }
 
   /** Return successes (right) for several Either values
     * Validation.run should be used instead in most cases as it is a type-safer method (it does not return a List[Any])
     * @param eithers
     * @return successes
     */
-  def successes(eithers : Either[_, _]*) : List[Any] = {
-    eithers.toList.collect {
-      case r : Right[_, _] => r.right.get
-    }
-  }
+  def successes(eithers : Either[_, _]*) : List[Any] = eithers.toList.collect { case r : Right[_, _] => r.right.get }
 
   /**
     * Tells if eithers contain successes (right)
@@ -66,12 +60,11 @@ object Validation {
     * @tparam R2
     * @return a tuple (R1, R2) of results in a Right if validation is successful or a list of errors L if it fails
     */
-  def run[L, R1, R2](e1: Either[L, R1], e2: Either[L, R2]): Either[List[L], (R1, R2)] = {
+  def run[L, R1, R2](e1: Either[L, R1], e2: Either[L, R2]): Either[List[L], (R1, R2)] =
     failures(e1, e2) match {
       case Nil => Right(e1.get, e2.get)
       case f: List[L] => Left(f)
     }
-  }
 
   /**
     * Run the validation
@@ -86,12 +79,11 @@ object Validation {
     * @tparam R3
     * @return a tuple (R1, R2, R3) of results in a Right if validation is successful or a list of errors L if it fails
     */
-  def run[L, R1, R2, R3](e1: Either[L, R1], e2: Either[L, R2], e3: Either[L, R3]): Either[List[L], (R1, R2, R3)] = {
+  def run[L, R1, R2, R3](e1: Either[L, R1], e2: Either[L, R2], e3: Either[L, R3]): Either[List[L], (R1, R2, R3)] =
     failures(e1, e2, e3) match {
       case Nil => Right(e1.get, e2.get, e3.get)
       case f: List[L] => Left(f)
     }
-  }
 
   /**
     * Retrieve failures (left) for several Either values

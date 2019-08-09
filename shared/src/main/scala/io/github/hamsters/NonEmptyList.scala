@@ -17,7 +17,5 @@ object NonEmptyList {
     * @tparam A
     * @return a NonEmptyList
     */
-  def apply[A](head: A, tail: A*): NonEmptyList[A] = {
-    NonEmptyList(head, tail.toList)
-  }
+  def apply[A](head: A, tail: A*): NonEmptyList[A] = NonEmptyList(head, tail.toList)
 }

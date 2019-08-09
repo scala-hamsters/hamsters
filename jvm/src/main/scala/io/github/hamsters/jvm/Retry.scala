@@ -4,7 +4,6 @@ import scala.concurrent.{ExecutionContext, Future, blocking}
 
 object Retry {
 
-
   /**
     * Retry a function several times
     *
