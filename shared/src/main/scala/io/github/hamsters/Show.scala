@@ -53,7 +53,8 @@ object Showable {
 
   implicit def showClass[T]: Showable[Class[T]] = new Showable[Class[T]] {
     override def format(value: Class[T]): String = value.getSimpleName.replace("$","")
-  }}
+  }
+}
 
 object Show {
   def show[A](value: A)(implicit s: Showable[A]): String = s.format(value)
@@ -66,5 +67,3 @@ object ShowableSyntax {
   }
 
 }
-
-

@@ -13,11 +13,11 @@ class LenserLawsProperties extends Properties("Lens laws") {
   import Generators._
   import Street._
 
-  property("if I get twice, I get the same answer") = forAll { (user: User) =>
+  property("if I get twice, I get the same answer") = forAll { user: User =>
     _number.get(user.street) == _number.get(user.street)
   }
 
-  property("if I get, then set it back, nothing changes") = forAll { (user: User) =>
+  property("if I get, then set it back, nothing changes") = forAll { user: User =>
     _number.set(user.street)(_number.get(user.street)) == user.street
   }
 
@@ -29,8 +29,4 @@ class LenserLawsProperties extends Properties("Lens laws") {
     _number.get(_number.set(_number.set(user.street)(streetNumber1))(streetNumber2)) == streetNumber2
   }
 
-
 }
-
-
-

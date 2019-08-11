@@ -78,5 +78,4 @@ class EnumSpec extends FlatSpec with Matchers {
     Enumeration.enumerate[Season] shouldBe Set(Winter, Spring, Summer, Fall)
   }
 
-
 }

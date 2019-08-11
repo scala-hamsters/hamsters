@@ -13,14 +13,14 @@ class ShowSpec extends FlatSpec with Matchers {
 
   @ShowMacro
   case class AdditionalShowInstances(
-                                      c: Char = '1',
-                                      b: Byte = 1.toByte,
-                                      boo: Boolean = true,
-                                      l: Long = 1L,
-                                      doub: Double = 1.0,
-                                      fl: Float = 1f,
-                                      date: Date = new Date(11111),
-                                      short: Short = 1.toShort)
+    c: Char = '1',
+    b: Byte = 1.toByte,
+    boo: Boolean = true,
+    l: Long = 1L,
+    doub: Double = 1.0,
+    fl: Float = 1f,
+    date: Date = new Date(11111),
+    short: Short = 1.toShort)
 
   "Show on simple object" should "show field names and values of object" in {
     val n = Name("john", "doe")
@@ -47,6 +47,7 @@ class ShowSpec extends FlatSpec with Matchers {
   }
 
   case object Foo
+
   "Show on case object" should "show simple class name without $" in {
     Show.show(Foo.getClass) should be("Foo")
   }

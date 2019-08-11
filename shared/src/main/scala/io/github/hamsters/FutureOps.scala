@@ -44,4 +44,3 @@ object FutureOps {
   }
 
 }
-

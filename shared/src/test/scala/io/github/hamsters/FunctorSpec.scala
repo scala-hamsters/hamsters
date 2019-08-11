@@ -5,10 +5,8 @@ import org.scalacheck.{Arbitrary, Properties}
 import scala.language.higherKinds
 import scala.reflect.ClassTag
 
-
 class OptionFunctorSpec extends FunctorSpec(Functor.functorOption)
 class ListFunctorSpec extends FunctorSpec(Functor.functorList)
-
 
 abstract class FunctorSpec[Box[_]](val functor: Functor[Box])(implicit val arbitrary: Arbitrary[Box[Int]], tag: ClassTag[Box[_]]) extends Properties(s"Functor for $tag")  with TypeUtils {
 
@@ -35,6 +33,5 @@ abstract class FunctorSpec[Box[_]](val functor: Functor[Box])(implicit val arbit
   property("associativity") = forAll { boxA: Box[Int] =>
     (mapF andThen mapGH)(boxA) == (mapFG andThen mapH)(boxA)
   }
-
 
 }

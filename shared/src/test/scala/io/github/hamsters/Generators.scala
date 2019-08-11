@@ -10,7 +10,7 @@ object Generators {
     } yield Street(number, street)
   }
 
-  implicit val arbitraryUser = Arbitrary[User]{
+  implicit val arbitraryUser = Arbitrary[User] {
     for {
       firstName <- Gen.alphaStr
       lastName <- Gen.alphaStr

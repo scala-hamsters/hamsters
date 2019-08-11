@@ -12,9 +12,8 @@ object Retry {
    * @tparam T
    * @return Try of result
    */
-  def apply[T](maxTries: Int, errorFn: String => Unit = _=> Unit)(fn: => T): Try[T] = {
+  def apply[T](maxTries: Int, errorFn: String => Unit = _=> Unit)(fn: => T): Try[T] =
     fromTry(maxTries, errorFn)(Try(fn))
-  }
 
   /**
     * Retry a function several times

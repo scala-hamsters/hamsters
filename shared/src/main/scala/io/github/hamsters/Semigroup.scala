@@ -31,17 +31,10 @@ object Semigroup {
   }
 
   implicit def semigroupalOption[T](implicit semigroup: Semigroup[T]): Semigroup[Option[T]] = new Semigroup[Option[T]] {
-    override def combine(maybeA: Option[T], maybeB: Option[T]): Option[T] = {
-      (maybeA, maybeB) match {
-        case (Some(a), Some(b)) => Some(semigroup.combine(a, b))
-        case _ => None
-      }
+    override def combine(maybeA: Option[T], maybeB: Option[T]): Option[T] = (maybeA, maybeB) match {
+      case (Some(a), Some(b)) => Some(semigroup.combine(a, b))
+      case _ => None
     }
   }
 
 }
-
-
-
-
-

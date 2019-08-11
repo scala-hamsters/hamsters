@@ -21,7 +21,7 @@ class RetrySpec extends FlatSpec with Matchers with MockFactory {
 
   "Retry" should "return result if no error" in {
     val result = Retry(3, logErrorsFunctionMock) {
-      1+1
+      1 + 1
     }
 
     result should be(Success(2))
@@ -29,7 +29,7 @@ class RetrySpec extends FlatSpec with Matchers with MockFactory {
 
   "Retry" should "should accept a Successful Try" in {
     val result = Retry.fromTry(3, logErrorsFunctionMock) {
-      Try(1+1)
+      Try(1 + 1)
     }
 
     result should be(Success(2))

@@ -27,7 +27,6 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers {
     }
   }
 
-
   "OptionT" should "handle Future[None] type" in {
     val noneString: Option[String] = None
     val composedABWithNone: Future[Option[String]] = for {
@@ -114,7 +113,6 @@ class MonadTransformersSpec extends AsyncFlatSpec with Matchers {
     filtered2.wrapped map {
       _ shouldBe None
     }
-
 
   }
 
