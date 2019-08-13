@@ -12,18 +12,20 @@ image::https://raw.githubusercontent.com/scala-hamsters/hamsters/gh-pages/hamste
 
 Currently, Hamsters supports :
 
- * Monad transformers 
- * Enum typeclass
- * Either additional operations (accumulate errors)
- * mapN
- * Lenses
- * Future squash operations
  * Default values for options (orEmpty)
- * NonEmptyList
- * Show
+ * Enum typeclass
+ * Future Squash
+ * HLists
+ * Lens
+ * mapN
  * Memoization
+ * Monad transformers
+ * NonEmptyList
  * Retry
- * List the children of a sealed trait
+ * Sealed
+ * Show
+ * Union types
+ * Validation
 
 == Documentation
 
