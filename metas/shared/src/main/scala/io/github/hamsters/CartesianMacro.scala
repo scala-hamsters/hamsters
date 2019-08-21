@@ -10,7 +10,7 @@ class CartesianMacro extends StaticAnnotation {
 
     val MAX_ARITY = 23
 
-    //t1 => t._1
+    // t1 => t._1
     def t(t : Term.Name) = Term.Name(t.value.replace("t", "t._"))
 
     val names =((1 until MAX_ARITY) map(i => Term.Name(s"t$i"))).toList
@@ -23,14 +23,13 @@ class CartesianMacro extends StaticAnnotation {
       }
     }
 
-    //produce f: (T, T,...) => T
+    // produce f: (T, T,...) => T
     def fTuples(i : Int) = param"f : (..${(0 until MAX_ARITY).map(_ => targ"T").take(i)}) => T"
-
 
     def patTerm(t : Term.Name) = Pat.Var.Term(t)
     def patValue(n : Seq[Term.Name]): Term.Apply = q"f(..$n)"
 
-    //produce (a1, a2),(a3,a4),a5...
+    // produce (a1, a2),(a3,a4),a5...
     def patKey(n : List[Term.Name]) : Pat.Tuple  = n match {
       case a1 :: a2 :: Nil => p"(${patTerm(a1)}, ${patTerm(a2)})"
       case a1 :: a2 :: a3 :: Nil => p"((${patTerm(a1)}, ${patTerm(a2)}), ${patTerm(a3)})"
@@ -51,7 +50,7 @@ class CartesianMacro extends StaticAnnotation {
               functor.map(${products(names.take(i))}){ ${partials(names.take(i))}}
               }"""
 
-    //produces TupleXBox case class  with mapN method
+    // produces TupleXBox case class  with mapN method
     def tuple(i: Int): Defn.Class = {
       q"""case class ${Type.Name(s"Tuple${i}Box")}[Box[_], T](t: ${boxes(i)}){
              ${mapNMethod(i)}
@@ -60,7 +59,7 @@ class CartesianMacro extends StaticAnnotation {
 
     val tuples = (2 until MAX_ARITY).map(tuple)
 
-    //produce conversions method between tuples of box  ands TupleNBox :
+    // produce conversions method between tuples of box  ands TupleNBox :
     // ex : implicit def t2x[Box[_], T](t: (Box[T], Box[T])) = Tuple2Box(t)
     def tupleBox2CaseClassBox(i  : Int) = q"""implicit def ${Term.Name(s"t${i}x")}[Box[_], T](t: ${boxes(i)}) = ${Term.Name(s"Tuple${i}Box")}(t)"""
 

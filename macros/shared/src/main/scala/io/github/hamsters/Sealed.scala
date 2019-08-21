@@ -4,21 +4,21 @@ import scala.language.experimental.macros
 import scala.reflect.macros.blackbox.Context
 
 object Sealed {
-  def impl[T: c.WeakTypeTag](c: Context) = {
+  def impl[T: c.WeakTypeTag](c: Context): c.universe.Apply = {
     import c.universe._
     val traitType = weakTypeOf[T].typeSymbol
     if (!traitType.asClass.isSealed) {
       c.abort(c.enclosingPosition, "Can only enumerate values of a sealed trait")
     }
 
-    val childs = traitType.asClass.knownDirectSubclasses
+    val children = traitType.asClass.knownDirectSubclasses
 
     Apply(
       Select(
         reify(Set).tree,
         TermName("apply")
       ),
-      childs.map(c => Ident(c.asInstanceOf[scala.reflect.internal.Symbols#Symbol].sourceModule.asInstanceOf[Symbol])).toList
+      children.map(c => Ident(c.asInstanceOf[scala.reflect.internal.Symbols#Symbol].sourceModule.asInstanceOf[Symbol])).toList
     )
   }
 

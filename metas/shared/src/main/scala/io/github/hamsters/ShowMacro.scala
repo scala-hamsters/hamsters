@@ -7,10 +7,9 @@ class ShowMacro extends scala.annotation.StaticAnnotation {
 
   inline def apply(defn: Any): Any = meta {
     defn match {
-      //TODO handle object with existing companion
-      //case  Seq(cls @ Defn.Class(_, name, _, ctor, template), companion: Defn.Object)=>  q""""""
+      // TODO handle object with existing companion
+      // case  Seq(cls @ Defn.Class(_, name, _, ctor, template), companion: Defn.Object)=>  q""""""
       case cls @ Defn.Class(_, _, _, ctor, _) =>
-
 
         val show =
           q"""
@@ -20,7 +19,7 @@ class ShowMacro extends scala.annotation.StaticAnnotation {
         val companion = q"object ${Term.Name(cls.name.value)} { $show }"
 
         val res = Term.Block(Seq(cls, companion))
-        //abort(res.syntax)
+        // abort(res.syntax)
         res
       case _ => abort(defn.pos, "Invalid annottee - you can only use @ShowMacro on case classes")
     }
