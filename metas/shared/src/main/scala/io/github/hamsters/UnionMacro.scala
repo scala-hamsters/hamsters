@@ -6,16 +6,11 @@ import scala.meta.{Term, _}
 
 class UnionMacro extends scala.annotation.StaticAnnotation {
 
-
-
   inline def apply(defn: Any): Any = meta {
 
-    def argByXY(idx: Int, i: Int): Term = if (idx == i) {
-      q"""Some(t)"""
-    }
-    else {
-      q"""None"""
-    }
+    def argByXY(idx: Int, i: Int): Term =
+      if (idx == i) q"""Some(t)"""
+      else q"""None"""
 
     defn match {
       case q"class $className[..$classTypes] { ..$body }" =>
@@ -37,7 +32,7 @@ class UnionMacro extends scala.annotation.StaticAnnotation {
           }
         }
           """
-        //println(result.syntax) display code result
+        // println(result.syntax) display code result
         result
       case _ =>
         println(defn.structure)

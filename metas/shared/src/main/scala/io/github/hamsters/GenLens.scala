@@ -11,8 +11,7 @@ class GenLens extends StaticAnnotation {
 
         val classParameters = params
           .map(p => (p.name, p.decltpe))
-          .collect{case (name, Some(declType) ) =>(name.value  ,  Type.Name(declType.toString())) }
-
+          .collect { case (name, Some(declType)) => (name.value, Type.Name(declType.toString())) }
 
         val clazz = q""" case class $tName(..$params)  """
         val companion =
@@ -26,7 +25,7 @@ class GenLens extends StaticAnnotation {
                }""")}
               }"""
         val res = Term.Block(Seq(clazz, companion))
-        //println(res.syntax)
+        // println(res.syntax)
         res
       }
       case _ =>
