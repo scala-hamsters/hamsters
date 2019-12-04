@@ -7,7 +7,8 @@ ifdef::env-github[]
 endif::[]
 
 A mini Scala utility library. Compatible with functional programming beginners. For the JVM and Scala.js.  
-It may help you understand how to use -  and how to implement (looking at the code) - some popular functional programming features. Il also provides some useful utilities.
+
+It may help you understand how to use -  and how to implement (looking at the code) - some popular functional programming features. Il also provides some useful utilities.  
 
 image::https://raw.githubusercontent.com/scala-hamsters/hamsters/gh-pages/hamsters.jpg[Hamster logo,width=150]
 
