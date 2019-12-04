@@ -6,15 +6,17 @@ ifdef::env-github[]
 :note-caption: :paperclip:
 endif::[]
 
-A mini Scala utility library. Compatible with functional programming beginners. For the JVM and Scala.js.
+A mini Scala utility library. Compatible with functional programming beginners. For the JVM and Scala.js.  
+It may help you understand how to use -  and how to implement (looking at the code) - some popular functional programming features. Il also provides some useful utilities.
 
 image::https://raw.githubusercontent.com/scala-hamsters/hamsters/gh-pages/hamsters.jpg[Hamster logo,width=150]
 
 Currently, Hamsters supports :
 
+ * Data validation
  * Default values for options (orEmpty)
  * Enum typeclass
- * Future Squash
+ * Future Squash (simplifications for nested types)
  * HLists
  * Lens
  * mapN
@@ -22,10 +24,9 @@ Currently, Hamsters supports :
  * Monad transformers
  * NonEmptyList
  * Retry
- * Sealed
- * Show
+ * Sealed traits children listing
+ * Show (better toString)
  * Union types
- * Validation
 
 == Documentation
 
