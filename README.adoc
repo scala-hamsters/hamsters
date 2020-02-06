@@ -6,6 +6,8 @@ ifdef::env-github[]
 :note-caption: :paperclip:
 endif::[]
 
+image:https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master["Build Status", link="https://travis-ci.org/scala-hamsters/hamsters"]
+
 A mini Scala utility library. Compatible with functional programming beginners. For the JVM and Scala.js.  
 
 It may help you understand how to use -  and how to implement (looking at the code) - some popular functional programming features. Il also provides some useful utilities.  
