@@ -4,6 +4,7 @@ Hamsters features :
 
  * [Validation](validation.md)
  * [Monad transformers](monad_tranformers.md) 
+ * [Future Operations](future_squash.md)
  * [Enum typeclass](enums.md)
  * [Default values for options (orEmpty)](default_values.md)
  * [HLists](hlist.md)
