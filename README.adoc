@@ -12,7 +12,7 @@ A mini Scala utility library. Compatible with functional programming beginners. 
 
 It may help you understand how to use -  and how to implement (looking at the code) - some popular functional programming features. Il also provides some useful utilities.  
 
-Hamsters "full" lib is compatible with Scala 2.11 and 2.12. Some parts of the lib, that are not relying on Scala Meta macros are compatible with 2.13 and extracted in [their own repository](https://github.com/scala-hamsters).
+Hamsters "full" lib is compatible with Scala 2.11 and 2.12. Some parts of the lib, that are not relying on Scala Meta macros are compatible with 2.13 and extracted in https://github.com/scala-hamsters[their own repository].
 
 image::https://raw.githubusercontent.com/scala-hamsters/hamsters/gh-pages/hamsters.jpg[Hamster logo,width=150]
 
