@@ -6,7 +6,7 @@ object EmptyOptionValues {
    
     /**
       *
-      * @return an empty element of A as defined by DefaultValue companion object
+      * @return an empty element of A 
       */
     def orEmpty: A = optValue.getOrElse(monoid.empty)
   }
