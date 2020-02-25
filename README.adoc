@@ -35,7 +35,7 @@ Currently, Hamsters supports :
 
 == Documentation
 
-https://github.com/scala-hamsters/hamsters/tree/3.1.0_/docs[Hamsters {release-version} documentation]
+https://github.com/scala-hamsters/hamsters/tree/{release-version}/docs[Hamsters {release-version} documentation]
 
 == Install as dependency
 
