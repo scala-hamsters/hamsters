@@ -15,8 +15,14 @@ val noneList: Option[List[String]] = None
 noneList.orEmpty  // List[String]()
 ```
 
-To support other types, you just have to declare a new implicit value : 
- 
+To support other types, you have to declare a new implicit monoid for this type.
+
+Example with the BigDecimal type (already supported) :
+
  ```scala
-implicit def myCaseClassDefaultValue = new DefaultValue[MyCaseClass] { ... }
+implicit val bigDecimalMonoid: Monoid[BigDecimal] = new Monoid[BigDecimal] {
+  override def empty: BigDecimal = BigDecimal(0)
+  override def compose(l: BigDecimal, r: BigDecimal): BigDecimal = l + r
+}
 ```
+
