@@ -1,8 +1,9 @@
 package io.github.hamsters
 
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
-class MonoidSpec extends FlatSpec with Matchers {
+class MonoidSpec extends AnyFlatSpec with Matchers {
 
   "Monoid empty of a string" should "empty" in {
     Monoid[String].empty shouldBe ""

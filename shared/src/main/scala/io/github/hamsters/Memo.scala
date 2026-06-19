@@ -12,8 +12,9 @@ object Memo {
     * @tparam B output type
     * @return calcluated, or memoized result if it has already been calculated
     */
-  def memoize[A, B](f: A => B): A => B = new mutable.HashMap[A, B]() {
-    override def apply(key: A): B = getOrElseUpdate(key, f(key))
+  def memoize[A, B](f: A => B): A => B = {
+    val cache = mutable.HashMap.empty[A, B]
+    (key: A) => cache.getOrElseUpdate(key, f(key))
   }
 
   /**
@@ -23,8 +24,9 @@ object Memo {
     * @tparam B output type
     * @return calcluated, or memoized result if it has already been calculated
     */
-  def threadSafeMemoize[A, B](f: A => B): A => B = new mutable.HashMap[A, B]() { self =>
-    override def apply(key: A): B = self.synchronized(getOrElseUpdate(key, f(key)))
+  def threadSafeMemoize[A, B](f: A => B): A => B = {
+    val cache = mutable.HashMap.empty[A, B]
+    (key: A) => cache.synchronized(cache.getOrElseUpdate(key, f(key)))
   }
 
 }

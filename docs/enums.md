@@ -11,8 +11,7 @@ case object Summer extends Season
 case object Fall extends Season
 
 implicit val seasonEnumerable = new Enumerable[Season] {
-  override def enumerate: Set[Season] = Sealed.values[Season] 
-  //OR override def enumerate: Set[Season] = Set(Winter, Spring, Summer, Fall)
+  override def enumerate: Set[Season] = Set(Winter, Spring, Summer, Fall)
 }
 
 Enumeration.name(Winter) // "winter"
@@ -25,7 +24,7 @@ It is also possible to use custom namings :
 ```scala
 
 implicit val seasonEnumerable = new Enumerable[Season] {
-  override def enumerate = Sealed.values[Season]
+  override def enumerate = Set(Winter, Spring, Summer, Fall)
 
   override def name(s: Season) = {
     s match {

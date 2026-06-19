@@ -2,7 +2,7 @@ package io.github.hamsters
 
 import java.util.Date
 
-trait Showable[A] {
+trait Showable[-A] {
   def format(value: A): String
 }
 
@@ -51,8 +51,8 @@ object Showable {
     override def format(value: Unit): String = value.toString
   }
 
-  implicit def showClass[T]: Showable[Class[T]] = new Showable[Class[T]] {
-    override def format(value: Class[T]): String = value.getSimpleName.replace("$","")
+  implicit val showClass: Showable[Class[?]] = new Showable[Class[?]] {
+    override def format(value: Class[?]): String = value.getSimpleName.replace("$","")
   }
 }
 

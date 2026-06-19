@@ -1,12 +1,13 @@
 package io.github.hamsters
 
-import org.scalatest._
+import org.scalatest.flatspec.AsyncFlatSpec
+import org.scalatest.matchers.should.Matchers
 import scala.concurrent.{ExecutionContext, _}
 import scala.util._
 
 class FutureOpsSpec extends AsyncFlatSpec with Matchers {
 
-  override implicit val executionContext = ExecutionContext.global
+  override implicit val executionContext: ExecutionContext = ExecutionContext.global
 
   import FutureOps._
 

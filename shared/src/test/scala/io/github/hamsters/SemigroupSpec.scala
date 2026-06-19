@@ -1,8 +1,9 @@
 package io.github.hamsters
 
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
-class SemigroupSpec extends FlatSpec with Matchers {
+class SemigroupSpec extends AnyFlatSpec with Matchers {
 
   "Semigroup empty of a string" should "empty" in {
     Semigroup[Int].combine(1,2) shouldBe 3

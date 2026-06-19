@@ -2,12 +2,13 @@ package jvm
 
 import io.github.hamsters.jvm.Retry
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
-class RetrySpec extends FlatSpec with Matchers with MockFactory {
+class RetrySpec extends AnyFlatSpec with Matchers with MockFactory {
 
   val logErrorsFunctionMock = mockFunction[String, Unit]
 

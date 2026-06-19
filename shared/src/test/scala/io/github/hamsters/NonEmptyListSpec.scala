@@ -1,8 +1,9 @@
 package io.github.hamsters
 
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
-class NonEmptyListSpec extends FlatSpec with Matchers {
+class NonEmptyListSpec extends AnyFlatSpec with Matchers {
 
   "NonEmptyList" should "handle a single parameter" in {
     NonEmptyList(42).head should be(42)

@@ -6,7 +6,6 @@ test -e ~/.coursier/coursier || \
   com.lihaoyi:ammonite_2.12.3:1.0.1 \
   io.github.scala-hamsters:hamsters_2.12:3.0.0 \
   -- --predef-code 'import io.github.hamsters._;
-                    import HList._;
                     import EmptyOptionValues._;
                     import FutureOps._;
                     import Validation._;

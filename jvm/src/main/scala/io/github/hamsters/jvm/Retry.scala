@@ -14,7 +14,7 @@ object Retry {
     * @tparam T
     * @return Future result
     */
-  def withWait[T](maxTries: Int, waitInMilliSeconds: Int, errorFn: String => Unit = _ => Unit)(fn: => T)
+  def withWait[T](maxTries: Int, waitInMilliSeconds: Int, errorFn: String => Unit = _ => ())(fn: => T)
                  (implicit executionContext: ExecutionContext): Future[T] = {
     def retry(remainingTries: Int, waitInMilliSeconds: Int, errorFn: String => Unit)(fn: => T): Future[T] = {
       Future {

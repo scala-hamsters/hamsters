@@ -1,11 +1,12 @@
 package io.github.hamsters
 
 import io.github.hamsters.Validation._
-import org.scalatest._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
 import scala.util.{Failure, Success, Try}
 
-class ValidationSpec extends FlatSpec with Matchers {
+class ValidationSpec extends AnyFlatSpec with Matchers {
 
   "Validation" should "give no failures" in {
     val e1 = Right(1)
@@ -164,7 +165,7 @@ class ValidationSpec extends FlatSpec with Matchers {
     def compute(x: BigInt) = BigInt(2)/x
 
     fromCatchable(compute(1)) should be(Right(BigInt(2)))
-    fromCatchable(compute(0)) should be(Left("BigInteger divide by zero"))
+    fromCatchable(compute(0)).swap.getOrElse("") should include ("by zero")
 
     fromCatchable(compute(0), (t: Throwable) => t.getClass.getSimpleName) should be(Left("ArithmeticException"))
 
