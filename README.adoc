@@ -1,12 +1,12 @@
 = Hamsters
-:release-version: 3.1.0
+:release-version: 4.0.0
 ifndef::env-github[:icons: font]
 ifdef::env-github[]
 :outfilesuffix: .adoc
 :note-caption: :paperclip:
 endif::[]
 
-image:https://travis-ci.org/scala-hamsters/hamsters.svg?branch=master["Build Status", link="https://travis-ci.org/scala-hamsters/hamsters"]
+image:https://github.com/scala-hamsters/hamsters/actions/workflows/release.yml/badge.svg["Release", link="https://github.com/scala-hamsters/hamsters/actions/workflows/release.yml"]
 
 A mini Scala utility library. Compatible with functional programming beginners. For the JVM and Scala.js.  
 
@@ -58,7 +58,7 @@ See https://github.com/scala-hamsters/hamsters-extensions[hamsters-extensions] f
 
 == Scaladoc
 
-You can find the API documentation https://static.javadoc.io/io.github.scala-hamsters/hamsters_2.12/{release-version}/io/github/hamsters/index.html[here].
+You can find the API documentation https://javadoc.io/doc/io.github.scala-hamsters/hamsters_3/{release-version}/io/github/hamsters/index.html[here].
 
 == Special thanks
 
