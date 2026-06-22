@@ -1,7 +1,0 @@
-language: scala
-jdk:
-  - openjdk21
-scala:
-  - 3.3.8
-script:
-  - sbt clean test
