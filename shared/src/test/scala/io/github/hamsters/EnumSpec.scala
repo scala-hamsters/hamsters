@@ -1,8 +1,9 @@
 package io.github.hamsters
 
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
-class EnumSpec extends FlatSpec with Matchers {
+class EnumSpec extends AnyFlatSpec with Matchers {
 
   "Enum" should "enumerate and parse an enumerable type" in {
 
@@ -12,8 +13,8 @@ class EnumSpec extends FlatSpec with Matchers {
     case object Summer extends Season
     case object Fall extends Season
 
-    implicit val seasonEnumerable = new Enumerable[Season] {
-      override def enumerate: Set[Season] = Sealed.values[Season]
+    implicit val seasonEnumerable: Enumerable[Season] = new Enumerable[Season] {
+      override def enumerate: Set[Season] = Set(Winter, Spring, Summer, Fall)
     }
 
     Enumeration.name(Winter) shouldBe "winter"
@@ -34,8 +35,8 @@ class EnumSpec extends FlatSpec with Matchers {
     case object Summer extends Season
     case object Fall extends Season
 
-    implicit val seasonEnumerable = new Enumerable[Season] {
-      override def enumerate =Sealed.values[Season]
+    implicit val seasonEnumerable: Enumerable[Season] = new Enumerable[Season] {
+      override def enumerate = Set(Winter, Spring, Summer, Fall)
 
       override def name(s: Season): String  = {
         s match {
@@ -64,12 +65,12 @@ class EnumSpec extends FlatSpec with Matchers {
     case object Green extends Color
     case object Blue extends Color
 
-    implicit val seasonEnumerable = new Enumerable[Season] {
+    implicit val seasonEnumerable: Enumerable[Season] = new Enumerable[Season] {
       override def enumerate: Set[Season] = Set(Winter, Spring, Summer, Fall)
     }
 
-    implicit val colorEnumerable = new Enumerable[Color] {
-      override def enumerate: Set[Color] = Sealed.values[Color]
+    implicit val colorEnumerable: Enumerable[Color] = new Enumerable[Color] {
+      override def enumerate: Set[Color] = Set(Red, Green, Blue)
     }
 
     Enumeration.name(Winter) shouldBe "winter"

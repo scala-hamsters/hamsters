@@ -1,10 +1,11 @@
 package io.github.hamsters
 
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 import Memo._
 import scala.collection.mutable.ArrayBuffer
 
-class MemoSpec extends FlatSpec with Matchers {
+class MemoSpec extends AnyFlatSpec with Matchers {
 
   "Memo" should "memoize function results" in {
 

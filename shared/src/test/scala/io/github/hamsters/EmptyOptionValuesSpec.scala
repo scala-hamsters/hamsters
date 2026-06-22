@@ -1,8 +1,9 @@
 package io.github.hamsters
 
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
-class EmptyOptionValuesSpec extends FlatSpec with Matchers {
+class EmptyOptionValuesSpec extends AnyFlatSpec with Matchers {
 
   import io.github.hamsters.EmptyOptionValues._
 

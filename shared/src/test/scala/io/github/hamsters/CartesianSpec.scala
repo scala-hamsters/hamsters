@@ -1,6 +1,7 @@
 package io.github.hamsters
 
-import org.scalatest.{AsyncFlatSpec, Matchers}
+import org.scalatest.flatspec.AsyncFlatSpec
+import org.scalatest.matchers.should.Matchers
 import io.github.hamsters.Cartesian._
 import io.github.hamsters.Functor._
 

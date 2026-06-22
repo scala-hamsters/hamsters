@@ -3,9 +3,14 @@ package io.github.hamsters
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Properties
 
-@GenLens
 case class Street(number: Int, name: String)
-@GenLens
+object Street {
+  val _number = new Lens[Street, Int] {
+    override def get: Street => Int = _.number
+    override def set: Street => Int => Street = s => v => s.copy(number = v)
+  }
+}
+
 case class User(firstName: String, lastName: String, street: Street)
 
 class LenserLawsProperties extends Properties("Lens laws") {
@@ -13,11 +18,11 @@ class LenserLawsProperties extends Properties("Lens laws") {
   import Generators._
   import Street._
 
-  property("if I get twice, I get the same answer") = forAll { user: User =>
+  property("if I get twice, I get the same answer") = forAll { (user: User) =>
     _number.get(user.street) == _number.get(user.street)
   }
 
-  property("if I get, then set it back, nothing changes") = forAll { user: User =>
+  property("if I get, then set it back, nothing changes") = forAll { (user: User) =>
     _number.set(user.street)(_number.get(user.street)) == user.street
   }
 

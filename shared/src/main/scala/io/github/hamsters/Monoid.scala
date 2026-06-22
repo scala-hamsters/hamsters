@@ -28,7 +28,7 @@ object Monoid {
   }
 
   implicit val longMonoid: Monoid[Long] = new Monoid[Long] {
-    override def empty: Long = 0l
+    override def empty: Long = 0L
     override def compose(l: Long, r: Long): Long = l + r
   }
 

@@ -1,17 +1,27 @@
 package io.github.hamsters
 
 import java.util.Date
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
-class ShowSpec extends FlatSpec with Matchers {
+class ShowSpec extends AnyFlatSpec with Matchers {
 
-  @ShowMacro
   case class Name(firstName: String, lastName: String)
+  object Name {
+    implicit val showable: Showable[Name] = new Showable[Name] {
+      override def format(a: Name): String =
+        "Name(" + "firstName=" + Show.show(a.firstName) + "," + "lastName=" + Show.show(a.lastName) + ")"
+    }
+  }
 
-  @ShowMacro
   case class Person(name : Name, age: Int)
+  object Person {
+    implicit val showable: Showable[Person] = new Showable[Person] {
+      override def format(a: Person): String =
+        "Person(" + "name=" + Show.show(a.name) + "," + "age=" + Show.show(a.age) + ")"
+    }
+  }
 
-  @ShowMacro
   case class AdditionalShowInstances(
     c: Char = '1',
     b: Byte = 1.toByte,
@@ -21,6 +31,20 @@ class ShowSpec extends FlatSpec with Matchers {
     fl: Float = 1f,
     date: Date = new Date(11111),
     short: Short = 1.toShort)
+  object AdditionalShowInstances {
+    implicit val showable: Showable[AdditionalShowInstances] = new Showable[AdditionalShowInstances] {
+      override def format(a: AdditionalShowInstances): String =
+        "AdditionalShowInstances(" +
+          "c=" + Show.show(a.c) + "," +
+          "b=" + Show.show(a.b) + "," +
+          "boo=" + Show.show(a.boo) + "," +
+          "l=" + Show.show(a.l) + "," +
+          "doub=" + Show.show(a.doub) + "," +
+          "fl=" + Show.show(a.fl) + "," +
+          "date=" + Show.show(a.date) + "," +
+          "short=" + Show.show(a.short) + ")"
+    }
+  }
 
   "Show on simple object" should "show field names and values of object" in {
     val n = Name("john", "doe")

@@ -1,7 +1,6 @@
 package io.github.hamsters
 
 import scala.concurrent.{ExecutionContext, Future}
-import scala.language.higherKinds
 
 trait Functor[Box[_]] {
 

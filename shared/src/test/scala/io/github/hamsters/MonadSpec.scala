@@ -11,7 +11,7 @@ class OptionMonadSpec extends MonadSpec[String, String, String, Option](Monad.op
 //class FutureMonadSpec extends MonadSpec[String, String, String, Future](Monad.futureMonad)
 
 abstract class MonadSpec[A: Arbitrary, B, C, Box[_]](monad: Monad[Box])
-(implicit boxArb: Arbitrary[Box[A]], aToBoxBArb: Arbitrary[A => Box[B]], bToBoxCArb: Arbitrary[B => Box[C]], tag: ClassTag[Box[_]])
+(implicit boxArb: Arbitrary[Box[A]], aToBoxBArb: Arbitrary[A => Box[B]], bToBoxCArb: Arbitrary[B => Box[C]], tag: ClassTag[Box[A]])
 
 extends Properties(s"Monad for $tag") {
 
