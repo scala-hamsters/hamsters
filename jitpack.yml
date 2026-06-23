@@ -1,4 +1,0 @@
-jdk:
-  - openjdk17
-install:
-  - sbt hamstersJVM/publishM2 hamstersJS/publishM2

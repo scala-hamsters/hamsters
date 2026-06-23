@@ -36,11 +36,6 @@ https://github.com/scala-hamsters/hamsters/tree/{release-version}/docs[Hamsters 
 
 == Install as dependency
 
-NOTE: Version {release-version} is being published to Maven Central. While the
-release is in progress, you can already use it via JitPack (see _Pre-release via
-JitPack_ below). The Maven Central coordinates below will resolve once publishing
-is complete.
-
 [source,scala,subs="verbatim,attributes"]
 ----
 libraryDependencies ++= Seq(
@@ -54,34 +49,6 @@ For Scala.js :
 ----
 libraryDependencies ++= Seq(
   "io.github.scala-hamsters" %%% "hamsters" % "{release-version}"
-)
-----
-
-=== Pre-release via JitPack
-
-Until {release-version} is available on Maven Central, it can be consumed from
-https://jitpack.io[JitPack], which builds the library directly from the git tag.
-Add the JitPack resolver and depend on the `com.github.scala-hamsters.hamsters`
-coordinates (note the JitPack-specific group id: `com.github.<org>.<repo>` for
-this multi-module build):
-
-[source,scala,subs="verbatim,attributes"]
-----
-resolvers += "jitpack" at "https://jitpack.io"
-
-libraryDependencies ++= Seq(
-  "com.github.scala-hamsters.hamsters" %% "hamsters" % "{release-version}"
-)
-----
-
-For Scala.js :
-
-[source,scala,subs="verbatim,attributes"]
-----
-resolvers += "jitpack" at "https://jitpack.io"
-
-libraryDependencies ++= Seq(
-  "com.github.scala-hamsters.hamsters" %%% "hamsters" % "{release-version}"
 )
 ----
 
