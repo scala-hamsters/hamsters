@@ -6,7 +6,8 @@ ifdef::env-github[]
 :note-caption: :paperclip:
 endif::[]
 
-image:https://github.com/scala-hamsters/hamsters/actions/workflows/release.yml/badge.svg["Release", link="https://github.com/scala-hamsters/hamsters/actions/workflows/release.yml"]
+image:https://github.com/scala-hamsters/hamsters/actions/workflows/ci.yml/badge.svg["CI", link="https://github.com/scala-hamsters/hamsters/actions/workflows/ci.yml"]
+image:https://img.shields.io/maven-central/v/io.github.scala-hamsters/hamsters_3["Maven Central", link="https://central.sonatype.com/artifact/io.github.scala-hamsters/hamsters_3"]
 
 A mini Scala utility library. Compatible with functional programming beginners. For the JVM and Scala.js.  
 
