@@ -24,7 +24,7 @@ Validation.failures(e1, e2, e3) // List[String] : List("error 1", "error 2")
 Validation.failures(e1, e4) // Nil
 ```
 
-To automatically catch exceptions into a Left or KO object, you can use `fromCatchable`.
+To automatically catch exceptions into a Left or Invalid object, you can use `fromCatchable`.
 By default it will give you an error message, but you can specify what to do in error cases :
 
 ```scala
