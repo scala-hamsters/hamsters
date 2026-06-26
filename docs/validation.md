@@ -37,8 +37,7 @@ fromCatchable(compute(0), (t: Throwable) => t.getClass.getSimpleName) //Invalid(
 ```
 
 ```
-Note : You can also use Valid/Invalid (Right/Left) in a monadic way (for example in a for-comprehension) if you want to stop processing at the first encountered error, even with Scala 2.11.
-To make it work with Scala 2.11, just import Validation.RightBiasedEither.
+Note : You can also use Valid/Invalid (Right/Left) in a monadic way (for example in a for-comprehension) if you want to stop processing at the first encountered error.
 ```
 
 ## Remarks: Try
