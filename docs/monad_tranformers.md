@@ -1,9 +1,14 @@
 #  Monad transformers
 
+OptionT, TryT and EitherT monad transformers are defined and can be used for composition, for example with Future.  
+Please note that Future does not provide referential transparency.
+
 Example : combine Future and Option types then make it work in a for comprehension.
 More information on why it's useful [here](http://loicdescotte.github.io/posts/scala-compose-option-future/).
 
-## FutureOption
+## Future Composition
+
+### FutureOption
 
 ```scala
 import io.github.hamsters.FutureOption
@@ -19,7 +24,7 @@ val composedAB: Future[Option[String]] = for {
 } yield ab
 ```
 
-## FutureTry
+### FutureTry
 
 ```scala
 import io.github.hamsters.FutureTry
@@ -35,7 +40,7 @@ val composedAB: Future[Try[String]] = for {
 } yield ab
 ```
 
-## FutureEither
+### FutureEither
 
 ```scala
 import io.github.hamsters.FutureEither
@@ -51,9 +56,9 @@ val composedAB: Future[Either[String, Int]] = for {
 } yield ab
 ```
 
-## OptionT and EitherT
+## OptionT, TryT and EitherT
 
-If you use other combinations of F[Option[A]] or F[Either[L,R]], you can bring your own `Monad` implicit instance and work with `OptionT` or `EitherT`. `Future` and `Option` instances are provided by default.
+If you use other combinations of F[Option[A]], F[Try[A]] or F[Either[L,R]], you can bring your own `Monad` implicit instance and work with `OptionT`, `TryT` or `EitherT`. `Future` and `Option` instances are provided by default.
 
 ---
 
